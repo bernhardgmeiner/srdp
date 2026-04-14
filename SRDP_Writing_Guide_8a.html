@@ -1,0 +1,1532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SRDP Writing Guide – Text Types B2</title>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #faf9f7;
+  --text: #1a1a1a;
+  --accent: #2563eb;
+  --accent-light: #dbeafe;
+  --green: #16a34a;
+  --green-light: #dcfce7;
+  --red: #dc2626;
+  --red-light: #fee2e2;
+  --orange: #ea580c;
+  --orange-light: #fff7ed;
+  --purple: #7c3aed;
+  --purple-light: #f3e8ff;
+  --gray: #6b7280;
+  --gray-light: #f3f4f6;
+  --border: #e5e7eb;
+  --serif: 'Merriweather', Georgia, serif;
+  --sans: 'Source Sans 3', -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body { font-family: var(--sans); color: var(--text); background: var(--bg); line-height: 1.7; }
+
+.container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+/* HEADER */
+header { background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%); color: white; padding: 48px 0 40px; }
+header h1 { font-family: var(--serif); font-size: 2.2rem; margin-bottom: 8px; letter-spacing: -0.5px; }
+header .subtitle { font-size: 1.1rem; opacity: 0.85; margin-bottom: 16px; }
+header .meta { font-size: 0.85rem; opacity: 0.65; }
+
+/* NAV */
+nav { background: white; border-bottom: 1px solid var(--border); padding: 12px 0; position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+nav .container { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+nav a { text-decoration: none; color: var(--accent); font-weight: 600; font-size: 0.82rem; padding: 5px 12px; border-radius: 20px; background: var(--accent-light); transition: all 0.15s; }
+nav a:hover, nav a.active { background: var(--accent); color: white; }
+.nav-sep { color: var(--border); font-size: 0.9rem; user-select: none; margin: 0 2px; }
+.nav-group-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1px; color: var(--gray); font-weight: 700; align-self: center; user-select: none; margin-right: -2px; }
+
+/* SECTIONS */
+section { padding: 48px 0 24px; }
+section + section { border-top: 2px solid var(--border); }
+
+h2 { font-family: var(--serif); font-size: 1.7rem; color: var(--text); margin-bottom: 24px; padding-bottom: 12px; border-bottom: 3px solid var(--accent); display: inline-block; }
+h3 { font-size: 1.15rem; font-weight: 700; color: var(--text); margin: 28px 0 12px; }
+h4 { font-size: 0.95rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--gray); margin: 20px 0 8px; }
+
+p { margin-bottom: 14px; }
+
+/* TEXT TYPE CARDS */
+.text-type { background: white; border-radius: 12px; padding: 32px; margin-bottom: 32px; border: 1px solid var(--border); box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+.text-type .badge { display: inline-block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 4px 12px; border-radius: 4px; margin-bottom: 16px; }
+.badge-essay { background: var(--purple-light); color: var(--purple); }
+.badge-article { background: var(--accent-light); color: var(--accent); }
+.badge-report { background: var(--orange-light); color: var(--orange); }
+.badge-blog { background: var(--green-light); color: var(--green); }
+.badge-email { background: var(--red-light); color: var(--red); }
+
+.text-type h3 { margin-top: 0; font-family: var(--serif); font-size: 1.4rem; color: var(--text); }
+.text-type .quick-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 16px 0 24px; }
+.quick-fact { background: var(--gray-light); padding: 12px 16px; border-radius: 8px; }
+.quick-fact .label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--gray); font-weight: 600; }
+.quick-fact .value { font-weight: 700; font-size: 1rem; }
+
+/* LAYOUT BOX */
+.layout-box { background: var(--gray-light); border-left: 4px solid var(--accent); padding: 20px 24px; border-radius: 0 8px 8px 0; margin: 16px 0; font-family: var(--mono); font-size: 0.85rem; line-height: 1.9; }
+.layout-box .optional { color: var(--gray); font-style: italic; font-family: var(--sans); }
+
+/* DOS AND DONTS */
+.dos-donts { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
+.do-box, .dont-box { padding: 20px; border-radius: 8px; }
+.do-box { background: var(--green-light); border: 1px solid #bbf7d0; }
+.dont-box { background: var(--red-light); border: 1px solid #fecaca; }
+.do-box h4, .dont-box h4 { margin-top: 0; }
+.do-box h4 { color: var(--green); }
+.dont-box h4 { color: var(--red); }
+.do-box ul, .dont-box ul { margin: 0; padding-left: 20px; }
+.do-box li, .dont-box li { margin-bottom: 6px; font-size: 0.9rem; }
+
+/* PHRASES BOX */
+.phrases { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 20px 24px; margin: 16px 0; }
+.phrases h4 { color: #92400e; margin-top: 0; }
+.phrases p { font-size: 0.9rem; margin-bottom: 8px; }
+.phrase { font-family: var(--mono); font-size: 0.85rem; background: white; padding: 3px 8px; border-radius: 4px; display: inline-block; margin: 2px 0; }
+
+/* TIP / WARNING BOXES */
+.tip { background: var(--accent-light); border-left: 4px solid var(--accent); padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+.tip strong { color: var(--accent); }
+.warning { background: var(--red-light); border-left: 4px solid var(--red); padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+.warning strong { color: var(--red); }
+
+/* TABLES */
+table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9rem; }
+th { background: var(--accent); color: white; text-align: left; padding: 12px 16px; font-weight: 600; }
+td { padding: 10px 16px; border-bottom: 1px solid var(--border); }
+tr:nth-child(even) td { background: var(--gray-light); }
+
+/* SUB-TYPE TABS */
+.subtype { border: 1px solid var(--border); border-radius: 8px; margin: 16px 0; overflow: hidden; }
+.subtype-header { background: var(--gray-light); padding: 12px 20px; font-weight: 700; font-size: 0.95rem; border-bottom: 1px solid var(--border); }
+.subtype-body { padding: 20px; }
+
+/* COMPARISON TABLE SCROLL */
+.comparison { overflow-x: auto; }
+.comparison table { min-width: 700px; }
+
+/* ===== MODEL TEXT ANNOTATIONS ===== */
+.model-wrap { background: white; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin: 24px 0; }
+.model-header { padding: 16px 24px; font-weight: 700; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.model-body { padding: 24px; line-height: 2.1; }
+.model-body p { margin-bottom: 14px; }
+
+.ann-toggle { background: var(--accent); color: white; border: none; padding: 8px 18px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.15s; }
+.ann-toggle:hover { background: #1d4ed8; }
+
+/* Annotation spans: coloured inline highlights */
+.ann { border-radius: 3px; padding: 1px 4px; cursor: help; position: relative; }
+.ann-structure { background: #dbeafe; border-bottom: 2px solid #60a5fa; }
+.ann-content { background: #dcfce7; border-bottom: 2px solid #4ade80; }
+.ann-language { background: #fef9c3; border-bottom: 2px solid #facc15; }
+.ann-special { background: #f3e8ff; border-bottom: 2px solid #a78bfa; }
+
+/* Labels: hidden by default, revealed by JS tooltip or show-all toggle */
+.ann-label { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px; padding: 2px 8px; border-radius: 3px; display: none; vertical-align: middle; margin-left: 2px; white-space: nowrap; }
+.show-all-labels .ann-label { display: inline-block; }
+
+/* Tooltip that JS injects on hover - much more reliable than sibling selectors */
+.ann-tooltip { position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%); padding: 4px 10px; border-radius: 4px; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px; color: white; white-space: nowrap; pointer-events: none; z-index: 10; animation: fadeIn 0.12s ease-out; }
+.ann-tooltip::after { content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border: 5px solid transparent; }
+.ann-structure .ann-tooltip { background: #2563eb; }
+.ann-structure .ann-tooltip::after { border-top-color: #2563eb; }
+.ann-content .ann-tooltip { background: #16a34a; }
+.ann-content .ann-tooltip::after { border-top-color: #16a34a; }
+.ann-language .ann-tooltip { background: #ca8a04; }
+.ann-language .ann-tooltip::after { border-top-color: #ca8a04; }
+.ann-special .ann-tooltip { background: #7c3aed; }
+.ann-special .ann-tooltip::after { border-top-color: #7c3aed; }
+@keyframes fadeIn { from { opacity: 0; transform: translateX(-50%) translateY(4px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
+
+.al-blue { background: #2563eb; color: white; }
+.al-green { background: #16a34a; color: white; }
+.al-yellow { background: #ca8a04; color: white; }
+.al-purple { background: #7c3aed; color: white; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 12px; padding: 12px 24px; background: var(--gray-light); font-size: 0.8rem; align-items: center; border-radius: 8px; margin-bottom: 8px; }
+.legend-item { display: flex; align-items: center; gap: 6px; }
+.legend-dot { width: 14px; height: 14px; border-radius: 3px; flex-shrink: 0; }
+
+/* ===== REGISTER COMPARISON ===== */
+.register-grid { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin: 16px 0; }
+.register-row { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--border); }
+.register-row:last-child { border-bottom: none; }
+.register-cell { padding: 12px 16px; font-size: 0.9rem; }
+.register-cell:first-child { border-right: 1px solid var(--border); background: #f0f4ff; }
+.register-cell:last-child { background: #fff7ed; }
+.register-header { font-weight: 700; background: var(--accent) !important; color: white !important; }
+.register-header:last-child { background: var(--orange) !important; }
+
+/* ===== PRACTICE / REVEAL ===== */
+.error-text { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 24px; margin: 16px 0; line-height: 2; }
+.error-text .task-label { font-weight: 700; color: var(--accent); margin-bottom: 8px; }
+.reveal-btn { background: var(--accent); color: white; border: none; padding: 10px 20px; border-radius: 6px; font-size: 0.9rem; font-weight: 600; cursor: pointer; margin: 8px 0; transition: background 0.15s; }
+.reveal-btn:hover { background: #1d4ed8; }
+.reveal { display: none; background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 16px 20px; margin: 8px 0; font-size: 0.9rem; }
+.reveal.show { display: block; }
+
+/* ===== GRAMMAR ===== */
+.grammar-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin: 12px 0; }
+.gp-wrong { padding: 12px 16px; background: var(--red-light); font-size: 0.9rem; border-right: 1px solid var(--border); }
+.gp-right { padding: 12px 16px; background: var(--green-light); font-size: 0.9rem; }
+.gp-wrong::before { content: "✗ "; color: var(--red); font-weight: 700; }
+.gp-right::before { content: "✓ "; color: var(--green); font-weight: 700; }
+
+.grammar-topic { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin: 20px 0; }
+.grammar-topic h4 { margin-top: 0; color: var(--text); text-transform: none; letter-spacing: 0; font-size: 1.05rem; }
+.grammar-topic p { font-size: 0.9rem; }
+
+/* ===== BACK TO TOP ===== */
+.back-to-top { position: fixed; bottom: 24px; right: 24px; width: 44px; height: 44px; border-radius: 50%; background: var(--accent); color: white; border: none; font-size: 1.3rem; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.15); opacity: 0; pointer-events: none; transition: opacity 0.25s, transform 0.25s; transform: translateY(12px); z-index: 200; }
+.back-to-top.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+.back-to-top:hover { background: #1d4ed8; }
+
+/* ===== PRINT ===== */
+@media print {
+  nav, .back-to-top, .ann-toggle { display: none !important; }
+  header { background: white !important; color: black !important; border-bottom: 3px solid black; }
+  .text-type { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+  section { padding: 24px 0 12px; }
+  body { font-size: 11pt; }
+  .ann-label { display: inline-block !important; }
+  .reveal { display: block !important; }
+  .ann-tooltip { display: none !important; }
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 640px) {
+  .dos-donts { grid-template-columns: 1fr; }
+  header h1 { font-size: 1.6rem; }
+  nav a { font-size: 0.75rem; padding: 4px 9px; }
+  .nav-group-label { display: none; }
+  .nav-sep { display: none; }
+  .register-row, .grammar-pair { grid-template-columns: 1fr; }
+  .register-cell:first-child { border-right: none; border-bottom: 1px solid var(--border); }
+  .gp-wrong { border-right: none; border-bottom: 1px solid var(--border); }
+  .model-body { padding: 16px; line-height: 1.9; }
+  .ann-tooltip { font-size: 0.6rem; }
+}
+</style>
+</head>
+<body>
+
+<header>
+<div class="container">
+  <h1>The Ultimate SRDP Writing Guide</h1>
+  <div class="subtitle">Your complete reference for every text type, every criterion, every trick – English B2</div>
+  <div class="meta">GRG 15 Auf der Schmelz · Class 8a · Schriftliche Reifeprüfung 2026</div>
+</div>
+</header>
+
+<nav>
+<div class="container">
+  <span class="nav-group-label">Basics</span>
+  <a href="#overview">Overview</a>
+  <a href="#assessment">Grading</a>
+  <span class="nav-sep">│</span>
+  <span class="nav-group-label">Text Types</span>
+  <a href="#essay">Essay</a>
+  <a href="#article">Article</a>
+  <a href="#report">Report</a>
+  <a href="#blog">Blog</a>
+  <a href="#email">E-Mail</a>
+  <span class="nav-sep">│</span>
+  <span class="nav-group-label">Tools</span>
+  <a href="#general">Tips</a>
+  <a href="#operators">Operators</a>
+  <a href="#models">Models</a>
+  <a href="#practice">Practice</a>
+  <a href="#grammar">Grammar</a>
+</div>
+</nav>
+
+<!-- ===================== OVERVIEW ===================== -->
+<section id="overview">
+<div class="container">
+<h2>The Big Picture</h2>
+
+<div class="tip" style="background: #f0f9ff; border-left-color: #0284c7; margin-bottom: 28px;">
+<strong style="color: #0284c7;">How to use this guide:</strong> Start with <strong>Overview</strong> and <strong>Grading</strong> to understand how the exam works. Then read the section for whichever <strong>text type</strong> you feel weakest on. Use the <strong>Model Texts</strong> to see theory in action – hover over the coloured highlights to learn what each part does. Test yourself in the <strong>Practice</strong> section. And keep the <strong>Grammar Kit</strong> open while proofreading your practice texts.
+</div>
+
+<p>In your English Matura, the <strong>Writing</strong> section gives you <strong>120 minutes</strong> for <strong>two writing tasks</strong>. One will be longer (~400 words), typically an essay or a report. The other will be shorter (~250 words) and could be any of the other text types. Together, writing counts for <strong>25% of your total grade</strong>.</p>
+
+<div class="tip">
+<strong>Time management:</strong> You have 120 minutes for 2 texts. A good split: <strong>~60–65 minutes for the 400-word task</strong> and <strong>~45–50 minutes for the 250-word task</strong>. Reserve <strong>5–10 minutes at the end for proofreading both texts</strong>. Within each task: ~5 min planning, ~35–45 min writing, ~5–10 min checking.
+</div>
+
+<p>There are <strong>five possible text types</strong> at B2 level:</p>
+
+<table>
+<tr><th>Text Type</th><th>Word Count</th><th>Register</th><th>Title?</th><th>Key Feature</th></tr>
+<tr><td><strong>Essay</strong></td><td>~400</td><td>Formal</td><td>Yes</td><td>Argue a position with evidence</td></tr>
+<tr><td><strong>Article</strong></td><td>~250</td><td>Formal/Informal</td><td>Yes (catchy!)</td><td>Entertain and inform readers</td></tr>
+<tr><td><strong>Report</strong></td><td>~250 or ~400</td><td>Formal</td><td>Yes + section headings</td><td>Present facts, recommend action</td></tr>
+<tr><td><strong>Blog</strong> (post/comment)</td><td>~250 (check task)</td><td>Informal</td><td>Post: Yes / Comment: No</td><td>Personal voice, engage readers</td></tr>
+<tr><td><strong>E-Mail</strong></td><td>~250</td><td>Mostly formal</td><td>Subject line</td><td>Clear purpose, proper format</td></tr>
+</table>
+
+<div class="tip">
+<strong>Golden Rule:</strong> The word count tolerance is <strong>±10%</strong>. For a 400-word task, that's 360–440. For 250 words, it's 225–275. Going over or under by more than 10% costs you one level on Task Achievement.
+</div>
+
+<div class="tip">
+<strong>What counts toward the word count?</strong> Every word in the <strong>body of your text</strong> counts, including the title. Header elements like To/From/Date/Subject in reports and e-mails are <strong>not</strong> typically counted. When in doubt, count everything – it's safer to be slightly over than under.
+</div>
+
+<p>Every task will give you <strong>three bullet points</strong> (content points). You must address <strong>all three</strong>, roughly equally. Each bullet point should get its own paragraph in the main body.</p>
+
+<div class="warning">
+<strong>Handwriting matters.</strong> If your handwriting is illegible, communication fails and your score drops drastically. Write clearly. If you run out of space, don't cram – cross out and rewrite neatly.
+</div>
+
+</div>
+</section>
+
+<!-- ===================== ASSESSMENT ===================== -->
+<section id="assessment">
+<div class="container">
+<h2>How You Are Graded</h2>
+
+<p>Your writing is assessed on <strong>four equally weighted criteria</strong>, each scored 0–10. Since 2024, the updated assessment scale (Bewertungsraster 2023) is in use:</p>
+
+<table>
+<tr><th>Criterion</th><th>What It Means</th><th>What Examiners Look For</th></tr>
+<tr>
+  <td><strong>1. Task Achievement</strong><br><span style="font-size:0.8rem;color:var(--gray)">(Erfüllung der Aufgabenstellung)</span></td>
+  <td>Did you do what the task asked?</td>
+  <td>All content points covered and developed; text type conventions and layout followed; appropriate title/greeting/closing; word count observed (±10%); supporting details and examples for each point</td>
+</tr>
+<tr>
+  <td><strong>2. Coherence & Cohesion</strong><br><span style="font-size:0.8rem;color:var(--gray)">(Kohärenz und Kohäsion)</span></td>
+  <td>Does your text hold together logically?</td>
+  <td>Clear overall structure; effective paragraphing; logical development and connection of ideas; variety of linking devices; clear relationships between sentences and paragraphs</td>
+</tr>
+<tr>
+  <td><strong>3. Lexical & Structural Range</strong><br><span style="font-size:0.8rem;color:var(--gray)">(Spektrum sprachlicher Mittel)</span></td>
+  <td>How wide is your language?</td>
+  <td>Variety of vocabulary and structures; complex sentence forms; varied formulation (not repeating the same phrases); appropriate register (formal/informal); not lifting words from the prompt</td>
+</tr>
+<tr>
+  <td><strong>4. Lexical & Structural Accuracy</strong><br><span style="font-size:0.8rem;color:var(--gray)">(Sprachrichtigkeit)</span></td>
+  <td>How correct is your language?</td>
+  <td>Grammar control; correct word choice; spelling; punctuation; accurate use of linking devices; reader doesn't have to stop and re-read</td>
+</tr>
+</table>
+
+<div class="warning">
+<strong>VETO Rule:</strong> If you completely miss the task (wrong text type, none of the content points addressed), you score <strong>0 on everything</strong>. The other three criteria won't even be assessed. Always read the task carefully.
+</div>
+
+<div class="warning">
+<strong>Missing a bullet point is expensive:</strong> If you only address 2 out of 3 content points, your Task Achievement score <strong>drops to level 6 at best</strong> (out of 10). Address all three – even briefly – before going into detail on any one.
+</div>
+
+<div class="tip">
+<strong>Compensation works in your favour:</strong> The four criteria are independent. If your grammar is weaker but your content and structure are strong, the good scores compensate. Play to your strengths.
+</div>
+
+<div class="warning">
+<strong>Don't play it safe with grammar.</strong> A common mistake: students use only simple, short sentences to avoid errors. The assessment scale punishes this. If you only write B1-level structures (simple sentences, basic vocabulary), your Range AND Accuracy scores are <strong>capped at level 4</strong> – even if everything is perfectly correct. B2 means taking risks: use complex sentences, relative clauses, conditionals, passive voice. A few errors in complex structures score higher than perfect simple ones.
+</div>
+
+</div>
+</section>
+
+<!-- ===================== ESSAY ===================== -->
+<section id="essay">
+<div class="container">
+<div class="text-type">
+<span class="badge badge-essay">Only B2 / First Living Foreign Language</span>
+<h3>The Opinion Essay</h3>
+<p>An essay presents <strong>your personal opinion</strong> on a topic and defends it with arguments and examples. Your goal: <strong>convince the reader</strong>. You can mention the opposing view, but only to show why it's unconvincing.</p>
+
+<div class="quick-facts">
+  <div class="quick-fact"><div class="label">Word Count</div><div class="value">~400 words</div></div>
+  <div class="quick-fact"><div class="label">Register</div><div class="value">Formal</div></div>
+  <div class="quick-fact"><div class="label">Title</div><div class="value">Required</div></div>
+  <div class="quick-fact"><div class="label">Structure</div><div class="value">5 paragraphs</div></div>
+</div>
+
+<h4>Layout</h4>
+<div class="layout-box">
+<strong>Title</strong><br>
+<strong>Introduction</strong> (~80 words) – hook + state your opinion<br>
+<strong>Body Paragraph 1</strong> (~80 words) – Bullet point 1<br>
+<strong>Body Paragraph 2</strong> (~80 words) – Bullet point 2<br>
+<strong>Body Paragraph 3</strong> (~80 words) – Bullet point 3<br>
+<strong>Conclusion</strong> (~80 words) – summarise + restate opinion in different words
+</div>
+
+<h4>The P.E.E.(P.) Formula for Each Body Paragraph</h4>
+<p>Every body paragraph should follow this pattern:</p>
+<table>
+<tr><th>Step</th><th>What to Do</th><th>Example</th></tr>
+<tr><td><strong>P</strong>oint</td><td>Topic sentence – state your argument</td><td><em>Many women find it very difficult to return to work after having children.</em></td></tr>
+<tr><td><strong>E</strong>vidence / Explain</td><td>Support it with reasoning</td><td><em>The main reason for this is that there are rarely any provisions made for childcare.</em></td></tr>
+<tr><td><strong>E</strong>xample</td><td>Give a concrete example</td><td><em>A recent study shows that fewer than 5% of large companies offer on-site daycare for their employees.</em></td></tr>
+<tr><td><strong>P</strong>oint (optional)</td><td>Circle back to your argument</td><td><em>This leads to the conclusion that workplace childcare must become a priority.</em></td></tr>
+</table>
+
+<h4>How to Write the Introduction</h4>
+<p>Start with one of these hooks, then clearly state your position:</p>
+<p>
+<span class="phrase">A rhetorical question</span>
+<span class="phrase">A striking fact or statistic</span>
+<span class="phrase">A relevant quotation</span>
+<span class="phrase">A controversial statement</span>
+</p>
+
+<div class="dos-donts">
+<div class="do-box">
+<h4>✓ DOs</h4>
+<ul>
+  <li>Write in a <strong>formal style</strong> throughout</li>
+  <li>Make your opinion clear from the introduction</li>
+  <li>Start each paragraph with a <strong>topic sentence</strong></li>
+  <li>Use <strong>generalisations</strong> (not personal anecdotes)</li>
+  <li>Use formal linking words: <em>However, Nevertheless, Moreover, Furthermore</em></li>
+  <li>Vary sentence length – mix short and long</li>
+  <li>Use complex grammar: passive voice, conditionals, relative clauses</li>
+  <li>You may mention a counter-argument – but then <strong>refute it</strong></li>
+</ul>
+</div>
+<div class="dont-box">
+<h4>✗ DON'Ts</h4>
+<ul>
+  <li>No contractions (<em>don't, can't, it's</em>)</li>
+  <li>No colloquial or slang expressions</li>
+  <li>No overly emotional language (<em>"I absolutely detest…"</em>)</li>
+  <li>No personal examples (<em>"When I was 12…"</em>) – use <strong>general or hypothetical</strong> examples instead</li>
+  <li>No over-generalisation (<em>"All politicians are liars."</em>)</li>
+  <li>No simple linking words as your only connectors (<em>and, but, because</em>)</li>
+  <li>No very short sentences one after another</li>
+  <li>No statistics without context</li>
+</ul>
+</div>
+</div>
+
+<div class="phrases">
+<h4>Useful Phrases</h4>
+<p><strong>Giving your opinion (without overusing "I"):</strong></p>
+<p><span class="phrase">It is (firmly) believed that…</span> <span class="phrase">One can argue that…</span> <span class="phrase">Many people are convinced that…</span> <span class="phrase">As far as many are concerned,…</span> <span class="phrase">It is often argued that…</span></p>
+<p><strong>When you do use "I":</strong></p>
+<p><span class="phrase">In my opinion/view,…</span> <span class="phrase">I am inclined to believe that…</span> <span class="phrase">I (firmly) believe that…</span> <span class="phrase">I am (not) convinced that…</span></p>
+<p><strong>Adding arguments:</strong></p>
+<p><span class="phrase">Furthermore,…</span> <span class="phrase">Moreover,…</span> <span class="phrase">In addition to this,…</span> <span class="phrase">What is more,…</span> <span class="phrase">Not only… but also…</span></p>
+<p><strong>Introducing the other side:</strong></p>
+<p><span class="phrase">It would also be interesting to see…</span> <span class="phrase">One should, nevertheless, consider…</span> <span class="phrase">The other side of the coin is that…</span> <span class="phrase">On the other hand,…</span></p>
+<p><strong>Balanced conclusions:</strong></p>
+<p><span class="phrase">Taking these points into consideration,…</span> <span class="phrase">All of this points to the conclusion that…</span> <span class="phrase">On balance, we can safely say that…</span> <span class="phrase">The arguments presented prove that…</span></p>
+</div>
+
+<div class="tip">
+<strong>Key difference – Essay vs. Article:</strong> An essay should make the reader <strong>think</strong>. It is fact-based and formal. An article should make the reader <strong>feel</strong>. It is more emotional and can be informal.
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- ===================== ARTICLE ===================== -->
+<section id="article">
+<div class="container">
+<div class="text-type">
+<span class="badge badge-article">All Levels</span>
+<h3>The Article</h3>
+<p>An article is a text for publication – a newspaper, magazine, or online journal. It should <strong>inform, entertain, persuade, or engage</strong> the reader. Think of yourself as a journalist or a contributor to a magazine.</p>
+
+<div class="quick-facts">
+  <div class="quick-fact"><div class="label">Word Count</div><div class="value">~250 words</div></div>
+  <div class="quick-fact"><div class="label">Register</div><div class="value">Formal or Informal (depends on audience)</div></div>
+  <div class="quick-fact"><div class="label">Title</div><div class="value">Required – make it catchy!</div></div>
+  <div class="quick-fact"><div class="label">Structure</div><div class="value">5 paragraphs</div></div>
+</div>
+
+<h4>Layout</h4>
+<div class="layout-box">
+<strong>Catchy Title</strong><br>
+<strong>Introduction</strong> (~50 words) – grab the reader's attention<br>
+<strong>Body Paragraph 1</strong> (~50 words) – Bullet point 1<br>
+<strong>Body Paragraph 2</strong> (~50 words) – Bullet point 2<br>
+<strong>Body Paragraph 3</strong> (~50 words) – Bullet point 3<br>
+<strong>Conclusion</strong> (~50 words) – leave the reader thinking
+</div>
+
+<h4>Title Ideas</h4>
+<p>Your title must grab attention. Try:</p>
+<p>
+<span class="phrase">A rhetorical question – "Is Technology Killing Conversation?"</span><br>
+<span class="phrase">Direct address – "What You Always Wanted to Know About…"</span><br>
+<span class="phrase">Alliteration – "Luscious Lollipops for Cool Kids"</span><br>
+<span class="phrase">A bold statement – "Technology: A Curse in Disguise"</span>
+</p>
+
+<div class="dos-donts">
+<div class="do-box">
+<h4>✓ DOs</h4>
+<ul>
+  <li>Know your <strong>audience</strong> (teenagers? general public? experts?)</li>
+  <li>Use <strong>rhetorical questions</strong> to engage readers</li>
+  <li>Address the reader directly (<em>"you"</em>)</li>
+  <li>Talk about <strong>personal experiences and emotions</strong></li>
+  <li>Use a <strong>topic sentence</strong> for each paragraph</li>
+  <li>Write a conclusion that <strong>leaves something to think about</strong></li>
+  <li>Make the opening paragraph irresistible</li>
+  <li>Can use exclamation marks and direct speech if appropriate</li>
+</ul>
+</div>
+<div class="dont-box">
+<h4>✗ DON'Ts</h4>
+<ul>
+  <li>Don't be overly emotional or dramatic</li>
+  <li>Don't forget who you're writing for</li>
+  <li>Don't write a boring title</li>
+  <li>Don't write like an essay (no "It is believed that…")</li>
+  <li>Don't ignore the <strong>publication context</strong> given in the task</li>
+</ul>
+</div>
+</div>
+
+<div class="phrases">
+<h4>Useful Phrases</h4>
+<p><strong>Openings:</strong></p>
+<p><span class="phrase">Have you ever…?</span> <span class="phrase">Do you remember the first time that…?</span> <span class="phrase">Are you one of those people who…?</span> <span class="phrase">There is nothing worse than…</span></p>
+<p><strong>Throughout:</strong></p>
+<p><span class="phrase">Can you imagine…?</span> <span class="phrase">If you ask me,…</span> <span class="phrase">You may not agree with me, but…</span> <span class="phrase">I will never forget the time when…</span> <span class="phrase">To be honest, it scares me when I think that…</span></p>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- ===================== REPORT ===================== -->
+<section id="report">
+<div class="container">
+<div class="text-type">
+<span class="badge badge-report">All Levels</span>
+<h3>The Report</h3>
+<p>A report is a <strong>formal, factual document</strong> written for someone in authority (a boss, a headmaster, a committee). You present findings – often from a survey or investigation – and end with <strong>recommendations</strong>. This is the most structured text type.</p>
+
+<div class="quick-facts">
+  <div class="quick-fact"><div class="label">Word Count</div><div class="value">~250 or ~400</div></div>
+  <div class="quick-fact"><div class="label">Register</div><div class="value">Formal, objective, neutral</div></div>
+  <div class="quick-fact"><div class="label">Title</div><div class="value">General heading + section headings</div></div>
+  <div class="quick-fact"><div class="label">Structure</div><div class="value">Header + sections with headings</div></div>
+</div>
+
+<h4>Layout</h4>
+<div class="layout-box">
+<strong>Date:</strong> [date]<br>
+<strong>From:</strong> [your name/role]<br>
+<strong>Subject:</strong> [clear, descriptive title]<br><br>
+<strong>Introduction</strong> (with heading, ~50/80 words) – state purpose, data source<br>
+<strong>Section 1</strong> (with heading, ~50/80 words) – Bullet point 1<br>
+<strong>Section 2</strong> (with heading, ~50/80 words) – Bullet point 2<br>
+<strong>Section 3</strong> (with heading, ~50/80 words) – Bullet point 3<br>
+<strong>Conclusion / Recommendations</strong> (with heading, ~50/80 words) – summarise + suggest
+</div>
+
+<div class="warning">
+<strong>The actual exam template for reports only has: Date, From, Subject.</strong> There is no "To:" field on the Formatvorlage. Don't add one – just fill in what's given. The section headings, however, are mandatory and must be created by you.
+</div>
+
+<div class="dos-donts">
+<div class="do-box">
+<h4>✓ DOs</h4>
+<ul>
+  <li>Present and <strong>analyse facts</strong>, not opinions</li>
+  <li>Be <strong>neutral, concise, and to the point</strong></li>
+  <li>Use the passive voice where appropriate</li>
+  <li>Include <strong>specific data</strong> when referencing surveys/statistics</li>
+  <li>End with clear <strong>recommendations or suggestions</strong></li>
+  <li>Make it the most organised-looking text on your paper</li>
+  <li>Use linking words to show proficiency</li>
+</ul>
+</div>
+<div class="dont-box">
+<h4>✗ DON'Ts</h4>
+<ul>
+  <li>Don't give personal opinions in the main body (save "In my opinion" for the conclusion only)</li>
+  <li>Don't repeat information</li>
+  <li>Don't write anything unnecessary</li>
+  <li>Don't forget the Date/From/Subject header</li>
+  <li>Don't forget section headings</li>
+  <li>Don't use emotional or informal language</li>
+</ul>
+</div>
+</div>
+
+<div class="phrases">
+<h4>Useful Phrases</h4>
+<p><strong>Introduction:</strong></p>
+<p><span class="phrase">As requested, I have prepared a report on…</span> <span class="phrase">The aim of this report is to…</span> <span class="phrase">This report examines/compares…</span> <span class="phrase">The data was collected through…</span></p>
+<p><strong>Presenting data:</strong></p>
+<p><span class="phrase">Twenty per cent of the people asked…</span> <span class="phrase">The majority of respondents…</span> <span class="phrase">One out of five stated that…</span> <span class="phrase">It is generally felt that…</span> <span class="phrase">A large proportion of those interviewed…</span></p>
+<p><strong>Conclusion / Recommendations:</strong></p>
+<p><span class="phrase">On the basis of these findings,…</span> <span class="phrase">I would therefore recommend/suggest that…</span> <span class="phrase">It would seem that… is the best option.</span> <span class="phrase">In view of this, one can recommend…</span></p>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- ===================== BLOG ===================== -->
+<section id="blog">
+<div class="container">
+<div class="text-type">
+<span class="badge badge-blog">All Levels</span>
+<h3>The Blog</h3>
+<p>A blog is a personal, public text on the internet. There are two sub-types: a <strong>blog post</strong> (you start a discussion) and a <strong>blog comment</strong> (you respond to someone else's post). The tone is personal, the style is engaging, and you want people to <strong>react</strong>.</p>
+
+<div class="quick-facts">
+  <div class="quick-fact"><div class="label">Word Count</div><div class="value">~250 (post) / as specified (comment)</div></div>
+  <div class="quick-fact"><div class="label">Register</div><div class="value">Informal to semi-formal</div></div>
+  <div class="quick-fact"><div class="label">Title</div><div class="value">Post: Yes / Comment: No</div></div>
+  <div class="quick-fact"><div class="label">Key Feature</div><div class="value">Personal voice, invite interaction</div></div>
+</div>
+
+<div class="subtype">
+<div class="subtype-header">Blog Post (Entry)</div>
+<div class="subtype-body">
+<div class="layout-box">
+<strong>Username</strong><br>
+<strong>Date / Time</strong><br>
+<strong>Title</strong> (attention-grabbing)<br><br>
+<strong>Introduction</strong> (~50 words) – hook the reader, introduce the topic<br>
+<strong>Body Paragraph 1</strong> (~50–80 words) – Bullet point 1<br>
+<strong>Body Paragraph 2</strong> (~50–80 words) – Bullet point 2<br>
+<strong>Body Paragraph 3</strong> (~50–80 words) – Bullet point 3<br>
+<strong>Conclusion</strong> (~50 words) – wrap up + <em>invite readers to comment</em>
+</div>
+<p>You write because you want to share something fascinating – an idea, an experience, a topic you want to discuss publicly.</p>
+</div>
+</div>
+
+<div class="subtype">
+<div class="subtype-header">Blog Comment (Response)</div>
+<div class="subtype-body">
+<div class="layout-box">
+<strong>Username</strong><br>
+<strong>Date / Time</strong><br>
+<span class="optional">(No title needed)</span><br><br>
+<strong>Introduction</strong> (~30–50 words) – <em>refer to the original post</em><br>
+<strong>Body Paragraph 1</strong> (~50 words) – Bullet point 1<br>
+<strong>Body Paragraph 2</strong> (~50 words) – Bullet point 2<br>
+<strong>Body Paragraph 3</strong> (~50 words) – Bullet point 3<br>
+<strong>Conclusion</strong> (~30–50 words) – your final thought
+</div>
+<p>The key difference: your <strong>first paragraph must refer to the original blog post</strong> you're commenting on. E.g., <em>"Hi Jeff, I stumbled across your blog recently and it really made me think…"</em></p>
+</div>
+</div>
+
+<div class="dos-donts">
+<div class="do-box">
+<h4>✓ DOs</h4>
+<ul>
+  <li>Write in a <strong>personal, engaging voice</strong></li>
+  <li>Share <strong>personal experiences</strong> and opinions</li>
+  <li>Address the reader directly</li>
+  <li>Encourage readers to comment</li>
+  <li>Make the first paragraph grab attention</li>
+  <li>Be aware your text is "public on the internet"</li>
+  <li>Contractions are OK (<em>don't, I'm, it's</em>)</li>
+  <li>Be original and show personality</li>
+</ul>
+</div>
+<div class="dont-box">
+<h4>✗ DON'Ts</h4>
+<ul>
+  <li>Don't write like an essay (too formal)</li>
+  <li>Don't forget to invite comments (blog post)</li>
+  <li>Don't forget to reference the original post (blog comment)</li>
+  <li>Don't be rude or offensive – remember it's public</li>
+  <li>Don't say something anonymous that you wouldn't say in person</li>
+</ul>
+</div>
+</div>
+
+<div class="phrases">
+<h4>Useful Phrases</h4>
+<p><strong>Blog post openers:</strong></p>
+<p><span class="phrase">It took me ages to figure this out, but…</span> <span class="phrase">So, here's what I've been thinking about…</span> <span class="phrase">You won't believe what happened to me…</span></p>
+<p><strong>Blog comment openers:</strong></p>
+<p><span class="phrase">Hi [name], I've just seen your blog on…</span> <span class="phrase">I stumbled across your post and…</span> <span class="phrase">This really resonated with me because…</span></p>
+<p><strong>Engaging the reader:</strong></p>
+<p><span class="phrase">What do you think?</span> <span class="phrase">I'd love to hear your thoughts on this.</span> <span class="phrase">Let me know in the comments!</span> <span class="phrase">Has anyone else experienced this?</span></p>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- ===================== EMAIL ===================== -->
+<section id="email">
+<div class="container">
+<div class="text-type">
+<span class="badge badge-email">All Levels</span>
+<h3>The E-Mail</h3>
+<p>E-mails at B2 level are <strong>predominantly formal</strong>. But the category covers several sub-types, each with its own conventions. Always check the task to see <strong>which kind</strong> you're writing.</p>
+
+<div class="quick-facts">
+  <div class="quick-fact"><div class="label">Word Count</div><div class="value">~250 words</div></div>
+  <div class="quick-fact"><div class="label">Register</div><div class="value">Formal (mostly at B2)</div></div>
+  <div class="quick-fact"><div class="label">Subject Line</div><div class="value">Required (Re:)</div></div>
+  <div class="quick-fact"><div class="label">Sign-Off</div><div class="value">Required</div></div>
+</div>
+
+<h4>Basic Layout (All E-Mail Sub-Types)</h4>
+<div class="layout-box">
+<strong>To:</strong> [recipient's email]<br>
+<strong>From:</strong> [your email]<br>
+<strong>Date:</strong> [date]<br>
+<strong>Subject:</strong> [clear and descriptive]<br><br>
+<strong>Dear Sir or Madam, / Dear Mr/Ms [Name],</strong><br><br>
+<strong>Introduction</strong> – state why you are writing<br>
+<strong>Body Paragraph 1</strong> – Bullet point 1<br>
+<strong>Body Paragraph 2</strong> – Bullet point 2<br>
+<strong>Body Paragraph 3</strong> – Bullet point 3<br>
+<strong>Conclusion</strong> – restate purpose, expected response<br><br>
+<strong>Yours faithfully, / Yours sincerely,</strong><br>
+<strong>[Your Name]</strong>
+</div>
+
+<div class="tip">
+<strong>Faithfully vs. Sincerely:</strong><br>
+<strong>Dear Sir/Madam</strong> (name unknown) → <strong>Yours faithfully,</strong><br>
+<strong>Dear Mr/Ms Brown</strong> (name known) → <strong>Yours sincerely,</strong>
+</div>
+
+<h3>E-Mail Sub-Types</h3>
+
+<!-- COMPLAINT -->
+<div class="subtype">
+<div class="subtype-header">📨 Letter / E-Mail of Complaint</div>
+<div class="subtype-body">
+<p>You're unhappy with a product or service and you want something done about it.</p>
+<div class="phrases">
+<h4>Key Phrases</h4>
+<p><strong>Opening:</strong></p>
+<p><span class="phrase">I am writing to express my dissatisfaction with…</span> <span class="phrase">I am writing to complain about…</span> <span class="phrase">I would like to draw your attention to…</span></p>
+<p><strong>Describing the problem:</strong></p>
+<p><span class="phrase">…was not what we had been led to expect</span> <span class="phrase">It was not up to standard</span> <span class="phrase">We were appalled to find…</span> <span class="phrase">To make matters worse,…</span></p>
+<p><strong>Making demands:</strong></p>
+<p><span class="phrase">I would like you to refund my money.</span> <span class="phrase">I expect a letter of explanation.</span> <span class="phrase">Unless I receive a satisfactory reply, I will…</span> <span class="phrase">I would be grateful if you could…</span></p>
+<p><strong>Closing:</strong></p>
+<p><span class="phrase">I look forward to hearing from you at your earliest convenience.</span> <span class="phrase">Thank you for your cooperation in correcting this matter.</span></p>
+</div>
+</div>
+</div>
+
+<!-- APPLICATION -->
+<div class="subtype">
+<div class="subtype-header">📨 Letter / E-Mail of Application</div>
+<div class="subtype-body">
+<p>You're applying for a job, internship, or course. Be confident, professional, and specific.</p>
+<div class="phrases">
+<h4>Key Phrases</h4>
+<p><strong>Opening:</strong></p>
+<p><span class="phrase">I am writing to apply for the position of… as advertised in…</span> <span class="phrase">I am writing with reference to your advertisement…</span> <span class="phrase">I am interested in applying for the position of…</span></p>
+<p><strong>Qualifications & Experience:</strong></p>
+<p><span class="phrase">I am currently a [age]-year-old student at…</span> <span class="phrase">My qualifications include…</span> <span class="phrase">For the past [time], I have…</span> <span class="phrase">I gained experience while…</span> <span class="phrase">As you can see from the attached CV,…</span></p>
+<p><strong>Skills & Why You're Suitable:</strong></p>
+<p><span class="phrase">I believe I am suitable for the position as I…</span> <span class="phrase">I consider myself to be enthusiastic, hard-working and reliable.</span> <span class="phrase">I have excellent communication skills.</span></p>
+<p><strong>Closing:</strong></p>
+<p><span class="phrase">I am available for an interview at your convenience.</span> <span class="phrase">I look forward to hearing from you.</span> <span class="phrase">Please find my CV attached.</span></p>
+</div>
+<div class="tip"><strong>Tenses tip:</strong> Use Present Simple for skills (<em>I am a reliable person</em>), Past Simple for past experience (<em>I worked for…</em>), Present Perfect for recent activities (<em>I have been working…</em>).</div>
+</div>
+</div>
+
+<!-- LETTER TO EDITOR -->
+<div class="subtype">
+<div class="subtype-header">📨 Letter to the Editor</div>
+<div class="subtype-body">
+<p>You respond to a published article or comment. This is one of the <strong>most frequently tested</strong> e-mail sub-types. You must reference the original publication, then agree or disagree with arguments.</p>
+
+<h4>Layout Specifics</h4>
+<div class="layout-box">
+<strong>To:</strong> [e.g. editor@guardian.com]<br>
+<strong>From:</strong> [your email]<br>
+<strong>Date:</strong> [date]<br>
+<strong>Subject:</strong> [topic of the article you respond to]<br><br>
+<strong>Dear Sir or Madam, / Dear Editor,</strong><br><br>
+<strong>Introduction</strong> – name the publication, the article, its date. State your position.<br>
+<strong>Body (3 paragraphs)</strong> – support your view with arguments, examples, personal experience<br>
+<strong>Conclusion</strong> – restate opinion, make an appeal or call to action<br><br>
+<strong>Yours faithfully,</strong><br>
+<strong>[Name]</strong><br>
+<strong>[Town/City]</strong>
+</div>
+
+<div class="tip">
+<strong>Two greeting options:</strong> Both <em>Dear Sir or Madam,</em> and <em>Dear Editor,</em> are correct for a letter to the editor. Both close with <em>Yours faithfully,</em> since you don't use a personal name.
+</div>
+
+<div class="phrases">
+<h4>Key Phrases</h4>
+<p><strong>Opening – always reference the article:</strong></p>
+<p><span class="phrase">I am writing in response to the article on…, which appeared in… on [date].</span> <span class="phrase">I am writing with reference to the article you published in last month's issue.</span> <span class="phrase">I have just read your article on… and I feel I must respond.</span> <span class="phrase">You raised some issues which I feel strongly about.</span></p>
+<p><strong>Agreeing:</strong></p>
+<p><span class="phrase">I completely agree with you that…</span> <span class="phrase">I wish to congratulate you on this article.</span> <span class="phrase">It is true that…</span> <span class="phrase">I am sure readers will agree with me when I say that…</span></p>
+<p><strong>Disagreeing:</strong></p>
+<p><span class="phrase">I am afraid I totally disagree.</span> <span class="phrase">It is simply not true that…</span> <span class="phrase">I cannot agree with you about…</span> <span class="phrase">The author fails to mention…</span> <span class="phrase">While I completely agree that…, I cannot accept…</span></p>
+<p><strong>Conclusion / Call to action:</strong></p>
+<p><span class="phrase">I hope that…</span> <span class="phrase">Considering the arguments presented, we should…</span> <span class="phrase">What we must do is make sure that…</span> <span class="phrase">May I draw your attention to…</span></p>
+</div>
+
+<div class="tip">
+<strong>Make it personal and local:</strong> Explain why <em>you</em> care about this issue. Explain how it affects your community. This makes your letter stand out and shows genuine engagement.
+</div>
+</div>
+</div>
+
+<!-- GENERAL ENQUIRY / INFORMATION -->
+<div class="subtype">
+<div class="subtype-header">📨 E-Mail of Enquiry / Requesting Information</div>
+<div class="subtype-body">
+<p>You want information about something – a product, a service, an event, etc.</p>
+<div class="phrases">
+<h4>Key Phrases</h4>
+<p><span class="phrase">I am writing to enquire about…</span> <span class="phrase">I would like to request further information about…</span> <span class="phrase">Could you possibly tell me…?</span> <span class="phrase">I would appreciate it if you could send me…</span> <span class="phrase">I look forward to receiving the information requested.</span></p>
+</div>
+</div>
+</div>
+
+<h4>General E-Mail Rules (All Sub-Types)</h4>
+<div class="dos-donts">
+<div class="do-box">
+<h4>✓ DOs</h4>
+<ul>
+  <li>Include <strong>all header elements</strong> (To, From, Date, Subject)</li>
+  <li>State your reason for writing in the <strong>first sentence</strong></li>
+  <li>Use <strong>formal language</strong> – no slang</li>
+  <li>Use full forms (<em>do not</em> instead of <em>don't</em>)</li>
+  <li>Address the reader as "you"</li>
+  <li>Leave a blank line between paragraphs</li>
+  <li>Match greeting to closing (<em>Dear Sir → Yours faithfully</em>)</li>
+  <li>Use "softer" verbs when criticising: <em>rather than, I would like to point out, it seems to me</em></li>
+</ul>
+</div>
+<div class="dont-box">
+<h4>✗ DON'Ts</h4>
+<ul>
+  <li>No contractions in formal e-mails</li>
+  <li>No emojis or emoticons</li>
+  <li>No casual greetings (<em>Hey, Hi there</em>)</li>
+  <li>Don't use a silly e-mail address (<em>katzi1@gmx.at</em>)</li>
+  <li>Don't forget a subject line</li>
+  <li>Don't mix up faithfully/sincerely</li>
+</ul>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- ===================== GENERAL TIPS ===================== -->
+<section id="general">
+<div class="container">
+<h2>General Tips for All Text Types</h2>
+
+<h3>Before You Write</h3>
+<p><strong>1. Read the task twice.</strong> Underline the text type, the audience, the three bullet points, and the word count. Getting any of these wrong is catastrophic.</p>
+<p><strong>2. Plan before you write.</strong> Spend 5 minutes making a quick plan. Jot down which arguments/ideas go where. This prevents rambling and forgotten bullet points.</p>
+<p><strong>3. Decide on register immediately.</strong> Formal = no contractions, no slang, passive voice welcome. Informal = contractions OK, personal tone, direct address.</p>
+
+<h3>While You Write</h3>
+<p><strong>4. One bullet point = one paragraph.</strong> This is the simplest way to guarantee you cover all content points roughly equally.</p>
+<p><strong>5. Topic sentences.</strong> Start every body paragraph with a clear sentence that tells the reader what this paragraph is about.</p>
+<p><strong>6. Linking devices – use variety.</strong> Don't just use <em>and, but, because</em>. Show B2 level:</p>
+
+<table>
+<tr><th>Function</th><th>Basic (avoid)</th><th>B2 Level (use these)</th></tr>
+<tr><td>Adding</td><td>and, also</td><td>Furthermore, Moreover, In addition, What is more, Not only… but also</td></tr>
+<tr><td>Contrasting</td><td>but</td><td>However, Nevertheless, On the other hand, Nonetheless, Although, Despite</td></tr>
+<tr><td>Cause</td><td>because</td><td>Since, As, Due to the fact that, Owing to</td></tr>
+<tr><td>Result</td><td>so</td><td>Therefore, Consequently, As a result, Thus</td></tr>
+<tr><td>Example</td><td>like</td><td>For instance, For example, Take for example, A case in point is</td></tr>
+<tr><td>Conclusion</td><td>to finish</td><td>To sum up, Taking everything into account, All things considered</td></tr>
+</table>
+
+<p><strong>7. Vary your grammar.</strong> Show range by using:</p>
+<p><span class="phrase">Passive voice</span> <span class="phrase">Conditional sentences (If…)</span> <span class="phrase">Relative clauses (who, which, that)</span> <span class="phrase">Participle constructions</span> <span class="phrase">Reported speech</span> <span class="phrase">Inversions (Not only… but also…)</span></p>
+
+<p><strong>8. Don't lift from the prompt.</strong> The task gives you words and phrases. Rephrase them in your own words. The assessment scale <strong>explicitly penalises</strong> frequent lifting: if you copy-paste phrases from the task, your Range score drops to level 4 or below. Even if your grammar is perfect, recycling the prompt's language signals limited vocabulary.</p>
+
+<h3>After You Write</h3>
+<p><strong>9. Count your words.</strong> Seriously. Count them. ±10% is the safe zone.</p>
+<p><strong>10. Proofread for your personal mistakes.</strong> You know your weaknesses – articles? third person -s? tenses? Check specifically for those.</p>
+<p><strong>11. Check text type conventions.</strong> Quick mental checklist: Does my report have section headings? Does my email have a subject line and proper greeting? Does my essay have a title?</p>
+
+<h3>The Most Common Mistakes (and How to Avoid Them)</h3>
+<table>
+<tr><th>Mistake</th><th>Why It Hurts</th><th>Fix</th></tr>
+<tr><td>Writing only 2 of 3 bullet points</td><td>Task Achievement drops to max. level 6/10</td><td>Tick off each bullet point as you write it</td></tr>
+<tr><td>Wrong text type conventions</td><td>E.g. no section headings in a report, no greeting in an email</td><td>Check the layout box in this guide before you start</td></tr>
+<tr><td>Copy-pasting from the prompt</td><td>Range drops to level 4 or below</td><td>Rephrase the task's words – use synonyms</td></tr>
+<tr><td>Word count way off</td><td>±10% = one level down on Task Achievement</td><td>Count your words. Practice estimating at home</td></tr>
+<tr><td>Using essay style in a blog (or vice versa)</td><td>Wrong register = lower Task Achievement</td><td>Ask yourself: formal or informal? Then commit</td></tr>
+<tr><td>Only simple linking words</td><td>"and, but, because" alone = low Coherence score</td><td>Use the B2 linking words table above</td></tr>
+<tr><td>No topic sentences</td><td>Paragraphs feel random, weak Coherence</td><td>First sentence of each paragraph = the point of that paragraph</td></tr>
+<tr><td>Forgetting to proofread</td><td>Silly errors in spelling/grammar that you'd catch in 3 minutes</td><td>Always save 5–10 minutes at the end</td></tr>
+</table>
+
+<h3>Quick-Reference: Which Text Type Does What?</h3>
+<div class="comparison">
+<table>
+<tr>
+  <th>Feature</th><th>Essay</th><th>Article</th><th>Report</th><th>Blog</th><th>E-Mail</th>
+</tr>
+<tr><td>Contractions?</td><td>No</td><td>Depends</td><td>No</td><td>Yes</td><td>No (formal)</td></tr>
+<tr><td>Personal examples?</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>Depends</td></tr>
+<tr><td>Rhetorical questions?</td><td>Intro only</td><td>Yes, many</td><td>No</td><td>Yes</td><td>No</td></tr>
+<tr><td>Section headings?</td><td>No</td><td>No</td><td>Yes!</td><td>No</td><td>No</td></tr>
+<tr><td>Recommendations?</td><td>No</td><td>Optional</td><td>Yes!</td><td>Optional</td><td>Depends</td></tr>
+<tr><td>Address reader?</td><td>No ("one")</td><td>Yes ("you")</td><td>No</td><td>Yes ("you")</td><td>Yes ("you")</td></tr>
+<tr><td>Emotional language?</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>Measured</td></tr>
+<tr><td>Header format?</td><td>Title only</td><td>Title only</td><td>Date/From/Subject</td><td>User/Date/Time</td><td>From/To/Subject</td></tr>
+</table>
+</div>
+
+<div class="tip">
+<strong>Final thought:</strong> The examiners aren't trying to trick you. They want to see that you can communicate clearly and appropriately in English. Pick the right register, cover all the content points, structure your text well, show off your vocabulary and grammar, and proofread. That's all there is to it. You've got this.
+</div>
+
+</div>
+</section>
+
+<!-- ===================== OPERATORS ===================== -->
+<section id="operators">
+<div class="container">
+<h2>Understanding the Task: Operators</h2>
+<p>The task instructions use specific verbs – <strong>operators</strong> – that tell you exactly what to do. Misreading these costs you Task Achievement points. Here's what each one demands:</p>
+
+<table>
+<tr><th>Operator</th><th>What You Must Do</th><th>Example Formulation</th></tr>
+<tr><td><strong>discuss</strong></td><td>Look at a topic from <strong>different angles</strong>. Present arguments for and against, weigh them up.</td><td><em>There are strong arguments both for and against… On the one hand… On the other hand…</em></td></tr>
+<tr><td><strong>evaluate</strong></td><td>Examine something and <strong>judge its quality or value</strong>. Say whether it's good or bad, effective or not – and why.</td><td><em>While this approach has certain merits, it fails to address… Overall, it can be considered…</em></td></tr>
+<tr><td><strong>argue (for/against)</strong></td><td>Take a <strong>clear position</strong> and support it with reasons. Stronger than "discuss" – you're not neutral.</td><td><em>I firmly believe that… The most convincing reason for this is…</em></td></tr>
+<tr><td><strong>analyse</strong></td><td>Break something down into its <strong>parts or causes</strong>. Look at how and why something works (or doesn't).</td><td><em>The main factors contributing to this are… A closer look reveals that…</em></td></tr>
+<tr><td><strong>compare</strong></td><td>Point out <strong>similarities and differences</strong> between two or more things.</td><td><em>While X tends to…, Y is more likely to… Both share the characteristic of…</em></td></tr>
+<tr><td><strong>comment on</strong></td><td>Give your <strong>opinion or reaction</strong> to something. Less structured than "discuss" – more personal.</td><td><em>What strikes me most about this is… In my view, this is…</em></td></tr>
+<tr><td><strong>describe</strong></td><td>Say <strong>what something is like</strong>. Give details, features, characteristics. Factual, not opinionated.</td><td><em>The programme consists of… It features… Participants are expected to…</em></td></tr>
+<tr><td><strong>suggest / recommend</strong></td><td>Propose <strong>ideas or solutions</strong>. What should be done? What would improve the situation?</td><td><em>I would recommend that… One possible solution would be to… It might be worth considering…</em></td></tr>
+<tr><td><strong>explain</strong></td><td>Make something <strong>clear and understandable</strong>. Say how or why something happens.</td><td><em>The reason for this is that… This is because… This can be explained by the fact that…</em></td></tr>
+<tr><td><strong>point out</strong></td><td><strong>Draw attention</strong> to specific facts, problems, or aspects. Highlight what matters.</td><td><em>It is important to note that… One aspect that deserves attention is… What is often overlooked is…</em></td></tr>
+</table>
+
+<div class="tip">
+<strong>Multiple operators in one task?</strong> A single bullet point might say "evaluate the advantages and suggest improvements". That means you need to do <em>both</em> – judge the current state AND propose changes. Underline every operator in the task before you start writing.
+</div>
+
+</div>
+</section>
+
+<!-- ===================== MODEL TEXTS ===================== -->
+<section id="models">
+<div class="container">
+<h2>Annotated Model Texts</h2>
+<p>One model text per text type, written at a <strong>solid B2 level</strong>. The colour-coded highlights mark key elements. <strong>Hover over any highlighted passage</strong> to see what it does – or use the button to reveal all labels at once.</p>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:#2563eb"></div> Structure / Layout</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#16a34a"></div> Content (P.E.E.)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#ca8a04"></div> Language Feature</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#7c3aed"></div> Text-Type Specific</div>
+  <div style="margin-left:auto"><button class="ann-toggle" onclick="document.getElementById('models').classList.toggle('show-all-labels'); this.textContent = this.textContent === 'Show All Labels' ? 'Hide Labels' : 'Show All Labels'">Show All Labels</button></div>
+</div>
+
+<!-- ===== ESSAY MODEL ===== -->
+<div class="model-wrap">
+<div class="model-header"><span class="badge badge-essay" style="margin:0">Essay</span> ~400 words · Formal · Title required</div>
+<div class="model-body">
+
+<p><span class="ann ann-structure"><strong>The Hidden Cost of Fast Fashion</strong></span> <span class="ann-label al-blue">TITLE</span></p>
+
+<p><span class="ann ann-special">Have you ever stopped to think about where your clothes actually come from?</span> <span class="ann-label al-purple">RHETORICAL QUESTION HOOK</span> The fashion industry has grown dramatically over the past two decades, <span class="ann ann-language">with consumers now purchasing</span> <span class="ann-label al-yellow">COMPLEX STRUCTURE</span> around 60% more clothing than they did in 2000. <span class="ann ann-content">In my opinion, the environmental and social damage caused by fast fashion far outweighs the benefit of cheap clothing.</span> <span class="ann-label al-green">THESIS – OPINION STATED CLEARLY</span></p>
+
+<p><span class="ann ann-content">To begin with, the environmental impact of fast fashion is staggering.</span> <span class="ann-label al-green">TOPIC SENTENCE = POINT</span> The production of cheap garments <span class="ann ann-language">requires</span> <span class="ann-label al-yellow">FORMAL VERB</span> enormous amounts of water and energy, and releases toxic chemicals into rivers and soil. <span class="ann ann-content"><span class="ann ann-language">According to</span> <span class="ann-label al-yellow">LINKING</span> the United Nations Environment Programme, the fashion industry is responsible for approximately 10% of global carbon emissions – more than international flights and maritime shipping combined.</span> <span class="ann-label al-green">EVIDENCE + EXAMPLE</span> <span class="ann ann-language">Furthermore,</span> <span class="ann-label al-yellow">B2 LINKING</span> most of these garments end up in landfill within a year of purchase, creating mountains of textile waste that will take centuries to decompose.</p>
+
+<p><span class="ann ann-content">Equally alarming are the working conditions in the factories that produce these clothes.</span> <span class="ann-label al-green">TOPIC SENTENCE</span> Workers in countries such as Bangladesh and Cambodia <span class="ann ann-language">are often forced to</span> <span class="ann-label al-yellow">PASSIVE</span> work twelve-hour shifts for wages that barely cover basic living costs. The Rana Plaza factory collapse in 2013, <span class="ann ann-language">which killed over 1,100 garment workers,</span> <span class="ann-label al-yellow">RELATIVE CLAUSE</span> <span class="ann ann-content">exposed the dangerous reality behind bargain-priced T-shirts.</span> <span class="ann-label al-green">CONCRETE EXAMPLE</span> <span class="ann ann-language">Despite</span> <span class="ann-label al-yellow">B2 LINKING</span> promises of reform, investigations continue to reveal forced overtime and unsafe buildings.</p>
+
+<p><span class="ann ann-special"><span class="ann ann-language">Admittedly,</span> <span class="ann-label al-yellow">CONCESSION MARKER</span> some argue that fast fashion makes trendy clothing accessible to people who cannot afford designer brands.</span> <span class="ann-label al-purple">COUNTER-ARGUMENT ACKNOWLEDGED</span> <span class="ann ann-language">While</span> <span class="ann-label al-yellow">LINKING</span> this may be true to some extent, <span class="ann ann-special">it does not justify an industry built on exploitation and pollution. Affordable clothing can exist without disposable clothing – brands such as Patagonia and Uniqlo have shown that durable, fairly produced garments do not have to be expensive.</span> <span class="ann-label al-purple">COUNTER-ARGUMENT REFUTED</span></p>
+
+<p><span class="ann ann-content"><span class="ann ann-language">Taking these points into consideration,</span> <span class="ann-label al-yellow">CONCLUSION LINKER</span> it is clear that the true cost of fast fashion is paid not by consumers, but by workers and the planet. <span class="ann ann-language">If we genuinely want to</span> <span class="ann-label al-yellow">CONDITIONAL</span> address the climate crisis, we must start by rethinking our relationship with the clothes we wear.</span> <span class="ann-label al-green">CONCLUSION – OPINION RESTATED IN NEW WORDS</span></p>
+
+</div>
+</div>
+
+<!-- ===== ARTICLE MODEL ===== -->
+<div class="model-wrap">
+<div class="model-header"><span class="badge badge-article" style="margin:0">Article</span> ~250 words · Informal/Semi-formal · Catchy title</div>
+<div class="model-body">
+
+<p><span class="ann ann-structure"><strong>Screens Off, Life On?</strong></span> <span class="ann-label al-blue">CATCHY TITLE (question)</span></p>
+
+<p><span class="ann ann-special">Are you one of those people who check their phone within five minutes of waking up?</span> <span class="ann-label al-purple">RHETORICAL QUESTION – GRABS READER</span> If so, you are definitely not alone. <span class="ann ann-special">A recent experiment at our school challenged students to give up their phones for an entire week – and the results were surprising.</span> <span class="ann-label al-purple">HOOK – READER WANTS TO KNOW MORE</span></p>
+
+<p><span class="ann ann-content">When the experiment started, most participants felt anxious and disconnected.</span> <span class="ann-label al-green">TOPIC SENTENCE</span> Several students admitted they instinctively reached into their pockets dozens of times a day. <span class="ann ann-special">"I didn't even realise how addicted I was,"</span> <span class="ann-label al-purple">DIRECT SPEECH – suits articles</span> one participant told me. <span class="ann ann-language">However,</span> <span class="ann-label al-yellow">LINKING</span> by day three, something shifted: people started talking more during breaks, playing cards, and actually paying attention in class.</p>
+
+<p><span class="ann ann-content">The most striking change was in the social atmosphere.</span> <span class="ann-label al-green">TOPIC SENTENCE</span> Without screens to hide behind, students had to look at each other and hold real conversations. <span class="ann ann-special">I know this sounds old-fashioned, but it genuinely felt different – warmer, somehow.</span> <span class="ann-label al-purple">PERSONAL EXPERIENCE – suits articles, NOT essays</span> Teachers noticed the difference too, reporting fewer disruptions and more engagement.</p>
+
+<p><span class="ann ann-language">So, would I recommend a phone detox?</span> <span class="ann-label al-yellow">DIRECT ADDRESS + RHETORICAL Q</span> Absolutely – <span class="ann ann-language">even if</span> <span class="ann-label al-yellow">CONCESSION</span> only for a few days. <span class="ann ann-special">You might be surprised by what you notice when you finally look up from that little screen.</span> <span class="ann-label al-purple">CONCLUSION – LEAVES READER THINKING</span></p>
+
+</div>
+</div>
+
+<!-- ===== REPORT MODEL ===== -->
+<div class="model-wrap">
+<div class="model-header"><span class="badge badge-report" style="margin:0">Report</span> ~250 words · Formal · Header + Section headings</div>
+<div class="model-body">
+
+<p><span class="ann ann-structure"><strong>Date:</strong> 15 March 2026</span><br>
+<span class="ann ann-structure"><strong>From:</strong> Anna Gruber, Student Council</span><br>
+<span class="ann ann-structure"><strong>Subject:</strong> Survey Results – Student Stress Levels</span>
+<span class="ann-label al-blue">HEADER – Date, From, Subject (matches exam template)</span></p>
+
+<p><span class="ann ann-structure"><strong>1. Introduction</strong></span> <span class="ann-label al-blue">SECTION HEADING</span><br>
+<span class="ann ann-content">This report presents the findings of a survey on stress levels conducted among 85 students in years 7 and 8.</span> <span class="ann-label al-green">PURPOSE + DATA SOURCE</span> <span class="ann ann-content">The aim is to identify the main causes of stress and suggest possible measures.</span> <span class="ann-label al-green">WHAT TO EXPECT</span></p>
+
+<p><span class="ann ann-structure"><strong>2. Key Findings</strong></span> <span class="ann-label al-blue">SECTION HEADING</span><br>
+<span class="ann ann-content"><span class="ann ann-language">The majority of</span> <span class="ann-label al-yellow">REPORT LANGUAGE</span> respondents (72%) reported feeling stressed on a regular basis. Exams and homework deadlines were identified as the primary sources of pressure.</span> <span class="ann-label al-green">DATA PRESENTATION</span> <span class="ann ann-language">In addition,</span> <span class="ann-label al-yellow">LINKING</span> 45% mentioned sleep problems connected to school-related anxiety. <span class="ann ann-special">Only 18% were aware of the school's existing counselling services.</span> <span class="ann-label al-purple">SURPRISING DETAIL – JUSTIFIES RECOMMENDATIONS</span></p>
+
+<p><span class="ann ann-structure"><strong>3. Social and Physical Impact</strong></span> <span class="ann-label al-blue">SECTION HEADING</span><br>
+<span class="ann ann-content"><span class="ann ann-language">A significant proportion of</span> <span class="ann-label al-yellow">REPORT LANGUAGE</span> those surveyed said stress had affected their relationships with friends and family.</span> <span class="ann-label al-green">TOPIC SENTENCE</span> <span class="ann ann-language">Furthermore,</span> <span class="ann-label al-yellow">LINKING</span> 35% reported headaches and 23% experienced difficulty concentrating. These findings suggest that student wellbeing <span class="ann ann-language">is being</span> <span class="ann-label al-yellow">PASSIVE</span> significantly impacted.</p>
+
+<p><span class="ann ann-structure"><strong>4. Recommendations</strong></span> <span class="ann-label al-blue">SECTION HEADING</span><br>
+<span class="ann ann-language">On the basis of these findings,</span> <span class="ann-label al-yellow">CONCLUSION LINKER</span> <span class="ann ann-special">I would recommend introducing a weekly "no-homework day" and promoting the counselling service through posters and assemblies.</span> <span class="ann-label al-purple">RECOMMENDATIONS – required for reports</span> <span class="ann ann-language">It would also be advisable to</span> <span class="ann-label al-yellow">FORMAL SUGGESTION</span> schedule exams more evenly across the term to reduce pressure peaks.</p>
+
+</div>
+</div>
+
+<!-- ===== BLOG MODEL ===== -->
+<div class="model-wrap">
+<div class="model-header"><span class="badge badge-blog" style="margin:0">Blog Post</span> ~250 words · Informal · Personal voice</div>
+<div class="model-body">
+
+<p><span class="ann ann-structure">by <strong>max_adventures</strong> · 22 March 2026, 19:34</span> <span class="ann-label al-blue">USERNAME + DATE/TIME</span></p>
+
+<p><span class="ann ann-structure"><strong>Why I Quit Instagram for a Month (And What Happened Next)</strong></span> <span class="ann-label al-blue">TITLE – attention-grabbing</span></p>
+
+<p><span class="ann ann-special">OK so hear me out – I know everyone talks about digital detoxes these days, but I actually went through with it.</span> <span class="ann-label al-purple">PERSONAL, INFORMAL TONE – contractions OK</span> Last month I deleted Instagram from my phone. Cold turkey. No "screen time limits", no "I'll just check once a day" – gone. <span class="ann ann-special">And honestly? It was weird.</span> <span class="ann-label al-purple">SHORT SENTENCE FOR EFFECT</span></p>
+
+<p><span class="ann ann-content">The first few days were rough.</span> <span class="ann-label al-green">TOPIC SENTENCE</span> I kept unlocking my phone and staring at the empty space where the app used to be. I realised I'd been scrolling for about two hours every single day – that's <span class="ann ann-language">basically</span> <span class="ann-label al-yellow">INFORMAL REGISTER</span> the same as watching a movie. Every. Day. <span class="ann ann-language">But</span> <span class="ann-label al-yellow">SIMPLE LINKING – fits blog tone</span> after about a week, something clicked. I started reading before bed again. I actually finished a book for the first time in months.</p>
+
+<p><span class="ann ann-content">The biggest surprise was how different I felt about myself.</span> <span class="ann-label al-green">TOPIC SENTENCE</span> Without constantly comparing my life to everyone else's highlight reel, I just felt… calmer. Less pressure to look a certain way or do certain things. <span class="ann ann-special">My friend Lisa said she noticed I seemed happier, which was pretty cool to hear.</span> <span class="ann-label al-purple">PERSONAL ANECDOTE – perfect for blogs</span></p>
+
+<p><span class="ann ann-language">So, am I back on Instagram now?</span> <span class="ann-label al-yellow">RHETORICAL Q</span> Yeah, I am. But I use it differently – maybe 20 minutes a day, max. The month off taught me it's a tool, not a lifestyle. <span class="ann ann-special">Have any of you tried something like this? I'd love to hear your stories in the comments!</span> <span class="ann-label al-purple">CALL TO COMMENT – required for blog posts</span></p>
+
+</div>
+</div>
+
+<!-- ===== EMAIL MODEL ===== -->
+<div class="model-wrap">
+<div class="model-header"><span class="badge badge-email" style="margin:0">E-Mail (Complaint)</span> ~250 words · Formal · Full header + sign-off</div>
+<div class="model-body">
+
+<p><span class="ann ann-structure"><strong>To:</strong> info@globalenglish.com</span><br>
+<span class="ann ann-structure"><strong>From:</strong> sarah.berger@gmx.at</span><br>
+<span class="ann ann-structure"><strong>Date:</strong> 10 April 2026</span><br>
+<span class="ann ann-structure"><strong>Subject:</strong> Complaint regarding Summer Language Course in Brighton</span>
+<span class="ann-label al-blue">HEADER – all 4 elements present</span></p>
+
+<p><span class="ann ann-structure"><strong>Dear Sir or Madam,</strong></span> <span class="ann-label al-blue">FORMAL GREETING (name unknown)</span></p>
+
+<p><span class="ann ann-content"><span class="ann ann-language">I am writing to express my dissatisfaction with</span> <span class="ann-label al-yellow">SET PHRASE – COMPLAINT OPENER</span> the two-week language course I attended at your Brighton school from 1 to 14 July 2025.</span> <span class="ann-label al-green">REASON FOR WRITING + SPECIFIC DETAILS</span> <span class="ann ann-language">Although</span> <span class="ann-label al-yellow">CONCESSION</span> your website promised small class sizes and experienced teachers, my experience <span class="ann ann-language">was far from</span> <span class="ann-label al-yellow">FORMAL UNDERSTATEMENT</span> what had been advertised.</p>
+
+<p><span class="ann ann-content">To begin with, the classes had up to 22 students, which made individual attention impossible.</span> <span class="ann-label al-green">TOPIC SENTENCE + EVIDENCE</span> <span class="ann ann-language">Furthermore,</span> <span class="ann-label al-yellow">B2 LINKING</span> our teacher changed three times during the course, and the final replacement had no formal teaching qualification. <span class="ann ann-content"><span class="ann ann-language">As a result,</span> <span class="ann-label al-yellow">CAUSE-EFFECT LINKER</span> several students felt they had not improved at all.</span> <span class="ann-label al-green">CONSEQUENCE</span></p>
+
+<p><span class="ann ann-content">The accommodation was equally disappointing.</span> <span class="ann-label al-green">TOPIC SENTENCE</span> The host family's house was located 45 minutes from the school by bus, <span class="ann ann-language">despite</span> <span class="ann-label al-yellow">LINKING</span> the brochure stating that all families would be within walking distance. <span class="ann ann-language">To make matters worse,</span> <span class="ann-label al-yellow">ESCALATION PHRASE</span> the room I was given had no desk, making homework extremely difficult.</p>
+
+<p><span class="ann ann-special"><span class="ann ann-language">I would therefore like to request</span> <span class="ann-label al-yellow">FORMAL DEMAND</span> a partial refund of the course fees, as the services provided did not match the description on your website.</span> <span class="ann-label al-purple">CLEAR DEMAND – specific and reasonable</span> <span class="ann ann-language">I look forward to hearing from you within 14 days.</span> <span class="ann-label al-yellow">DEADLINE + SET CLOSING PHRASE</span></p>
+
+<p><span class="ann ann-structure"><strong>Yours faithfully,</strong></span> <span class="ann-label al-blue">CORRECT SIGN-OFF (Dear Sir → faithfully)</span><br>
+<span class="ann ann-structure"><strong>Sarah Berger</strong></span> <span class="ann-label al-blue">FULL NAME</span></p>
+
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- ===================== PRACTICE ===================== -->
+<section id="practice">
+<div class="container">
+<h2>Practice Zone</h2>
+
+<h3>Exercise 1: Spot the Text-Type Mistakes</h3>
+<p>Each text below contains <strong>deliberate errors in text-type conventions</strong> (not grammar). Find them, then click to reveal the answers.</p>
+
+<div class="error-text">
+<div class="task-label">Text A – "Essay" by a student</div>
+<p><em>Should Schools Ban Mobile Phones?</em></p>
+<p>Hey guys! So there's been a lot of talk about banning phones in schools lately. I think it's a terrible idea and here's why.</p>
+<p>When my school tried a phone ban last year, I was so annoyed. I couldn't text my mum when I needed to, and honestly, it made me feel anxious. My best friend Lea had the same problem – she told me she felt "cut off from the world".</p>
+<p>Also, phones can be really useful for learning. There's loads of apps that help with languages and maths. So why would you take that away?</p>
+<p>To sum up, phone bans are dumb. Schools should trust students more!!!</p>
+<button class="reveal-btn">Reveal errors</button>
+<div class="reveal">
+<strong>6 errors found:</strong><br>
+1. <strong>"Hey guys!"</strong> – colloquial greeting. Essays are formal. No direct address.<br>
+2. <strong>Contractions</strong> (there's, here's, it's, couldn't) – not allowed in formal essays.<br>
+3. <strong>Personal anecdote</strong> ("When my school tried…", "My best friend Lea") – essays use general examples, not autobiographical stories.<br>
+4. <strong>"loads of apps"</strong> – colloquial. Formal alternative: "a large number of applications".<br>
+5. <strong>"phone bans are dumb"</strong> – emotive/slang. Use: "banning phones is unlikely to be effective".<br>
+6. <strong>"!!!"</strong> – exclamation marks are inappropriate in formal essays.<br>
+<strong>Overall:</strong> This reads like a blog post, not an essay. Wrong register throughout.
+</div>
+</div>
+
+<div class="error-text">
+<div class="task-label">Text B – "Report" by a student</div>
+<p>To: The Principal<br>From: Student Council<br>Subject: Canteen Food</p>
+<p>Dear Sir, I am writing to tell you about what students think about our canteen food. I personally believe the food is terrible and many of my friends agree. The pizza is always cold and the salad looks disgusting.</p>
+<p>Another thing that really annoys me is the prices. Everything has become so expensive lately! A simple sandwich costs almost 4 euros, which is outrageous. I think they should reduce prices immediately.</p>
+<p>In conclusion, our canteen needs a complete makeover. The school should fire the catering company and find a new one.</p>
+<button class="reveal-btn">Reveal errors</button>
+<div class="reveal">
+<strong>6 errors found:</strong><br>
+1. <strong>Missing Date</strong> in header (the exam template requires Date, From, Subject).<br>
+2. <strong>"Dear Sir"</strong> – reports don't have a greeting. That's for emails/letters.<br>
+3. <strong>No section headings</strong> – every report paragraph needs its own heading (e.g. "1. Introduction", "2. Food Quality", "3. Pricing", "4. Recommendations").<br>
+4. <strong>Personal opinion in the body</strong> ("I personally believe", "really annoys me") – reports present objective findings, not personal feelings. Use: "72% of respondents rated the food quality as poor".<br>
+5. <strong>"disgusting", "outrageous"</strong> – emotional language. Reports are neutral and factual.<br>
+6. <strong>"fire the catering company"</strong> – too aggressive. Reports make measured recommendations: "It would be advisable to review the current catering contract."
+</div>
+</div>
+
+<div class="error-text">
+<div class="task-label">Text C – "E-Mail (Letter to the Editor)" by a student</div>
+<p>To: editor@dailynews.com<br>From: mike99@yahoo.com<br>Date: 5 March 2026<br>Subject: Your article about school uniforms</p>
+<p>Hi there,</p>
+<p>I read your article about school uniforms and I think you're totally wrong. Uniforms are great because everyone looks the same and nobody gets bullied for wearing cheap clothes.</p>
+<p>That's basically it. Hope you'll print my letter.</p>
+<p>Cheers,<br>Mike</p>
+<button class="reveal-btn">Reveal errors</button>
+<div class="reveal">
+<strong>7 errors found:</strong><br>
+1. <strong>"Hi there"</strong> – too informal. Use: "Dear Sir or Madam," or "Dear Editor,".<br>
+2. <strong>"you're", "that's"</strong> – contractions not appropriate in formal letters to the editor.<br>
+3. <strong>No article reference</strong> – must state the article title, publication, and date.<br>
+4. <strong>"totally wrong"</strong> – too blunt and informal. Use: "I am afraid I must disagree with the position expressed."<br>
+5. <strong>Only one argument</strong> – the task would give 3 bullet points; each needs a paragraph.<br>
+6. <strong>"Cheers"</strong> – informal sign-off. Must be: "Yours faithfully,".<br>
+7. <strong>"Mike"</strong> – must give full name (and town/city for letters to the editor).<br>
+</div>
+</div>
+
+<h3>Exercise 2: Register Cheat Sheet – Same Content, Different Voice</h3>
+<p>The same ideas, expressed in the register appropriate for an <strong>essay</strong> vs. a <strong>blog</strong>. Study the differences.</p>
+
+<div class="register-grid">
+<div class="register-row">
+<div class="register-cell register-header">Formal (Essay / Report / E-Mail)</div>
+<div class="register-cell register-header">Informal (Blog / casual Article)</div>
+</div>
+<div class="register-row">
+<div class="register-cell">I am writing to express my concern about the proposed changes.</div>
+<div class="register-cell">So, I just heard about these new changes and honestly? I'm not happy.</div>
+</div>
+<div class="register-row">
+<div class="register-cell">It is widely acknowledged that social media can have a negative impact on mental health.</div>
+<div class="register-cell">We all know that social media can mess with your head.</div>
+</div>
+<div class="register-row">
+<div class="register-cell">One cannot deny that there are certain advantages to this approach.</div>
+<div class="register-cell">OK, I'll admit – there are some good things about it.</div>
+</div>
+<div class="register-row">
+<div class="register-cell">Furthermore, the data suggests that a significant proportion of respondents were dissatisfied.</div>
+<div class="register-cell">Plus, loads of people in the survey said they weren't happy either.</div>
+</div>
+<div class="register-row">
+<div class="register-cell">Taking these points into consideration, it would appear that the current system is inadequate.</div>
+<div class="register-cell">So yeah – the whole thing just doesn't work.</div>
+</div>
+<div class="register-row">
+<div class="register-cell">I would therefore recommend that the school administration reconsider this policy.</div>
+<div class="register-cell">Honestly, the school should just change this. What do you guys think?</div>
+</div>
+<div class="register-row">
+<div class="register-cell">I look forward to hearing from you at your earliest convenience.</div>
+<div class="register-cell">Let me know what you think in the comments!</div>
+</div>
+</div>
+
+<div class="tip">
+<strong>The test:</strong> Read your text aloud. If your essay sounds like a conversation with your friend, the register is wrong. If your blog sounds like a UN speech, same problem.
+</div>
+
+</div>
+</section>
+
+<!-- ===================== GRAMMAR KIT ===================== -->
+<section id="grammar">
+<div class="container">
+<h2>Grammar Kit for Austrian Learners</h2>
+<p>These are the <strong>most common mistakes</strong> that German-speaking students make in English. They come from <strong>L1 interference</strong> – your brain trying to apply German rules to English. Knowing them means you can catch them when you proofread.</p>
+
+<!-- 1. ARTICLES -->
+<div class="grammar-topic">
+<h4>1. Articles: a / an / the / (nothing)</h4>
+<p>German has articles too, but English uses them differently. This is the single biggest error source for Austrian students.</p>
+
+<div class="grammar-pair">
+<div class="gp-wrong"><strong>The school</strong> is very important for young people. <span style="color:var(--gray);font-size:0.8rem">(German: "Die Schule ist wichtig" → tempting to add "the")</span></div>
+<div class="gp-right"><strong>School</strong> is very important for young people. (general concept = no article)</div>
+</div>
+<div class="grammar-pair">
+<div class="gp-wrong">I go to <strong>the school</strong> every day. <span style="color:var(--gray);font-size:0.8rem">(German: "Ich gehe in die Schule")</span></div>
+<div class="gp-right">I go to <strong>school</strong> every day. (institution = no article)</div>
+</div>
+<div class="grammar-pair">
+<div class="gp-wrong"><strong>The life</strong> is complicated.</div>
+<div class="gp-right"><strong>Life</strong> is complicated. (abstract concept = no article)</div>
+</div>
+<div class="grammar-pair">
+<div class="gp-wrong">She plays <strong>the</strong> piano very well. ✓ BUT: She plays <strong>the</strong> football.</div>
+<div class="gp-right">She plays <strong>the</strong> piano. ✓ She plays <strong>Ø</strong> football. (instruments: THE / sports: no article)</div>
+</div>
+
+<p><strong>Quick rule:</strong> Use "the" when both you and the reader know <em>which specific one</em>. Use "a/an" when introducing something new. Use <em>no article</em> for abstract concepts, general plurals, sports, meals, and institutions used for their purpose (school, church, hospital, prison).</p>
+</div>
+
+<!-- 2. PREPOSITIONS -->
+<div class="grammar-topic">
+<h4>2. Prepositions</h4>
+<p>German and English prepositions rarely match 1:1. Don't translate – learn the English collocations.</p>
+
+<div class="grammar-pair">
+<div class="gp-wrong">I am good <strong>in</strong> English.</div>
+<div class="gp-right">I am good <strong>at</strong> English.</div>
+</div>
+<div class="grammar-pair">
+<div class="gp-wrong">I am interested <strong>for</strong> this topic.</div>
+<div class="gp-right">I am interested <strong>in</strong> this topic.</div>
+</div>
+<div class="grammar-pair">
+<div class="gp-wrong">It depends <strong>from</strong> the weather.</div>
+<div class="gp-right">It depends <strong>on</strong> the weather.</div>
+</div>
+<div class="grammar-pair">
+<div class="gp-wrong">I am waiting <strong>on</strong> the bus.</div>
+<div class="gp-right">I am waiting <strong>for</strong> the bus.</div>
+</div>
+<div class="grammar-pair">
+<div class="gp-wrong">She consists <strong>on</strong> going there.</div>
+<div class="gp-right">She <strong>insists on</strong> going there. (consists <strong>of</strong> = besteht aus)</div>
+</div>
+<div class="grammar-pair">
+<div class="gp-wrong">We discussed <strong>about</strong> the problem.</div>
+<div class="gp-right">We discussed the problem. (discuss = transitive, no preposition)</div>
+</div>
+<div class="grammar-pair">
+<div class="gp-wrong"><strong>In</strong> the one hand… <strong>in</strong> the other hand…</div>
+<div class="gp-right"><strong>On</strong> the one hand… <strong>on</strong> the other hand…</div>
+</div>
+</div>
+
+<!-- 3. FALSE FRIENDS -->
+<div class="grammar-topic">
+<h4>3. False Friends (Falsche Freunde)</h4>
+<p>Words that look like German words but mean something completely different.</p>
+
+<table>
+<tr><th>You write…</th><th>You think it means…</th><th>It actually means…</th><th>Correct English word</th></tr>
+<tr><td>become</td><td>bekommen (to get)</td><td>werden (to turn into)</td><td><strong>get / receive</strong></td></tr>
+<tr><td>gift</td><td>Gift (poison)</td><td>Geschenk (present)</td><td><strong>poison</strong></td></tr>
+<tr><td>sensible</td><td>sensibel (sensitive)</td><td>vernünftig (reasonable)</td><td><strong>sensitive</strong></td></tr>
+<tr><td>actual(ly)</td><td>aktuell (current)</td><td>tatsächlich (in fact)</td><td><strong>current(ly)</strong></td></tr>
+<tr><td>consequent</td><td>konsequent (consistent)</td><td>folgend/daraus resultierend</td><td><strong>consistent / persistent</strong></td></tr>
+<tr><td>eventually</td><td>eventuell (maybe)</td><td>schließlich (in the end)</td><td><strong>possibly / perhaps</strong></td></tr>
+<tr><td>chef</td><td>Chef (boss)</td><td>Koch (cook)</td><td><strong>boss / manager</strong></td></tr>
+<tr><td>gymnasium</td><td>Gymnasium (school type)</td><td>Turnhalle (sports hall)</td><td><strong>grammar school / secondary school</strong></td></tr>
+<tr><td>sympathetic</td><td>sympathisch (likeable)</td><td>mitfühlend (compassionate)</td><td><strong>likeable / nice</strong></td></tr>
+<tr><td>to spend</td><td>spenden (to donate)</td><td>ausgeben/verbringen</td><td><strong>to donate</strong></td></tr>
+<tr><td>handy</td><td>Handy (mobile phone)</td><td>praktisch (useful)</td><td><strong>mobile phone / cell phone</strong></td></tr>
+</table>
+</div>
+
+<!-- 4. SINCE vs FOR -->
+<div class="grammar-topic">
+<h4>4. Since vs. For</h4>
+<p>German uses "seit" for both. English distinguishes between a <strong>point in time</strong> and a <strong>period of time</strong>.</p>
+
+<div class="grammar-pair">
+<div class="gp-wrong">I have been living here <strong>since</strong> five years.</div>
+<div class="gp-right">I have been living here <strong>for</strong> five years. (period of time → for)</div>
+</div>
+<div class="grammar-pair">
+<div class="gp-wrong">I have been living here <strong>for</strong> 2019.</div>
+<div class="gp-right">I have been living here <strong>since</strong> 2019. (point in time → since)</div>
+</div>
+
+<p><strong>Since</strong> = starting point (since Monday, since 2019, since I was a child). <strong>For</strong> = duration (for two hours, for five years, for a long time). Both trigger <strong>Present Perfect</strong> (or Present Perfect Continuous).</p>
+</div>
+
+<!-- 5. IF vs WHEN -->
+<div class="grammar-topic">
+<h4>5. If vs. When</h4>
+<p>German "wenn" covers both. English splits them.</p>
+
+<div class="grammar-pair">
+<div class="gp-wrong"><strong>If</strong> I come home, I always eat dinner. (routine → not uncertain)</div>
+<div class="gp-right"><strong>When</strong> I come home, I always eat dinner. (it definitely happens → when)</div>
+</div>
+<div class="grammar-pair">
+<div class="gp-wrong"><strong>When</strong> it rains tomorrow, we will stay inside. (uncertain → not definite)</div>
+<div class="gp-right"><strong>If</strong> it rains tomorrow, we will stay inside. (might or might not happen → if)</div>
+</div>
+
+<p><strong>When</strong> = it will definitely happen (just a question of timing). <strong>If</strong> = it might or might not happen (condition).</p>
+</div>
+
+<!-- 6. MAKE vs DO -->
+<div class="grammar-topic">
+<h4>6. Make vs. Do</h4>
+<p>German uses "machen" for almost everything. English splits it.</p>
+
+<div class="grammar-pair">
+<div class="gp-wrong">I have to <strong>make</strong> my homework.</div>
+<div class="gp-right">I have to <strong>do</strong> my homework.</div>
+</div>
+<div class="grammar-pair">
+<div class="gp-wrong">She <strong>does</strong> a lot of mistakes.</div>
+<div class="gp-right">She <strong>makes</strong> a lot of mistakes.</div>
+</div>
+
+<p><strong>DO</strong> = tasks, work, activities (do homework, do the dishes, do exercise, do a favour, do your best, do business). <strong>MAKE</strong> = creating/producing something (make a mistake, make a decision, make money, make a suggestion, make progress, make an effort, make friends).</p>
+</div>
+
+<!-- 7. SAY vs TELL -->
+<div class="grammar-topic">
+<h4>7. Say vs. Tell</h4>
+
+<div class="grammar-pair">
+<div class="gp-wrong">He <strong>said me</strong> that he was tired.</div>
+<div class="gp-right">He <strong>told me</strong> that he was tired.</div>
+</div>
+<div class="grammar-pair">
+<div class="gp-wrong">He <strong>told</strong> that he was tired.</div>
+<div class="gp-right">He <strong>said</strong> that he was tired.</div>
+</div>
+
+<p><strong>Say</strong> = say something (no person directly after). <strong>Tell</strong> = tell <em>someone</em> something (always needs a person after it). <em>He said (that)… / He told me (that)…</em></p>
+</div>
+
+<!-- 8. PRESENT PERFECT vs PAST SIMPLE -->
+<div class="grammar-topic">
+<h4>8. Present Perfect vs. Past Simple</h4>
+<p>German Perfekt ("Ich habe gemacht") looks like Present Perfect but often translates as Past Simple in English.</p>
+
+<div class="grammar-pair">
+<div class="gp-wrong">I <strong>have seen</strong> this film yesterday.</div>
+<div class="gp-right">I <strong>saw</strong> this film yesterday. (specific past time → Past Simple)</div>
+</div>
+<div class="grammar-pair">
+<div class="gp-wrong">I <strong>went</strong> to London three times (and might go again).</div>
+<div class="gp-right">I <strong>have been</strong> to London three times. (life experience, no specific time → Pres. Perfect)</div>
+</div>
+<div class="grammar-pair">
+<div class="gp-wrong">She <strong>has graduated</strong> in 2020.</div>
+<div class="gp-right">She <strong>graduated</strong> in 2020. (finished past event with specific time → Past Simple)</div>
+</div>
+
+<p><strong>Past Simple</strong> = finished action at a specific time (yesterday, in 2020, last week, when I was 10). <strong>Present Perfect</strong> = connected to the present (ever, never, already, yet, just, since, for, so far, this week).</p>
+</div>
+
+<!-- 9. THIRD PERSON -S -->
+<div class="grammar-topic">
+<h4>9. The Forgotten Third-Person -s</h4>
+<p>German doesn't add -s in the third person. English does. Every single time.</p>
+
+<div class="grammar-pair">
+<div class="gp-wrong">She <strong>think</strong> that this is a good idea.</div>
+<div class="gp-right">She <strong>thinks</strong> that this is a good idea.</div>
+</div>
+<div class="grammar-pair">
+<div class="gp-wrong">The report <strong>show</strong> that 60% of students agree.</div>
+<div class="gp-right">The report <strong>shows</strong> that 60% of students agree.</div>
+</div>
+
+<p>This is the <strong>easiest point to lose and the easiest to fix</strong> during proofreading. Scan every sentence: if the subject is he/she/it or a singular noun, the verb needs -s.</p>
+</div>
+
+<!-- 10. WORD ORDER -->
+<div class="grammar-topic">
+<h4>10. Word Order</h4>
+<p>German has flexible word order (verb-second rule, time before place). English is much stricter: <strong>Subject – Verb – Object – Manner – Place – Time</strong> (or Time at the very beginning of the sentence).</p>
+
+<div class="grammar-pair">
+<div class="gp-wrong">I wrote <strong>yesterday a test</strong>. <span style="color:var(--gray);font-size:0.8rem">(German: "Ich schrieb gestern einen Test")</span></div>
+<div class="gp-right">I wrote a test <strong>yesterday</strong>. / <strong>Yesterday,</strong> I wrote a test. (time goes at the end or very beginning)</div>
+</div>
+<div class="grammar-pair">
+<div class="gp-wrong">There are <strong>in Austria many</strong> beautiful mountains.</div>
+<div class="gp-right">There are many beautiful mountains in Austria.</div>
+</div>
+<p>Also watch out for <strong>adverb placement</strong>: adverbs of frequency go <em>before</em> the main verb but <em>after</em> "be": <em>She <strong>always</strong> forgets / She is <strong>always</strong> late.</em> And remember: <em>cannot</em> is one word in English, not two (<em>can not</em> is only correct when "not" belongs to what follows: <em>"You can not only read but also write"</em>).</p>
+</div>
+
+<!-- 11. ADJECTIVE vs ADVERB -->
+<div class="grammar-topic">
+<h4>11. Adjective vs. Adverb</h4>
+<p>In German, adjectives and adverbs often look the same ("schnell"). In English, adverbs usually take <strong>-ly</strong>.</p>
+
+<div class="grammar-pair">
+<div class="gp-wrong">She drives very <strong>careful</strong>.</div>
+<div class="gp-right">She drives very <strong>carefully</strong>. (how does she drive? → adverb)</div>
+</div>
+<div class="grammar-pair">
+<div class="gp-wrong">He speaks English <strong>perfect</strong>.</div>
+<div class="gp-right">He speaks English <strong>perfectly</strong>.</div>
+</div>
+<div class="grammar-pair">
+<div class="gp-wrong">She can sing really <strong>good</strong>.</div>
+<div class="gp-right">She can sing really <strong>well</strong>. (good = adjective, well = adverb of "good")</div>
+</div>
+
+<p>Exceptions that never change: <em>fast, hard, well, late, early</em>. And remember: <strong>good</strong> is always an adjective (<em>a good singer</em>), <strong>well</strong> is its adverb (<em>she sings well</em>).</p>
+</div>
+
+<!-- 12. MUCH / MANY / A LOT OF -->
+<div class="grammar-topic">
+<h4>12. Much / Many / A Lot Of</h4>
+
+<div class="grammar-pair">
+<div class="gp-wrong">There are <strong>much</strong> students in the class.</div>
+<div class="gp-right">There are <strong>many</strong> students in the class. (countable plural → many)</div>
+</div>
+<div class="grammar-pair">
+<div class="gp-wrong">I don't have <strong>many</strong> time.</div>
+<div class="gp-right">I don't have <strong>much</strong> time. (uncountable → much)</div>
+</div>
+
+<p><strong>Many</strong> = countable plural (many books, many people). <strong>Much</strong> = uncountable (much water, much time, much money). In positive statements, prefer <strong>a lot of</strong> for both: "There are <em>a lot of</em> students" sounds more natural than "There are many students."</p>
+</div>
+
+<!-- 13. CONDITIONALS -->
+<div class="grammar-topic">
+<h4>13. Conditionals – Would + Infinitive, Not Would + Past</h4>
+
+<div class="grammar-pair">
+<div class="gp-wrong">If I <strong>would have</strong> more time, I would study abroad.</div>
+<div class="gp-right">If I <strong>had</strong> more time, I would study abroad. (Type 2: if + Past Simple, would + infinitive)</div>
+</div>
+<div class="grammar-pair">
+<div class="gp-wrong">If I <strong>would be</strong> you, I would accept the offer.</div>
+<div class="gp-right">If I <strong>were</strong> you, I would accept the offer.</div>
+</div>
+
+<p>Never put "would" in the if-clause. The structure is: <strong>If + Past Simple, … would + infinitive</strong> (Type 2) or <strong>If + Past Perfect, … would have + past participle</strong> (Type 3).</p>
+</div>
+
+<!-- 14. COMMON SPELLING -->
+<div class="grammar-topic">
+<h4>14. Spelling Traps</h4>
+<p>These are the words that Austrian students misspell most often. Learn them.</p>
+
+<table>
+<tr><th>Wrong</th><th>Correct</th><th>Wrong</th><th>Correct</th></tr>
+<tr><td>definately</td><td><strong>definitely</strong></td><td>goverment</td><td><strong>government</strong></td></tr>
+<tr><td>enviroment</td><td><strong>environment</strong></td><td>wich</td><td><strong>which</strong></td></tr>
+<tr><td>arguement</td><td><strong>argument</strong></td><td>occured</td><td><strong>occurred</strong></td></tr>
+<tr><td>recieve</td><td><strong>receive</strong></td><td>seperate</td><td><strong>separate</strong></td></tr>
+<tr><td>accomodation</td><td><strong>accommodation</strong></td><td>neccessary</td><td><strong>necessary</strong></td></tr>
+<tr><td>responsable</td><td><strong>responsible</strong></td><td>therefor</td><td><strong>therefore</strong></td></tr>
+</table>
+
+<div class="tip">
+<strong>British or American? Both are fine – but don't mix.</strong> You can write <em>colour</em> or <em>color</em>, <em>realise</em> or <em>realize</em>, <em>centre</em> or <em>center</em>. The examiners accept both. What they don't accept is switching between them in the same text. Pick one variety and stick with it throughout.
+</div>
+</div>
+
+<div class="tip">
+<strong>Your proofreading routine (last 5 minutes):</strong> Read through your text three times, each time looking for ONE thing only. First pass: <strong>third-person -s and verb tenses</strong>. Second pass: <strong>prepositions and articles</strong>. Third pass: <strong>spelling of tricky words</strong>. You will catch far more errors this way than by reading "generally".
+</div>
+
+</div>
+</section>
+
+<footer style="background: var(--gray-light); padding: 32px 0; text-align: center; color: var(--gray); font-size: 0.85rem; margin-top: 48px;">
+<div class="container">
+  <p>GRG 15 Auf der Schmelz · Class 8a · Schriftliche Reifeprüfung Englisch B2</p>
+  <p style="margin-top: 8px;">Sources: BMBWF/matura.gv.at (Textsortencharakteristika, Assessment Scale B2, Handreichungen), HPT "Going for Finals AHS" (Kammerhofer/Reid-Brown), ÖSZ Praxisreihe 33, class materials</p>
+</div>
+</footer>
+
+<button class="back-to-top" id="btt" onclick="window.scrollTo({top:0})" aria-label="Back to top">↑</button>
+
+<script>
+// ===== 1. ANNOTATION HOVER TOOLTIPS =====
+// The CSS sibling selector (ann:hover + ann-label) breaks on nested annotations.
+// This JS reads each ann-label's text, stores it on the preceding .ann as data-label,
+// then shows a floating tooltip on hover. Much more reliable.
+document.querySelectorAll('.ann').forEach(ann => {
+  const label = ann.nextElementSibling;
+  if (label && label.classList.contains('ann-label')) {
+    ann.dataset.label = label.textContent.trim();
+  }
+  ann.addEventListener('mouseenter', function() {
+    if (this.closest('.show-all-labels')) return; // labels already visible
+    if (!this.dataset.label) return;
+    const tip = document.createElement('span');
+    tip.className = 'ann-tooltip';
+    tip.textContent = this.dataset.label;
+    this.appendChild(tip);
+  });
+  ann.addEventListener('mouseleave', function() {
+    const tip = this.querySelector('.ann-tooltip');
+    if (tip) tip.remove();
+  });
+});
+
+// ===== 2. BACK TO TOP =====
+const btt = document.getElementById('btt');
+let ticking = false;
+window.addEventListener('scroll', () => {
+  if (!ticking) {
+    requestAnimationFrame(() => {
+      btt.classList.toggle('visible', window.scrollY > 600);
+      ticking = false;
+    });
+    ticking = true;
+  }
+}, { passive: true });
+
+// ===== 3. NAV ACTIVE STATE =====
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('nav a[href^="#"]');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(a => a.classList.remove('active'));
+      const active = document.querySelector('nav a[href="#' + entry.target.id + '"]');
+      if (active) active.classList.add('active');
+    }
+  });
+}, { rootMargin: '-20% 0px -75% 0px' });
+sections.forEach(s => observer.observe(s));
+
+// ===== 4. REVEAL BUTTON TOGGLE TEXT =====
+document.querySelectorAll('.reveal-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const reveal = this.nextElementSibling;
+    reveal.classList.toggle('show');
+    this.textContent = reveal.classList.contains('show') ? 'Hide errors' : 'Reveal errors';
+  });
+});
+</script>
+
+</body>
+</html>
