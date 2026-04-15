@@ -199,7 +199,56 @@ tr:nth-child(even) td { background: var(--gray-light); }
   .ann-label { display: inline-block !important; }
   .reveal { display: block !important; }
   .ann-tooltip { display: none !important; }
+  details { margin: 8px 0; }
+  details > summary { display: none !important; }
+  details > .collapsible-body,
+  details > .phrases,
+  details > .grammar-topic,
+  details > .error-text,
+  details > .subtype,
+  details > div { display: block !important; }
+  details.grammar-collapse > .grammar-topic { border-radius: 12px; border-top: 1px solid #ccc; }
 }
+
+/* ===== COLLAPSIBLE SECTIONS ===== */
+details { margin: 16px 0; }
+details > summary { cursor: pointer; font-weight: 700; font-size: 0.95rem; padding: 12px 16px; border-radius: 8px; background: var(--gray-light); border: 1px solid var(--border); list-style: none; display: flex; align-items: center; gap: 8px; transition: background 0.15s; user-select: none; }
+details > summary:hover { background: #e8e9ed; }
+details > summary::before { content: '▸'; font-size: 0.85rem; color: var(--accent); transition: transform 0.2s; flex-shrink: 0; }
+details[open] > summary::before { transform: rotate(90deg); }
+details > summary::-webkit-details-marker { display: none; }
+details > .collapsible-body { padding: 4px 0 0; }
+
+/* Variants for different contexts */
+details.phrases-collapse > summary { background: #fffbeb; border-color: #fde68a; font-size: 0.9rem; padding: 10px 16px; }
+details.phrases-collapse > summary::before { color: #92400e; }
+details.phrases-collapse > summary:hover { background: #fef3c7; }
+
+details.dos-collapse > summary { background: transparent; border: 1px dashed var(--border); font-size: 0.9rem; padding: 10px 16px; }
+
+details.grammar-collapse > summary { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 14px 20px; font-size: 1.05rem; }
+details.grammar-collapse[open] > summary { border-radius: 12px 12px 0 0; border-bottom: 1px solid var(--border); }
+details.grammar-collapse > .grammar-topic { margin-top: 0; border-radius: 0 0 12px 12px; border-top: none; }
+
+details.practice-collapse > summary { font-size: 0.95rem; }
+
+/* Paragraph section specific */
+.para-anatomy { display: grid; gap: 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin: 16px 0; }
+.para-row { padding: 14px 20px; font-size: 0.9rem; display: flex; align-items: baseline; gap: 12px; border-bottom: 1px solid var(--border); }
+.para-row:last-child { border-bottom: none; }
+.para-row .para-num { font-weight: 700; font-size: 0.75rem; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: white; }
+.para-topic { background: #dbeafe; }
+.para-topic .para-num { background: #2563eb; }
+.para-support { background: #dcfce7; }
+.para-support .para-num { background: #16a34a; }
+.para-evidence { background: #fef9c3; }
+.para-evidence .para-num { background: #ca8a04; }
+.para-close { background: #f3e8ff; }
+.para-close .para-num { background: #7c3aed; }
+
+.formula-box { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; margin: 8px 0; }
+.formula-box .formula-label { font-weight: 700; font-size: 0.85rem; color: var(--accent); margin-bottom: 4px; }
+.formula-box .formula-example { font-style: italic; font-size: 0.9rem; color: var(--text); }
 
 /* ===== MOBILE ===== */
 @media (max-width: 640px) {
@@ -241,6 +290,7 @@ tr:nth-child(even) td { background: var(--gray-light); }
   <span class="nav-sep">│</span>
   <span class="nav-group-label">Tools</span>
   <a href="#general">Tips</a>
+  <a href="#paragraphs">Paragraphs</a>
   <a href="#operators">Operators</a>
   <a href="#models">Models</a>
   <a href="#practice">Practice</a>
@@ -374,7 +424,7 @@ tr:nth-child(even) td { background: var(--gray-light); }
 <span class="phrase">A controversial statement</span>
 </p>
 
-<div class="dos-donts">
+<details class="dos-collapse"><summary>DOs and DON'Ts</summary><div class="collapsible-body"><div class="dos-donts">
 <div class="do-box">
 <h4>✓ DOs</h4>
 <ul>
@@ -401,10 +451,9 @@ tr:nth-child(even) td { background: var(--gray-light); }
   <li>No statistics without context</li>
 </ul>
 </div>
-</div>
+</div></div></details>
 
-<div class="phrases">
-<h4>Useful Phrases</h4>
+<details class="phrases-collapse"><summary>Useful Phrases</summary><div class="phrases">
 <p><strong>Giving your opinion (without overusing "I"):</strong></p>
 <p><span class="phrase">It is (firmly) believed that…</span> <span class="phrase">One can argue that…</span> <span class="phrase">Many people are convinced that…</span> <span class="phrase">As far as many are concerned,…</span> <span class="phrase">It is often argued that…</span></p>
 <p><strong>When you do use "I":</strong></p>
@@ -415,7 +464,7 @@ tr:nth-child(even) td { background: var(--gray-light); }
 <p><span class="phrase">It would also be interesting to see…</span> <span class="phrase">One should, nevertheless, consider…</span> <span class="phrase">The other side of the coin is that…</span> <span class="phrase">On the other hand,…</span></p>
 <p><strong>Balanced conclusions:</strong></p>
 <p><span class="phrase">Taking these points into consideration,…</span> <span class="phrase">All of this points to the conclusion that…</span> <span class="phrase">On balance, we can safely say that…</span> <span class="phrase">The arguments presented prove that…</span></p>
-</div>
+</div></details>
 
 <div class="tip">
 <strong>Key difference – Essay vs. Article:</strong> An essay should make the reader <strong>think</strong>. It is fact-based and formal. An article should make the reader <strong>feel</strong>. It is more emotional and can be informal.
@@ -459,7 +508,7 @@ tr:nth-child(even) td { background: var(--gray-light); }
 <span class="phrase">A bold statement – "Technology: A Curse in Disguise"</span>
 </p>
 
-<div class="dos-donts">
+<details class="dos-collapse"><summary>DOs and DON'Ts</summary><div class="collapsible-body"><div class="dos-donts">
 <div class="do-box">
 <h4>✓ DOs</h4>
 <ul>
@@ -483,15 +532,14 @@ tr:nth-child(even) td { background: var(--gray-light); }
   <li>Don't ignore the <strong>publication context</strong> given in the task</li>
 </ul>
 </div>
-</div>
+</div></div></details>
 
-<div class="phrases">
-<h4>Useful Phrases</h4>
+<details class="phrases-collapse"><summary>Useful Phrases</summary><div class="phrases">
 <p><strong>Openings:</strong></p>
 <p><span class="phrase">Have you ever…?</span> <span class="phrase">Do you remember the first time that…?</span> <span class="phrase">Are you one of those people who…?</span> <span class="phrase">There is nothing worse than…</span></p>
 <p><strong>Throughout:</strong></p>
 <p><span class="phrase">Can you imagine…?</span> <span class="phrase">If you ask me,…</span> <span class="phrase">You may not agree with me, but…</span> <span class="phrase">I will never forget the time when…</span> <span class="phrase">To be honest, it scares me when I think that…</span></p>
-</div>
+</div></details>
 
 </div>
 </div>
@@ -528,7 +576,7 @@ tr:nth-child(even) td { background: var(--gray-light); }
 <strong>The actual exam template for reports only has: Date, From, Subject.</strong> There is no "To:" field on the Formatvorlage. Don't add one – just fill in what's given. The section headings, however, are mandatory and must be created by you.
 </div>
 
-<div class="dos-donts">
+<details class="dos-collapse"><summary>DOs and DON'Ts</summary><div class="collapsible-body"><div class="dos-donts">
 <div class="do-box">
 <h4>✓ DOs</h4>
 <ul>
@@ -552,17 +600,16 @@ tr:nth-child(even) td { background: var(--gray-light); }
   <li>Don't use emotional or informal language</li>
 </ul>
 </div>
-</div>
+</div></div></details>
 
-<div class="phrases">
-<h4>Useful Phrases</h4>
+<details class="phrases-collapse"><summary>Useful Phrases</summary><div class="phrases">
 <p><strong>Introduction:</strong></p>
 <p><span class="phrase">As requested, I have prepared a report on…</span> <span class="phrase">The aim of this report is to…</span> <span class="phrase">This report examines/compares…</span> <span class="phrase">The data was collected through…</span></p>
 <p><strong>Presenting data:</strong></p>
 <p><span class="phrase">Twenty per cent of the people asked…</span> <span class="phrase">The majority of respondents…</span> <span class="phrase">One out of five stated that…</span> <span class="phrase">It is generally felt that…</span> <span class="phrase">A large proportion of those interviewed…</span></p>
 <p><strong>Conclusion / Recommendations:</strong></p>
 <p><span class="phrase">On the basis of these findings,…</span> <span class="phrase">I would therefore recommend/suggest that…</span> <span class="phrase">It would seem that… is the best option.</span> <span class="phrase">In view of this, one can recommend…</span></p>
-</div>
+</div></details>
 
 </div>
 </div>
@@ -617,7 +664,7 @@ tr:nth-child(even) td { background: var(--gray-light); }
 </div>
 </div>
 
-<div class="dos-donts">
+<details class="dos-collapse"><summary>DOs and DON'Ts</summary><div class="collapsible-body"><div class="dos-donts">
 <div class="do-box">
 <h4>✓ DOs</h4>
 <ul>
@@ -641,17 +688,16 @@ tr:nth-child(even) td { background: var(--gray-light); }
   <li>Don't say something anonymous that you wouldn't say in person</li>
 </ul>
 </div>
-</div>
+</div></div></details>
 
-<div class="phrases">
-<h4>Useful Phrases</h4>
+<details class="phrases-collapse"><summary>Useful Phrases</summary><div class="phrases">
 <p><strong>Blog post openers:</strong></p>
 <p><span class="phrase">It took me ages to figure this out, but…</span> <span class="phrase">So, here's what I've been thinking about…</span> <span class="phrase">You won't believe what happened to me…</span></p>
 <p><strong>Blog comment openers:</strong></p>
 <p><span class="phrase">Hi [name], I've just seen your blog on…</span> <span class="phrase">I stumbled across your post and…</span> <span class="phrase">This really resonated with me because…</span></p>
 <p><strong>Engaging the reader:</strong></p>
 <p><span class="phrase">What do you think?</span> <span class="phrase">I'd love to hear your thoughts on this.</span> <span class="phrase">Let me know in the comments!</span> <span class="phrase">Has anyone else experienced this?</span></p>
-</div>
+</div></details>
 
 </div>
 </div>
@@ -697,12 +743,9 @@ tr:nth-child(even) td { background: var(--gray-light); }
 <h3>E-Mail Sub-Types</h3>
 
 <!-- COMPLAINT -->
-<div class="subtype">
-<div class="subtype-header">📨 Letter / E-Mail of Complaint</div>
-<div class="subtype-body">
+<details><summary>📨 Letter / E-Mail of Complaint</summary><div class="subtype-body">
 <p>You're unhappy with a product or service and you want something done about it.</p>
-<div class="phrases">
-<h4>Key Phrases</h4>
+<details class="phrases-collapse"><summary>Key Phrases</summary><div class="phrases">
 <p><strong>Opening:</strong></p>
 <p><span class="phrase">I am writing to express my dissatisfaction with…</span> <span class="phrase">I am writing to complain about…</span> <span class="phrase">I would like to draw your attention to…</span></p>
 <p><strong>Describing the problem:</strong></p>
@@ -711,17 +754,13 @@ tr:nth-child(even) td { background: var(--gray-light); }
 <p><span class="phrase">I would like you to refund my money.</span> <span class="phrase">I expect a letter of explanation.</span> <span class="phrase">Unless I receive a satisfactory reply, I will…</span> <span class="phrase">I would be grateful if you could…</span></p>
 <p><strong>Closing:</strong></p>
 <p><span class="phrase">I look forward to hearing from you at your earliest convenience.</span> <span class="phrase">Thank you for your cooperation in correcting this matter.</span></p>
-</div>
-</div>
-</div>
+</div></details>
+</div></details>
 
 <!-- APPLICATION -->
-<div class="subtype">
-<div class="subtype-header">📨 Letter / E-Mail of Application</div>
-<div class="subtype-body">
+<details><summary>📨 Letter / E-Mail of Application</summary><div class="subtype-body">
 <p>You're applying for a job, internship, or course. Be confident, professional, and specific.</p>
-<div class="phrases">
-<h4>Key Phrases</h4>
+<details class="phrases-collapse"><summary>Key Phrases</summary><div class="phrases">
 <p><strong>Opening:</strong></p>
 <p><span class="phrase">I am writing to apply for the position of… as advertised in…</span> <span class="phrase">I am writing with reference to your advertisement…</span> <span class="phrase">I am interested in applying for the position of…</span></p>
 <p><strong>Qualifications & Experience:</strong></p>
@@ -730,15 +769,13 @@ tr:nth-child(even) td { background: var(--gray-light); }
 <p><span class="phrase">I believe I am suitable for the position as I…</span> <span class="phrase">I consider myself to be enthusiastic, hard-working and reliable.</span> <span class="phrase">I have excellent communication skills.</span></p>
 <p><strong>Closing:</strong></p>
 <p><span class="phrase">I am available for an interview at your convenience.</span> <span class="phrase">I look forward to hearing from you.</span> <span class="phrase">Please find my CV attached.</span></p>
-</div>
+</div></details>
 <div class="tip"><strong>Tenses tip:</strong> Use Present Simple for skills (<em>I am a reliable person</em>), Past Simple for past experience (<em>I worked for…</em>), Present Perfect for recent activities (<em>I have been working…</em>).</div>
 </div>
-</div>
+</details>
 
 <!-- LETTER TO EDITOR -->
-<div class="subtype">
-<div class="subtype-header">📨 Letter to the Editor</div>
-<div class="subtype-body">
+<details><summary>📨 Letter to the Editor</summary><div class="subtype-body">
 <p>You respond to a published article or comment. This is one of the <strong>most frequently tested</strong> e-mail sub-types. You must reference the original publication, then agree or disagree with arguments.</p>
 
 <h4>Layout Specifics</h4>
@@ -760,8 +797,7 @@ tr:nth-child(even) td { background: var(--gray-light); }
 <strong>Two greeting options:</strong> Both <em>Dear Sir or Madam,</em> and <em>Dear Editor,</em> are correct for a letter to the editor. Both close with <em>Yours faithfully,</em> since you don't use a personal name.
 </div>
 
-<div class="phrases">
-<h4>Key Phrases</h4>
+<details class="phrases-collapse"><summary>Key Phrases</summary><div class="phrases">
 <p><strong>Opening – always reference the article:</strong></p>
 <p><span class="phrase">I am writing in response to the article on…, which appeared in… on [date].</span> <span class="phrase">I am writing with reference to the article you published in last month's issue.</span> <span class="phrase">I have just read your article on… and I feel I must respond.</span> <span class="phrase">You raised some issues which I feel strongly about.</span></p>
 <p><strong>Agreeing:</strong></p>
@@ -770,28 +806,25 @@ tr:nth-child(even) td { background: var(--gray-light); }
 <p><span class="phrase">I am afraid I totally disagree.</span> <span class="phrase">It is simply not true that…</span> <span class="phrase">I cannot agree with you about…</span> <span class="phrase">The author fails to mention…</span> <span class="phrase">While I completely agree that…, I cannot accept…</span></p>
 <p><strong>Conclusion / Call to action:</strong></p>
 <p><span class="phrase">I hope that…</span> <span class="phrase">Considering the arguments presented, we should…</span> <span class="phrase">What we must do is make sure that…</span> <span class="phrase">May I draw your attention to…</span></p>
-</div>
+</div></details>
 
 <div class="tip">
 <strong>Make it personal and local:</strong> Explain why <em>you</em> care about this issue. Explain how it affects your community. This makes your letter stand out and shows genuine engagement.
 </div>
 </div>
-</div>
+</details>
 
 <!-- GENERAL ENQUIRY / INFORMATION -->
-<div class="subtype">
-<div class="subtype-header">📨 E-Mail of Enquiry / Requesting Information</div>
-<div class="subtype-body">
+<details><summary>📨 E-Mail of Enquiry / Requesting Information</summary><div class="subtype-body">
 <p>You want information about something – a product, a service, an event, etc.</p>
-<div class="phrases">
-<h4>Key Phrases</h4>
+<details class="phrases-collapse"><summary>Key Phrases</summary><div class="phrases">
 <p><span class="phrase">I am writing to enquire about…</span> <span class="phrase">I would like to request further information about…</span> <span class="phrase">Could you possibly tell me…?</span> <span class="phrase">I would appreciate it if you could send me…</span> <span class="phrase">I look forward to receiving the information requested.</span></p>
-</div>
-</div>
-</div>
+</div></details>
+</div></details>
 
 <h4>General E-Mail Rules (All Sub-Types)</h4>
-<div class="dos-donts">
+
+<details class="dos-collapse"><summary>DOs and DON'Ts</summary><div class="collapsible-body"><div class="dos-donts">
 <div class="do-box">
 <h4>✓ DOs</h4>
 <ul>
@@ -816,7 +849,7 @@ tr:nth-child(even) td { background: var(--gray-light); }
   <li>Don't mix up faithfully/sincerely</li>
 </ul>
 </div>
-</div>
+</div></div></details>
 
 </div>
 </div>
@@ -890,6 +923,120 @@ tr:nth-child(even) td { background: var(--gray-light); }
 <div class="tip">
 <strong>Final thought:</strong> The examiners aren't trying to trick you. They want to see that you can communicate clearly and appropriately in English. Pick the right register, cover all the content points, structure your text well, show off your vocabulary and grammar, and proofread. That's all there is to it. You've got this.
 </div>
+
+</div>
+</section>
+
+
+<!-- ===================== PARAGRAPHS ===================== -->
+<section id="paragraphs">
+<div class="container">
+<h2>Building a Paragraph</h2>
+
+<p>Every body paragraph in your text – whether it's an essay, report, article, or blog – follows the same basic architecture. Master this and you'll never stare at a blank page again.</p>
+
+<h3>1. Anatomy of a Paragraph</h3>
+<p>A body paragraph has four layers. Each has a job.</p>
+
+<div class="para-anatomy">
+<div class="para-row para-topic"><span class="para-num">1</span> <strong>Topic Sentence</strong> – states the point of this paragraph in one sentence</div>
+<div class="para-row para-support"><span class="para-num">2</span> <strong>Supporting Sentence</strong> – explains <em>why</em> or <em>how</em> your point is true</div>
+<div class="para-row para-evidence"><span class="para-num">3</span> <strong>Evidence / Example</strong> – proves it with a concrete fact, statistic, or scenario</div>
+<div class="para-row para-close"><span class="para-num">4</span> <strong>Closing Sentence</strong> – draws a conclusion or links to the next paragraph</div>
+</div>
+
+<p>Not every paragraph needs all four in exactly this order. But if you're stuck, this sequence works every time.</p>
+
+<h3>2. Writing the Topic Sentence</h3>
+<p>The topic sentence is the most important sentence in the paragraph. It tells the reader: <em>this is what this paragraph is about.</em> Everything else in the paragraph must connect back to it.</p>
+
+<p>Three formulas that always work:</p>
+
+<div class="formula-box">
+<div class="formula-label">Claim</div>
+<div class="formula-example">"The most significant problem with social media is its effect on young people's self-esteem."</div>
+</div>
+<div class="formula-box">
+<div class="formula-label">Contrast</div>
+<div class="formula-example">"While many believe that homework improves performance, the evidence suggests otherwise."</div>
+</div>
+<div class="formula-box">
+<div class="formula-label">Cause</div>
+<div class="formula-example">"One of the main reasons for youth unemployment is the mismatch between education and the job market."</div>
+</div>
+
+<div class="warning">
+<strong>Common topic sentence mistakes:</strong> Too vague (<em>"There are many problems."</em> – which problems?), too broad (<em>"Technology has changed the world."</em> – narrow it down), or a question instead of a statement (<em>"Is social media bad?"</em> – make a claim, don't ask).
+</div>
+
+<h3>3. Supporting Sentences</h3>
+<p>After the topic sentence, you need to back it up. There are three ways to do this:</p>
+
+<div class="formula-box">
+<div class="formula-label">Explanation – answer "why?"</div>
+<div class="formula-example">"This is largely because teenagers compare themselves to carefully edited images, which creates unrealistic expectations."</div>
+</div>
+<div class="formula-box">
+<div class="formula-label">Evidence – use data or facts</div>
+<div class="formula-example">"A study by the Royal Society for Public Health found that Instagram is the platform most likely to cause feelings of inadequacy among 14- to 24-year-olds."</div>
+</div>
+<div class="formula-box">
+<div class="formula-label">Illustration – paint a scenario</div>
+<div class="formula-example">"Consider a typical teenager who spends two hours a day scrolling through influencer content – by the end of the week, they will have been exposed to hundreds of idealised images."</div>
+</div>
+
+<p>A strong paragraph uses at least two of these. The more specific you are, the more convincing your writing becomes.</p>
+
+<h3>4. The Closing Sentence</h3>
+<p>The last sentence of a paragraph does one of three things:</p>
+
+<details class="dos-collapse"><summary>DOs and DON'Ts</summary><div class="collapsible-body"><div class="dos-donts">
+<div class="do-box">
+<h4>✓ Strong closings</h4>
+<ul>
+  <li><strong>Draw a consequence:</strong> <em>"This means that schools must act before the problem gets worse."</em></li>
+  <li><strong>Link forward:</strong> <em>"The economic impact, however, is only part of the picture."</em></li>
+  <li><strong>Reinforce the point:</strong> <em>"Clearly, the environmental cost of fast fashion can no longer be ignored."</em></li>
+</ul>
+</div>
+<div class="dont-box">
+<h4>✗ Weak closings</h4>
+<ul>
+  <li><strong>Just repeating the topic sentence:</strong> <em>"So, as I said, social media is bad for self-esteem."</em></li>
+  <li><strong>Introducing a new idea:</strong> <em>"Also, the government should invest more in education."</em> (that's a new paragraph)</li>
+  <li><strong>Trailing off:</strong> <em>"…and that is why this is an important topic."</em></li>
+</ul>
+</div>
+</div></div></details>
+
+<h3>5. A Complete Paragraph – Annotated</h3>
+<p>Here is one body paragraph from an essay on social media, with each layer highlighted:</p>
+
+<div class="model-wrap">
+<div class="model-header">Example: Body paragraph from a social media essay</div>
+<div class="model-body">
+<p><span class="ann ann-structure">The most damaging aspect of social media is its impact on young people's mental health.</span> <span class="ann-label al-blue">TOPIC SENTENCE</span> <span class="ann ann-content">Platforms such as Instagram and TikTok constantly expose teenagers to idealised images of beauty, wealth, and success, which creates a distorted view of reality.</span> <span class="ann-label al-green">EXPLANATION</span> <span class="ann ann-language">According to</span> <span class="ann-label al-yellow">LINKING</span> <span class="ann ann-content">a 2019 study by the Royal Society for Public Health, Instagram was rated the worst social media platform for mental health among young people, with 70% of respondents saying it made them feel worse about their body image.</span> <span class="ann-label al-green">EVIDENCE</span> <span class="ann ann-special">These findings make it clear that the relationship between social media and self-esteem is not just anecdotal – it is a measurable, growing problem that demands attention.</span> <span class="ann-label al-purple">CLOSING – draws consequence</span></p>
+</div>
+</div>
+
+<h3>6. Build Your Own – Practice</h3>
+<p>Here is a real bullet point from a Matura essay task. Try building a paragraph from it, sentence by sentence.</p>
+
+<details class="practice-collapse"><summary>Task: Essay on overtourism. Bullet point: "environmental aspects"</summary><div class="error-text">
+<div class="task-label">Task: Essay on overtourism. Bullet point: "environmental aspects"</div>
+<p><strong>Step 1:</strong> Write a topic sentence that makes a clear claim about tourism and the environment.</p>
+<p><strong>Step 2:</strong> Add a supporting sentence that explains why or how.</p>
+<p><strong>Step 3:</strong> Add evidence or a concrete example.</p>
+<p><strong>Step 4:</strong> Write a closing sentence that draws a conclusion.</p>
+<button class="reveal-btn">Show example paragraph</button>
+<div class="reveal">
+<strong>Example:</strong><br><br>
+<span style="color:#2563eb;font-weight:700">①</span> Mass tourism poses a serious threat to the natural environment of popular destinations. 
+<span style="color:#16a34a;font-weight:700">②</span> The sheer volume of visitors leads to pollution, waste, and the destruction of fragile ecosystems that took centuries to develop. 
+<span style="color:#ca8a04;font-weight:700">③</span> In Barcelona, for instance, the city produces 25% more waste during peak tourist season, and local beaches have had to be closed repeatedly due to overcrowding and sewage overflow. 
+<span style="color:#7c3aed;font-weight:700">④</span> If cities fail to regulate tourist numbers, the very landscapes that attract visitors in the first place will be permanently damaged.
+</div>
+</div></details>
 
 </div>
 </section>
@@ -1059,7 +1206,7 @@ tr:nth-child(even) td { background: var(--gray-light); }
 <h3>Exercise 1: Spot the Text-Type Mistakes</h3>
 <p>Each text below contains <strong>deliberate errors in text-type conventions</strong> (not grammar). Find them, then click to reveal the answers.</p>
 
-<div class="error-text">
+<details class="practice-collapse"><summary>Text A – "Essay" by a student</summary><div class="error-text">
 <div class="task-label">Text A – "Essay" by a student</div>
 <p><em>Should Schools Ban Mobile Phones?</em></p>
 <p>Hey guys! So there's been a lot of talk about banning phones in schools lately. I think it's a terrible idea and here's why.</p>
@@ -1077,9 +1224,9 @@ tr:nth-child(even) td { background: var(--gray-light); }
 6. <strong>"!!!"</strong> – exclamation marks are inappropriate in formal essays.<br>
 <strong>Overall:</strong> This reads like a blog post, not an essay. Wrong register throughout.
 </div>
-</div>
+</div></details>
 
-<div class="error-text">
+<details class="practice-collapse"><summary>Text B – "Report" by a student</summary><div class="error-text">
 <div class="task-label">Text B – "Report" by a student</div>
 <p>To: The Principal<br>From: Student Council<br>Subject: Canteen Food</p>
 <p>Dear Sir, I am writing to tell you about what students think about our canteen food. I personally believe the food is terrible and many of my friends agree. The pizza is always cold and the salad looks disgusting.</p>
@@ -1095,8 +1242,9 @@ tr:nth-child(even) td { background: var(--gray-light); }
 5. <strong>"disgusting", "outrageous"</strong> – emotional language. Reports are neutral and factual.<br>
 6. <strong>"fire the catering company"</strong> – too aggressive. Reports make measured recommendations: "It would be advisable to review the current catering contract."
 </div>
-</div>
+</div></details>
 
+<details class="practice-collapse"><summary>Text C – "E-Mail (Letter to the Editor)" by a student</summary>
 <div class="error-text">
 <div class="task-label">Text C – "E-Mail (Letter to the Editor)" by a student</div>
 <p>To: editor@dailynews.com<br>From: mike99@yahoo.com<br>Date: 5 March 2026<br>Subject: Your article about school uniforms</p>
@@ -1116,6 +1264,7 @@ tr:nth-child(even) td { background: var(--gray-light); }
 7. <strong>"Mike"</strong> – must give full name (and town/city for letters to the editor).<br>
 </div>
 </div>
+</details>
 
 <h3>Exercise 2: Register Cheat Sheet – Same Content, Different Voice</h3>
 <p>The same ideas, expressed in the register appropriate for an <strong>essay</strong> vs. a <strong>blog</strong>. Study the differences.</p>
@@ -1168,8 +1317,7 @@ tr:nth-child(even) td { background: var(--gray-light); }
 <h2>Grammar Kit for Austrian Learners</h2>
 <p>These are the <strong>most common mistakes</strong> that German-speaking students make in English. They come from <strong>L1 interference</strong> – your brain trying to apply German rules to English. Knowing them means you can catch them when you proofread.</p>
 
-<!-- 1. ARTICLES -->
-<div class="grammar-topic">
+<details class="grammar-collapse"><summary>1. Articles: a / an / the / (nothing)</summary><div class="grammar-topic">
 <h4>1. Articles: a / an / the / (nothing)</h4>
 <p>German has articles too, but English uses them differently. This is the single biggest error source for Austrian students.</p>
 
@@ -1191,10 +1339,9 @@ tr:nth-child(even) td { background: var(--gray-light); }
 </div>
 
 <p><strong>Quick rule:</strong> Use "the" when both you and the reader know <em>which specific one</em>. Use "a/an" when introducing something new. Use <em>no article</em> for abstract concepts, general plurals, sports, meals, and institutions used for their purpose (school, church, hospital, prison).</p>
-</div>
+</div></details>
 
-<!-- 2. PREPOSITIONS -->
-<div class="grammar-topic">
+<details class="grammar-collapse"><summary>2. Prepositions</summary><div class="grammar-topic">
 <h4>2. Prepositions</h4>
 <p>German and English prepositions rarely match 1:1. Don't translate – learn the English collocations.</p>
 
@@ -1226,10 +1373,9 @@ tr:nth-child(even) td { background: var(--gray-light); }
 <div class="gp-wrong"><strong>In</strong> the one hand… <strong>in</strong> the other hand…</div>
 <div class="gp-right"><strong>On</strong> the one hand… <strong>on</strong> the other hand…</div>
 </div>
-</div>
+</div></details>
 
-<!-- 3. FALSE FRIENDS -->
-<div class="grammar-topic">
+<details class="grammar-collapse"><summary>3. False Friends (Falsche Freunde)</summary><div class="grammar-topic">
 <h4>3. False Friends (Falsche Freunde)</h4>
 <p>Words that look like German words but mean something completely different.</p>
 
@@ -1247,10 +1393,9 @@ tr:nth-child(even) td { background: var(--gray-light); }
 <tr><td>to spend</td><td>spenden (to donate)</td><td>ausgeben/verbringen</td><td><strong>to donate</strong></td></tr>
 <tr><td>handy</td><td>Handy (mobile phone)</td><td>praktisch (useful)</td><td><strong>mobile phone / cell phone</strong></td></tr>
 </table>
-</div>
+</div></details>
 
-<!-- 4. SINCE vs FOR -->
-<div class="grammar-topic">
+<details class="grammar-collapse"><summary>4. Since vs. For</summary><div class="grammar-topic">
 <h4>4. Since vs. For</h4>
 <p>German uses "seit" for both. English distinguishes between a <strong>point in time</strong> and a <strong>period of time</strong>.</p>
 
@@ -1264,10 +1409,9 @@ tr:nth-child(even) td { background: var(--gray-light); }
 </div>
 
 <p><strong>Since</strong> = starting point (since Monday, since 2019, since I was a child). <strong>For</strong> = duration (for two hours, for five years, for a long time). Both trigger <strong>Present Perfect</strong> (or Present Perfect Continuous).</p>
-</div>
+</div></details>
 
-<!-- 5. IF vs WHEN -->
-<div class="grammar-topic">
+<details class="grammar-collapse"><summary>5. If vs. When</summary><div class="grammar-topic">
 <h4>5. If vs. When</h4>
 <p>German "wenn" covers both. English splits them.</p>
 
@@ -1281,10 +1425,9 @@ tr:nth-child(even) td { background: var(--gray-light); }
 </div>
 
 <p><strong>When</strong> = it will definitely happen (just a question of timing). <strong>If</strong> = it might or might not happen (condition).</p>
-</div>
+</div></details>
 
-<!-- 6. MAKE vs DO -->
-<div class="grammar-topic">
+<details class="grammar-collapse"><summary>6. Make vs. Do</summary><div class="grammar-topic">
 <h4>6. Make vs. Do</h4>
 <p>German uses "machen" for almost everything. English splits it.</p>
 
@@ -1298,10 +1441,9 @@ tr:nth-child(even) td { background: var(--gray-light); }
 </div>
 
 <p><strong>DO</strong> = tasks, work, activities (do homework, do the dishes, do exercise, do a favour, do your best, do business). <strong>MAKE</strong> = creating/producing something (make a mistake, make a decision, make money, make a suggestion, make progress, make an effort, make friends).</p>
-</div>
+</div></details>
 
-<!-- 7. SAY vs TELL -->
-<div class="grammar-topic">
+<details class="grammar-collapse"><summary>7. Say vs. Tell</summary><div class="grammar-topic">
 <h4>7. Say vs. Tell</h4>
 
 <div class="grammar-pair">
@@ -1314,10 +1456,9 @@ tr:nth-child(even) td { background: var(--gray-light); }
 </div>
 
 <p><strong>Say</strong> = say something (no person directly after). <strong>Tell</strong> = tell <em>someone</em> something (always needs a person after it). <em>He said (that)… / He told me (that)…</em></p>
-</div>
+</div></details>
 
-<!-- 8. PRESENT PERFECT vs PAST SIMPLE -->
-<div class="grammar-topic">
+<details class="grammar-collapse"><summary>8. Present Perfect vs. Past Simple</summary><div class="grammar-topic">
 <h4>8. Present Perfect vs. Past Simple</h4>
 <p>German Perfekt ("Ich habe gemacht") looks like Present Perfect but often translates as Past Simple in English.</p>
 
@@ -1335,10 +1476,9 @@ tr:nth-child(even) td { background: var(--gray-light); }
 </div>
 
 <p><strong>Past Simple</strong> = finished action at a specific time (yesterday, in 2020, last week, when I was 10). <strong>Present Perfect</strong> = connected to the present (ever, never, already, yet, just, since, for, so far, this week).</p>
-</div>
+</div></details>
 
-<!-- 9. FEW/FEWER vs LITTLE/LESS -->
-<div class="grammar-topic">
+<details class="grammar-collapse"><summary>9. Few / Fewer vs. Little / Less</summary><div class="grammar-topic">
 <h4>9. Few / Fewer vs. Little / Less</h4>
 <p>German uses "wenig/weniger" for everything. English splits it the same way as much/many – by countable vs. uncountable.</p>
 
@@ -1360,10 +1500,9 @@ tr:nth-child(even) td { background: var(--gray-light); }
 </div>
 
 <p><strong>Few / fewer</strong> = countable (fewer books, fewer mistakes, fewer people). <strong>Little / less</strong> = uncountable (less water, less money, less stress). Watch out: <em>a few</em> (= some, positive) vs. <em>few</em> (= almost none, negative). Same for <em>a little</em> vs. <em>little</em>.</p>
-</div>
+</div></details>
 
-<!-- 10. WORD ORDER -->
-<div class="grammar-topic">
+<details class="grammar-collapse"><summary>10. Word Order</summary><div class="grammar-topic">
 <h4>10. Word Order</h4>
 <p>German has flexible word order (verb-second rule, time before place). English is much stricter: <strong>Subject – Verb – Object – Manner – Place – Time</strong> (or Time at the very beginning of the sentence).</p>
 
@@ -1376,10 +1515,9 @@ tr:nth-child(even) td { background: var(--gray-light); }
 <div class="gp-right">There are many beautiful mountains in Austria.</div>
 </div>
 <p>Also watch out for <strong>adverb placement</strong>: adverbs of frequency go <em>before</em> the main verb but <em>after</em> "be": <em>She <strong>always</strong> forgets / She is <strong>always</strong> late.</em> And remember: <em>cannot</em> is one word in English, not two (<em>can not</em> is only correct when "not" belongs to what follows: <em>"You can not only read but also write"</em>).</p>
-</div>
+</div></details>
 
-<!-- 11. ADJECTIVE vs ADVERB -->
-<div class="grammar-topic">
+<details class="grammar-collapse"><summary>11. Adjective vs. Adverb</summary><div class="grammar-topic">
 <h4>11. Adjective vs. Adverb</h4>
 <p>In German, adjectives and adverbs often look the same ("schnell"). In English, adverbs usually take <strong>-ly</strong>.</p>
 
@@ -1397,10 +1535,9 @@ tr:nth-child(even) td { background: var(--gray-light); }
 </div>
 
 <p>Exceptions that never change: <em>fast, hard, well, late, early</em>. And remember: <strong>good</strong> is always an adjective (<em>a good singer</em>), <strong>well</strong> is its adverb (<em>she sings well</em>).</p>
-</div>
+</div></details>
 
-<!-- 12. MUCH / MANY / A LOT OF -->
-<div class="grammar-topic">
+<details class="grammar-collapse"><summary>12. Much / Many / A Lot Of</summary><div class="grammar-topic">
 <h4>12. Much / Many / A Lot Of</h4>
 
 <div class="grammar-pair">
@@ -1413,10 +1550,9 @@ tr:nth-child(even) td { background: var(--gray-light); }
 </div>
 
 <p><strong>Many</strong> = countable plural (many books, many people). <strong>Much</strong> = uncountable (much water, much time, much money). In positive statements, prefer <strong>a lot of</strong> for both: "There are <em>a lot of</em> students" sounds more natural than "There are many students."</p>
-</div>
+</div></details>
 
-<!-- 13. CONDITIONALS -->
-<div class="grammar-topic">
+<details class="grammar-collapse"><summary>13. Conditionals – Would + Infinitive, Not Would + Past</summary><div class="grammar-topic">
 <h4>13. Conditionals – Would + Infinitive, Not Would + Past</h4>
 
 <div class="grammar-pair">
@@ -1429,10 +1565,9 @@ tr:nth-child(even) td { background: var(--gray-light); }
 </div>
 
 <p>Never put "would" in the if-clause. The structure is: <strong>If + Past Simple, … would + infinitive</strong> (Type 2) or <strong>If + Past Perfect, … would have + past participle</strong> (Type 3).</p>
-</div>
+</div></details>
 
-<!-- 14. COMMON SPELLING -->
-<div class="grammar-topic">
+<details class="grammar-collapse"><summary>14. Spelling Traps</summary><div class="grammar-topic">
 <h4>14. Spelling Traps</h4>
 <p>These are the words that Austrian students misspell most often. Learn them.</p>
 
@@ -1449,7 +1584,7 @@ tr:nth-child(even) td { background: var(--gray-light); }
 <div class="tip">
 <strong>British or American? Both are fine – but don't mix.</strong> You can write <em>colour</em> or <em>color</em>, <em>realise</em> or <em>realize</em>, <em>centre</em> or <em>center</em>. The examiners accept both. What they don't accept is switching between them in the same text. Pick one variety and stick with it throughout.
 </div>
-</div>
+</div></details>
 
 <div class="tip">
 <strong>Your proofreading routine (last 5 minutes):</strong> Read through your text three times, each time looking for ONE thing only. First pass: <strong>third-person -s and verb tenses</strong>. Second pass: <strong>prepositions and articles</strong>. Third pass: <strong>spelling of tricky words</strong>. You will catch far more errors this way than by reading "generally".
@@ -1528,10 +1663,11 @@ sections.forEach(s => observer.observe(s));
 
 // ===== 4. REVEAL BUTTON TOGGLE TEXT =====
 document.querySelectorAll('.reveal-btn').forEach(btn => {
+  const originalText = btn.textContent;
   btn.addEventListener('click', function() {
     const reveal = this.nextElementSibling;
     reveal.classList.toggle('show');
-    this.textContent = reveal.classList.contains('show') ? 'Hide errors' : 'Reveal errors';
+    this.textContent = reveal.classList.contains('show') ? 'Hide' : originalText;
   });
 });
 </script>
