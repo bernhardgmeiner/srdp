@@ -39,12 +39,13 @@ header .subtitle { font-size: 1.1rem; opacity: 0.85; margin-bottom: 16px; }
 header .meta { font-size: 0.85rem; opacity: 0.65; }
 
 /* NAV */
-nav { background: white; border-bottom: 1px solid var(--border); padding: 12px 0; position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
-nav .container { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
-nav a { text-decoration: none; color: var(--accent); font-weight: 600; font-size: 0.82rem; padding: 5px 12px; border-radius: 20px; background: var(--accent-light); transition: all 0.15s; }
-nav a:hover, nav a.active { background: var(--accent); color: white; }
-.nav-sep { color: var(--border); font-size: 0.9rem; user-select: none; margin: 0 2px; }
-.nav-group-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1px; color: var(--gray); font-weight: 700; align-self: center; user-select: none; margin-right: -2px; }
+nav { background: white; border-bottom: 1px solid var(--border); padding: 10px 0; position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+nav .container { display: flex; flex-wrap: wrap; gap: 5px; align-items: center; }
+nav a { text-decoration: none; color: var(--gray); font-weight: 600; font-size: 0.78rem; padding: 4px 10px; border-radius: 4px; transition: all 0.15s; }
+nav a:hover { color: var(--accent); background: var(--accent-light); }
+nav a.active { color: white; background: var(--accent); }
+.nav-sep { width: 1px; height: 16px; background: var(--border); margin: 0 6px; flex-shrink: 0; }
+.nav-group-label { display: none; }
 
 /* SECTIONS */
 section { padding: 48px 0 24px; }
@@ -254,8 +255,7 @@ details.practice-collapse > summary { font-size: 0.95rem; }
 @media (max-width: 640px) {
   .dos-donts { grid-template-columns: 1fr; }
   header h1 { font-size: 1.6rem; }
-  nav a { font-size: 0.75rem; padding: 4px 9px; }
-  .nav-group-label { display: none; }
+  nav a { font-size: 0.72rem; padding: 3px 7px; }
   .nav-sep { display: none; }
   .register-row, .grammar-pair { grid-template-columns: 1fr; }
   .register-cell:first-child { border-right: none; border-bottom: 1px solid var(--border); }
@@ -270,25 +270,22 @@ details.practice-collapse > summary { font-size: 0.95rem; }
 <header>
 <div class="container">
   <h1>Don't Panic, It's Just the Matura</h1>
-  <div class="subtitle">Your complete reference for every text type, every criterion, every trick – English B2</div>
-  <div class="meta">GRG 15 Auf der Schmelz · Class 8a · Schriftliche Reifeprüfung 2026</div>
+  <div class="subtitle">Your complete reference for every text type of the AHS-Matura</div>
+  <div class="meta">GRG 15 Auf der Schmelz · Schriftliche Reifeprüfung 2026</div>
 </div>
 </header>
 
 <nav>
 <div class="container">
-  <span class="nav-group-label">Basics</span>
   <a href="#overview">Overview</a>
   <a href="#assessment">Grading</a>
-  <span class="nav-sep">│</span>
-  <span class="nav-group-label">Text Types</span>
+  <span class="nav-sep"></span>
   <a href="#essay">Essay</a>
   <a href="#article">Article</a>
   <a href="#report">Report</a>
   <a href="#blog">Blog</a>
   <a href="#email">E-Mail</a>
-  <span class="nav-sep">│</span>
-  <span class="nav-group-label">Tools</span>
+  <span class="nav-sep"></span>
   <a href="#general">Tips</a>
   <a href="#paragraphs">Paragraphs</a>
   <a href="#operators">Operators</a>
@@ -1603,7 +1600,7 @@ details.practice-collapse > summary { font-size: 0.95rem; }
 
 <footer style="background: var(--gray-light); padding: 32px 0; text-align: center; color: var(--gray); font-size: 0.85rem; margin-top: 48px;">
 <div class="container">
-  <p>GRG 15 Auf der Schmelz · Class 8a · Schriftliche Reifeprüfung Englisch B2</p>
+  <p>GRG 15 Auf der Schmelz · Schriftliche Reifeprüfung Englisch B2</p>
   <p style="margin-top: 8px;">Sources: BMBWF/matura.gv.at (Textsortencharakteristika, Assessment Scale B2, Handreichungen), HPT "Going for Finals AHS" (Kammerhofer/Reid-Brown), ÖSZ Praxisreihe 33, class materials</p>
 </div>
 </footer>
