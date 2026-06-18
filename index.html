@@ -6,10 +6,24 @@
 <meta name="description" content="Don't Panic, It's Just the Matura — the complete interactive B2 writing guide for the Austrian AHS Reifeprüfung in English. All text types, model texts, phrases, quizzes and tools.">
 <title>Don't Panic, It's Just the Matura — Writing Guide B2</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230f62fe'/><text x='50' y='72' font-size='62' text-anchor='middle' fill='white' font-family='Georgia'>M</text></svg>">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
+@font-face{font-family:'IBM Plex Sans';font-style:normal;font-weight:300;font-display:swap;src:url('fonts/ibm-plex-sans-latin-300-normal.woff2') format('woff2')}
+@font-face{font-family:'IBM Plex Sans';font-style:normal;font-weight:400;font-display:swap;src:url('fonts/ibm-plex-sans-latin-400-normal.woff2') format('woff2')}
+@font-face{font-family:'IBM Plex Sans';font-style:italic;font-weight:400;font-display:swap;src:url('fonts/ibm-plex-sans-latin-400-italic.woff2') format('woff2')}
+@font-face{font-family:'IBM Plex Sans';font-style:normal;font-weight:500;font-display:swap;src:url('fonts/ibm-plex-sans-latin-500-normal.woff2') format('woff2')}
+@font-face{font-family:'IBM Plex Sans';font-style:normal;font-weight:600;font-display:swap;src:url('fonts/ibm-plex-sans-latin-600-normal.woff2') format('woff2')}
+@font-face{font-family:'IBM Plex Mono';font-style:normal;font-weight:400;font-display:swap;src:url('fonts/ibm-plex-mono-latin-400-normal.woff2') format('woff2')}
+@font-face{font-family:'IBM Plex Mono';font-style:normal;font-weight:500;font-display:swap;src:url('fonts/ibm-plex-mono-latin-500-normal.woff2') format('woff2')}
+/* ─── SITE FOOTER ─── */
+.site-footer{border-top:1px solid var(--border);margin-top:64px;padding:38px 0 46px;background:var(--surface-1)}
+.site-footer .ftin{max-width:960px;margin:0 auto;padding:0 48px}
+.site-footer .ft-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:26px;margin-bottom:22px}
+.site-footer .ft-h{font-size:.6875rem;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px}
+.site-footer p{font-size:.8125rem;color:var(--text-secondary);line-height:1.65}
+.site-footer a{color:var(--primary);text-decoration:none}
+.site-footer a:hover{text-decoration:underline}
+.site-footer .ft-base{font-size:.75rem;color:var(--text-muted);border-top:1px solid var(--border);padding-top:16px;line-height:1.6}
+@media(max-width:640px){.site-footer .ftin{padding:0 20px}}
 /* ─── TOKENS ─────────────────────────────────────────────── */
 :root{
   --font-sans:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;
@@ -21,7 +35,7 @@
   --text:#161616; --text-secondary:#525252; --text-muted:#6f6f6f;
   --hover:#f4f4f4;
   --primary:#0f62fe; --primary-bg:#0f62fe; --primary-fg:#ffffff; --primary-hover:#0050e6; --primary-faint:#edf5ff;
-  --blue:#0f62fe; --purple:#8a3ffc; --orange:#c45500; --green:#198038; --red:#da1e28; --yellow:#8e6a00;
+  --blue:#0f62fe; --purple:#8a3ffc; --orange:#a04200; --green:#198038; --red:#da1e28; --yellow:#8e6a00;
   --footer-bg:#161616; --footer-surface:#262626; --footer-ink:#ffffff; --footer-ink-muted:#c6c6c6;
 }
 [data-theme="dark"]{
@@ -54,7 +68,7 @@ a{color:var(--primary)}
 
 /* ─── SIDE NAV ───────────────────────────────────────────── */
 #sidenav{width:264px;flex-shrink:0;height:100vh;position:sticky;top:0;background:var(--bg);border-right:1px solid var(--border);display:flex;flex-direction:column;z-index:50}
-.nav-brand{padding:20px 16px;border-bottom:1px solid var(--border)}
+.nav-brand{padding:20px 16px;border-bottom:1px solid var(--border);position:relative}
 .nav-brand .t1{font-weight:600;font-size:.9375rem;color:var(--text);line-height:1.3}
 .nav-brand .t2{font-size:.75rem;color:var(--text-muted);margin-top:3px;letter-spacing:.32px}
 .nav-scroll{flex:1;overflow-y:auto;padding:4px 0 8px}
@@ -89,9 +103,12 @@ a{color:var(--primary)}
 .page-head .inner{max-width:960px;margin:0 auto;padding:0 48px}
 @media(max-width:640px){.page-head .inner{padding:0 20px}}
 .eyebrow{font-size:.875rem;letter-spacing:.16px;color:var(--text-secondary);margin-bottom:14px;display:flex;align-items:center;gap:10px}
-h1.title{font-weight:300;font-size:clamp(1.9rem,4.5vw,3.1rem);line-height:1.18;letter-spacing:-.4px;margin-bottom:12px}
+h1.title{font-weight:400;font-size:clamp(1.9rem,4.5vw,3.1rem);line-height:1.18;letter-spacing:-.4px;margin-bottom:12px}
 .lead{font-size:1.125rem;color:var(--text-secondary);max-width:620px;line-height:1.55;margin-bottom:30px}
-.section-label{font-size:.875rem;letter-spacing:.16px;color:var(--text-secondary);margin-bottom:16px;padding-bottom:11px;border-bottom:1px solid var(--border)}
+/* H2-level section heading: clearly larger and heavier than body/lead text */
+.section-label{font-size:1.3rem;font-weight:600;letter-spacing:-.2px;line-height:1.3;color:var(--text);margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+/* H3-level sub heading for inner groups (phrase categories etc.) */
+.sub-label{font-size:.8125rem;font-weight:500;letter-spacing:.4px;text-transform:uppercase;color:var(--text-muted);margin-bottom:11px}
 .gap{height:56px}
 .gap-s{height:28px}
 
@@ -206,8 +223,8 @@ mark.ann:hover .bub,mark.ann:focus .bub,.show-labels mark.ann .bub{display:block
 .dnd-role{font-size:.8125rem;margin-top:6px}
 .dnd-role.ok{color:var(--green)}
 .dnd-role.no{color:var(--red)}
-.dnd-btns{display:flex;flex-direction:column;gap:2px;flex-shrink:0}
-.dnd-btns button{border:1px solid var(--border);background:var(--surface);color:var(--text-secondary);cursor:pointer;font-size:.7rem;padding:2px 7px;line-height:1.2}
+.dnd-btns{display:flex;flex-direction:column;gap:6px;flex-shrink:0}
+.dnd-btns button{border:1px solid var(--border);background:var(--surface);color:var(--text-secondary);cursor:pointer;font-size:1rem;min-width:44px;min-height:36px;display:flex;align-items:center;justify-content:center;line-height:1}
 .dnd-btns button:hover{border-color:var(--border-strong);color:var(--text)}
 
 /* ─── CHECKLIST ──────────────────────────────────────────── */
@@ -294,9 +311,27 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--text);color:var(--bg);padding:10px 18px;font-size:.875rem;z-index:500;opacity:0;transition:opacity .2s;pointer-events:none}
 .toast.show{opacity:1}
 
+/* ─── GUIDED TOUR ────────────────────────────────────────── */
+.tour-catch{position:fixed;inset:0;z-index:7999;display:none}
+.tour-spot{position:fixed;z-index:8000;border-radius:4px;box-shadow:0 0 0 3px var(--primary),0 0 0 9999px rgba(0,0,0,.55);pointer-events:none;transition:top .2s,left .2s,width .2s,height .2s;display:none}
+.tour-card{position:fixed;z-index:8001;width:330px;max-width:calc(100vw - 32px);background:var(--surface);border:1px solid var(--border-strong);box-shadow:0 14px 44px rgba(0,0,0,.32);padding:20px 22px;display:none}
+.tour-card .tc-step{font-size:.75rem;letter-spacing:.32px;text-transform:uppercase;color:var(--text-muted);margin-bottom:9px}
+.tour-card .tc-title{font-size:1.05rem;font-weight:600;color:var(--text);margin-bottom:9px;line-height:1.3}
+.tour-card .tc-text{font-size:.9rem;color:var(--text-secondary);line-height:1.55;margin-bottom:18px}
+.tour-card .tc-btns{display:flex;align-items:center;gap:8px}
+.tour-card .tc-skip{margin-left:auto;background:none;border:none;color:var(--text-muted);font-size:.8125rem;cursor:pointer;text-decoration:underline;padding:4px}
+body.tour-on{overflow:hidden}
+.nav-help{background:none;border:1px solid var(--border-strong);color:var(--text-secondary);width:25px;height:25px;border-radius:50%;cursor:pointer;font-size:.8125rem;line-height:1;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center}
+.nav-help:hover{background:var(--hover);color:var(--text)}
+.nav-help.pulse{border-color:var(--primary);color:var(--primary);animation:helpPulse 1.5s ease-out 3}
+@keyframes helpPulse{0%{box-shadow:0 0 0 0 rgba(15,98,254,.45)}70%{box-shadow:0 0 0 9px rgba(15,98,254,0)}100%{box-shadow:0 0 0 0 rgba(15,98,254,0)}}
+.nav-hint{position:absolute;top:54px;right:14px;z-index:60;background:var(--primary);color:#fff;font-size:.75rem;line-height:1.4;padding:9px 12px;max-width:185px;box-shadow:0 8px 24px rgba(0,0,0,.28);cursor:pointer;animation:hintIn .25s ease-out}
+.nav-hint::after{content:"";position:absolute;top:-6px;right:12px;border:6px solid transparent;border-bottom-color:var(--primary);border-top:0}
+.nav-hint b{display:block;font-weight:600;margin-bottom:1px}
+@keyframes hintIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
 /* ─── PRINT ──────────────────────────────────────────────── */
 @media print{
-  #sidenav,.mobile-bar,.no-print,.tabs{display:none!important}
+  #sidenav,.mobile-bar,.no-print,.tabs,#tourCatch,#tourSpot,#tourCard,.toast{display:none!important}
   body{background:#fff;color:#000;font-size:10.5pt}
   #app{display:block}
   #main{height:auto;overflow:visible}
@@ -331,7 +366,7 @@ SRDP.textTypes = [
       { label: 'Word count', value: '~400 words (360–440)' },
       { label: 'Register', value: 'Formal' },
       { label: 'Title', value: 'Required' },
-      { label: 'Structure', value: '5 paragraphs' },
+      { label: 'Structure', value: '~5 paragraphs' },
     ],
     layout: [
       { part: 'Title', note: 'clear and relevant — not necessarily catchy' },
@@ -363,7 +398,7 @@ SRDP.textTypes = [
     ],
     phrases: [
       { category: 'Giving your opinion (without overusing "I")',
-        items: ['It is (firmly) believed that…', 'One can argue that…', 'Many people are convinced that…', 'As far as many are concerned,…', 'It is often argued that…'] },
+        items: ['It is (firmly) believed that…', 'One can argue that…', 'Many people are convinced that…', 'As far as many people are concerned,…', 'It is often argued that…'] },
       { category: 'When you do use "I"',
         items: ['In my opinion/view,…', 'I am inclined to believe that…', 'I (firmly) believe that…', 'I am (not) convinced that…'] },
       { category: 'Adding arguments',
@@ -377,33 +412,46 @@ SRDP.textTypes = [
     modelText: {
       title: 'The Hidden Cost of Fast Fashion', wordCount: '~400', register: 'Formal',
       paragraphs: [
-        { text: 'Have you ever stopped to think about where your clothes actually come from? The fashion industry has grown dramatically over the past two decades, with consumers now purchasing around 60% more clothing than they did in 2000. In my opinion, the environmental and social damage caused by fast fashion far outweighs the benefit of cheap clothing.',
+        {
+          text: 'Have you ever stopped to think about where your clothes actually come from? The fashion industry has grown dramatically over the past two decades, with consumers now purchasing around 60% more clothing than they did in 2000. In my opinion, the environmental and social damage caused by fast fashion far outweighs the benefit of cheap clothing.',
           annotations: [
             { span: 'Have you ever stopped to think about where your clothes actually come from?', type: 'special', label: 'Rhetorical question hook' },
             { span: 'In my opinion, the environmental and social damage caused by fast fashion far outweighs the benefit of cheap clothing.', type: 'content', label: 'Thesis — opinion stated clearly' },
-          ] },
-        { text: 'To begin with, the environmental impact of fast fashion is staggering. The production of cheap garments requires enormous amounts of water and energy, and releases toxic chemicals into rivers and soil. According to the United Nations Environment Programme, the fashion industry is responsible for approximately 10% of global carbon emissions — more than international flights and maritime shipping combined. Furthermore, most of these garments end up in landfill within a year of purchase.',
+          ]
+        },
+        {
+          text: 'To begin with, the environmental impact of fast fashion is severe. The production of cheap garments requires enormous amounts of water and energy, and releases toxic chemicals into rivers and soil. According to the United Nations Environment Programme, the fashion industry is responsible for an estimated 2 to 8 per cent of global carbon emissions, alongside a significant share of industrial water pollution. Furthermore, most of these garments end up in landfill within a year of purchase. In addition, synthetic fabrics such as polyester are made from fossil fuels and shed tiny microplastics with every single wash. These particles flow into rivers and oceans, enter the food chain, and have even been detected in human blood.',
           annotations: [
-            { span: 'To begin with, the environmental impact of fast fashion is staggering.', type: 'content', label: 'Topic sentence (Point)' },
+            { span: 'To begin with, the environmental impact of fast fashion is severe.', type: 'content', label: 'Topic sentence (Point)' },
             { span: 'According to the United Nations Environment Programme', type: 'language', label: 'Evidence introducer' },
             { span: 'Furthermore,', type: 'language', label: 'B2 linking word' },
-          ] },
-        { text: 'Equally alarming are the working conditions in the factories that produce these clothes. Workers in countries such as Bangladesh and Cambodia are often forced to work twelve-hour shifts for wages that barely cover basic living costs. The Rana Plaza factory collapse in 2013, which killed over 1,100 garment workers, exposed the dangerous reality behind bargain-priced T-shirts. Despite promises of reform, investigations continue to reveal unsafe conditions.',
+            { span: 'synthetic fabrics such as polyester are made from fossil fuels', type: 'content', label: 'Evidence developed in detail' },
+          ]
+        },
+        {
+          text: 'Equally alarming are the working conditions in the factories that produce these clothes. Workers in countries such as Bangladesh and Cambodia are often forced to work twelve-hour shifts for wages that barely cover basic living costs. The Rana Plaza factory collapse in 2013, which killed over 1,100 garment workers, exposed the dangerous reality behind bargain-priced T-shirts. Despite promises of reform, investigations continue to reveal unsafe conditions. Independent investigations have also uncovered widespread child labour and the violent suppression of trade unions. While shoppers in Europe enjoy an endless supply of cheap outfits, the people who actually make them are denied safety, a living wage and basic security.',
           annotations: [
             { span: 'which killed over 1,100 garment workers,', type: 'language', label: 'Relative clause — adds detail elegantly' },
             { span: 'Despite', type: 'language', label: 'B2 contrasting linker' },
-          ] },
-        { text: 'Admittedly, some argue that fast fashion makes trendy clothing accessible to people who cannot afford designer brands. While this may be true to some extent, it does not justify an industry built on exploitation and pollution. Affordable clothing can exist without disposable clothing — brands such as Patagonia and Uniqlo have shown that durable, fairly produced garments do not have to be expensive.',
+            { span: 'While shoppers in Europe enjoy an endless supply of cheap outfits', type: 'language', label: 'Contrast carries the argument' },
+          ]
+        },
+        {
+          text: 'Admittedly, some argue that fast fashion makes trendy clothing accessible to people who cannot afford designer brands. While this may be true to some extent, it does not justify an industry built on exploitation and pollution. Affordable clothing can exist without disposable clothing. A number of clothing brands have shown that durable, fairly produced garments do not have to be expensive.',
           annotations: [
             { span: 'Admittedly,', type: 'special', label: 'Counter-argument acknowledged' },
             { span: 'While this may be true to some extent,', type: 'special', label: 'Counter-argument refuted' },
-          ] },
-        { text: 'Taking these points into consideration, it is clear that the true cost of fast fashion is paid not by consumers, but by workers and the planet. If we genuinely want to address the climate crisis, we must start by rethinking our relationship with the clothes we wear.',
+          ]
+        },
+        {
+          text: 'Taking these points into consideration, it is clear that the true cost of fast fashion is paid not by consumers, but by workers and the planet. If we genuinely want to address the climate crisis, we must start by rethinking our relationship with the clothes we wear. Consumers can make a genuine difference by buying less, choosing quality over quantity and repairing what they already own.',
           annotations: [
             { span: 'Taking these points into consideration,', type: 'language', label: 'Conclusion linker' },
             { span: 'If we genuinely want to address the climate crisis,', type: 'language', label: 'Conditional — complex structure' },
-          ] },
-      ],
+            { span: 'buying less, choosing quality over quantity', type: 'content', label: 'Concrete call to action' },
+          ]
+        },
+      ]
     },
   },
 
@@ -415,7 +463,7 @@ SRDP.textTypes = [
       { label: 'Word count', value: '~250 or ~400' },
       { label: 'Register', value: 'Match the audience' },
       { label: 'Title', value: 'Required — catchy!' },
-      { label: 'Structure', value: '5 paragraphs' },
+      { label: 'Structure', value: '~5 paragraphs' },
     ],
     layout: [
       { part: 'Catchy title', note: 'rhetorical question, alliteration, bold statement' },
@@ -452,28 +500,37 @@ SRDP.textTypes = [
     ],
     tip: 'Key difference — essay vs. article: an essay makes the reader think. An article makes the reader feel. Essays are fact-based; articles are personal, emotional, and engaging. Always check WHERE the article will appear — a school magazine needs a different voice than a serious newspaper.',
     modelText: {
-      title: 'Screens Off, Life On?', wordCount: '~250', register: 'Informal/Semi-formal',
+      title: 'Screens Off, Life On?', wordCount: '~250', register: 'Semi-formal (school magazine)',
       paragraphs: [
-        { text: 'Are you one of those people who check their phone within five minutes of waking up? If so, you are definitely not alone. A recent experiment at our school challenged students to give up their phones for an entire week — and the results were surprising.',
+        {
+          text: 'Are you one of those people who check their phone within five minutes of waking up? If so, you are definitely not alone. A recent experiment at our school challenged students to give up their phones for an entire week. The results were surprising.',
           annotations: [
             { span: 'Are you one of those people who check their phone within five minutes of waking up?', type: 'special', label: 'Rhetorical question — grabs reader immediately' },
-            { span: 'the results were surprising.', type: 'special', label: 'Hook — reader wants to know more' },
-          ] },
-        { text: 'When the experiment started, most participants felt anxious and disconnected. Several students admitted they instinctively reached into their pockets dozens of times a day. "I didn\'t even realise how addicted I was," one participant told me. However, by day three, something shifted: people started talking more during breaks, playing cards, and actually paying attention in class.',
+            { span: 'The results were surprising.', type: 'special', label: 'Hook — reader wants to know more' },
+          ]
+        },
+        {
+          text: 'When the experiment started, most participants felt anxious and disconnected. Several students admitted they instinctively reached into their pockets dozens of times a day. "I didn\'t even realise how addicted I was," one participant told me. However, by day three the first cracks began to show: a handful of students started talking during breaks instead of reaching for their phones. By the middle of the week, the mood had completely changed. Students who normally sat in silence were suddenly chatting, laughing and swapping stories at every break.',
           annotations: [
             { span: '"I didn\'t even realise how addicted I was,"', type: 'special', label: 'Direct speech — suits articles, NOT essays' },
             { span: 'However,', type: 'language', label: 'B2 linking word' },
-          ] },
-        { text: 'The most striking change was in the social atmosphere. Without screens to hide behind, students had to look at each other and hold real conversations. I know this sounds old-fashioned, but it genuinely felt different — warmer, somehow. Teachers noticed the difference too, reporting fewer disruptions and more engagement.',
+            { span: 'the mood had completely changed', type: 'special', label: 'Turning point in the story' },
+          ]
+        },
+        {
+          text: 'The most striking change was in the social atmosphere. Without screens to hide behind, students had to look at each other and hold real conversations. I know this sounds old-fashioned, but it genuinely felt different — warmer, somehow. Teachers noticed the difference too, reporting fewer disruptions and more engagement. One classmate of mine, usually glued to her screen, ended up organising a lunchtime card tournament that half the year joined.',
           annotations: [
             { span: 'I know this sounds old-fashioned, but it genuinely felt different — warmer, somehow.', type: 'special', label: 'Personal voice — suits articles, NOT essays' },
-          ] },
-        { text: 'So, would I recommend a phone detox? Absolutely — even if only for a few days. You might be surprised by what you notice when you finally look up from that little screen.',
+          ]
+        },
+        {
+          text: 'So, would I recommend a phone detox? Absolutely, even if only for a few days. You might be surprised by what you notice when you finally look up from that little screen. Honestly, the hardest part was not giving up the phone. It was admitting just how much I had been missing.',
           annotations: [
             { span: 'So, would I recommend a phone detox?', type: 'language', label: 'Rhetorical question to conclude' },
             { span: 'You might be surprised by what you notice', type: 'special', label: 'Conclusion — leaves reader thinking' },
-          ] },
-      ],
+          ]
+        },
+      ]
     },
   },
 
@@ -525,30 +582,47 @@ SRDP.textTypes = [
     modelText: {
       title: 'Survey Results — Student Stress Levels', wordCount: '~250', register: 'Formal',
       paragraphs: [
-        { text: 'Date: 15 March 2026\nFrom: Anna Gruber, Student Council\nSubject: Survey Results — Student Stress Levels',
+        {
+          text: 'Date: 15 March 2026\nFrom: Anna Gruber, Student Council\nSubject: Survey Results — Student Stress Levels',
           isHeader: true,
           annotations: [
             { span: 'Date: 15 March 2026\nFrom: Anna Gruber, Student Council\nSubject: Survey Results — Student Stress Levels', type: 'structure', label: 'Header — Date, From, Subject all required' },
-          ] },
-        { text: '1. Introduction\nThis report presents the findings of a survey on stress levels conducted among 85 students in years 7 and 8. The aim is to identify the main causes of stress and suggest possible measures.',
+          ]
+        },
+        {
+          text: '1. Introduction\nThis report presents the findings of a survey on stress levels conducted among 85 students in years 7 and 8. The aim is to identify the main causes of stress and suggest possible measures. The survey was carried out anonymously over a two-week period in February and consisted of ten questions on workload, sleep and support services.',
           annotations: [
             { span: '1. Introduction', type: 'structure', label: 'Section heading — numbered' },
             { span: 'The aim is to identify the main causes of stress and suggest possible measures.', type: 'content', label: 'States purpose of report' },
-          ] },
-        { text: '2. Key Findings\nThe majority of respondents (72%) reported feeling stressed on a regular basis. Exams and homework deadlines were identified as the primary sources of pressure. In addition, 45% mentioned sleep problems connected to school-related anxiety. Only 18% were aware of the school\'s existing counselling services.',
+            { span: 'carried out anonymously', type: 'language', label: 'Passive — objective method' },
+          ]
+        },
+        {
+          text: '2. Key Findings\nThe majority of respondents (72%) reported feeling stressed on a regular basis. Exams and homework deadlines were identified as the primary sources of pressure. In addition, 45% mentioned sleep problems connected to school-related anxiety. Only 18% were aware of the school\'s existing counselling services. When asked about the timing of stress, students pointed clearly to the weeks before exams. Notably, girls reported higher stress levels than boys, although both groups named similar causes.',
           annotations: [
             { span: 'The majority of respondents (72%)', type: 'language', label: 'Report language — cite data precisely' },
             { span: 'were identified as', type: 'language', label: 'Passive voice — objective tone' },
             { span: 'In addition,', type: 'language', label: 'B2 linking word' },
-          ] },
-        { text: '3. Recommendations\nOn the basis of these findings, I would recommend introducing a weekly "no-homework day" and promoting the counselling service through posters and assemblies. It would also be advisable to schedule exams more evenly across the term to reduce pressure peaks.',
+            { span: 'Notably, girls reported higher stress levels than boys', type: 'language', label: 'Precise reporting of data' },
+          ]
+        },
+        {
+          text: '3. Recommendations\nOn the basis of these findings, I would recommend introducing a weekly "no-homework day" and promoting the counselling service through posters and assemblies. It would also be advisable to schedule exams more evenly across the term to reduce pressure peaks. Finally, teachers could be encouraged to coordinate test dates through a shared online calendar so that deadlines do not pile up in the same week.',
           annotations: [
             { span: '3. Recommendations', type: 'structure', label: 'Final section — numbered consistently' },
             { span: 'On the basis of these findings,', type: 'language', label: 'Conclusion linker for reports' },
             { span: 'I would recommend', type: 'special', label: 'Recommendation — required in every report' },
             { span: 'It would also be advisable to', type: 'language', label: 'Formal suggestion phrase' },
-          ] },
-      ],
+          ]
+        },
+        {
+          text: '4. Conclusion\nIn summary, stress is widespread among younger students and is closely linked to exams and homework. If these recommendations are put into practice, the school could noticeably improve both student wellbeing and academic results.',
+          annotations: [
+            { span: '4. Conclusion', type: 'structure', label: 'Optional final section, numbered' },
+            { span: 'If these recommendations are put into practice', type: 'language', label: 'Conditional — formal close' },
+          ]
+        },
+      ]
     },
   },
 
@@ -599,26 +673,35 @@ SRDP.textTypes = [
     modelText: {
       title: 'Why I Quit Instagram for a Month (And What Happened Next)', wordCount: '~250', register: 'Informal',
       paragraphs: [
-        { text: 'by max_adventures · 22 March 2026, 19:34\n\nWhy I Quit Instagram for a Month (And What Happened Next)',
+        {
+          text: 'by max_adventures · 22 March 2026, 19:34\n\nWhy I Quit Instagram for a Month (And What Happened Next)',
           isHeader: true,
           annotations: [
             { span: 'by max_adventures · 22 March 2026, 19:34', type: 'structure', label: 'Username + date/time — required for blog' },
-          ] },
-        { text: 'OK so hear me out — I know everyone talks about digital detoxes these days, but I actually went through with it. Last month I deleted Instagram from my phone. Cold turkey. No "screen time limits", no "I\'ll just check once a day" — gone. And honestly? It was weird.',
+          ]
+        },
+        {
+          text: 'OK so hear me out — I know everyone talks about digital detoxes these days, but I actually went through with it. Last month I deleted Instagram from my phone. Cold turkey. No "screen time limits", no "I\'ll just check once a day" — gone. And honestly? It was weird. My friends genuinely thought I had lost my mind. One of them actually asked if I was okay, as if deleting an app were some kind of cry for help.',
           annotations: [
             { span: 'OK so hear me out —', type: 'special', label: 'Informal, personal tone — contractions OK' },
             { span: 'And honestly? It was weird.', type: 'special', label: 'Short sentence for effect — works in blogs' },
-          ] },
-        { text: "The first few days were rough. I kept unlocking my phone and staring at the empty space where the app used to be. I realised I'd been scrolling for about two hours every single day — that's basically the same as watching a movie. Every. Day. But after about a week, something clicked. I started reading before bed again.",
+          ]
+        },
+        {
+          text: 'The first few days were rough. I kept unlocking my phone and staring at the empty space where the app used to be. I realised I\'d been scrolling for about two hours every single day. That\'s basically the same as watching a movie. Every. Day. But after about a week, something clicked. I started reading before bed again. By the end of the second week, I had finished an entire book, the first one in months, and somehow my brain felt quieter and less twitchy.',
           annotations: [
             { span: 'basically', type: 'language', label: 'Informal register — fine for blogs' },
             { span: 'Every. Day.', type: 'special', label: 'Stylistic fragmentation — very blog-appropriate' },
-          ] },
-        { text: "So, am I back on Instagram now? Yeah, I am. But I use it differently — maybe 20 minutes a day, max. The month off taught me it's a tool, not a lifestyle. Have any of you tried something like this? I'd love to hear your stories in the comments!",
+            { span: 'my brain felt quieter and less twitchy', type: 'special', label: 'Vivid personal detail' },
+          ]
+        },
+        {
+          text: 'So, am I back on Instagram now? Yeah, I am. But I use it differently: maybe 20 minutes a day, max. The month off taught me it\'s just a tool, and I\'d been treating it like a lifestyle. Have any of you tried something like this? I\'d love to hear your stories in the comments! If you have ever felt like your phone owns you instead of the other way round, maybe give it a try. Worst case, you waste a weekend. Best case, you get a little piece of your life back.',
           annotations: [
-            { span: "Have any of you tried something like this? I'd love to hear your stories in the comments!", type: 'special', label: 'Call to comment — REQUIRED for blog posts' },
-          ] },
-      ],
+            { span: 'Have any of you tried something like this? I\'d love to hear your stories in the comments!', type: 'special', label: 'Call to comment — REQUIRED for blog posts' },
+          ]
+        },
+      ]
     },
   },
 
@@ -674,30 +757,40 @@ SRDP.textTypes = [
     modelText: {
       title: 'Complaint regarding Summer Language Course in Brighton', wordCount: '~250', register: 'Formal',
       paragraphs: [
-        { text: 'To: info@globalenglish.com\nFrom: sarah.berger@gmx.at\nDate: 10 April 2026\nSubject: Complaint regarding Summer Language Course in Brighton',
+        {
+          text: 'To: info@globalenglish.example\nFrom: sarah.berger@email.example\nDate: 10 April 2026\nSubject: Complaint regarding Summer Language Course in Brighton',
           isHeader: true,
           annotations: [
-            { span: 'To: info@globalenglish.com\nFrom: sarah.berger@gmx.at\nDate: 10 April 2026\nSubject: Complaint regarding Summer Language Course in Brighton', type: 'structure', label: 'Header — all 4 elements required' },
-          ] },
-        { text: 'Dear Sir or Madam,\n\nI am writing to express my dissatisfaction with the two-week language course I attended at your Brighton school from 1 to 14 July 2025. Although your website promised small class sizes and experienced teachers, my experience was far from what had been advertised.',
+            { span: 'To: info@globalenglish.example\nFrom: sarah.berger@email.example\nDate: 10 April 2026\nSubject: Complaint regarding Summer Language Course in Brighton', type: 'structure', label: 'Header — all 4 elements required' },
+          ]
+        },
+        {
+          text: 'Dear Sir or Madam,\n\nI am writing to express my dissatisfaction with the two-week language course I attended at your Brighton school from 1 to 14 July 2025. Although your website promised small class sizes and experienced teachers, my experience was far from what had been advertised. I had specifically chosen your school because of these promises, so the reality on arrival was a serious disappointment.',
           annotations: [
             { span: 'Dear Sir or Madam,', type: 'structure', label: 'Formal greeting (name unknown)' },
             { span: 'I am writing to express my dissatisfaction with', type: 'language', label: 'Set phrase — complaint opener' },
             { span: 'Although', type: 'language', label: 'Concession — B2 linking' },
             { span: 'far from what had been advertised', type: 'language', label: 'Formal understatement — effective in complaints' },
-          ] },
-        { text: 'To begin with, the classes had up to 22 students, which made individual attention impossible. Furthermore, our teacher changed three times during the course, and the final replacement had no formal teaching qualification. As a result, several students felt they had not improved at all.',
+          ]
+        },
+        {
+          text: 'To begin with, the classes had up to 22 students, which made individual attention impossible. Furthermore, our teacher changed three times during the course, and the final replacement had no formal teaching qualification. As a result, several students felt they had not improved at all. On top of this, the afternoon activities advertised in the brochure were cancelled twice without notice. When I raised these problems with the reception staff, I was simply told that nothing could be done, and none of the staff seemed willing to take responsibility.',
           annotations: [
             { span: 'Furthermore,', type: 'language', label: 'B2 linking word' },
             { span: 'As a result,', type: 'language', label: 'Cause-effect linker' },
-          ] },
-        { text: 'I would therefore like to request a partial refund of the course fees, as the services provided did not match the description on your website. I look forward to hearing from you within 14 days.\n\nYours faithfully,\nSarah Berger',
+            { span: 'On top of this', type: 'language', label: 'Adds a further complaint' },
+          ]
+        },
+        {
+          text: 'I would therefore like to request a partial refund of the course fees, as the services provided did not match the description on your website. I look forward to hearing from you within 14 days. Should I not receive a satisfactory response, I will have no choice but to share my experience on public review platforms.\n\nYours faithfully,\nSarah Berger',
           annotations: [
             { span: 'I would therefore like to request', type: 'special', label: 'Clear, specific demand' },
             { span: 'I look forward to hearing from you within 14 days.', type: 'language', label: 'Sets a deadline — professional and firm' },
             { span: 'Yours faithfully,', type: 'structure', label: 'Correct sign-off (Dear Sir → faithfully)' },
-          ] },
-      ],
+            { span: 'Should I not receive a satisfactory response', type: 'language', label: 'Formal conditional — firm but polite' },
+          ]
+        },
+      ]
     },
   },
 ];
@@ -755,37 +848,46 @@ SRDP.emailSubTypes = [
       { category: 'Suitability', items: ['I believe I am suitable for this position as I…', 'I consider myself to be enthusiastic, hard-working, and reliable.', 'My experience in… has prepared me well for…', 'I have developed strong skills in… through my work at…'] },
       { category: 'Closing', items: ['I am available for an interview at your convenience.', 'I look forward to discussing my application further.', 'Please do not hesitate to contact me if you require any further information.', 'I would welcome the opportunity to contribute to your organisation.'] },
     ],
-    tip: 'Tense tip: use present simple for current skills ("I am a reliable person"), past simple for past experience ("I worked for…"), present perfect for ongoing activities ("I have been studying…"). Mixing these correctly demonstrates B2 grammar range.',
+    tip: 'Tense tip: use present simple for current skills ("I am a reliable person"), past simple for past experience ("I worked for…"), present perfect for ongoing activities ("I have been studying…"). Mixing these correctly shows B2 grammar range.',
     modelText: {
       title: 'Application for Summer Camp Counsellor', wordCount: '~250', register: 'Formal',
       paragraphs: [
-        { text: 'To: recruitment@lakesidecamps.co.uk\nFrom: lukas.steiner@gmx.at\nDate: 3 May 2026\nSubject: Application for Summer Camp Counsellor',
+        {
+          text: 'To: recruitment@lakesidecamps.example\nFrom: lukas.steiner@email.example\nDate: 3 May 2026\nSubject: Application for Summer Camp Counsellor',
           isHeader: true,
           annotations: [
             { span: 'Subject: Application for Summer Camp Counsellor', type: 'structure', label: 'Subject names the exact position' },
-          ] },
-        { text: 'Dear Ms Carter,\n\nI am writing to apply for the position of summer camp counsellor at Lakeside Camps, as advertised on your website on 28 April. As an 18-year-old secondary school student with experience in youth work, I believe I would be a valuable addition to your team.',
+          ]
+        },
+        {
+          text: 'Dear Ms Carter,\n\nI am writing to apply for the position of summer camp counsellor at Lakeside Camps, as advertised on your website on 28 April. As an 18-year-old secondary school student with experience in youth work, I believe I would be a valuable addition to your team. Working with children has been part of my life for years, and a summer at Lakeside Camps would be the perfect next step.',
           annotations: [
             { span: 'Dear Ms Carter,', type: 'structure', label: 'Name known → will close with "Yours sincerely"' },
             { span: 'I am writing to apply for the position of summer camp counsellor at Lakeside Camps, as advertised on your website on 28 April.', type: 'language', label: 'Position + where you saw the ad — first sentence' },
-          ] },
-        { text: 'For the past two years, I have been a volunteer leader in a local scout group, where I plan weekly activities for children aged eight to twelve. This has taught me how to organise games, resolve conflicts calmly and take responsibility for the safety of a group. In addition, I have completed a first-aid course and speak fluent German and English.',
+          ]
+        },
+        {
+          text: 'For the past two years, I have been a volunteer leader in a local scout group, where I plan weekly activities for children aged eight to twelve. This has taught me how to organise games, resolve conflicts calmly and take responsibility for the safety of a group. In addition, I have completed a first-aid course and speak fluent German and English. Last summer I also helped run a two-week day camp for forty children, where I was responsible for planning the daily schedule and supervising swimming sessions.',
           annotations: [
             { span: 'For the past two years, I have been', type: 'language', label: 'Present perfect — ongoing experience' },
             { span: 'This has taught me how to organise games, resolve conflicts calmly and take responsibility', type: 'content', label: 'Skills linked to the job — not just listed' },
-          ] },
-        { text: 'I would welcome the opportunity to bring my energy and experience to Lakeside Camps this summer. I am available for an online interview at your convenience and would be happy to provide references. Please find my CV attached.\n\nYours sincerely,\nLukas Steiner',
+            { span: 'responsible for planning the daily schedule', type: 'content', label: 'Concrete, relevant responsibility' },
+          ]
+        },
+        {
+          text: 'I would welcome the opportunity to bring my energy and experience to Lakeside Camps this summer. I am available for an online interview at your convenience and would be happy to provide references. Please find my CV attached. I love being outdoors, and I would like to help children enjoy the kind of great summer I had at camp myself.\n\nYours sincerely,\nLukas Steiner',
           annotations: [
             { span: 'I am available for an online interview at your convenience', type: 'language', label: 'Standard closing move for applications' },
             { span: 'Yours sincerely,', type: 'structure', label: 'Correct: name known → sincerely' },
-          ] },
-      ],
+          ]
+        },
+      ]
     },
   },
   {
     id: 'editor', name: 'Letter to the Editor',
     purpose: 'You respond to an article or comment published in a newspaper or magazine. You must reference the original publication, then agree or disagree with the arguments made. This is one of the most frequently tested sub-types.',
-    layoutNotes: 'Standard email header (To: editor@publication.com). Greeting: "Dear Sir or Madam," or "Dear Editor,". FIRST SENTENCE must name the article, publication, and date. Sign off with Yours faithfully + full name + town/city.',
+    layoutNotes: 'Standard email header (To: editor@publication.example). Greeting: "Dear Sir or Madam," or "Dear Editor,". FIRST SENTENCE must name the article, publication, and date. Sign off with Yours faithfully + full name + town/city.',
     dos: [
       'Name the article, publication, and date in your first sentence',
       'Take a clear position (agree, disagree, or partially agree)',
@@ -811,27 +913,37 @@ SRDP.emailSubTypes = [
     modelText: {
       title: 'Re: "Why Teenagers Should Not Have Part-Time Jobs"', wordCount: '~250', register: 'Formal',
       paragraphs: [
-        { text: 'To: editor@viennaherald.com\nFrom: julia.brunner@gmail.com\nDate: 12 February 2026\nSubject: Re: "Why Teenagers Should Not Have Part-Time Jobs"',
+        {
+          text: 'To: editor@viennaherald.example\nFrom: julia.brunner@email.example\nDate: 12 February 2026\nSubject: Re: "Why Teenagers Should Not Have Part-Time Jobs"',
           isHeader: true,
           annotations: [
-            { span: 'To: editor@viennaherald.com', type: 'structure', label: 'Addressed to the editor' },
-          ] },
-        { text: 'Dear Sir or Madam,\n\nI am writing in response to the article entitled "Why Teenagers Should Not Have Part-Time Jobs", which appeared in the Vienna Herald on 8 February. While the author raises some valid concerns, I cannot accept the conclusion that part-time work harms young people.',
+            { span: 'To: editor@viennaherald.example', type: 'structure', label: 'Addressed to the editor' },
+          ]
+        },
+        {
+          text: 'Dear Sir or Madam,\n\nI am writing in response to the article entitled "Why Teenagers Should Not Have Part-Time Jobs", which appeared in the Vienna Herald on 8 February. While the author raises some valid concerns, I cannot accept the conclusion that part-time work harms young people. As a sixteen-year-old who works part-time myself, I feel the article overlooks the very people it claims to protect.',
           annotations: [
             { span: 'I am writing in response to the article entitled "Why Teenagers Should Not Have Part-Time Jobs", which appeared in the Vienna Herald on 8 February.', type: 'special', label: 'REQUIRED: article + publication + date in sentence one' },
             { span: 'While the author raises some valid concerns, I cannot accept', type: 'content', label: 'Clear position — partial disagreement' },
-          ] },
-        { text: 'It is certainly true that schoolwork must come first. However, the article fails to consider what a few hours of work each week actually teach: responsibility, time management and the value of money. Speaking from my own experience as a student who works four hours every Saturday, my grades have not suffered — if anything, I have learned to organise my week far more effectively.',
+            { span: 'I feel the article overlooks the very people it claims to protect', type: 'special', label: 'Personal stake stated early' },
+          ]
+        },
+        {
+          text: 'It is certainly true that schoolwork must come first. However, the article fails to consider what a few hours of work each week actually teach you about responsibility, time management and handling your own money. Speaking from my own experience as a student who works four hours every Saturday, my grades have not suffered — if anything, I have learned to organise my week far more effectively. Many of my classmates juggle a weekend job with school and sport without any drop in their marks. What they gain instead is confidence and a sense of independence that no classroom can teach.',
           annotations: [
             { span: 'However, the article fails to consider', type: 'language', label: 'Formal disagreement phrase' },
             { span: 'Speaking from my own experience as a student who works four hours every Saturday', type: 'special', label: 'Personal, local angle — strengthens the letter' },
-          ] },
-        { text: 'Instead of warning parents about part-time jobs, we should be discussing how to make them fair and compatible with school. I urge your readers, especially employers, to offer young people flexible positions with reasonable hours.\n\nYours faithfully,\nJulia Brunner, Vienna',
+            { span: 'confidence and a sense of independence that no classroom can teach', type: 'content', label: 'Counter-argument developed' },
+          ]
+        },
+        {
+          text: 'Instead of warning parents about part-time jobs, we should be discussing how to make them fair and compatible with school. I urge your readers, especially employers, to offer young people flexible positions with reasonable hours. A balanced approach would serve teenagers far better than a blanket ban.\n\nYours faithfully,\nJulia Brunner, Vienna',
           annotations: [
             { span: 'I urge your readers, especially employers, to', type: 'language', label: 'Call to action — strong ending' },
             { span: 'Yours faithfully,\nJulia Brunner, Vienna', type: 'structure', label: 'Faithfully + full name + city' },
-          ] },
-      ],
+          ]
+        },
+      ]
     },
   },
   {
@@ -856,31 +968,40 @@ SRDP.emailSubTypes = [
       { category: 'Asking questions (indirect form)', items: ['I would like to know whether…', 'Could you please tell me…?', 'I would be grateful if you could inform me of…', 'I would appreciate it if you could clarify…', 'I was wondering whether it might be possible to…'] },
       { category: 'Closing', items: ['I look forward to receiving the information requested.', 'I would appreciate a prompt reply, as I need to make arrangements by…', 'Please do not hesitate to contact me if you require any further information.', 'I look forward to hearing from you.'] },
     ],
-    tip: 'Indirect questions ("I would like to know whether…") are more formal than direct questions ("Is there…?"). Use them all the way through and the examiner sees solid B2 control of register and grammar.',
+    tip: 'Indirect questions ("I would like to know whether…") are more formal than direct questions ("Is there…?"). Use them throughout and the examiner sees solid B2 control of register and grammar.',
     modelText: {
       title: 'Enquiry about Volunteer Programme in Scotland', wordCount: '~230', register: 'Formal',
       paragraphs: [
-        { text: 'To: info@highlandvolunteers.org\nFrom: paul.wagner@gmx.at\nDate: 20 January 2026\nSubject: Enquiry about Volunteer Programme in Scotland',
+        {
+          text: 'To: info@highlandvolunteers.example\nFrom: paul.wagner@email.example\nDate: 20 January 2026\nSubject: Enquiry about Volunteer Programme in Scotland',
           isHeader: true,
           annotations: [
             { span: 'Subject: Enquiry about Volunteer Programme in Scotland', type: 'structure', label: 'Clear, descriptive subject line' },
-          ] },
-        { text: 'Dear Sir or Madam,\n\nI am writing to enquire about the four-week conservation volunteer programme in the Scottish Highlands, which I found on your website. I am an 18-year-old student from Austria and I am planning to spend part of my summer doing meaningful work abroad.',
+          ]
+        },
+        {
+          text: 'Dear Sir or Madam,\n\nI am writing to enquire about the four-week conservation volunteer programme in the Scottish Highlands, which I found on your website. I am an 18-year-old student from Austria and I am planning to spend part of my summer doing meaningful work abroad. I am particularly interested in projects involving woodland restoration and the protection of native wildlife.',
           annotations: [
             { span: 'I am writing to enquire about', type: 'language', label: 'Set phrase — enquiry opener' },
             { span: 'I am an 18-year-old student from Austria', type: 'content', label: 'Says who you are — gives context' },
-          ] },
-        { text: 'First of all, I would like to know whether the programme is open to participants without previous experience in conservation work. Furthermore, could you please tell me what kind of accommodation is provided and whether meals are included in the participation fee? Finally, I would be grateful if you could inform me of the total costs and the application deadline for July.',
+          ]
+        },
+        {
+          text: 'First of all, I would like to know whether the programme is open to participants without previous experience in conservation work. Furthermore, could you please tell me what kind of accommodation is provided and whether meals are included in the participation fee? Finally, I would be grateful if you could inform me of the total costs and the application deadline for July. I would also appreciate some information about the typical daily routine and whether volunteers are given any free time to explore the surrounding area. Knowing this in advance would help me decide whether the programme is the right fit.',
           annotations: [
             { span: 'I would like to know whether', type: 'language', label: 'Indirect question — formal register' },
             { span: 'could you please tell me what kind of accommodation is provided', type: 'language', label: 'Indirect question — note the word order' },
             { span: 'I would be grateful if you could inform me of', type: 'language', label: 'Very formal request phrase' },
-          ] },
-        { text: 'I would appreciate a prompt reply, as I need to make my travel arrangements by the end of February. Thank you very much in advance for your help.\n\nYours faithfully,\nPaul Wagner',
+            { span: 'whether volunteers are given any free time', type: 'language', label: 'Polite indirect question' },
+          ]
+        },
+        {
+          text: 'I would appreciate a prompt reply, as I need to make my travel arrangements by the end of February. Thank you very much in advance for your help. In addition, I would be grateful for the contact details of a former participant who might be willing to share their experience.\n\nYours faithfully,\nPaul Wagner',
           annotations: [
             { span: 'I would appreciate a prompt reply, as I need to make my travel arrangements by the end of February.', type: 'language', label: 'Polite urgency + reason' },
-          ] },
-      ],
+          ]
+        },
+      ]
     },
   },
 ];
@@ -1065,7 +1186,7 @@ SRDP.quizzes = {
 SRDP.finalQuiz = [
   { q: 'Which text type ALWAYS needs section headings?', options: ['Report', 'Article', 'Essay', 'Blog post'], correct: 0, explanation: 'The report is the only text type with (numbered) section headings. Headings in an essay would be a convention error.' },
   { q: 'The task says: "Write a blog comment (around 250 words)." Do you write a title?', options: ['Yes — every text needs a title', 'No — comments have no title; reference the original post instead', 'Only if you have space left', 'Yes, but in lower case'], correct: 1, explanation: 'Blog comments have no title. They open by referencing the post you are responding to.' },
-  { q: 'How much time do you have for the whole Writing section (B2, AHS)?', options: ['90 minutes', '100 minutes', '120 minutes', '150 minutes'], correct: 2, explanation: '120 minutes for two tasks: roughly 65–70 minutes for the long task and 45–50 for the short one, plus proofreading.' },
+  { q: 'How much time do you have for the whole Writing section (B2, AHS)?', options: ['90 minutes', '100 minutes', '120 minutes', '150 minutes'], correct: 2, explanation: '120 minutes for two tasks: roughly 65 minutes for the long task and 40 for the short one, leaving time to proofread both.' },
   { q: 'Your 250-word task: which word count range is safe?', options: ['200–300', '225–275', '240–260', 'Anything over 250'], correct: 1, explanation: 'The tolerance is ±10%: for ~250 words that means 225–275. For ~400 words: 360–440.' },
   { q: '"Dear Sir or Madam," pairs with…', options: ['Yours faithfully,', 'Yours sincerely,', 'Best regards,', 'Cheers,'], correct: 0, explanation: 'Name unknown → faithfully. Name known (Dear Ms Brown) → sincerely.' },
   { q: 'Where may you give your personal opinion in a report?', options: ['Anywhere', 'In the findings section', 'In the conclusion/recommendations', 'Nowhere'], correct: 2, explanation: 'The body presents neutral findings; the final section may recommend and evaluate ("I would suggest…").' },
@@ -1177,7 +1298,7 @@ SRDP.prompts = [
     bullets: ["respond directly to the blogger's argument", 'describe what you observe at your own school', 'suggest a better (or stricter) solution'] },
   { type: 'email', length: 250, topic: 'Complaint: language course',
     scenario: 'You attended a two-week language course in Brighton that did not match what the website promised.',
-    material: { kind: 'text', label: 'What the website promised', source: 'globalenglish.com — Summer Intensive Brighton',
+    material: { kind: 'text', label: 'What the website promised', source: 'globalenglish.example — Summer Intensive Brighton',
       lines: ['"Small groups of maximum 10 students · all teachers fully qualified with at least five years\' experience · modern single rooms with private bathroom, five minutes from the school · full social programme included"'] },
     instruction: 'Write an e-mail (around 250 words) to the course provider.',
     bullets: ['compare what was promised with what you actually experienced', 'describe the problems with the accommodation', 'state what you want the company to do'] },
@@ -1189,19 +1310,19 @@ SRDP.prompts = [
     bullets: ["respond to the article's main claims", 'present your view on the environmental benefits', 'discuss the practical challenges of switching'] },
   { type: 'email', length: 250, topic: 'Application: summer internship',
     scenario: 'You have found an advertisement on the website of an international environmental NGO.',
-    material: { kind: 'text', label: 'The advertisement', source: 'greenfuture.org — Summer Internship for School Students',
+    material: { kind: 'text', label: 'The advertisement', source: 'greenfuture.example — Summer Internship for School Students',
       lines: ['"We are looking for committed students (16+) to support our communications team for four weeks in July. Tasks include researching environmental topics, writing short texts for social media and helping at two public events. Good English, reliability and an interest in climate issues are essential. Apply by e-mail to Ms Hana Said, including your relevant experience and why you want to join us."'] },
     instruction: 'Write an e-mail of application (around 250 words) to Ms Said.',
     bullets: ['state which internship you are applying for and where you saw it', 'describe your relevant skills and experience', 'explain why you want to work for this organisation'] },
   { type: 'email', length: 250, topic: 'Enquiry: au pair agency',
     scenario: 'You are considering a gap year as an au pair in Ireland and found an agency online.',
-    material: { kind: 'text', label: "From the agency's website", source: 'dublinaupairs.ie — Your year in Ireland',
+    material: { kind: 'text', label: "From the agency's website", source: 'dublinaupairs.example — Your year in Ireland',
       lines: ['"We place au pairs aged 18–27 with carefully selected host families across Ireland. Programmes run from 6 to 12 months. Au pairs receive free board and lodging plus weekly pocket money. Language course options available. Contact us for details about requirements, fees and the application process."'] },
     instruction: 'Write an e-mail of enquiry (around 250 words) to the agency.',
     bullets: ['introduce yourself and your plans', 'ask about requirements and the application process', 'request information about costs and support'] },
   { type: 'email', length: 250, topic: 'Complaint: concert tickets',
     scenario: 'You bought a premium package for a concert online. The evening turned out very differently.',
-    material: { kind: 'text', label: 'What you paid for', source: 'ticketnow.at — Premium Package (€189), Stadthalle Vienna',
+    material: { kind: 'text', label: 'What you paid for', source: 'ticketnow.example — Premium Package (€189), Stadthalle Vienna',
       lines: ['"Guaranteed seating in rows 1–10 with a clear stage view · separate fast-lane entry · welcome drink and exclusive merchandise item · access to the VIP lounge after the show"'] },
     instruction: 'Write an e-mail (around 250 words) to the ticket company.',
     bullets: ['compare what you paid for with what you actually received', 'describe how the staff reacted on the evening', 'demand appropriate compensation'] },
@@ -1341,13 +1462,13 @@ SRDP.paragraphs = {
   ],
   supports: [
     { label: 'EXPLANATION', sub: 'Answer "why?"', ex: '"This is largely because teenagers compare themselves to carefully edited images, which creates unrealistic expectations."' },
-    { label: 'EVIDENCE', sub: 'Use data or facts', ex: '"A study by the Royal Society for Public Health found that Instagram was rated the worst platform for mental health among 14–24-year-olds."' },
+    { label: 'EVIDENCE', sub: 'Use data or facts', ex: '"A 2017 report by the Royal Society for Public Health ranked Instagram the worst platform for the mental health of 14- to 24-year-olds."' },
     { label: 'ILLUSTRATION', sub: 'Paint a scenario', ex: '"Consider a typical teenager who spends two hours a day scrolling — by the end of the week, they will have been exposed to hundreds of idealised images."' },
   ],
   anatomyExample: [
     { role: 'point', text: "Social media can be very harmful to teenagers' mental health." },
     { role: 'explain', text: 'Apps like Instagram and TikTok are full of edited photos and perfect-looking lives. When young people see this every day, they start to believe that their own lives are not good enough, which makes them feel unhappy and insecure.' },
-    { role: 'evidence', text: "A study by the Royal Society for Public Health found that Instagram is the worst platform for young people's mental health, with 70% of users saying it made them feel worse about how they look." },
+    { role: 'evidence', text: "A 2017 report by the Royal Society for Public Health ranked Instagram as the most harmful social media platform for young people's mental health and body image." },
     { role: 'closing', text: 'If platforms do not do more to protect young users, these problems will only get worse in the future.' },
   ],
   closings: {
@@ -1404,13 +1525,13 @@ SRDP.paragraphs = {
       model: {
         point: "Social media can be very harmful to teenagers' mental health.",
         explain: 'Apps like Instagram and TikTok are full of edited photos and perfect-looking lives. When young people see this every day, they start to believe that their own lives are not good enough, which makes them feel unhappy and insecure.',
-        evidence: "A study by the Royal Society for Public Health found that Instagram is the worst platform for young people's mental health, with 70% of users saying it made them feel worse about how they look.",
+        evidence: "A 2017 report by the Royal Society for Public Health ranked Instagram as the most harmful social media platform for young people's mental health and body image.",
         closing: 'If platforms do not do more to protect young users, these problems will only get worse in the future.',
       },
       analysis: [
         { part: 'Topic sentence', why: 'Clear and specific: not "Social media is bad" but narrows it down to mental health.' },
         { part: 'Supporting sentence', why: 'Explains the HOW: edited photos → unrealistic expectations → feeling insecure. The reader follows the logic.' },
-        { part: 'Evidence', why: 'Names a real study with a concrete number (70%). Much stronger than writing "many experts say..."' },
+        { part: 'Evidence', why: 'Names a real, citable study instead of a vague "many experts say...". Only quote a number if you can stand behind it.' },
         { part: 'Closing', why: "Doesn't repeat the topic sentence. Instead, it looks ahead: what happens if nothing changes? That's a real conclusion." },
       ] },
     { id: 'politicians', title: 'Task 2: Politicians on Social Media',
@@ -1513,8 +1634,8 @@ In conclusion, our canteen needs a complete makeover. The school should fire the
     ],
     verdict: 'This reads like a personal complaint letter, not a report.' },
   { id: 'textC', title: 'Text C — "Letter to the Editor" by a student',
-    text: `To: editor@dailynews.com
-From: mike99@yahoo.com
+    text: `To: editor@dailynews.example
+From: mike99@email.example
 Date: 5 March 2026
 Subject: Your article about school uniforms
 
@@ -1557,8 +1678,8 @@ Thomas Maier`,
     ],
     verdict: 'A five-paragraph essay in disguise. Wrong genre from the first line.' },
   { id: 'textE', title: 'Text E — "E-mail of application" by a student',
-    text: `To: jobs@sportcamp.at
-From: partyking2008@hotmail.com
+    text: `To: jobs@sportcamp.example
+From: partyking2008@email.example
 Date: 2 May 2026
 Subject: job
 
@@ -1571,7 +1692,7 @@ I can't work Mondays btw.
 See ya,
 Felix`,
     errors: [
-      { mark: '"partyking2008@hotmail.com"', fix: 'Unprofessional address — use a neutral one (firstname.lastname@…).' },
+      { mark: '"partyking2008@email.example"', fix: 'Unprofessional address — use a neutral one (firstname.lastname@…).' },
       { mark: 'Subject: "job"', fix: 'Too vague. Name the position: "Application for Summer Camp Counsellor".' },
       { mark: '"Hey!"', fix: 'Formal greeting required: "Dear Sir or Madam," or the name from the ad.' },
       { mark: '"I really need the money because I want to buy a scooter"', fix: 'Focus on what you offer, not what you want to gain.' },
@@ -1625,7 +1746,7 @@ SRDP.dndSets = {
     { text: 'So, what do you think? Have you ever tried a digital detox? Let me know below!', role: 'Conclusion — invites comments' },
   ],
   email: [
-    { text: 'To: info@hotel-vienna.com | Subject: Complaint regarding stay on 5 April', role: 'E-mail header' },
+    { text: 'To: info@hotel-vienna.example | Subject: Complaint regarding stay on 5 April', role: 'E-mail header' },
     { text: 'I am writing to express my dissatisfaction with the service I received during my recent stay.', role: 'Opening — states purpose' },
     { text: 'To begin with, the room had not been cleaned prior to my arrival, which was unacceptable.', role: 'First complaint point' },
     { text: 'Furthermore, despite requesting a non-smoking room, I was placed in a room that smelled of smoke.', role: 'Second complaint point' },
@@ -1741,7 +1862,7 @@ function modelBox(model, extraNote) {
     '</div>'
   );
 }
-function sectionLabel(t) { return '<div class="section-label">' + t + '</div>'; }
+function sectionLabel(t) { return '<h2 class="section-label">' + t + '</h2>'; }
 function pageHead(eyebrow, title, lead, extra) {
   return '<div class="page-head"><div class="inner">' +
     '<div class="eyebrow">' + eyebrow + '</div>' +
@@ -1762,7 +1883,7 @@ function chips(items, prefix) {
   ).join('') + '</div>';
 }
 function phraseGroups(groups) {
-  return groups.map(g => '<div style="margin-bottom:30px">' + sectionLabel(esc(g.category || g.label)) + chips(g.items || g.phrases) + '</div>').join('');
+  return groups.map(g => '<div style="margin-bottom:30px"><h3 class="sub-label">' + esc(g.category || g.label) + '</h3>' + chips(g.items || g.phrases) + '</div>').join('');
 }
 
 /* ─── generic quiz engine ─────────────────────────────────── */
@@ -1896,6 +2017,7 @@ const NAV = [
     { id: 'checklist', label: 'Writing checklist' },
     { id: 'selfcheck', label: 'Self-check studio' },
     { id: 'taskbank', label: 'Task bank' },
+    { id: 'topicvocab', label: 'Topic vocabulary' },
   ]},
   { divider: 'Skills & practice', items: [
     { id: 'paragraphs', label: 'Paragraph writing' },
@@ -1908,7 +2030,7 @@ NAV[2].items = SRDP.textTypes.map(t => ({ id: t.id, label: t.name, color: t.colo
 function buildNav() {
   const nav = $('#sidenav');
   nav.innerHTML =
-    '<div class="nav-brand"><div class="t1">Don&rsquo;t Panic, It&rsquo;s Just the Matura</div><div class="t2">English Writing · B2 · AHS</div></div>' +
+    '<div class="nav-brand" style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px"><div><div class="t1">Don&rsquo;t Panic, It&rsquo;s Just the Matura</div><div class="t2">English Writing · B2 · AHS</div></div><button class="nav-help" data-action="start-tour" title="Replay the guided tour" aria-label="Replay the guided tour">?</button></div>' +
     '<div class="nav-scroll">' +
       NAV.map(sec =>
         (sec.divider ? '<div class="nav-divider">' + sec.divider + '</div>' : '') +
@@ -1959,7 +2081,7 @@ PAGES.home = {
   title: 'Home',
   render() {
     const prog = M.progress();
-    const trackable = ['overview', 'essay', 'article', 'report', 'blog', 'email', 'phrasebank', 'checklist', 'selfcheck', 'taskbank', 'paragraphs', 'grammar', 'practice'];
+    const trackable = ['overview', 'essay', 'article', 'report', 'blog', 'email', 'phrasebank', 'checklist', 'selfcheck', 'taskbank', 'topicvocab', 'paragraphs', 'grammar', 'practice'];
     const visited = trackable.filter(id => prog[id] && prog[id].visited).length;
     const quizzes = ['essay', 'article', 'report', 'blog', 'email', 'final'].filter(id => prog[id] && prog[id].quiz).length;
     const pct = Math.round((visited / trackable.length) * 100);
@@ -1967,13 +2089,33 @@ PAGES.home = {
       '<div class="page-head" style="padding-bottom:56px"><div class="inner" style="max-width:1100px">' +
         '<div class="eyebrow"><span>AHS Schriftliche Reifeprüfung · English B2 (<a href="https://www.bernhardgmeiner.com" target="_blank" rel="noopener">Bernhard Gmeiner</a>)</span></div>' +
         '<h1 class="title" style="font-size:clamp(2.3rem,5.5vw,4.4rem);max-width:880px">Don&rsquo;t panic, it&rsquo;s just the Matura.</h1>' +
-        '<p class="lead">Everything you need for the two writing tasks of the English Matura. Start with the overview, or jump straight to the text type you are practising this week.</p>' +
+        '<p class="lead">Everything you need for the two writing tasks of the English Matura. Start with the overview, or jump straight to the text type you are practising this week.</p>' +'<p lang="de" style="font-size:.9375rem;color:var(--text-muted);max-width:620px;margin:-14px 0 26px;line-height:1.5">Diese Seite hilft bei der Vorbereitung auf die schriftliche Englisch-Matura (AHS, B2). Alle Lerninhalte sind auf Englisch.</p>' +
         '<div style="display:flex;gap:1px;flex-wrap:wrap">' +
           '<a class="btn btn-primary" href="#overview" style="min-width:200px">Start with the overview <span>→</span></a>' +
           '<a class="btn btn-ghost" href="#essay" style="min-width:170px">Jump to the essay <span>→</span></a>' +
         '</div>' +
       '</div></div>' +
       '<div class="wrap" style="max-width:1100px">' +
+        '<div class="gap-s"></div>' +
+        sectionLabel('How to use this guide') +
+        '<p style="font-size:1rem;color:var(--text-secondary);line-height:1.6;max-width:680px;margin-bottom:22px">New here? These four steps are the short version. Follow them in order, or jump straight to whatever you are practising this week.</p>' +
+        '<div class="grid g-auto-240">' +
+          [
+            ['overview', '01', 'Read the overview', 'How the Writing section works and how your texts are graded.'],
+            ['essay', '02', 'Pick a text type', 'Each of the five types has a guide, a model text, phrases and a quiz.'],
+            ['selfcheck', '03', 'Draft and self-check', 'Paste your text in for instant checks on length, register and conventions.'],
+            ['taskbank', '04', 'Practise for real', 'Real Matura prompts in the Task bank, then test yourself in the Practice zone.'],
+          ].map(function(s){ return '<a class="card link" href="#' + s[0] + '" style="text-decoration:none">' +
+              '<div style="font-weight:300;font-size:1.7rem;line-height:1;color:var(--primary);margin-bottom:12px">' + s[1] + '</div>' +
+              '<div style="font-weight:600;font-size:1rem;color:var(--text);margin-bottom:7px">' + s[2] + '</div>' +
+              '<div style="font-size:.875rem;color:var(--text-muted);line-height:1.5">' + s[3] + '</div>' +
+              '<div class="go">Open <span>&rarr;</span></div>' +
+            '</a>'; }).join('') +
+        '</div>' +
+        '<div style="margin-top:16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap">' +
+          '<button class="btn btn-ghost" data-action="start-tour">Take the guided tour <span>&rarr;</span></button>' +
+          '<span style="font-size:.8125rem;color:var(--text-muted)">A two-minute walkthrough of every section. You can stop any time.</span>' +
+        '</div>' +
         (visited > 0 ?
           '<div class="gap-s"></div>' +
           '<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px">' +
@@ -2011,6 +2153,7 @@ PAGES.home = {
             ['checklist', 'Writing checklist', 'Self-assess before you put your pen down'],
             ['selfcheck', 'Self-check studio', 'Paste your text, get instant convention checks'],
             ['taskbank', 'Task bank', '24 Matura-style tasks for every text type'],
+            ['topicvocab', 'Topic vocabulary', 'Collocations for the most common Matura topics'],
             ['grammar', 'Grammar kit', 'The 14 classic Austrian mistakes'],
             ['paragraphs', 'Paragraph writing', 'The four-layer paragraph, step by step'],
             ['practice', 'Practice zone', 'Spot mistakes, fix the register, final quiz'],
@@ -2023,6 +2166,7 @@ PAGES.home = {
         '</div>' +
         '<div class="gap"></div>' +
         sectionLabel('Common pitfalls that cost the most marks') +
+        '<p style="font-size:.875rem;color:var(--text-muted);margin:-6px 0 16px;max-width:620px">A quick selection. The <a href="#overview">overview</a> has the full list of the eight most expensive mistakes.</p>' +
         '<div class="grid g-auto-280">' +
           [
             ['Missing a bullet point', 'Task Achievement drops sharply'],
@@ -2048,6 +2192,7 @@ PAGES.overview = {
     return '<div class="page">' +
       pageHead('Basics', 'Overview &amp; grading', 'How the Writing section works and how your texts are graded. Ten minutes here saves you marks everywhere else.') +
       '<div class="wrap"><div class="gap-s"></div>' +
+        '<a class="btn btn-ghost no-print" href="pdf/overview.pdf" target="_blank" rel="noopener" style="margin-bottom:20px">Download this page as a PDF <span>&darr;</span></a>' +
         sectionLabel('The Writing section') +
         '<p style="font-size:1.1rem;color:var(--text-secondary);line-height:1.6;margin-bottom:22px;max-width:720px">You have <strong style="color:var(--text)">120 minutes</strong> for <strong style="color:var(--text)">two tasks</strong>: one longer (~400 words, at B2 usually the essay) and one shorter (~250 words). Writing is one of four equally weighted sections of the written exam, alongside Reading, Listening and Language in Use.</p>' +
         '<div class="tip">Time split that works: ~65 min for the 400-word task (incl. 5–10 min planning) · ~40 min for the 250-word task · the rest for proofreading both. Write your finishing times on the task sheet before you start.</div>' +
@@ -2072,17 +2217,17 @@ PAGES.overview = {
             '<div class="card" style="border-top:3px solid var(--primary)">' +
               '<div style="font-weight:300;font-size:1.6rem;margin-bottom:8px">0' + (i + 1) + '</div>' +
               '<div style="font-weight:600;margin-bottom:3px">' + c.name + '</div>' +
-              '<div style="font-size:.75rem;color:var(--text-muted);margin-bottom:11px;letter-spacing:.32px">' + c.german + '</div>' +
+              '<div lang="de" style="font-size:.75rem;color:var(--text-muted);margin-bottom:11px;letter-spacing:.32px">' + c.german + '</div>' +
               '<div style="font-size:.875rem;color:var(--text-secondary);line-height:1.55">' + c.detail + '</div>' +
             '</div>').join('') +
         '</div>' +
         '<div class="gap-s"></div>' +
-        '<div class="tip warn"><strong>VETO rule:</strong> if a text addresses none of the content points, the whole performance is rated 0 and the other three criteria are not even looked at. This is why you read every task twice.</div>' +
+        '<div class="tip warn"><strong>VETO rule:</strong> if a text does not address the set task at all (an off-topic or clearly pre-prepared text that ignores the actual prompt), Task Achievement is rated 0 and the other three criteria are not assessed. Writing in the wrong text type alone does not trigger this. Read every task twice.</div>' +
         '<div class="tip warn"><strong>Don&rsquo;t play it safe with grammar.</strong> A text built only on simple sentences cannot reach the upper Range bands, even if every sentence is correct. Work in a passive, a conditional or a relative clause where it fits naturally.</div>' +
         '<div class="gap"></div>' +
         sectionLabel('What the bands mean (simplified)') +
         '<div class="acc">' + d.assessment.bands.map((b, i) =>
-          '<div class="acc-item' + (i === 0 ? ' open' : '') + '"><button class="acc-head" data-action="acc"><span class="pm">+</span><span>' + b.band + ' · ' + b.label + '</span></button>' +
+          '<div class="acc-item' + (i === 0 ? ' open' : '') + '"><button class="acc-head" data-action="acc" aria-expanded="' + (i === 0 ? 'true' : 'false') + '"><span class="pm">+</span><span>' + b.band + ' · ' + b.label + '</span></button>' +
           '<div class="acc-body"><p style="font-size:.9rem;color:var(--text-secondary);line-height:1.6;padding-top:10px">' + b.desc + '</p></div></div>').join('') +
         '</div>' +
         '<div style="margin-top:10px;font-size:.75rem;color:var(--text-muted)">Simplified summary for orientation — your teachers grade with the official B2 rating scale.</div>' +
@@ -2108,6 +2253,31 @@ PAGES.overview = {
 
 /* ─── TEXT TYPE PAGES ─────────────────────────────────────── */
 const typeTabs = {};
+const TYPE_EXAMPLES = {
+  essay: { weak: 'Social media has many advantages and disadvantages for young people today.', strong: 'For teenagers, the real cost of social media is not screen time. It is a slowly shrinking attention span.', why: 'A strong essay opens each paragraph with one clear, arguable point. The weaker version lists everything and commits to nothing, so the examiner cannot follow your line of argument.' },
+  article: { weak: 'In this article I am going to tell you about the advantages of doing sport.', strong: 'Ask anyone who has hit the wall at kilometre 30: running is at least half a mental game.', why: 'An article has to pull the reader in. Announcing your plan reads flat, while a concrete hook makes someone want to read on. That is exactly what the task rewards.' },
+  report: { weak: 'I really think the school canteen is terrible and nobody likes it.', strong: 'Under heading 2, Findings: 68 per cent of the 120 students surveyed rated the canteen food as poor or very poor.', why: 'A report stays factual and impersonal and presents its evidence under numbered headings. Personal outbursts cost you marks for register and task achievement.' },
+  blog: { weak: 'One should carefully consider the various advantages before deciding to take a gap year.', strong: 'I used to think a gap year was just an expensive way to put off real life. Then I took one, and it changed my mind.', why: 'Blogs work through a personal, informal voice with contractions and a short story. Formal phrasing like one should consider is essay register dropped into the wrong text type.' },
+  email: { weak: 'Hi! Your headphones broke after two days and I want my money back, thanks.', strong: 'Dear Sir or Madam, I am writing to request a refund for the headphones I bought on 3 May, which stopped working after two days.', why: 'A formal email names its purpose in the first line and keeps a polite, formal register throughout. The casual version would be marked down for register and tone.' },
+};
+const SECOND_MODELS = {
+  essay: { title:'Should smartphones be banned in schools?', meta:'~400 words · formal', tip:'This second example has no colour labels on purpose. Try to spot the thesis in the introduction, the topic sentence of each body paragraph, the counter-argument and the forward-looking conclusion yourself.', paras:[{ t:'Walk into any schoolyard during a break and you will see the same picture: rows of students staring silently at their screens. Some teachers and parents argue that smartphones have no place in education and should be banned outright. In my opinion, a complete ban is the wrong answer; schools should teach students to use these devices responsibly instead.', mono:false },{ t:'There is no denying that smartphones can be a serious distraction. Notifications interrupt concentration, social media tempts students during lessons, and cheating in tests has become easier than ever. Research suggests that pupils who are separated from their phones often perform better in exams and remember more of what they learn. Beyond the classroom, there is growing concern about the effect of constant connectivity on sleep and attention spans. For younger children in particular, the endless pull of games and messages can make focused learning almost impossible.', mono:false },{ t:'However, banning smartphones completely ignores their enormous educational potential. A phone is also a dictionary, a research tool, a calculator and a way into learning apps that would otherwise be out of reach. Used well, it can record an experiment, translate an unfamiliar word in seconds, or remind a forgetful teenager when an assignment is due. Forbidding the device does not teach self-control; it simply postpones the moment when young people have to manage it on their own. In a world where digital skills are essential, schools that ban phones may leave their students unprepared.', mono:false },{ t:'A more sensible approach lies somewhere in the middle. Phones could be switched off and stored away during lessons, but brought out deliberately for specific tasks such as research or quizzes. Teachers also need clear, shared guidelines, so that the same rules apply in every classroom rather than depending on who happens to be on duty. Rules agreed on together with the students are far more effective than a blanket ban that pupils will only try to get around. Above all, a thoughtful policy treats students as young adults who can learn responsibility, instead of treating them like a problem to be switched off.', mono:false },{ t:'All things considered, smartphones are not the enemy of education, but they are not a magic solution either. The real challenge is the way we teach young people to use them, not the technology itself. Schools that manage this will give their students a skill that lasts far longer than any exam.', mono:false }] },
+  article: { title:'Why learning a language is worth the struggle', meta:'~250 words · semi-formal', tip:'This second example has no colour labels. Try to spot the catchy opening question, the personal voice, and the way each paragraph develops one clear idea yourself.', paras:[{ t:'Have you ever given up on a language because the grammar felt impossible? You are not alone. But after spending a summer working in Italy with barely any Italian, I am convinced that pushing through the hard part is one of the most rewarding things a teenager can do.', mono:false },{ t:'The obvious benefit is communication. Once I could order food, ask for directions and joke with my colleagues, a whole country opened up to me. Suddenly I was not just a tourist staring helplessly at a menu. Now I could actually take part. I will never forget the afternoon an elderly shopkeeper, delighted that a foreigner was even trying, spent twenty minutes teaching me the local word for delicious. That single afternoon taught me more than a month of vocabulary lists ever could.', mono:false },{ t:'What surprised me more, though, was what it did to my confidence. Every small conversation I survived made the next one a little easier. I slowly realised that making mistakes was not really embarrassing. It was just part of the process. By the end of the summer, the language had stopped feeling like a school subject and started feeling like a tool I actually owned.', mono:false },{ t:'So if you are ever tempted to quit, my advice is simple: keep going, and look for chances to use the language in real life, even when it feels awkward. The struggle is temporary, but the doors a second language opens stay open for good.', mono:false }] },
+  report: { title:'Report on the use of the school library', meta:'~250 words · formal', tip:'This second example has no colour labels. Try to spot the header, the numbered sections, the precise data and the clear recommendations yourself.', paras:[{ t:'Date: 8 May 2026\nFrom: Tom Pichler, Student Council\nSubject: Survey on the Use of the School Library', mono:true },{ t:'1. Introduction\nThis report presents the results of a survey on how students use the school library. A total of 110 students from years 9 to 12 took part. The aim is to find out why the library is so often empty and to suggest practical improvements.', mono:false },{ t:'2. Findings\nThe results were revealing. While 78% of respondents said they valued having a library, only 21% visited it more than once a month. The main reasons given were limited opening hours and a lack of quiet study space. Interestingly, students in the upper years were far more likely to use the library than younger ones, who tended to study at home. In addition, many were unaware that e-books could be borrowed free of charge.', mono:false },{ t:'3. Recommendations\nOn the basis of these findings, it would be advisable to extend the opening hours into the early afternoon and to create a separate silent study area. Furthermore, the e-book service should be promoted more actively, for example through posters and a short presentation in each class. It would also be worth repeating the survey after one term to measure the effect.', mono:false },{ t:'4. Conclusion\nIn summary, students clearly value the library but rarely use it. With longer hours, a dedicated quiet zone and better promotion, it could once again become a valuable part of school life.', mono:false }] },
+  blog: { title:'What three months without takeaway taught me', meta:'~250 words · informal', tip:'This second example has no colour labels. Try to spot the username line, the chatty personal voice, the short punchy sentences and the call to comment yourself.', paras:[{ t:'by leo_cooks · 14 April 2026, 18:20\n\nWhat Three Months Without Takeaway Taught Me', mono:true },{ t:'OK, confession time: I used to order food about four times a week. Pizza, sushi, burgers, you name it. So when my mum challenged me to cook every single meal myself for three months, I genuinely thought I would starve. My friends were just as sceptical. One of them actually offered to order for me in case of emergencies, as if a home-cooked dinner were some kind of survival situation. Spoiler: I did not starve.', mono:false },{ t:'The first week was rough. I burnt rice, undercooked chicken and somehow set off the smoke alarm twice. But here is the thing nobody tells you: cooking gets easier scarily fast. By week three I could throw together a curry without even checking the recipe, and it actually tasted good. Somewhere around week six, I even started to enjoy it. There is something weirdly satisfying about eating a meal you made with your own two hands, even if half of it is slightly burnt.', mono:false },{ t:'The biggest surprise, though, was not the food. It was the money. I worked out that I had saved almost 200 euros, just by not tapping that little delivery button. So, am I never ordering takeaway again? Of course not. But now it feels like a treat instead of a lazy default. Have you ever tried a challenge like this? Tell me how it went in the comments!', mono:false }] },
+  email: { title:'Complaint about a faulty online order', meta:'~250 words · formal', tip:'This second example has no colour labels. Try to spot the four-part header, the formal greeting, the specific complaint, the clear request and the matching sign-off yourself.', paras:[{ t:'To: support@techstore.example\nFrom: julia.berger@email.example\nDate: 22 April 2026\nSubject: Faulty Wireless Headphones (Order #48217)', mono:true },{ t:'Dear Sir or Madam,\n\nI am writing to complain about a pair of wireless headphones I ordered from your website on 5 April. Although the product was advertised as new and fully functional, it developed a serious fault within only three days of use. As I had been looking forward to using them for my daily commute, the disappointment was considerable.', mono:false },{ t:'To be specific, the right earpiece stopped working completely, and the battery now lasts barely an hour despite a full charge. I have carefully followed the troubleshooting steps on your website, but unfortunately none of them solved the problem. I should add that this is the second item from your shop to develop a fault within a month, which has understandably shaken my confidence in the products you sell. Naturally, I expected an item advertised as new to last considerably longer than a few days of normal use.', mono:false },{ t:'As the headphones are clearly defective, I would therefore like to request either a full refund or a replacement of the same model. Given that the order is still well within its warranty period, I trust this can be resolved quickly. I have attached a copy of my order confirmation and look forward to your reply within 14 days.\n\nYours faithfully,\nJulia Berger', mono:false }] },
+};
+function secondModelBox(m) {
+  return '<div class="gap-s"></div>' +
+    '<div class="acc"><div class="acc-item"><button class="acc-head" data-action="acc" aria-expanded="false"><span class="pm">+</span><span>A second model text (a different topic)</span></button>' +
+    '<div class="acc-body">' +
+      '<div style="font-weight:600;font-size:.95rem;margin:12px 0 3px">' + esc(m.title) + '</div>' +
+      '<div style="font-size:.75rem;color:var(--text-muted);margin-bottom:14px;letter-spacing:.32px">' + esc(m.meta) + '</div>' +
+      '<div style="font-size:.95rem;line-height:1.65;color:var(--text)">' + m.paras.map(function(p){ return '<p style="margin-bottom:12px' + (p.mono ? ';font-family:var(--font-mono);font-size:.8125rem;line-height:1.8' : '') + '">' + esc(p.t).replace(/\n/g, '<br>') + '</p>'; }).join('') + '</div>' +
+      '<div class="tip" style="margin-top:14px">' + esc(m.tip) + '</div>' +
+    '</div></div></div>';
+}
+
 function typePage(typeId) {
   const t = SRDP.textTypes.find(x => x.id === typeId);
   const col = TYPE_COLORS[t.color];
@@ -2127,19 +2297,30 @@ function typePage(typeId) {
         t.layout.map(r => '<div><span class="part">' + esc(r.part) + '</span>' + (r.note ? '<span class="note">— ' + esc(r.note) + '</span>' : '') + '</div>').join('') +
       '</div><div class="gap-s"></div>' +
       sectionLabel('Do&rsquo;s and don&rsquo;ts') + ddCols(t.dos, t.donts) +
+      (TYPE_EXAMPLES[typeId] ?
+        '<div class="gap-s"></div>' +
+        '<div class="acc"><div class="acc-item"><button class="acc-head" data-action="acc" aria-expanded="false"><span class="pm">+</span><span>See it in action: weaker vs. stronger</span></button>' +
+        '<div class="acc-body">' +
+          '<div class="grid g-2" style="margin-top:12px">' +
+            '<div class="dd-col dont"><h3>Weaker</h3><p style="font-size:.9rem;line-height:1.55;color:var(--text-secondary);font-style:italic">&ldquo;' + esc(TYPE_EXAMPLES[typeId].weak) + '&rdquo;</p></div>' +
+            '<div class="dd-col do"><h3>Stronger</h3><p style="font-size:.9rem;line-height:1.55;color:var(--text-secondary);font-style:italic">&ldquo;' + esc(TYPE_EXAMPLES[typeId].strong) + '&rdquo;</p></div>' +
+          '</div>' +
+          '<p style="font-size:.875rem;color:var(--text-muted);line-height:1.6;margin-top:14px"><strong style="color:var(--text)">Why it matters: </strong>' + esc(TYPE_EXAMPLES[typeId].why) + '</p>' +
+        '</div></div></div>'
+      : '') +
       '<div class="gap-s"></div>' +
       '<div class="tip" style="border-left-color:' + col + '"><strong>Key tip · </strong>' + esc(t.tip) + '</div>' +
       '<div class="gap-s"></div>' +
-      '<button class="btn btn-ghost no-print" data-action="print">Print this guide</button>';
+      '<div class="no-print" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">' +'<a class="btn btn-primary" href="pdf/' + typeId + '.pdf" target="_blank" rel="noopener">Download this guide (PDF) <span>&darr;</span></a>' +'<span style="font-size:.8125rem;color:var(--text-muted)">A clean, printable PDF of this whole guide, ready to revise from on paper.</span>' +'</div>';
   } else if (tab === 'model') {
-    body = '<div style="margin-bottom:14px;font-size:1rem;color:var(--text)"><strong>' + esc(t.modelText.title) + '</strong></div>' + modelBox(t.modelText);
+    body = (typeId === 'blog' ? '<div class="tip" style="margin-bottom:16px">This model is a blog <strong>post</strong>. A blog <strong>comment</strong> works differently: no title, and the first sentence refers to the post it responds to (see the Key tip on the Guide tab).</div>' : '') + '<div style="margin-bottom:14px;font-size:1rem;color:var(--text)"><strong>' + esc(t.modelText.title) + '</strong></div>' + modelBox(t.modelText) + (SECOND_MODELS[typeId] ? secondModelBox(SECOND_MODELS[typeId]) : '');
   } else if (tab === 'phrases') {
     body = phraseGroups(t.phrases) +
       '<div style="font-size:.75rem;color:var(--text-muted);border-top:1px solid var(--border);padding-top:14px;letter-spacing:.32px">Click any phrase to copy it. The full searchable collection lives in the <a href="#phrasebank">phrase bank</a>.</div>';
-  } else if (tab === 'subtypes') {
+  } else if (tab === 'subtypes' && typeId === 'email') {
     body = '<p style="font-size:.9375rem;color:var(--text-secondary);margin-bottom:20px;line-height:1.55">At B2, the e-mail task is almost always formal and falls into one of four sub-types. Open the one your task asks for; each comes with phrases and a model text.</p>' +
       '<div class="acc">' + SRDP.emailSubTypes.map(st =>
-        '<div class="acc-item"><button class="acc-head" data-action="acc"><span class="pm">+</span><span>' + st.name + '</span></button>' +
+        '<div class="acc-item"><button class="acc-head" data-action="acc" aria-expanded="false"><span class="pm">+</span><span>' + st.name + '</span></button>' +
         '<div class="acc-body">' +
           '<p style="font-size:.9375rem;color:var(--text-secondary);margin:10px 0 18px;line-height:1.55">' + esc(st.purpose) + '</p>' +
           '<div class="layout-box" style="border-left-color:' + col + ';margin-bottom:18px;font-size:.8125rem;line-height:1.7">' + esc(st.layoutNotes) + '</div>' +
@@ -2159,7 +2340,7 @@ function typePage(typeId) {
   } else if (tab === 'quiz') {
     body = '<div data-quiz-host="' + typeId + '"></div>';
   } else if (tab === 'dnd') {
-    body = '<p style="font-size:.9375rem;color:var(--text-secondary);margin-bottom:18px;line-height:1.5">Drag these sentences into the correct structural order, or use the ▲▼ buttons.</p>' +
+    body = '<p style="font-size:.9375rem;color:var(--text-secondary);margin-bottom:18px;line-height:1.5">Put these sentences into the correct structural order. Drag them on a computer, or use the ▲▼ buttons on any device, including your phone.</p>' +
       '<div data-dnd-host="' + typeId + '"></div>';
   }
 
@@ -2234,7 +2415,7 @@ function pbResults() {
   return '<div style="font-size:.8125rem;color:var(--text-muted);margin-bottom:18px">' + list.length + ' phrase' + (list.length !== 1 ? 's' : '') + ' found' + (pbState.search ? ' for &ldquo;' + esc(pbState.search) + '&rdquo;' : '') + '</div>' +
     (list.length === 0 ? '<div style="text-align:center;padding:48px;color:var(--text-muted)">No phrases match your search.</div>' :
       Object.keys(grouped).map(cat =>
-        '<div style="margin-bottom:26px"><div class="section-label">' + esc(cat) + '</div>' + M.chips(grouped[cat].map(p => p.phrase)) + '</div>').join(''));
+        '<div style="margin-bottom:26px"><h2 class="section-label">' + esc(cat) + '</h2>' + M.chips(grouped[cat].map(p => p.phrase)) + '</div>').join(''));
 }
 PAGES.phrasebank = {
   title: 'Phrase bank', track: 'phrasebank',
@@ -2243,6 +2424,7 @@ PAGES.phrasebank = {
     return '<div class="page">' +
       pageHead('Tool', 'Phrase bank', n + ' exam-ready phrases. Click any phrase to copy it instantly.') +
       '<div class="wrap"><div class="gap-s"></div>' +
+        '<a class="btn btn-ghost no-print" href="pdf/phrase-bank.pdf" target="_blank" rel="noopener" style="margin-bottom:20px">Download this page as a PDF <span>&darr;</span></a>' +
         '<div class="field" style="max-width:420px;margin-bottom:18px"><label for="pbSearch">Search</label><input type="text" id="pbSearch" placeholder="Search phrases…" value="' + esc(pbState.search) + '"></div>' +
         '<div class="tabs" style="border-bottom:1px solid var(--border);margin-bottom:26px">' +
           [['all', 'All']].concat(SRDP.textTypes.map(t => [t.id, t.name])).map(f =>
@@ -2275,7 +2457,7 @@ function clBody() {
   const n = items.filter(i => clState.checks[i.id]).length;
   const bar = score >= 90 ? 'var(--green)' : score >= 70 ? 'var(--yellow)' : 'var(--primary)';
   const section = (title, list) =>
-    '<div style="margin-bottom:26px"><div class="section-label">' + title + '</div><div style="border:1px solid var(--border)">' +
+    '<div style="margin-bottom:26px"><h2 class="section-label">' + title + '</h2><div style="border:1px solid var(--border)">' +
     list.map(it => {
       const checked = !!clState.checks[it.id];
       const flagged = clState.submitted && !checked;
@@ -2303,6 +2485,7 @@ PAGES.checklist = {
     return '<div class="page">' +
       pageHead('Tool', 'Writing checklist', 'Use this before you put your pen down. Tick each item you are confident about. The high-priority items cost the most marks.') +
       '<div class="wrap" style="max-width:780px"><div class="gap-s"></div>' +
+        '<a class="btn btn-ghost no-print" href="pdf/checklist.pdf" target="_blank" rel="noopener" style="margin-bottom:20px">Download this page as a PDF <span>&darr;</span></a>' +
         '<div class="tabs" style="border-bottom:1px solid var(--border);margin-bottom:28px">' +
           Object.keys(SRDP.checklists).map(id =>
             '<button class="tab' + (clState.type === id ? ' active' : '') + '" data-action="cl-type" data-t="' + id + '">' + SRDP.checklists[id].label + '</button>').join('') +
@@ -2434,6 +2617,15 @@ PAGES.selfcheck = {
     return '<div class="page">' +
       pageHead('Tool', 'Self-check studio', 'Paste your practice text for a quick convention check: word count, register, layout. For real feedback, copy the ready-made AI prompt at the bottom.') +
       '<div class="wrap" style="max-width:860px"><div class="gap-s"></div>' +
+        '<div class="acc" style="margin-bottom:22px"><div class="acc-item"><button class="acc-head" data-action="acc" aria-expanded="false"><span class="pm">+</span><span>How this check works, and what it cannot do</span></button>' +
+        '<div class="acc-body">' +
+          '<ol style="margin:12px 0 0 18px;font-size:.9rem;color:var(--text-secondary);line-height:1.7">' +
+            '<li>Choose the text type and your target word count.</li>' +
+            '<li>Paste your practice text into the box.</li>' +
+            '<li>Press <strong>Check my text</strong> for instant notes on length, register, layout and the conventions of that text type.</li>' +
+          '</ol>' +
+          '<p style="font-size:.875rem;color:var(--text-muted);line-height:1.6;margin-top:13px">It scans the surface only. It cannot judge your ideas or catch every grammar slip, so treat the notes as a quick second pair of eyes. For real feedback, copy the AI prompt it builds for you, or ask your teacher.</p>' +
+        '</div></div></div>' +
         '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:18px">' +
           '<div class="field"><label for="scType">Text type</label><select id="scType">' +
             SRDP.textTypes.map(t => '<option value="' + t.id + '"' + (scState.type === t.id ? ' selected' : '') + '>' + t.name + '</option>').join('') +
@@ -2451,7 +2643,7 @@ PAGES.selfcheck = {
           '<button class="btn btn-primary" data-action="sc-run">Check my text</button>' +
           '<button class="btn btn-ghost" data-action="sc-prompt">Copy AI feedback prompt</button>' +
         '</div>' +
-        '<div style="margin-top:8px;font-size:.8125rem;color:var(--text-muted);line-height:1.5">The AI prompt copies your text plus the official SRDP criteria — paste it into ChatGPT, Claude or another AI of your choice for a structured assessment. Nothing leaves this page on its own.</div>' +
+        '<div style="margin-top:8px;font-size:.8125rem;color:var(--text-muted);line-height:1.5">The AI prompt copies your text plus the official SRDP criteria. When you paste it into ChatGPT, Claude or another tool, your text is sent to that provider, so use a practice text and leave out real names or personal details. An AI score is only rough practice feedback, not your real Matura mark. Nothing leaves this page unless you paste it there yourself.</div>' +
         '<div id="scResults" style="margin-top:28px"></div>' +
         '<div style="height:72px"></div>' +
       '</div></div>';
@@ -2515,6 +2707,31 @@ function tbList() {
   if (tbState.filter !== 'all') list = list.filter(x => x.p.type === tbState.filter);
   return list.map(x => taskCard(x.p, x.i)).join('');
 }
+const TOPIC_VOCAB = [
+  { topic: 'Environment & climate', words: ['climate change', 'carbon footprint', 'renewable energy sources', 'greenhouse gas emissions', 'to cut down on waste', 'a throwaway society', 'environmentally friendly', 'to raise awareness of', 'sustainable development', 'to tackle pollution', 'single-use plastic', 'to combat global warming'] },
+  { topic: 'Social media & technology', words: ['to scroll through a feed', 'screen time', 'a digital detox', 'to go viral', 'an online presence', 'to spread fake news', 'data privacy', 'to stay connected', 'information overload', 'a filter bubble', 'cyberbullying', 'to disconnect from devices'] },
+  { topic: 'Education & school', words: ['to sit an exam', 'lifelong learning', 'a heavy workload', 'to fall behind', 'extracurricular activities', 'distance learning', 'academic pressure', 'to broaden your horizons', 'a well-rounded education', 'to retake a subject', 'peer pressure', 'to develop key skills'] },
+  { topic: 'Health & lifestyle', words: ['a balanced diet', 'to lead an active lifestyle', 'mental health', 'to put on weight', 'a work-life balance', 'to burn off calories', 'a sedentary lifestyle', 'to cope with stress', 'to stay in shape', 'sleep deprivation', 'preventive healthcare', 'to get into shape'] },
+  { topic: 'Work & career', words: ['to apply for a job', 'job satisfaction', 'a steady income', 'to climb the career ladder', 'work experience', 'a nine-to-five job', 'to be self-employed', 'job security', 'to work remotely', 'to meet a deadline', 'a competitive field', 'transferable skills'] },
+  { topic: 'Travel & tourism', words: ['to broaden the mind', 'mass tourism', 'off the beaten track', 'a once-in-a-lifetime trip', 'to immerse yourself in a culture', 'eco-tourism', 'a tourist hotspot', 'to travel on a budget', 'cultural exchange', 'to soak up the atmosphere', 'overtourism', 'a culture shock'] },
+  { topic: 'Consumerism & money', words: ['to live beyond your means', 'an impulse buy', 'to save up for', 'fast fashion', 'a throwaway culture', 'value for money', 'to be in debt', 'to spend money wisely', 'a tight budget', 'conspicuous consumption', 'to cut back on spending', 'ethical shopping'] },
+  { topic: 'Society & community', words: ['to volunteer for a good cause', 'a sense of belonging', 'social inequality', 'to give something back', 'an ageing population', 'cultural diversity', 'to bridge the gap', 'community spirit', 'to integrate into society', 'equal opportunities', 'a multicultural society', 'to break down barriers'] },
+];
+PAGES.topicvocab = {
+  title: 'Topic vocabulary', track: 'topicvocab',
+  render() {
+    return '<div class="page">' +
+      pageHead('Tool', 'Topic vocabulary', 'Collocations for the most common Matura topics. Topic-specific vocabulary is what lifts your Lexical Range score above the safe basics. Open a topic and click any phrase to copy it.') +
+      '<div class="wrap"><div class="gap-s"></div>' +
+        '<a class="btn btn-ghost no-print" href="pdf/topic-vocabulary.pdf" target="_blank" rel="noopener" style="margin-bottom:20px">Download this page as a PDF <span>&darr;</span></a>' +
+        '<div class="tip" style="margin-bottom:22px">Phrases here are for the <strong>content</strong> of your text (the ideas in your body paragraphs). For structure and linking, use the <a href="#phrasebank">phrase bank</a>.</div>' +
+        '<div class="acc">' + TOPIC_VOCAB.map(function(t){ return '<div class="acc-item"><button class="acc-head" data-action="acc" aria-expanded="false"><span class="pm">+</span><span>' + esc(t.topic) + '</span><span class="sub">' + t.words.length + ' phrases</span></button>' +
+          '<div class="acc-body">' + M.chips(t.words) + '</div></div>'; }).join('') +
+        '</div>' +
+        '<div style="height:72px"></div>' +
+      '</div></div>';
+  },
+};
 PAGES.taskbank = {
   title: 'Task bank', track: 'taskbank',
   render() {
@@ -2562,7 +2779,7 @@ PAGES.grammar = {
       '<div class="wrap"><div class="gap-s"></div>' +
         sectionLabel('Common mistakes — click to open') +
         '<div class="acc">' + d.grammar.map(g =>
-          '<div class="acc-item"><button class="acc-head" data-action="acc"><span class="pm">+</span><span>' + esc(g.title) + '</span><span class="sub">' + (g.pairs ? g.pairs.length + ' examples' : g.table.length + ' items') + '</span></button>' +
+          '<div class="acc-item"><button class="acc-head" data-action="acc" aria-expanded="false"><span class="pm">+</span><span>' + esc(g.title) + '</span><span class="sub">' + (g.pairs ? g.pairs.length + ' examples' : g.table.length + ' items') + '</span></button>' +
           '<div class="acc-body"><p style="font-size:.9rem;color:var(--text-secondary);line-height:1.6;padding:10px 0 16px">' + esc(g.intro) + '</p>' +
             (g.pairs ? g.pairs.map(p =>
               '<div class="pair-row" style="border:1px solid var(--border);margin-bottom:8px">' +
@@ -2709,7 +2926,7 @@ function paragraphsBody() {
   }
   if (tab === 'phrases') {
     return sectionLabel('Paragraph phrase bank — click to copy') +
-      SRDP.paragraphs.phraseGroups.map(g => '<div style="margin-bottom:26px"><div class="section-label">' + esc(g.label) + '</div>' + M.chips(g.phrases) + '</div>').join('');
+      SRDP.paragraphs.phraseGroups.map(g => '<div style="margin-bottom:26px"><h2 class="section-label">' + esc(g.label) + '</h2>' + M.chips(g.phrases) + '</div>').join('');
   }
   if (tab === 'recipe') {
     const P2 = SRDP.paragraphs;
@@ -2736,7 +2953,7 @@ PAGES.paragraphs = {
   render() {
     const tabs = [['anatomy', 'Anatomy'], ['formulas', 'Topic sentences'], ['warmups', 'Warm-ups'], ['tasks', 'Full paragraphs'], ['phrases', 'Phrase bank'], ['recipe', 'The recipe']];
     return '<div class="page">' +
-      pageHead('Skills', 'Building a paragraph', 'Every good body paragraph does four jobs, in order. Learn them once and you will never stare at a blank page again.',
+      pageHead('Skills', 'Building a paragraph', 'Every good body paragraph does four jobs, in order. Learn them once and the blank page stops being a problem.',
         '<div class="tabs">' + tabs.map(t => '<button class="tab' + (paraTabs.current === t[0] ? ' active' : '') + '" data-action="para-tab" data-tab="' + t[0] + '">' + t[1] + '</button>').join('') + '</div>') +
       '<div class="wrap"><div class="gap-s"></div><div id="paraBody">' + paragraphsBody() + '</div><div style="height:72px"></div></div>' +
     '</div>';
@@ -2830,16 +3047,18 @@ window.MWG.wirePractice = wirePractice;
 'use strict';
 const M = window.MWG;
 const { $, $$, esc } = M;
+const SITE_FOOTER = '<footer class="site-footer no-print"><div class="ftin">' +'<div class="ft-cols">' +'<div><div class="ft-h">About this site</div><p>A free, independent revision site for the written part of the English Matura (AHS, B2). Made by an English teacher. It is not an official document of the BMBWF or any education authority.</p></div>' +'<div><div class="ft-h">Your data</div><p>No account, no tracking, no ads. Your progress is saved only in your own browser and is never sent anywhere. Everything runs on your device.</p></div>' +'<div><div class="ft-h" lang="de">Impressum / Kontakt</div><p lang="de">Bernhard Gmeiner, Wien<br>E-Mail: bernhard.gmeiner@gmail.com<br><a href="https://www.bernhardgmeiner.com" target="_blank" rel="noopener">bernhardgmeiner.com</a><br>Privates, nicht-kommerzielles Projekt.</p></div>' +'</div>' +'<div class="ft-base" lang="de">Diese Seite hilft bei der Vorbereitung auf die schriftliche Englisch-Matura (AHS, B2) und orientiert sich an der offiziellen SRDP-Beurteilungsskala. Bewertet wird in der echten Matura von deinen Lehrkr\u00e4ften mit der offiziellen Skala. \u00b7 Stand: Schuljahr 2025/26</div>' +'</div></footer>';
 
 /* ─── ROUTER ──────────────────────────────────────────────── */
 let current = '';
 function route() {
+  if (tourActive) endTour();
   let id = (location.hash || '#home').slice(1);
   if (!PAGES[id]) id = 'home';
   current = id;
   const page = PAGES[id];
   const main = $('#main');
-  main.innerHTML = page.render();
+  main.innerHTML = page.render() + SITE_FOOTER;
   if (page.wire) page.wire();
   if (page.track) M.markVisited(page.track);
   $$('#sidenav .nav-item').forEach(a => a.classList.toggle('active', a.dataset.nav === id));
@@ -2850,6 +3069,81 @@ function route() {
   M.paintNav();
 }
 function rerender(partId, html, wire) { const el = $(partId); if (el) { el.innerHTML = html; wire && wire(); } }
+
+/* ─── GUIDED TOUR ─────────────────────────────────────────── */
+const TOUR = [
+  { sel:null, title:'Welcome to the writing guide', text:'Everything here is built around the two writing tasks of the B2 Matura. This quick tour shows you where things are. It takes about a minute.' },
+  { sel:'[data-nav="overview"]', title:'Start with the overview', text:'How the Writing section is built, how much time you get, and how the four criteria are graded. Read it once and the rest makes more sense.' },
+  { sel:'[data-nav="essay"]', title:'The five text types', text:'Essay, article, report, blog and email. Each one has a guide, a model text, a phrase list, a quiz and a drag-and-drop builder.' },
+  { sel:'[data-nav="phrasebank"]', title:'Tools that do the work', text:'A searchable phrase bank, a self-assessment checklist, and the Self-check studio that scans a draft you paste in.' },
+  { sel:'[data-nav="selfcheck"]', title:'Self-check studio', text:'Paste a draft and get instant feedback on length, register and conventions, plus a ready-made prompt for an AI second opinion.' },
+  { sel:'[data-nav="taskbank"]', title:'Task bank and practice', text:'Real Matura-style prompts with source material, plus a practice zone to spot mistakes and take the final quiz.' },
+  { sel:'#themeToggle', title:'Theme and progress', text:'Switch between light and dark here. Visited sections and quiz results are saved on this device, so the menu remembers where you were.' },
+  { sel:null, title:'You are set', text:'Pick any section in the menu to start. You can replay this tour any time from the ? button at the top of the menu, or the button on the home page.' },
+];
+let tourI = 0, tourActive = false;
+function ensureTourDom(){
+  if (document.getElementById('tourCard')) return;
+  const w = document.createElement('div');
+  w.innerHTML = '<div id="tourCatch" class="tour-catch"></div><div id="tourSpot" class="tour-spot"></div><div id="tourCard" class="tour-card" role="dialog" aria-modal="true" aria-label="Guided tour"></div>';
+  document.body.appendChild(w);
+}
+function positionTourCard(rect){
+  const card = document.getElementById('tourCard');
+  const cw = card.offsetWidth, ch = card.offsetHeight, gap = 16, vw = window.innerWidth, vh = window.innerHeight;
+  let left, top;
+  if (!rect){ left = (vw-cw)/2; top = (vh-ch)/2; }
+  else if (rect.right+gap+cw <= vw){ left = rect.right+gap; top = Math.min(Math.max(8, rect.top), vh-ch-8); }
+  else if (rect.left-gap-cw >= 0){ left = rect.left-gap-cw; top = Math.min(Math.max(8, rect.top), vh-ch-8); }
+  else if (rect.bottom+gap+ch <= vh){ left = Math.min(Math.max(8, rect.left), vw-cw-8); top = rect.bottom+gap; }
+  else { left = (vw-cw)/2; top = (vh-ch)/2; }
+  card.style.left = Math.round(left)+'px'; card.style.top = Math.round(top)+'px';
+}
+function showTour(i){
+  ensureTourDom();
+  tourI = Math.max(0, Math.min(TOUR.length-1, i));
+  const step = TOUR[tourI];
+  const spot = document.getElementById('tourSpot'), card = document.getElementById('tourCard'), catcher = document.getElementById('tourCatch');
+  catcher.style.display = 'block';
+  let rect = null;
+  if (step.sel){ const t = document.querySelector(step.sel); if (t){ const r = t.getBoundingClientRect(); if (r.width>0 && r.height>0 && r.right>0 && r.left<window.innerWidth && r.bottom>0 && r.top<window.innerHeight){ rect = r; } } }
+  if (rect){ const pad = 6; spot.style.display='block'; spot.style.top=(rect.top-pad)+'px'; spot.style.left=(rect.left-pad)+'px'; spot.style.width=(rect.width+pad*2)+'px'; spot.style.height=(rect.height+pad*2)+'px'; }
+  else { spot.style.display='none'; }
+  const isLast = tourI===TOUR.length-1, isFirst = tourI===0;
+  card.innerHTML = '<div class="tc-step">Step '+(tourI+1)+' of '+TOUR.length+'</div>' +
+    '<div class="tc-title">'+step.title+'</div>' +
+    '<div class="tc-text">'+step.text+'</div>' +
+    '<div class="tc-btns">' +
+      (isFirst?'':'<button class="btn btn-ghost btn-sm" data-action="tour-prev">Back</button>') +
+      '<button class="btn btn-primary btn-sm" data-action="tour-next">'+(isLast?'Done':'Next')+'</button>' +
+      (isLast?'':'<button class="tc-skip" data-action="tour-skip">Skip</button>') +
+    '</div>';
+  card.style.display = 'block';
+  positionTourCard(rect);
+  var _nb = card.querySelector('[data-action="tour-next"]'); if (_nb) { try { _nb.focus(); } catch (e) {} }
+}
+function startTour(){ tourActive = true; document.body.classList.add('tour-on'); if (window.innerWidth <= 840) { var _sn = document.getElementById('sidenav'); if (_sn) _sn.classList.add('open'); } showTour(0); }
+function endTour(){ tourActive = false; document.body.classList.remove('tour-on'); var _sn=document.getElementById('sidenav'); if(_sn) _sn.classList.remove('open'); var _ov=document.querySelector('.nav-overlay'); if(_ov) _ov.remove(); ['tourSpot','tourCard','tourCatch'].forEach(function(id){ const e=document.getElementById(id); if(e) e.style.display='none'; }); try{ M.store('mwg_tour_done','1'); }catch(e){} }
+function maybeShowHint(){
+  try{ if (M.store('mwg_hint_seen')) return; }catch(e){ return; }
+  if (window.innerWidth <= 840) return;
+  var help = document.querySelector('.nav-help'); var brand = document.querySelector('.nav-brand');
+  if (!help || !brand) return;
+  help.classList.add('pulse');
+  var hint = document.createElement('div');
+  hint.className = 'nav-hint';
+  hint.innerHTML = '<b>New here?</b>Take a quick tour of the guide.';
+  brand.appendChild(hint);
+  var done = false;
+  function dismiss(){ if(done) return; done=true; help.classList.remove('pulse'); if(hint.parentNode) hint.remove(); try{ M.store('mwg_hint_seen','1'); }catch(e){} document.removeEventListener('click', onDoc, true); window.removeEventListener('hashchange', dismiss); }
+  function onDoc(e){ if (e.target.closest('.nav-hint')) return; dismiss(); }
+  hint.addEventListener('click', function(e){ e.stopPropagation(); dismiss(); startTour(); });
+  setTimeout(function(){ document.addEventListener('click', onDoc, true); }, 200);
+  window.addEventListener('hashchange', dismiss);
+  setTimeout(dismiss, 7000);
+}
+window.addEventListener('resize', function(){ if (tourActive) showTour(tourI); });
+M.startTour = startTour;
 
 /* ─── EVENT DELEGATION ────────────────────────────────────── */
 document.addEventListener('click', e => {
@@ -2877,6 +3171,10 @@ document.addEventListener('click', e => {
     if (item) { item.classList.toggle('open'); el.setAttribute('aria-expanded', item.classList.contains('open')); }
   }
   else if (act === 'print') { window.print(); }
+  else if (act === 'start-tour') { startTour(); }
+  else if (act === 'tour-next') { if (tourI >= TOUR.length-1) endTour(); else showTour(tourI+1); }
+  else if (act === 'tour-prev') { showTour(tourI-1); }
+  else if (act === 'tour-skip') { endTour(); }
   else if (act === 'toggle-labels') {
     const box = el.closest('.model-box');
     box.classList.toggle('show-labels');
@@ -2918,7 +3216,7 @@ document.addEventListener('click', e => {
     const findings = M.analyze(text, type, target);
     const icons = { ok: '✓', warn: '!', bad: '✗', info: 'i' };
     rerender('#scResults',
-      '<div class="section-label">Findings</div><div style="border:1px solid var(--border)">' +
+      '<h2 class="section-label">Findings</h2><div style="border:1px solid var(--border)">' +
       findings.map(f => '<div class="finding ' + f.status + '"><span class="fi">' + icons[f.status] + '</span><span class="ft">' + f.html + '</span></div>').join('') +
       '</div>');
     try { $('#scResults').scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (err) {}
@@ -2958,6 +3256,7 @@ document.addEventListener('click', e => {
 
 /* keyboard support for checklist rows */
 document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && tourActive) { endTour(); return; }
   if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('[data-action="cl-toggle"]')) {
     e.preventDefault(); e.target.click();
   }
@@ -2976,11 +3275,12 @@ $('#burger').addEventListener('click', () => {
   } else { const ov = $('.nav-overlay'); if (ov) ov.remove(); }
 });
 
-/* ─── INIT ────────────────────────────────────────────────── */
-M.setTheme(M.store('mwg_theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+/* INIT */
+M.setTheme(M.store('mwg_theme') || 'light');
 M.buildNav();
 window.addEventListener('hashchange', route);
 route();
+setTimeout(maybeShowHint, 600);
 })();
 </script>
 </body>
