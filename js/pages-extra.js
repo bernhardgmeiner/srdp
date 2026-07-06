@@ -1,0 +1,184 @@
+/* ════════════════════════════════════════════════════════════
+   Pages 4 – FAQ · For teachers · The honest model · Archiv-Links
+   ════════════════════════════════════════════════════════════ */
+(function () {
+'use strict';
+const M = window.MWG;
+const { esc, sectionLabel, pageHead } = M;
+
+/* ─── FAQ ─────────────────────────────────────────────────── */
+/* Quellen: matura.gv.at (LFS-Seite, Stand 2026), Begleittext zum
+   SRDP-Bewertungsraster B2 (2023). Antworten ohne offizielle Quelle
+   sind als best practice formuliert – Details siehe _dev/NOTES.md */
+const FAQ = [
+  { q: "What happens if I write too few or too many words?",
+    a: "The tolerance is ±10%. For a 400-word task that means 360–440 words, for 250 it means 225–275. If you are outside that range, your Task Achievement score officially drops by one band – that is written into the assessment grid. Nobody fails because of word count alone, but why give away a band? Practise estimating your word count from your handwriting: count one full line, count the lines, multiply." },
+  { q: "Do contractions (don't, it's) really cost marks?",
+    a: "Not automatically. The grid rates whether your register fits the text type. In a blog or an informal e-mail, contractions are exactly right. In an essay, a report or a formal e-mail they pull your register down – one won't sink you, but a text full of them tells the examiner you can't hear the difference. Decide once before you write: formal or informal? Then commit." },
+  { q: "Can I use a dictionary?",
+    a: "No. At AHS, dictionaries and reference works – electronic ones included – are not allowed anywhere in the standardised exam. (At BHS the rules are different, but this guide is built for AHS.) That is less scary than it sounds: the tasks are designed so that B2 vocabulary is enough. When a word refuses to come, paraphrase it – that is a skill the grid actually rewards." },
+  { q: "What if I completely misread the task?",
+    a: "The only true disaster is a text that ignores the set task altogether – an off-topic text or one that was obviously prepared in advance. That triggers the official VETO rule: Task Achievement is rated 0 and the other three criteria are not assessed at all. Writing the wrong text type alone does NOT trigger the veto, but it costs you heavily in Task Achievement. Your insurance policy costs 60 seconds: read the task twice and underline text type, audience and the three bullet points." },
+  { q: "Can I invent facts, numbers and personal experiences?",
+    a: "Yes. This is a language exam, not a fact check. The official guidance says content counts as relevant when it serves the task – even if it's not what the examiner expected. An invented survey, a made-up summer job in Italy: all fine, as long as it is plausible and actually develops the bullet point. What doesn't help is padding that ignores the task." },
+  { q: "Do British and American spelling both count?",
+    a: "Both are accepted – colour or color, organise or organize. What you should avoid is mixing systems mid-text, because inconsistency starts to look like guessing. Pick the one you actually know (for most Austrian students that's British) and stay with it. If you want certainty for your school, verify this one with your teacher." },
+  { q: "What if I don't finish the second task?",
+    a: "An unfinished text is not an automatic zero – it is assessed with the same grid, and whatever stands on the page earns what it earns. But an incomplete text usually bleeds marks in Task Achievement (undeveloped content points) and Coherence (no ending). The rescue strategy is time management: set finishing times for both tasks before you start writing, and if time gets short, a short, complete text beats a long, unfinished one." },
+  { q: "How exact is 'around 400 words'?",
+    a: "Exactly ±10% – that is the official rule, not folklore. 'Around 400' means 360–440 is safe; 'around 250' means 225–275. Inside the range, nobody counts pedantically. Outside it, Task Achievement drops one band. Note that more is not better anyway: hitting the range with dense, relevant content scores higher than 480 words of padding." },
+  { q: "Can I write more than the three bullet points ask for?",
+    a: "You can – extra relevant ideas are not punished. But the grid rewards developing all three given points in roughly equal depth. Every sentence you spend on a fourth idea is a sentence missing from the three that are actually being assessed, and it pushes you towards the word limit. Treat the three bullet points as the skeleton of your text; add extras only when all three stand solid." },
+  { q: "Is the title part of the word count?",
+    a: "There is no clear public rule on this, and counting practice can differ. The pragmatic answer: a title is four to eight words, so it almost never decides anything. If you are near the edge of the ±10% range, the title is not what saves you – cutting waffle is. If you want the exact counting convention for your school, ask your teacher." },
+  { q: "Which task should I write first?",
+    a: "Your choice – the booklet doesn't care about order. A sensible default: start with the long task (usually the essay) while your head is fresh, give it ~65 minutes, then the short task in ~40, and keep the rest for proofreading both. If staring at the essay blocks you, warming up with the short task first is a legitimate strategy too. Decide before exam day, not during it." },
+  { q: "Are the tasks the same at every school?",
+    a: "Yes. The written Matura is standardised: the tasks come centrally from the BMB, and every AHS candidate in Austria opens the same booklet on the same day at the same time. That is good news for you – it is exactly why the released past papers are such honest practice material." },
+  { q: "What happens if my written exam is negative?",
+    a: "It is not the end of the road. A negative Klausur can be repeated, and there is also the option of a mündliche Kompensationsprüfung – an oral compensation exam that can turn the grade around (see SchUG § 40). Your teachers will walk you through the procedure if it ever comes to that. Plan A, of course, is this guide." },
+];
+
+PAGES.faq = {
+  title: 'FAQ', track: 'faq',
+  render() {
+    return '<div class="page">' +
+      pageHead('Basics', 'FAQ', 'The questions students actually ask before the writing exam – answered short and straight. Where something depends on your school, we say so instead of guessing.') +
+      '<div class="wrap"><div class="gap-s"></div>' +
+        '<div class="acc">' + FAQ.map((f, i) =>
+          '<div class="acc-item"><button class="acc-head" data-action="acc" aria-expanded="false"><span class="pm">+</span><span>' + esc(f.q) + '</span></button>' +
+          '<div class="acc-body"><p style="font-size:.9375rem;color:var(--text-secondary);line-height:1.65;padding:10px 0 4px">' + esc(f.a) + '</p></div></div>').join('') +
+        '</div>' +
+        '<div class="tip" style="margin-top:26px">Rules around exam-day logistics are applied by your school&rsquo;s exam team. When in doubt, your teacher&rsquo;s answer beats this page.</div>' +
+        '<div style="height:72px"></div>' +
+      '</div></div>';
+  },
+};
+M.FAQ_DATA = FAQ;
+
+/* ─── FOR TEACHERS ────────────────────────────────────────── */
+PAGES.teachers = {
+  title: 'For teachers', track: 'teachers',
+  render() {
+    return '<div class="page">' +
+      pageHead('About', 'For teachers', 'What this site is, and how to use it in your classroom. Short version: take it, it&rsquo;s free.') +
+      '<div class="wrap"><div class="gap-s"></div>' +
+        sectionLabel('What this is') +
+        '<p style="font-size:1rem;color:var(--text-secondary);line-height:1.65;max-width:720px;margin-bottom:14px">A free, independent revision site for the writing part of the English Matura (AHS, B2), built by <a href="https://www.bernhardgmeiner.com" target="_blank" rel="noopener">Bernhard Gmeiner</a>, an English teacher in Vienna, with the help of Claude Cowork. It follows the official SRDP documents – the B2 assessment grid (2023 revision), the text type characteristics, the ±10% rule, the veto rule – and turns them into guides, model texts, quizzes and practice tools that students can use on their own.</p>' +
+        '<p style="font-size:1rem;color:var(--text-secondary);line-height:1.65;max-width:720px">No accounts, no tracking, no ads. Progress lives in the student&rsquo;s own browser and nowhere else.</p>' +
+        '<div class="gap-s"></div>' +
+        sectionLabel('Use it freely') +
+        '<p style="font-size:1rem;color:var(--text-secondary);line-height:1.65;max-width:720px">Everything here may be used in class: project it, share links to individual sections, print or copy the PDFs, put the URL on your Moodle, Google Classroom or MS Teams page. No permission needed, no strings attached. A short mention of the source is appreciated, never required.</p>' +
+        '<div class="gap-s"></div>' +
+        sectionLabel('Three ideas for your classroom') +
+        '<div class="grid g-auto-240">' +
+          [['Task bank as Schularbeit prep', 'The 24 Matura-style tasks in the <a href="#taskbank">Task bank</a> come with source material and operators, ready for timed writing sessions. The random button settles the &ldquo;which topic&rdquo; discussion in one click.'],
+           ['Self-check as a peer ritual', 'Before texts reach your desk, students run them through the <a href="#selfcheck">Self-check studio</a> and rate themselves on the four official criteria. Peer pairs compare ratings first – the arguments they have are half the learning.'],
+           ['Countdown plan as a frame', 'The <a href="#studyplan">Countdown plan</a> gives the last four weeks before the Klausur a day-by-day structure. Assign it as the homework skeleton and spend lesson time on feedback instead of organisation.']
+          ].map(c => '<div class="card"><div style="font-weight:600;margin-bottom:8px">' + c[0] + '</div><div style="font-size:.875rem;color:var(--text-secondary);line-height:1.6">' + c[1] + '</div></div>').join('') +
+        '</div>' +
+        '<div class="gap-s"></div>' +
+        sectionLabel('Found a mistake?') +
+        '<p style="font-size:1rem;color:var(--text-secondary);line-height:1.65;max-width:720px">Corrections from colleagues are gold. If a fact, a model text or a quiz answer looks off, <a href="mailto:bernhard.gmeiner@gmail.com?subject=Matura%20Guide%20Feedback">send a short e-mail</a> naming the section. More about me at <a href="https://www.bernhardgmeiner.com" target="_blank" rel="noopener">bernhardgmeiner.com</a>.</p>' +
+        '<div class="gap-s"></div>' +
+        sectionLabel('Für Eltern') +
+        '<p lang="de" style="font-size:1rem;color:var(--text-secondary);line-height:1.65;max-width:720px">Diese Seite hilft Ihrem Kind bei der Vorbereitung auf die schriftliche Englisch-Matura (AHS, Niveau B2). Sie ist kostenlos, werbefrei und speichert keine Daten auf Servern – der Lernfortschritt bleibt im Browser Ihres Kindes. Die Inhalte orientieren sich an den offiziellen Unterlagen des Bildungsministeriums. Bewertet wird in der echten Matura von den Lehrer:innen Ihres Kindes mit der offiziellen Skala; diese Seite ersetzt keinen Unterricht, sie ergänzt ihn.</p>' +
+        '<div style="height:72px"></div>' +
+      '</div></div>';
+  },
+};
+
+/* ─── THE HONEST MODEL (annotierte Realtexte) ─────────────── */
+const HONEST = {
+  essay: {
+    title: 'Should the school day start later?',
+    meta: '~400 words · a realistic pass, not a model of perfection',
+    intro: 'Every model text on this site shows you what strong looks like. This one shows you what real looks like: a believable student essay that would pass – and exactly where it leaks marks. The numbered markers explain what each weak spot costs and how the strong version would sound.',
+    paras: [
+      "Everybody knows that teenagers are always tired in the morning.{{1}} In Austria the school starts{{2}} at eight o'clock and many students must get up at six. In this essay I want to write about the question if the school day should start later.{{3}}",
+      "The first point is sleep.{{4}} Scientists say that teenagers need around nine hours of sleep, but most of them only get seven hours. Since three years{{5}} I go to school by bus and I see every morning students which{{6}} are sleeping on the bus. When school would start{{7}} at nine, everybody could sleep one hour more. This would be very good for the health and also for the marks, because tired students cannot concentrate good{{8}} in the lessons.",
+      "The second point is free time.{{4}} When school starts later, it also ends later, and this is a problem for students who do sports or play an instrument. My training for example starts at five. So a later start is maybe not so good for these students, it is really annoying for them.{{9}} On the other hand, they could do their homework in the morning, when the brain is fresh.",
+      "The third point is the family. Many parents must go to work at eight, and they bring the small children to school before. When the school starts later, the parents have a problem, because they cannot bring the children. So a later start is good for the teenagers but not so good for the parents. This is a big problem and it is very important to think about it.{{10}}",
+      "All in all I think that the school should start later, because sleep is very important for teenagers.{{11}} Maybe nine o'clock is too late, but half past eight would be a good compromise. It is very important that the politicians think about this question.{{12}}",
+    ],
+    notes: [
+      "Opening with 'Everybody knows that…' is the weakest of all hooks – it announces an opinion piece without an angle. Stronger: a concrete image or a surprising fact ('At 7:15, half my bus is asleep.').",
+      "Article error, straight from the Grammar kit: German 'die Schule' pulls in a wrong 'the'. It's 'school starts', no article – institution used for its purpose.",
+      "Announcing your plan ('In this essay I want to write about…') wastes the whole introduction. State a thesis instead: take a position in one clear sentence.",
+      "'The first point is sleep.' is a label, not a topic sentence. It costs Coherence marks because it doesn't say anything the paragraph will prove. Stronger: 'The strongest argument for a later start is simple biology: teenagers are wired to sleep late.'",
+      "'Since three years' – the classic since/for trap. English needs 'for three years' (duration) and would prefer a present perfect: 'For three years I have been taking the bus…'.",
+      "'students which' – people take 'who', not 'which'. Small error, but it repeats through the text, and repeated basic errors drag Accuracy below band 6.",
+      "'When school would start at nine' – a double conditional error: 'when' instead of 'if', and 'would' inside the if-clause. B2 wants 'If school started at nine, everybody could…'.",
+      "'concentrate good' – adverb needed: 'concentrate well' (or 'properly'). Adjective/adverb confusion is high-frequency and cheap to fix in proofreading.",
+      "Register slip: 'it is really annoying for them' is spoken language in a formal essay. The idea is fine – the wrapping costs Range marks. Formal version: 'for these students, a later start would create serious scheduling conflicts.'",
+      "Empty intensifiers ('a big problem', 'very important') appear five times in this text. Each one is a missed chance for precise B2 language: 'a genuine dilemma for working parents' says something; 'a big problem' says nothing.",
+      "The conclusion only repeats the introduction's point about sleep and drops the other two arguments. A strong conclusion weighs all three and lands on a position.",
+      "Ending on 'the politicians should think about it' outsources the essay's job. The task asked what YOU think – commit: 'Starting at half past eight would cost little and win back an hour of sleep – it is the obvious first step.'",
+    ],
+    verdict: "Where would this land? Task Achievement around 6 – all three points are addressed with some development, conventions are basically there. Coherence around 5–6 – paragraphs exist, but label-style topic sentences and a repetitive conclusion weaken the line of thought. Range and Accuracy around 4–5 each: simple structures dominate, intensifiers repeat, and the since/for, article and if-clause errors are exactly the frequent, fixable kind – which is the encouraging part, because every single marker above is trainable.",
+  },
+  email: {
+    title: 'Complaint about a delayed delivery',
+    meta: '~250 words · a realistic pass, not a model of perfection',
+    intro: 'Same idea as the essay above: this formal e-mail would pass, but it drips marks in a dozen small places. The markers show where – and what the strong version would do instead.',
+    paras: [
+      "To: office@citysports.example\nFrom: lukas.maier@email.example\nDate: 12 March 2026\nSubject: Problem{{1}}",
+      "Dear Sir or Madam,",
+      "I am writing to you because I have a problem with my order.{{2}} Three weeks ago I ordered a pair of running shoes on your website. On the website it said{{3}} that the delivery takes three or four days, but until today{{4}} I didn't receive{{5}} anything.",
+      "I already wrote two informations{{6}} to your service team, but I didn't get an answer. This is not okay for me.{{7}} I need the shoes for a running competition, which is in two weeks, and slowly I am getting nervous.{{8}} I don't{{9}} understand how a delivery can take so long when your website promises something else.",
+      "So I want my money back or the shoes until next week.{{10}} I hope you understand my situation and that we can find a good solution together.",
+      "I look forward to hear{{11}} from you.",
+      "Best wishes,{{12}}\nLukas Maier",
+    ],
+    notes: [
+      "A one-word subject line ('Problem') wastes the first impression and costs Task Achievement points on the title/subject descriptor. Strong: 'Delayed delivery of order #58291 – request for refund'.",
+      "The purpose sentence is there (good!) but vague. Name the facts in line one: 'I am writing to complain about a delivery that is now three weeks overdue (order #58291).'",
+      "'On the website it said' – word-for-word German ('Auf der Website stand'). Natural English: 'Your website states that…'. Word order and dummy subjects are Grammar-kit territory.",
+      "'until today' – German 'bis heute'. English: 'to this day' or simply 'I have still not received anything'.",
+      "Tense: 'I didn't receive anything' closes the event; the waiting continues, so present perfect is needed: 'I have not received anything.' The since/for/present-perfect cluster is the most expensive habit in Austrian B2 writing.",
+      "'two informations' – 'information' is uncountable, and it's the wrong word anyway: 'I have already contacted your service team twice.'",
+      "'This is not okay for me' – spoken register in a formal complaint. The formal weapon is understatement: 'I find this lack of response disappointing.'",
+      "'slowly I am getting nervous' – direct translation of 'langsam werde ich nervös', and too personal for the genre. Formal: 'the matter is now becoming urgent.'",
+      "Contractions ('don't', 'didn't') are fine in a blog – in a formal complaint they soften the register. Written out, the same sentence sounds professional.",
+      "The demand is the right move (clear request!) but the tone tips into rude and the deadline is unclear. Formal: 'I would therefore ask you either to deliver the shoes by 20 March or to refund the full amount.'",
+      "'look forward to hear' – after 'look forward to', English needs the -ing form: 'I look forward to hearing from you.' Cheap to memorise, embarrassing to lose.",
+      "'Best wishes' after 'Dear Sir or Madam' breaks the pairing rule: unknown name → 'Yours faithfully'. The closing is a two-second decision that examiners always see.",
+    ],
+    verdict: "Where would this land? Task Achievement around 6 – purpose, complaint and request are all there, the subject line and the closing pair leak points. Coherence 6 – the order of ideas is actually fine. Range 5 – the register keeps slipping into spoken German-English. Accuracy 4–5 – 'informations', 'to hear', tense choices. Total effect: a pass with no room to spare, built almost entirely out of errors this site's Grammar kit covers.",
+  },
+};
+
+function honestModel(typeId) {
+  const h = HONEST[typeId];
+  if (!h) return '';
+  let n = 0;
+  const paras = h.paras.map(p => {
+    const html = esc(p).replace(/\{\{(\d+)\}\}/g, (_, num) =>
+      '<button class="hm-mark" data-action="hm-jump" data-type="' + typeId + '" data-n="' + num + '" aria-label="Annotation ' + num + '">' + num + '</button>');
+    const mono = p.indexOf('To:') === 0 || p.indexOf('by ') === 0;
+    return '<p' + (mono ? ' style="font-family:var(--font-mono);font-size:.8125rem;line-height:1.8"' : '') + '>' + html.replace(/\n/g, '<br>') + '</p>';
+  }).join('');
+  return '<div class="gap-s"></div>' +
+    '<div class="acc"><div class="acc-item"><button class="acc-head" data-action="acc" aria-expanded="false"><span class="pm">+</span><span>The honest model: a realistic text and what it costs</span></button>' +
+    '<div class="acc-body">' +
+      '<div style="font-weight:600;font-size:.95rem;margin:12px 0 3px">' + esc(h.title) + '</div>' +
+      '<div style="font-size:.75rem;color:var(--text-muted);margin-bottom:12px;letter-spacing:.32px">' + esc(h.meta) + '</div>' +
+      '<p style="font-size:.875rem;color:var(--text-secondary);line-height:1.6;margin-bottom:18px;max-width:700px">' + esc(h.intro) + '</p>' +
+      '<div class="hm-grid">' +
+        '<div class="hm-text" id="hmText-' + typeId + '">' + paras + '</div>' +
+        '<ol class="hm-notes" id="hmNotes-' + typeId + '">' + h.notes.map((x, i) =>
+          '<li id="hmNote-' + typeId + '-' + (i + 1) + '"><span class="hm-num">' + (i + 1) + '</span>' + esc(x) + '</li>').join('') + '</ol>' +
+      '</div>' +
+      '<div class="tip" style="margin-top:16px"><strong>Where would this land? · </strong>' + esc(h.verdict) + '</div>' +
+    '</div></div></div>';
+}
+M.honestModel = honestModel;
+
+M.hmJump = function (el) {
+  const note = document.getElementById('hmNote-' + el.dataset.type + '-' + el.dataset.n);
+  if (!note) return;
+  try { note.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' }); } catch (e) {}
+  note.classList.add('search-hit');
+  setTimeout(() => note.classList.remove('search-hit'), 2000);
+};
+})();
