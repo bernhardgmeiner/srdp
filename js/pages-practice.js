@@ -5,6 +5,15 @@
 'use strict';
 const M = window.MWG;
 const { esc, sectionLabel, pageHead, PEEL } = M;
+function comparisonTable() {
+  const drop = M.school() === 'bhs' ? SRDP.comparison.head.indexOf('Essay') : -1;
+  const keep = arr => arr.filter((_, i) => i !== drop);
+  return '<div class="tbl-wrap" tabindex="0" role="group" aria-label="Table (scroll sideways on small screens)"><table class="tbl"><thead><tr>' +
+    keep(SRDP.comparison.head).map(h => '<th>' + esc(h) + '</th>').join('') + '</tr></thead><tbody>' +
+    SRDP.comparison.rows.map(r => '<tr>' + keep(r).map((c, j) =>
+      '<td class="' + (j > 0 && c === 'Yes' ? 'cell-yes' : j > 0 && c === 'No' ? 'cell-no' : '') + '">' + esc(c) + '</td>').join('') + '</tr>').join('') +
+    '</tbody></table></div>';
+}
 
 /* ─── GRAMMAR KIT ─────────────────────────────────────────── */
 PAGES.grammar = {
@@ -37,10 +46,7 @@ PAGES.grammar = {
         '</tbody></table></div>' +
         '<div class="gap"></div>' +
         sectionLabel('Which text type does what?') +
-        '<div class="tbl-wrap" tabindex="0" role="group" aria-label="Table (scroll sideways on small screens)"><table class="tbl"><thead><tr>' + SRDP.comparison.head.map(h => '<th>' + h + '</th>').join('') + '</tr></thead><tbody>' +
-          SRDP.comparison.rows.map(r => '<tr>' + r.map((c, j) =>
-            '<td class="' + (j > 0 && c === 'Yes' ? 'cell-yes' : j > 0 && c === 'No' ? 'cell-no' : '') + '">' + esc(c) + '</td>').join('') + '</tr>').join('') +
-        '</tbody></table></div>' +
+        comparisonTable() +
         '<div class="gap"></div>' +
         sectionLabel('Task operators — what the verbs in the task demand') +
         '<div class="acc">' + SRDP.operators.map(o =>
@@ -222,7 +228,7 @@ function practiceBody() {
   if (przState.tab === 'spot') {
     return sectionLabel('Spot the mistakes — conventions, not grammar') +
       '<p style="font-size:.9375rem;color:var(--text-secondary);margin-bottom:20px;line-height:1.55">Each text below contains deliberate errors in text-type conventions. Find them yourself, then reveal the answers.</p>' +
-      '<div style="border:1px solid var(--border)">' + SRDP.spotTexts.map((ex, i) =>
+      '<div style="border:1px solid var(--border)">' + SRDP.spotTexts.filter(ex => !ex.schools || ex.schools.indexOf(M.school()) >= 0).map((ex, i) =>
         '<div style="' + (i > 0 ? 'border-top:1px solid var(--border)' : '') + '">' +
           '<div style="padding:14px 22px;background:var(--surface-1);font-size:.875rem;font-weight:600">' + esc(ex.title) + '</div>' +
           '<div class="mono-text" style="border-top:1px solid var(--border);background:var(--surface)">' + esc(ex.text) + '</div>' +

@@ -264,7 +264,7 @@ PAGES.selfcheck = {
           '</select></div>' +
           '<div class="field"><label for="scTarget">Target length</label><select id="scTarget">' +
             '<option value="250"' + (scState.target === 250 ? ' selected' : '') + '>~250 words</option>' +
-            '<option value="400"' + (scState.target === 400 ? ' selected' : '') + '>~400 words</option>' +
+            (M.school() === 'ahs' ? '<option value="400"' + (scState.target === 400 ? ' selected' : '') + '>~400 words</option>' : '') +
           '</select></div>' +
         '</div>' +
         '<div class="field" style="margin-bottom:16px"><label for="scTask">The task you answered (optional, but it makes the AI prompt much better)</label>' +
@@ -338,14 +338,15 @@ function taskCard(p, i) {
 }
 function tbPrompts() {
   const ids = M.typesForSchool().map(t => t.id);
-  return SRDP.prompts.map((p, i) => ({ p, i })).filter(x => ids.indexOf(x.p.type) >= 0);
+  const bhs = M.school() === 'bhs';
+  return SRDP.prompts.map((p, i) => ({ p, i })).filter(x => ids.indexOf(x.p.type) >= 0 && (!bhs || x.p.length <= 250));
 }
 function genPrompt() {
   const cfg = M.schoolConfig();
   const types = M.school() === 'ahs'
     ? 'essay (~400 words), or article, report, blog or e-mail (~250 words)'
     : 'article, report, blog, e-mail or leaflet (~250 words)';
-  return 'You are an experienced Austrian English teacher. Generate ONE realistic writing task for the standardised SRDP exam (' + (cfg.long || 'AHS') + ', English B2), text type of your choice: ' + types + '. Format: a 1–2 sentence situation; any input material the text type needs (a short statement to discuss for an essay, 4–5 survey figures for a report, a 3–4 sentence excerpt for a letter to the editor or blog comment, an advertisement for an application, or the topic and audience for a leaflet); a clear instruction naming text type, audience and word count; and exactly three bullet points, each starting with an operator (describe, explain, suggest…). Then ask me to write the text and wait. After I submit it, assess it with the four SRDP criteria (Task Achievement, Coherence and Cohesion, Lexical and Structural Range, Lexical and Structural Accuracy), each 0–10, with brief justifications and my five most important errors.';
+  return 'You are an experienced Austrian English teacher. Generate ONE realistic writing task for the standardised SRDP exam (' + (cfg.long || 'AHS') + ', English B2), text type of your choice: ' + types + '. Format: a 1–2 sentence situation; any input material the text type needs (a short statement or quotation to respond to, 4–5 survey figures for a report, a 3–4 sentence excerpt for a letter to the editor or blog comment, an advertisement for an application, or a topic and target audience for a persuasive task); a clear instruction naming text type, audience and word count; and exactly three bullet points, each starting with an operator (describe, explain, suggest…). Then ask me to write the text and wait. After I submit it, assess it with the four SRDP criteria (Task Achievement, Coherence and Cohesion, Lexical and Structural Range, Lexical and Structural Accuracy), each 0–10, with brief justifications and my five most important errors.';
 }
 function tbList() {
   let list = tbPrompts();
@@ -359,13 +360,13 @@ const TOPIC_VOCAB = [
     { w: "renewable energy sources", hint: "Wind, solar, hydro — energy that does not run out. 'Austria invests heavily in renewable energy sources.'" },
     { w: "greenhouse gas emissions", hint: "The gases that heat up the planet. Usually with 'cut' or 'reduce': 'The EU wants to cut greenhouse gas emissions by 2030.'" },
     { w: "to cut down on waste", hint: "To reduce the amount you throw away. 'Schools could cut down on waste by banning plastic bottles.'" },
-    { w: "a throwaway society", hint: "A society that buys, uses and bins things quickly. Good for critical essays: 'We live in a throwaway society.'" },
+    { w: "a throwaway society", hint: "A society that buys, uses and bins things quickly. Good for critical writing: 'We live in a throwaway society.'" },
     { w: "environmentally friendly", hint: "Not harmful to nature. Describes products, habits, choices: 'an environmentally friendly alternative'." },
     { w: "to raise awareness of", hint: "To make people notice a problem. 'The campaign raises awareness of plastic pollution.'" },
     { w: "sustainable development", hint: "Growth that does not destroy resources for the future. A key term in formal texts and reports." },
     { w: "to tackle pollution", hint: "To deal with pollution seriously. 'Tackle' also works with problems, causes, issues." },
     { w: "single-use plastic", hint: "Plastic you use once and throw away — straws, cups, bags. 'The EU has banned many single-use plastics.'" },
-    { w: "to combat global warming", hint: "To fight against global warming. More formal than 'fight': perfect for essays and reports." },
+    { w: "to combat global warming", hint: "To fight against global warming. More formal than 'fight': perfect for reports and articles." },
   ] },
   { topic: "Social media & technology", words: [
     { w: "to scroll through a feed", hint: "To move through posts on a screen, often mindlessly. 'I caught myself scrolling through my feed for an hour.'" },
@@ -377,13 +378,13 @@ const TOPIC_VOCAB = [
     { w: "data privacy", hint: "Control over who sees and uses your personal information. 'Teenagers care more about data privacy than adults think.'" },
     { w: "to stay connected", hint: "To keep in contact, especially over distance. 'Social media helps families stay connected across continents.'" },
     { w: "information overload", hint: "Too much information to process. 'Constant notifications lead to information overload.'" },
-    { w: "a filter bubble", hint: "An online space where you only see opinions you already agree with. Strong term for essays on social media." },
+    { w: "a filter bubble", hint: "An online space where you only see opinions you already agree with. Strong term for writing on social media." },
     { w: "cyberbullying", hint: "Bullying that happens online. 'Victims of cyberbullying cannot simply walk away.'" },
     { w: "to disconnect from devices", hint: "To switch off and step away from technology. 'Learning to disconnect from devices is a skill in itself.'" },
   ] },
   { topic: "Education & school", words: [
     { w: "to sit an exam", hint: "To take an exam (British English). 'Austrian students sit their final exams in May.'" },
-    { w: "lifelong learning", hint: "Continuing to learn long after school. A favourite in essays about the future of work." },
+    { w: "lifelong learning", hint: "Continuing to learn long after school. A favourite in articles about the future of work." },
     { w: "a heavy workload", hint: "A large amount of work to manage. 'Students complain about a heavy workload in their final year.'" },
     { w: "to fall behind", hint: "To make slower progress than the others. 'Without support, weaker students quickly fall behind.'" },
     { w: "extracurricular activities", hint: "Clubs, sports and projects outside normal lessons. 'Universities value extracurricular activities.'" },
@@ -424,12 +425,12 @@ const TOPIC_VOCAB = [
     { w: "transferable skills", hint: "Skills useful in any job — teamwork, communication, problem-solving." },
   ] },
   { topic: "Travel & tourism", words: [
-    { w: "to broaden the mind", hint: "Travel makes you more open and understanding. 'Travel broadens the mind' is a classic essay line — use it with a twist." },
+    { w: "to broaden the mind", hint: "Travel makes you more open and understanding. 'Travel broadens the mind' is a classic opener — use it with a twist." },
     { w: "mass tourism", hint: "Tourism in huge, damaging numbers. 'Mass tourism is slowly destroying the places it loves.'" },
     { w: "off the beaten track", hint: "Away from the usual tourist routes. 'We found a village completely off the beaten track.'" },
     { w: "a once-in-a-lifetime trip", hint: "A journey you will probably only make once. 'For my grandparents, it was a once-in-a-lifetime trip.'" },
     { w: "to immerse yourself in a culture", hint: "To dive deeply into local life. 'Living with a host family lets you immerse yourself in the culture.'" },
-    { w: "eco-tourism", hint: "Travel designed to protect nature and support locals. Useful contrast to mass tourism in essays." },
+    { w: "eco-tourism", hint: "Travel designed to protect nature and support locals. Useful contrast to mass tourism." },
     { w: "a tourist hotspot", hint: "A place crowded with visitors. 'Hallstatt has become a tourist hotspot.'" },
     { w: "to travel on a budget", hint: "To travel cheaply. 'Interrail is the classic way to travel on a budget.'" },
     { w: "cultural exchange", hint: "Sharing traditions and views between cultures. 'School partnerships create real cultural exchange.'" },
@@ -441,7 +442,7 @@ const TOPIC_VOCAB = [
     { w: "to live beyond your means", hint: "To spend more than you earn. 'Credit cards make it easy to live beyond your means.'" },
     { w: "an impulse buy", hint: "Something you buy without planning. 'The chocolate at the checkout is a classic impulse buy.'" },
     { w: "to save up for", hint: "To collect money for something specific. 'She is saving up for a year abroad.'" },
-    { w: "fast fashion", hint: "Cheap clothing produced quickly and thrown away quickly. A key term for essays on consumption." },
+    { w: "fast fashion", hint: "Cheap clothing produced quickly and thrown away quickly. A key term for writing on consumption." },
     { w: "a throwaway culture", hint: "A culture of using things once and binning them. Works well paired with fast fashion." },
     { w: "value for money", hint: "Good quality for the price paid. 'The hostel was basic but great value for money.'" },
     { w: "to be in debt", hint: "To owe money. 'Many students leave university deeply in debt.'" },
@@ -456,13 +457,13 @@ const TOPIC_VOCAB = [
     { w: "a sense of belonging", hint: "The feeling of being part of a group. 'Clubs give young people a sense of belonging.'" },
     { w: "social inequality", hint: "The unfair gap between rich and poor. 'Education is the best answer to social inequality.'" },
     { w: "to give something back", hint: "To return help to your community. 'After her career, she wanted to give something back.'" },
-    { w: "an ageing population", hint: "A society with more and more old people. Standard term in reports and essays on society." },
+    { w: "an ageing population", hint: "A society with more and more old people. Standard term in reports and articles on society." },
     { w: "cultural diversity", hint: "The variety of cultures in one place. 'Vienna's cultural diversity is one of its greatest strengths.'" },
     { w: "to bridge the gap", hint: "To reduce the distance between groups. 'Sport can bridge the gap between generations.'" },
     { w: "community spirit", hint: "The feeling of togetherness in a neighbourhood. 'The flood revealed an amazing community spirit.'" },
     { w: "to integrate into society", hint: "To become a full part of a society. 'Language courses help newcomers integrate into society.'" },
     { w: "equal opportunities", hint: "The same chances for everyone. 'Equal opportunities remain a goal, not a reality.'" },
-    { w: "a multicultural society", hint: "A society made up of many cultures. Neutral, factual term for essays." },
+    { w: "a multicultural society", hint: "A society made up of many cultures. Neutral, factual term for reports." },
     { w: "to break down barriers", hint: "To remove obstacles between people. 'Music breaks down barriers that words cannot.'" },
   ] },
   { topic: "AI & the digital future", words: [
@@ -485,7 +486,7 @@ const TOPIC_VOCAB = [
     { w: "to spread disinformation", hint: "To distribute deliberately false information. Stronger and more precise than 'fake news'." },
     { w: "media literacy", hint: "The ability to understand and question media. 'Media literacy should be a school subject of its own.'" },
     { w: "a paywall", hint: "A barrier that makes you pay to read articles. 'Quality journalism increasingly sits behind a paywall.'" },
-    { w: "public service broadcasting", hint: "Radio and TV financed by the public, like the ORF or the BBC. Useful in essays on trustworthy news." },
+    { w: "public service broadcasting", hint: "Radio and TV financed by the public, like the ORF or the BBC. Useful in writing on trustworthy news." },
     { w: "investigative journalism", hint: "Journalism that uncovers hidden facts. 'Investigative journalism brought the scandal to light.'" },
     { w: "a news outlet", hint: "A company that publishes news — paper, site or channel. 'Compare how two news outlets report the same story.'" },
     { w: "to fact-check a claim", hint: "To check whether a statement is true. 'Fact-check a claim before you share it.'" },
@@ -532,7 +533,7 @@ PAGES.taskbank = {
   title: 'Task bank', track: 'taskbank',
   render() {
     return '<div class="page">' +
-      pageHead('Tool', 'Task bank', tbPrompts().length + ' Matura-style writing tasks, each with the material you need: statements for essays, survey data for reports, source texts for letters and comments, topics for leaflets. Pick one yourself or roll the dice.') +
+      pageHead('Tool', 'Task bank', tbPrompts().length + ' Matura-style writing tasks, each with the material you need: survey data for reports, source texts for letters and comments, and statements or topics to respond to. Pick one yourself or roll the dice.') +
       '<div class="wrap" style="max-width:860px"><div class="gap-s"></div>' +
         '<div class="tip" style="margin-bottom:18px">These ' + tbPrompts().length + ' tasks are Matura-style, built for practice. The officially released past papers are in the BMB download area: <a href="https://www.matura.gv.at/downloads" target="_blank" rel="noopener">matura.gv.at/downloads</a>.</div>' +
         '<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;border-bottom:1px solid var(--border)">' +

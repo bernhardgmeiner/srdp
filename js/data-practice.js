@@ -4,7 +4,7 @@
 
 /* ─── SPOT THE MISTAKES ────────────────────────────────────── */
 SRDP.spotTexts = [
-  { id: 'textA', title: 'Text A — "Essay" by a student',
+  { id: 'textA', schools: ['ahs'], title: 'Text A — "Essay" by a student',
     text: `Hey guys! So there's been a lot of talk about banning phones in schools lately. I think it's a terrible idea and here's why.
 
 When my school tried a phone ban last year, I was so annoyed. I couldn't text my mum when I needed to, and honestly, it made me feel anxious. My best friend Lea had the same problem – she told me she felt "cut off from the world".
@@ -114,10 +114,10 @@ Felix`,
 /* ─── REGISTER GYM ─────────────────────────────────────────── */
 SRDP.registerGym = [
   { informal: "So, I just heard about these new changes and honestly? I'm not happy.", formal: 'I am writing to express my concern about the proposed changes.', hint: 'Complaint / e-mail opener' },
-  { informal: 'We all know that social media can mess with your head.', formal: 'It is widely acknowledged that social media can have a negative impact on mental health.', hint: 'Essay-style generalisation' },
+  { informal: 'We all know that social media can mess with your head.', formal: 'It is widely acknowledged that social media can have a negative impact on mental health.', hint: 'Formal opinion writing' },
   { informal: "Plus, loads of people in the survey said they weren't happy either.", formal: 'Furthermore, the data suggests that a significant proportion of respondents were dissatisfied.', hint: 'Report language' },
   { informal: 'Honestly, the school should just change this. What do you guys think?', formal: 'I would therefore recommend that the school administration reconsider this policy.', hint: 'Recommendation' },
-  { informal: 'Let me know what you think in the comments!', formal: 'I look forward to hearing from you at your earliest convenience.', hint: 'Closing formula' },
+  { informal: 'Anyway, just get back to me as soon as you can, OK?', formal: 'I look forward to hearing from you at your earliest convenience.', hint: 'Closing formula (e-mail / letter)' },
   { informal: "The hotel room was gross and the staff couldn't care less.", formal: 'The room was not up to the standard advertised, and the staff appeared unwilling to address our concerns.', hint: 'Complaint body' },
   { informal: "You guys should totally hire me, I'm great with kids.", formal: 'I believe I am well suited to this position, as I have considerable experience working with children.', hint: 'Application' },
   { informal: "Anyway, that's why I think it's a bad idea.", formal: 'Taking these points into consideration, this proposal appears unlikely to succeed.', hint: 'Conclusion' },

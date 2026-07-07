@@ -5,6 +5,15 @@
 'use strict';
 const M = window.MWG;
 const { esc, sectionLabel, pageHead, ddCols, chips, phraseGroups, modelBox, TYPE_COLORS } = M;
+function qfWordCount(t) {
+  const wc = (t.quickFacts || []).find(f => f.label === 'Word count');
+  if (M.school() === 'bhs' && ['article', 'report', 'blog'].indexOf(t.id) >= 0) return '~250 words';
+  return wc ? wc.value : '';
+}
+function qfBadge(t) {
+  if (M.school() === 'bhs' && ['article', 'report', 'email'].indexOf(t.id) >= 0) return '~250 words · one of three tasks';
+  return t.badge;
+}
 window.PAGES = window.PAGES || {};
 
 /* ─── HOME ────────────────────────────────────────────────── */
@@ -70,7 +79,7 @@ PAGES.home = {
                 (p && p.quiz ? '<span style="font-size:.75rem;color:var(--green)">✓ quiz done</span>' : p && p.visited ? '<span style="font-size:.75rem;color:var(--text-muted)">read</span>' : '') +
               '</div>' +
               '<div style="font-size:1rem;color:var(--text);margin-bottom:8px;line-height:1.4">' + esc(t.tagline) + '</div>' +
-              '<div style="font-size:.875rem;color:var(--text-muted)">' + esc(t.quickFacts[0].value) + ' · ' + esc(t.quickFacts[1].value) + '</div>' +
+              '<div style="font-size:.875rem;color:var(--text-muted)">' + esc(qfWordCount(t)) + ' · ' + esc(t.quickFacts[1].value) + '</div>' +
               '<div class="go">Open guide <span>→</span></div>' +
             '</a>';
           }).join('') +
@@ -102,7 +111,7 @@ PAGES.home = {
             ['Missing a bullet point', 'Task Achievement drops sharply'],
             ['Lifting from the prompt', 'Range score suffers'],
             ['Only simple grammar', 'Range stays in the low bands'],
-            ['Wrong text type register', 'Essay style in a blog = penalty'],
+            ['Wrong text type register', 'Formal style in a blog = penalty'],
             ['Word count off by >±10%', 'Task Achievement drops one band'],
             ['Skipping proofreading', 'Errors you would catch in 3 minutes'],
           ].map(w =>
@@ -132,7 +141,7 @@ PAGES.overview = {
         '</tr></thead><tbody>' +
           M.typesForSchool().map(t =>
             '<tr class="rowlink" data-goto="' + t.id + '"><td><span style="display:inline-flex;align-items:center;gap:8px"><span style="width:8px;height:8px;background:' + TYPE_COLORS[t.color] + '"></span>' + t.name + '</span></td>' +
-            '<td>' + esc(t.quickFacts[0].value) + '</td><td>' + esc(t.quickFacts[1].value) + '</td><td>' + esc(t.quickFacts[2].value) + '</td><td style="color:var(--text-muted)">' + esc(t.tagline) + '</td></tr>').join('') +
+            '<td>' + esc(qfWordCount(t)) + '</td><td>' + esc(t.quickFacts[1].value) + '</td><td>' + esc(t.quickFacts[2].value) + '</td><td style="color:var(--text-muted)">' + esc(t.tagline) + '</td></tr>').join('') +
         '</tbody></table></div>' +
         '<div class="gap-s"></div>' +
         '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">' +
@@ -170,7 +179,7 @@ PAGES.overview = {
             ['Ignoring the text type&rsquo;s rules (e.g. a report without headings)', 'Task Achievement drops – conventions are part of the criterion', 'Check the Layout box in the guide before you start'],
             ['Copying words from the prompt', 'Range drops', 'Rephrase the task&rsquo;s words — use synonyms'],
             ['Word count off by more than ±10%', 'Task Achievement drops one band', 'Count your words. Practise estimating.'],
-            ['Essay style in a blog (or vice versa)', 'Wrong register = lower Task Achievement', 'Ask: formal or informal? Then commit.'],
+            ['Formal style in a blog (or vice versa)', 'Wrong register = lower Task Achievement', 'Ask: formal or informal? Then commit.'],
             ['Only simple linking words', 'Low Coherence score', 'Use the B2 linking words table'],
             ['No topic sentences', 'Paragraphs feel random, weak Coherence', 'First sentence of each paragraph = the point'],
             ['Forgetting to proofread', 'Errors you would catch in 3 minutes', 'Always save 5–10 min at the end'],
@@ -188,7 +197,7 @@ const TYPE_EXAMPLES = {
   essay: { weak: 'Social media has many advantages and disadvantages for young people today.', strong: 'For teenagers, the real cost of social media is not screen time. It is a slowly shrinking attention span.', why: 'A strong essay opens each paragraph with one clear, arguable point. The weaker version lists everything and commits to nothing, so the examiner cannot follow your line of argument.' },
   article: { weak: 'In this article I am going to tell you about the advantages of doing sport.', strong: 'Ask anyone who has hit the wall at kilometre 30: running is at least half a mental game.', why: 'An article has to pull the reader in. Announcing your plan reads flat, while a concrete hook makes someone want to read on. That is exactly what the task rewards.' },
   report: { weak: 'I really think the school canteen is terrible and nobody likes it.', strong: 'Under heading 2, Findings: 68 per cent of the 120 students surveyed rated the canteen food as poor or very poor.', why: 'A report stays factual and impersonal and presents its evidence under clear headings. Personal outbursts cost you marks for register and task achievement.' },
-  blog: { weak: 'One should carefully consider the various advantages before deciding to take a gap year.', strong: 'I used to think a gap year was just an expensive way to put off real life. Then I took one, and it changed my mind.', why: 'Blogs work through a personal, informal voice with contractions and a short story. Formal phrasing like one should consider is essay register dropped into the wrong text type.' },
+  blog: { weak: 'One should carefully consider the various advantages before deciding to take a gap year.', strong: 'I used to think a gap year was just an expensive way to put off real life. Then I took one, and it changed my mind.', why: 'Blogs work through a personal, informal voice with contractions and a short story. Formal phrasing like one should consider is formal register dropped into the wrong text type.' },
   email: { weak: 'Hi! Your headphones broke after two days and I want my money back, thanks.', strong: 'Dear Sir or Madam, I am writing to request a refund for the headphones I bought on 3 May, which stopped working after two days.', why: 'A formal email names its purpose in the first line and keeps a polite, formal register throughout. The casual version would be marked down for register and tone.' },
   leaflet: { weak: 'This leaflet provides information about the annual town festival taking place in the market square.', strong: 'Live music, free food and the whole town in one square: the Seetal Festival is back, and you are invited.', why: 'A leaflet has to grab a reader holding it for two seconds at a bus stop. The weak version describes itself like a report and gives no reason to care. The strong version leads with the benefits and speaks straight to the reader, which is exactly what a persuasive leaflet does.' },
 };
@@ -216,13 +225,13 @@ function placeholderTypePage(t) {
   const col = TYPE_COLORS[t.color] || 'var(--primary)';
   return '<div class="page">' +
     '<div class="page-head"><div class="inner">' +
-      '<div class="eyebrow"><span style="width:10px;height:10px;background:' + col + '"></span>Text type · ' + esc(t.badge) + '</div>' +
+      '<div class="eyebrow"><span style="width:10px;height:10px;background:' + col + '"></span>Text type · ' + esc(qfBadge(t)) + '</div>' +
       '<h1 class="title">The ' + esc(t.name.toLowerCase()) + '</h1>' +
       '<p class="lead">' + esc(t.tagline) + '</p>' +
     '</div></div>' +
     '<div class="wrap"><div class="gap-s"></div>' +
       '<div class="grid g-auto-150" style="margin-bottom:34px">' +
-        t.quickFacts.map(f => '<div class="card" style="padding:15px 16px"><div style="font-size:.75rem;color:var(--text-muted);margin-bottom:6px;letter-spacing:.32px">' + esc(f.label) + '</div><div style="font-size:.9375rem;font-weight:600">' + esc(f.value) + '</div></div>').join('') +
+        t.quickFacts.map(f => '<div class="card" style="padding:15px 16px"><div style="font-size:.75rem;color:var(--text-muted);margin-bottom:6px;letter-spacing:.32px">' + esc(f.label) + '</div><div style="font-size:.9375rem;font-weight:600">' + esc(f.label === 'Word count' ? qfWordCount(t) : f.value) + '</div></div>').join('') +
       '</div>' +
       '<div class="tip warn" style="border-left-color:' + col + '"><strong>Diese Textsorte wird gerade aufgebaut.</strong> Für BHS kommen hier – wie bei den anderen Textsorten – Layout, Do&rsquo;s &amp; Don&rsquo;ts, ein annotierter Modelltext, Phrasen, ein Quiz und die &bdquo;Build the text&ldquo;-&Uuml;bung dazu. Der Sprachteil (Grammatik, Wortschatz, Phrasenbank, Self-check) gilt schon jetzt genauso.</div>' +
       '<div class="gap-s"></div>' +
@@ -235,7 +244,7 @@ function typePage(typeId) {
   const t = SRDP.textTypes.find(x => x.id === typeId);
   if (t.placeholder) return placeholderTypePage(t);
   const col = TYPE_COLORS[t.color];
-  const quizzes = SRDP.quizzes[typeId] || [];
+  const quizzes = (SRDP.quizzes[typeId] || []).filter(q => !q.schools || q.schools.indexOf(M.school()) >= 0);
   const tab = typeTabs[typeId] || 'guide';
   const tabs = [
     ['guide', 'Guide'], ['model', 'Model text'], ['phrases', 'Phrases'],
@@ -301,14 +310,14 @@ function typePage(typeId) {
 
   return '<div class="page">' +
     '<div class="page-head"><div class="inner">' +
-      '<div class="eyebrow"><span style="width:10px;height:10px;background:' + col + '"></span>Text type · ' + esc(t.badge) + '</div>' +
+      '<div class="eyebrow"><span style="width:10px;height:10px;background:' + col + '"></span>Text type · ' + esc(qfBadge(t)) + '</div>' +
       '<h1 class="title">The ' + t.name.toLowerCase() + '</h1>' +
       '<p class="lead">' + esc(t.tagline) + '</p>' +
       '<div class="tabs">' + tabs.map(tb => '<button class="tab' + (tab === tb[0] ? ' active' : '') + '" data-action="type-tab" data-type="' + typeId + '" data-tab="' + tb[0] + '">' + tb[1] + '</button>').join('') + '</div>' +
     '</div></div>' +
     '<div class="wrap"><div class="gap-s"></div>' +
       '<div class="grid g-auto-150" style="margin-bottom:38px">' +
-        t.quickFacts.map(f => '<div class="card" style="padding:15px 16px"><div style="font-size:.75rem;color:var(--text-muted);margin-bottom:6px;letter-spacing:.32px">' + esc(f.label) + '</div><div style="font-size:.9375rem;font-weight:600">' + esc(f.value) + '</div></div>').join('') +
+        t.quickFacts.map(f => '<div class="card" style="padding:15px 16px"><div style="font-size:.75rem;color:var(--text-muted);margin-bottom:6px;letter-spacing:.32px">' + esc(f.label) + '</div><div style="font-size:.9375rem;font-weight:600">' + esc(f.label === 'Word count' ? qfWordCount(t) : f.value) + '</div></div>').join('') +
       '</div>' +
       body +
       '<div style="height:72px"></div>' +
@@ -323,7 +332,7 @@ SRDP.textTypes.forEach(t => {
       if (t.placeholder) return;
       const tab = typeTabs[t.id] || 'guide';
       if (tab === 'quiz') {
-        const qz = SRDP.quizzes[t.id] || [];
+        const qz = (SRDP.quizzes[t.id] || []).filter(q => !q.schools || q.schools.indexOf(M.school()) >= 0);
         if (qz.length) {
           if (!M.quizStates[t.id] || M.quizStates[t.id]._stale) M.initQuiz(t.id, qz, (score, total) => { if (score >= Math.ceil(total * 0.6)) M.markQuiz(t.id); });
           const host = M.$('[data-quiz-host="' + t.id + '"]');

@@ -133,7 +133,7 @@ SRDP.textTypes = [
       "Don't be overly emotional or dramatic",
       "Don't forget who you're writing for",
       "Don't write a boring title",
-      'Don\'t write like an essay (no "It is believed that…")',
+      'Don\'t write like a formal report (no "It is believed that…")',
       "Don't ignore the publication context given in the task",
     ],
     phrases: [
@@ -144,21 +144,21 @@ SRDP.textTypes = [
       { category: 'Conclusions',
         items: ['So next time you…', 'The question is not whether… but when.', "Perhaps it's time we all…", "Food for thought, isn't it?"] },
     ],
-    tip: 'Key difference — essay vs. article: an essay makes the reader think. An article makes the reader feel. Essays are fact-based; articles are personal, emotional, and engaging. Always check WHERE the article will appear — a school magazine needs a different voice than a serious newspaper.',
+    tip: 'Key difference — report vs. article: a report only informs. An article makes the reader feel; it is personal, emotional and engaging. Always check WHERE the article will appear — a school magazine needs a different voice than a serious newspaper.',
     modelText: {
       title: 'Screens Off, Life On?', wordCount: '~250', register: 'Semi-formal (school magazine)',
       paragraphs: [
         {
-          text: 'Are you one of those people who check their phone within five minutes of waking up? If so, you are definitely not alone. A recent experiment at our school challenged students to give up their phones for an entire week. The results were surprising.',
+          text: 'Are you one of those people who check their phones within five minutes of waking up? If so, you are definitely not alone. A recent experiment at our school challenged students to give up their phones for an entire week. The results were surprising.',
           annotations: [
-            { span: 'Are you one of those people who check their phone within five minutes of waking up?', type: 'special', label: 'Rhetorical question — grabs reader immediately' },
+            { span: 'Are you one of those people who check their phones within five minutes of waking up?', type: 'special', label: 'Rhetorical question — grabs reader immediately' },
             { span: 'The results were surprising.', type: 'special', label: 'Hook — reader wants to know more' },
           ]
         },
         {
           text: 'When the experiment started, most participants felt anxious and disconnected. Several students admitted they instinctively reached into their pockets dozens of times a day. "I didn\'t even realise how addicted I was," one participant told me. However, by day three the first cracks began to show: a handful of students started talking during breaks instead of reaching for their phones. By the middle of the week, the mood had completely changed. Students who normally sat in silence were suddenly chatting, laughing and swapping stories at every break.',
           annotations: [
-            { span: '"I didn\'t even realise how addicted I was,"', type: 'special', label: 'Direct speech — suits articles, NOT essays' },
+            { span: '"I didn\'t even realise how addicted I was,"', type: 'special', label: 'Direct speech — suits articles, NOT reports' },
             { span: 'However,', type: 'language', label: 'B2 linking word' },
             { span: 'the mood had completely changed', type: 'special', label: 'Turning point in the story' },
           ]
@@ -166,7 +166,7 @@ SRDP.textTypes = [
         {
           text: 'The most striking change was in the social atmosphere. Without screens to hide behind, students had to look at each other and hold real conversations. I know this sounds old-fashioned, but it genuinely felt different — warmer, somehow. Teachers noticed the difference too, reporting fewer disruptions and more engagement. One classmate of mine, usually glued to her screen, ended up organising a lunchtime card tournament that half the year joined.',
           annotations: [
-            { span: 'I know this sounds old-fashioned, but it genuinely felt different — warmer, somehow.', type: 'special', label: 'Personal voice — suits articles, NOT essays' },
+            { span: 'I know this sounds old-fashioned, but it genuinely felt different — warmer, somehow.', type: 'special', label: 'Personal voice — suits articles, NOT reports' },
           ]
         },
         {
@@ -301,7 +301,7 @@ SRDP.textTypes = [
       'Shorter paragraphs work well here',
     ],
     donts: [
-      "Don't write like an essay (too formal)",
+      "Don't write like a report (too formal)",
       "Don't forget to invite comments (blog post)",
       "Don't forget to reference the original post (blog comment)",
       "Don't be rude or offensive — remember it's public",
@@ -315,7 +315,7 @@ SRDP.textTypes = [
       { category: 'Engaging the reader',
         items: ['What do you think?', "I'd love to hear your thoughts on this.", 'Let me know in the comments!', 'Has anyone else experienced this?', 'Am I the only one who…?'] },
     ],
-    tip: 'For a blog COMMENT, your very first sentence must reference the original post by name: "Hi Jeff, I stumbled across your blog on overtourism and it really made me think…"',
+    tip: 'For a blog COMMENT, your very first sentence should refer to the original post, ideally by name: "Hi Jeff, I stumbled across your blog on overtourism and it really made me think…"',
     modelText: {
       title: 'Why I Quit Instagram for a Month (And What Happened Next)', wordCount: '~250', register: 'Informal',
       paragraphs: [
@@ -469,7 +469,7 @@ SRDP.textTypes = [
       'Match the register to the audience, but keep it accessible – not slang, not bureaucratic',
     ],
     donts: [
-      "Don't write it as one long, unbroken block of text – that is an essay, not a leaflet",
+      "Don't write it as one long, unbroken block of text – a leaflet is broken into short, headed sections",
       "Don't drop the subheadings – they are what make it a leaflet at a glance",
       "Don't tell a personal story from your own life – a leaflet informs, it does not confess (that is a blog)",
       "Don't weigh arguments for and against – a leaflet promotes one thing, it does not debate it",
@@ -486,7 +486,7 @@ SRDP.textTypes = [
       { category: 'Practical information & closings',
         items: ['When: Saturday, 14 June, from 10 a.m.', 'Where: the main hall, Hauptstraße 1.', 'Entry is free. / Tickets: €5.', 'For more information, visit www.…', 'Questions? Call us on… or drop by any weekday.'] },
     ],
-    tip: 'A leaflet (called a „Broschüre“ on the official task sheet) is not a mini-essay. It informs AND persuades a target audience, and the layout does half the work: a clear title, short headed sections, direct address and a call to action. Picture the reader holding it at a bus stop – everything has to land in seconds. Keep the register persuasive but clean: warmer than a report, cleaner than a blog. You write the text only – a title, headed sections and a call to action, never drawings or layout.',
+    tip: 'A leaflet (called a „Broschüre“ on the official task sheet) is not one long block of prose. It informs AND persuades a target audience, and the layout does half the work: a clear title, short headed sections, direct address and a call to action. Picture the reader holding it at a bus stop – everything has to land in seconds. Keep the register persuasive but clean: warmer than a report, cleaner than a blog. You write the text only – a title, headed sections and a call to action, never drawings or layout.',
     modelText: {
       title: 'Open Day at Schulzentrum Seetal – See Your Future in Action',
       wordCount: '~250', register: 'Persuasive',
