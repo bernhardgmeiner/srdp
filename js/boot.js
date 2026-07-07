@@ -5,7 +5,7 @@
 'use strict';
 const M = window.MWG;
 const { $, $$, esc } = M;
-const SITE_FOOTER = '<footer class="site-footer no-print"><div class="ftin">' +'<div class="ft-cols">' +'<div><div class="ft-h">About this site</div><p>A free, independent revision site for the written part of the English Matura (AHS, B2). Made by an English teacher. It is not an official document of the BMB or any education authority.</p></div>' +'<div><div class="ft-h">Your data</div><p>No account, no tracking, no ads. Your progress is saved only in your own browser and is never sent anywhere. Everything runs on your device.</p></div>' +'<div><div class="ft-h" lang="de">Impressum / Kontakt</div><p lang="de">Bernhard Gmeiner, Wien<br>E-Mail: bernhard.gmeiner@gmail.com<br><a href="https://www.bernhardgmeiner.com" target="_blank" rel="noopener">bernhardgmeiner.com</a><br>Privates, nicht-kommerzielles Projekt.</p></div>' +'<div><div class="ft-h">Found a mistake? <span lang="de">/ Fehler gefunden?</span></div><p>Spotted a typo, a wrong fact or a broken link? <a href="mailto:bernhard.gmeiner@gmail.com?subject=Matura%20Guide%20Feedback">Send a short e-mail</a> and mention which section it is in. Every report makes the guide better.</p></div>' +'</div>' +'<div class="ft-base" lang="de">Diese Seite hilft bei der Vorbereitung auf die schriftliche Englisch-Matura (AHS, B2) und orientiert sich an der offiziellen SRDP-Beurteilungsskala. Bewertet wird in der echten Matura von deinen Lehrkr\u00e4ften mit der offiziellen Skala. \u00b7 Stand: Schuljahr 2025/26</div>' +'</div></footer>';
+const SITE_FOOTER = '<footer class="site-footer no-print"><div class="ftin">' +'<div class="ft-cols">' +'<div><div class="ft-h">About this site</div><p>A free, independent revision site for the written part of the English Matura (AHS & BHS, B2). Made by an English teacher. It is not an official document of the BMB or any education authority.</p></div>' +'<div><div class="ft-h">Your data</div><p>No account, no tracking, no ads. Your progress is saved only in your own browser and is never sent anywhere. Everything runs on your device. Your progress is saved only in this browser on this device, so clearing your browser or switching devices resets it.</p></div>' +'<div><div class="ft-h" lang="de">Impressum / Kontakt</div><p lang="de">Bernhard Gmeiner, Wien<br>E-Mail: bernhard.gmeiner@gmail.com<br><a href="https://www.bernhardgmeiner.com" target="_blank" rel="noopener">bernhardgmeiner.com</a><br>Privates, nicht-kommerzielles Projekt.</p></div>' +'<div><div class="ft-h">Found a mistake? <span lang="de">/ Fehler gefunden?</span></div><p>Spotted a typo, a wrong fact or a broken link? <a href="mailto:bernhard.gmeiner@gmail.com?subject=Matura%20Guide%20Feedback">Send a short e-mail</a> and mention which section it is in. Every report makes the guide better.</p></div>' +'</div>' +'<div class="ft-base" lang="de">Diese Seite hilft bei der Vorbereitung auf die schriftliche Englisch-Matura (AHS & BHS, B2) und orientiert sich an der offiziellen SRDP-Beurteilungsskala. Bewertet wird in der echten Matura von deinen Lehrkr\u00e4ften mit der offiziellen Skala. \u00b7 Stand: Schuljahr 2025/26</div>' +'</div></footer><div class="print-note" lang="de">Unabhängige Übungsseite von Bernhard Gmeiner – kein offizielles Dokument des BMB. Übungsaufgaben sind nachgebaut. Es zählt die Bewertung deiner Lehrkräfte.</div>';
 
 /* ─── ROUTER ──────────────────────────────────────────────── */
 let current = '';
@@ -17,6 +17,10 @@ function route() {
   if (tourActive) endTour();
   let id = (location.hash || (pathPage ? '#' + pathPage : '#home')).slice(1);
   if (!PAGES[id]) id = 'home';
+  /* Textsorte, die es im aktuellen Schultyp nicht gibt (z. B. essay bei BHS,
+     leaflet bei AHS) → auf Home umleiten, auch bei Deep-Links */
+  if (window.SRDP && SRDP.textTypes.some(t => t.id === id && t.schools && t.schools.indexOf(M.school()) < 0)) id = 'home';
+  const prev = current;
   current = id;
   const page = PAGES[id];
   const main = $('#main');
@@ -29,16 +33,18 @@ function route() {
   try { main.scrollTo({ top: 0 }); window.scrollTo({ top: 0 }); } catch (e) { main.scrollTop = 0; }
   $('#sidenav').classList.remove('open');
   const ov = $('.nav-overlay'); if (ov) ov.remove();
+  if (id !== prev) { try { main.focus(); } catch (e) {} if (M.announce) M.announce(page.title); }
+  else { const at = main.querySelector('.tabs .tab.active'); if (at) { try { at.focus(); } catch (e) {} } }
   M.paintNav();
 }
 function rerender(partId, html, wire) { const el = $(partId); if (el) { el.innerHTML = html; wire && wire(); } }
 
 /* ─── GUIDED TOUR ─────────────────────────────────────────── */
 const TOUR = [
-  { sel:null, title:'Welcome to the writing guide', text:'Everything here is built around the two writing tasks of the B2 Matura. This quick tour shows you where things are. It takes about a minute.' },
+  { sel:null, title:'Welcome to the writing guide', text:'Everything here is built around the writing tasks of the B2 Matura. This quick tour shows you where things are. It takes about a minute.' },
   { sel:'[data-nav="overview"]', title:'Start with the overview', text:'How the Writing section is built, how much time you get, and how the four criteria are graded. Read it once and the rest makes more sense.' },
   { sel:'[data-nav="studyplan"]', title:'Your countdown plan', text:'A day-by-day study plan for the last four weeks (or the last seven days). Set your exam date and the plan tells you what to do today.' },
-  { sel:'[data-nav="essay"]', title:'The five text types', text:'Essay, article, report, blog and email. Each one has a guide, a model text, a phrase list, a quiz and a drag-and-drop builder.' },
+  { sel:'[data-nav="article"]', title:'The text types', text:'Each text type has a guide, a model text, a phrase list, a quiz and a drag-and-drop builder. Open one and switch tabs along the top.' },
   { sel:'[data-nav="phrasebank"]', title:'Tools that do the work', text:'A searchable phrase bank, a self-assessment checklist, and the Self-check studio that scans a draft you paste in.' },
   { sel:'[data-nav="selfcheck"]', title:'Self-check studio', text:'Paste a draft and get instant feedback on length, register and conventions, plus a ready-made prompt for an AI second opinion.' },
   { sel:'[data-nav="taskbank"]', title:'Task bank and practice', text:'Real Matura-style prompts with source material, plus a practice zone to spot mistakes and take the final quiz.' },
@@ -131,10 +137,12 @@ document.addEventListener('click', e => {
   }
   else if (act === 'print') { window.print(); }
   else if (act === 'start-tour') { startTour(); }
+  else if (act === 'set-school') { M.setSchool(el.dataset.school); const ch = document.getElementById('schoolChooser'); if (ch) ch.remove(); var appEl = document.getElementById('app'); if (appEl) { appEl.removeAttribute('inert'); appEl.removeAttribute('aria-hidden'); } var ab = document.querySelector('.school-btn.active'); if (ab) { try { ab.focus(); } catch (e) {} } }
   else if (act === 'open-search') { M.openSearch && M.openSearch(); }
   else if (act.indexOf('flash-') === 0) { M.flashAction && M.flashAction(act, el.dataset); }
   else if (act.indexOf('plan-') === 0) { M.planAction && M.planAction(act, el); }
   else if (act.indexOf('rate-') === 0) { M.rateAction && M.rateAction(act, el); }
+  else if (act.indexOf('mock-') === 0) { M.mockAction && M.mockAction(act); }
   else if (act === 'hm-jump') { M.hmJump && M.hmJump(el); }
   else if (act === 'tour-next') { if (tourI >= TOUR.length-1) endTour(); else showTour(tourI+1); }
   else if (act === 'tour-prev') { showTour(tourI-1); }
@@ -156,6 +164,10 @@ document.addEventListener('click', e => {
     if (st && j >= 0 && j < st.shuffled.length) {
       [st.shuffled[i], st.shuffled[j]] = [st.shuffled[j], st.shuffled[i]];
       st.checked = false; M.repaintDnd(el.dataset.dnd);
+      const dh = $('[data-dnd-host="' + el.dataset.dnd + '"]');
+      const mb = dh && dh.querySelector('.dnd-item[data-i="' + j + '"] [data-action="' + act + '"]');
+      if (mb) { try { mb.focus(); } catch (e) {} }
+      if (M.announce) M.announce('Moved to position ' + (j + 1) + ' of ' + st.shuffled.length);
     }
   }
   else if (act === 'dnd-check') { const st = M.dndStates[el.dataset.dnd]; if (st) { st.checked = true; M.repaintDnd(el.dataset.dnd); } }
@@ -190,13 +202,16 @@ document.addEventListener('click', e => {
     const text = $('#scText').value.trim();
     if (!text) { M.toast('Paste your text first'); return; }
     const type = SRDP.textTypes.find(t => t.id === $('#scType').value);
+    if (!type) { M.toast('Pick a text type first'); return; }
     const prompt = SRDP.aiPromptTemplate(type.name, $('#scTarget').value, $('#scTask').value.trim(), text) + (M.scRatingLine ? M.scRatingLine() : '');
     M.copyText(prompt, () => M.flashCopied(el));
   }
   /* task bank */
   else if (act === 'tb-filter') { M.tbState.filter = el.dataset.f; route(); }
   else if (act === 'tb-random') {
-    const pool = M.tbState.filter === 'all' ? SRDP.prompts : SRDP.prompts.filter(p => p.type === M.tbState.filter);
+    const base = M.tbPrompts ? M.tbPrompts().map(x => x.p) : SRDP.prompts;
+    const pool = M.tbState.filter === 'all' ? base : base.filter(p => p.type === M.tbState.filter);
+    if (!pool.length) { M.toast('No tasks for this filter yet'); return; }
     const p = pool[Math.floor(Math.random() * pool.length)];
     rerender('#tbRandom', '<div style="border:2px solid var(--primary);border-bottom:none;margin-top:0"><div style="padding:10px 22px;background:var(--primary-faint);font-size:.75rem;letter-spacing:.32px;color:var(--primary)">🎲 Your random task. No take-backs, start writing!</div>' + M.taskCard(p, 0) + '</div>');
     try { $('#tbRandom').scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (err) {}
@@ -240,11 +255,44 @@ $('#burger').addEventListener('click', () => {
   } else { const ov = $('.nav-overlay'); if (ov) ov.remove(); }
 });
 
+/* ─── FIRST-VISIT SCHOOL CHOOSER ──────────────────────────── */
+function showSchoolChooser() {
+  if (M.schoolChosen && M.schoolChosen()) return;
+  if (document.getElementById('schoolChooser')) return;
+  const SC = (window.SRDP && SRDP.schools) || {};
+  function card(id) {
+    const c = SC[id] || {};
+    const d = id === 'ahs' ? 'Gymnasium · 2 Schreibaufgaben, mit Essay' : 'HAK, HTL, HLW u. a. · 3 Schreibaufgaben, mit Leaflet';
+    return '<button class="sc-card" data-action="set-school" data-school="' + id + '">' +
+      '<span class="sc-k">' + esc(c.label || id.toUpperCase()) + '</span>' +
+      '<span class="sc-d">' + esc(d) + '</span></button>';
+  }
+  const w = document.createElement('div');
+  w.id = 'schoolChooser';
+  w.className = 'school-chooser';
+  w.setAttribute('role', 'dialog');
+  w.setAttribute('aria-modal', 'true');
+  w.setAttribute('aria-labelledby', 'scTitle'); w.setAttribute('aria-describedby', 'scSub');
+  w.innerHTML = '<div class="sc-box">' +
+    '<div class="sc-title" id="scTitle" lang="de">Welcome! Wähle deinen Schultyp</div>' +
+    '<div class="sc-sub" id="scSub" lang="de">Grammatik, Wortschatz und die Sprach-Tools gelten für beide gleich – auch das Bewertungsraster. Unterschiedlich sind nur die Textsorten und die Anzahl der Schreibaufgaben (AHS: 2, BHS: 3). Du kannst oben links jederzeit umschalten.</div>' +
+    '<div class="sc-cards">' + card('ahs') + card('bhs') + '</div>' +
+    '<div class="sc-note" lang="de">Du kannst später oben links jederzeit wechseln.</div>' +
+  '</div>';
+  document.body.appendChild(w);
+  var appEl = document.getElementById('app'); if (appEl) { appEl.setAttribute('inert', ''); appEl.setAttribute('aria-hidden', 'true'); }
+  w.addEventListener('keydown', function (e) { if (e.key === 'Escape') { var chE = document.getElementById('schoolChooser'); if (chE) chE.remove(); var appE = document.getElementById('app'); if (appE) { appE.removeAttribute('inert'); appE.removeAttribute('aria-hidden'); } return; } if (e.key !== 'Tab') return; var cards = w.querySelectorAll('.sc-card'); if (!cards.length) return; var f0 = cards[0], fn = cards[cards.length - 1]; if (e.shiftKey && document.activeElement === f0) { e.preventDefault(); fn.focus(); } else if (!e.shiftKey && document.activeElement === fn) { e.preventDefault(); f0.focus(); } });
+  const first = w.querySelector('.sc-card'); if (first) { try { first.focus(); } catch (e) {} }
+}
+M.showSchoolChooser = showSchoolChooser;
+
 /* INIT */
 M.setTheme(M.store('mwg_theme') || 'light');
+document.documentElement.setAttribute('data-school', M.school());
 M.buildNav();
 M.initBackToTop();
 window.addEventListener('hashchange', route);
 route();
-setTimeout(maybeShowHint, 600);
+if (M.schoolChosen()) setTimeout(maybeShowHint, 600);
+else showSchoolChooser();
 })();

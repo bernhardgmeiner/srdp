@@ -7,7 +7,7 @@ SRDP.textTypes = [
   /* ─── ESSAY ─────────────────────────────────────────────── */
   {
     id: 'essay', name: 'Essay', tagline: 'Argue your position with evidence',
-    color: 'purple', badge: 'B2 · the long task (~400 words)',
+    color: 'purple', badge: 'B2 · the long task (~400 words)', schools: ['ahs'],
     quickFacts: [
       { label: 'Word count', value: '~400 words (360–440)' },
       { label: 'Register', value: 'Formal' },
@@ -104,7 +104,7 @@ SRDP.textTypes = [
   /* ─── ARTICLE ───────────────────────────────────────────── */
   {
     id: 'article', name: 'Article', tagline: 'Write for real readers',
-    color: 'blue', badge: 'Long or short task',
+    color: 'blue', badge: 'Long or short task', schools: ['ahs', 'bhs'],
     quickFacts: [
       { label: 'Word count', value: '~250 or ~400' },
       { label: 'Register', value: 'Match the audience' },
@@ -183,7 +183,7 @@ SRDP.textTypes = [
   /* ─── REPORT ────────────────────────────────────────────── */
   {
     id: 'report', name: 'Report', tagline: 'Present findings and recommend action',
-    color: 'orange', badge: 'Long or short task',
+    color: 'orange', badge: 'Long or short task', schools: ['ahs', 'bhs'],
     quickFacts: [
       { label: 'Word count', value: '~250 or ~400' },
       { label: 'Register', value: 'Formal, objective, neutral' },
@@ -275,7 +275,7 @@ SRDP.textTypes = [
   /* ─── BLOG ──────────────────────────────────────────────── */
   {
     id: 'blog', name: 'Blog', tagline: 'Personal voice, invite interaction',
-    color: 'green', badge: 'Post or comment',
+    color: 'green', badge: 'Post or comment', schools: ['ahs', 'bhs'],
     quickFacts: [
       { label: 'Word count', value: '~250 or ~400' },
       { label: 'Register', value: 'Informal to semi-formal' },
@@ -354,7 +354,7 @@ SRDP.textTypes = [
   /* ─── E-MAIL ────────────────────────────────────────────── */
   {
     id: 'email', name: 'E-Mail', tagline: 'Clear purpose, proper format',
-    color: 'red', badge: 'Usually the short task',
+    color: 'red', badge: 'Usually the short task', schools: ['ahs', 'bhs'],
     quickFacts: [
       { label: 'Word count', value: '~250 words (225–275)' },
       { label: 'Register', value: 'Formal (mostly at B2)' },
@@ -420,7 +420,7 @@ SRDP.textTypes = [
           ]
         },
         {
-          text: 'To begin with, the classes had up to 22 students, which made individual attention impossible. Furthermore, our teacher changed three times during the course, and the final replacement had no formal teaching qualification. As a result, several students felt they had not improved at all. On top of this, the afternoon activities advertised in the brochure were cancelled twice without notice. When I raised these problems with the reception staff, I was simply told that nothing could be done, and none of the staff seemed willing to take responsibility.',
+          text: 'To begin with, the classes had up to 22 students, which made individual attention impossible. Furthermore, our teacher changed three times during the course, and the final replacement had no formal teaching qualification. As a result, several students felt they had not improved at all. On top of this, the afternoon activities advertised in the brochure were cancelled twice without notice. When I raised these problems with the reception staff, I was simply told that nothing could be done, and none of the staff seemed willing to take responsibility. To make matters worse, the written complaint I handed in during the course was never answered.',
           annotations: [
             { span: 'Furthermore,', type: 'language', label: 'B2 linking word' },
             { span: 'As a result,', type: 'language', label: 'Cause-effect linker' },
@@ -439,7 +439,141 @@ SRDP.textTypes = [
       ]
     },
   },
+  /* ─── LEAFLET (BHS) ─────────────────────────────────────────── */
+  {
+    id: 'leaflet', name: 'Leaflet', tagline: 'Inform and persuade at a glance',
+    color: 'purple', badge: 'BHS · „Broschüre“ · informs & persuades', schools: ['bhs'],
+    quickFacts: [
+      { label: 'Word count', value: '~250 words' },
+      { label: 'Register', value: 'Persuasive, reader-friendly' },
+      { label: 'Title', value: 'Required – plus subheadings' },
+      { label: 'Key feature', value: 'Headed sections + call to action' },
+    ],
+    layout: [
+      { part: 'Main title', note: 'names the offer or event clearly – and makes people want to read on' },
+      { part: 'Short intro / hook', note: '~30–40 words – say what this is and why it matters to the reader' },
+      { part: 'Subheading + section 1', note: 'one benefit or block of information under its own heading' },
+      { part: 'Subheading + section 2', note: 'the next point – short, scannable, one idea per section' },
+      { part: 'Subheading + section 3 (optional)', note: 'a further point if the word count allows' },
+      { part: 'Call to action', note: 'tell the reader the one thing to do next (come, sign up, get in touch)' },
+      { part: 'Practical details', note: 'date, time, place, price, website, phone – the facts people need' },
+    ],
+    dos: [
+      'Give it a clear title and break the text into short, headed sections',
+      'Know exactly who the leaflet is for and write straight to them',
+      'Sell the benefits, not just the facts – why should the reader care?',
+      'Keep sections short and scannable – a leaflet is read standing up, not studied',
+      'Address the reader directly ("you") and use imperatives: come along, find out more',
+      'End with a clear call to action – the one thing you want the reader to do',
+      'Add the practical details: date, time, place, price, how to get in touch',
+      'Match the register to the audience, but keep it accessible – not slang, not bureaucratic',
+    ],
+    donts: [
+      "Don't write it as one long, unbroken block of text – that is an essay, not a leaflet",
+      "Don't drop the subheadings – they are what make it a leaflet at a glance",
+      "Don't tell a personal story from your own life – a leaflet informs, it does not confess (that is a blog)",
+      "Don't weigh arguments for and against – a leaflet promotes one thing, it does not debate it",
+      "Don't slip into slang or txt-speak – persuasive is fine, sloppy is not",
+      "Don't forget the call to action and the contact details – a leaflet with no next step is just decoration",
+    ],
+    phrases: [
+      { category: 'Attention-grabbing openers',
+        items: ['Looking for something to do this summer?', 'Ever wondered what goes on behind our doors?', 'New to the area? Here is where to start.', 'Something new is coming to your town – and everyone is welcome.', 'Good news for anyone who loves…'] },
+      { category: 'Describing & persuading',
+        items: ['Whether you are a complete beginner or already experienced,…', 'There really is something for everyone.', 'It is easier – and cheaper – than you might think.', 'Best of all, it is completely free.', 'No experience needed – just come as you are.'] },
+      { category: 'Direct address & calls to action',
+        items: ['Come along and see for yourself.', 'Sign up today – places are limited.', 'Bring a friend and make a day of it.', 'Find out more on our website.', 'Do not miss out.'] },
+      { category: 'Practical information & closings',
+        items: ['When: Saturday, 14 June, from 10 a.m.', 'Where: the main hall, Hauptstraße 1.', 'Entry is free. / Tickets: €5.', 'For more information, visit www.…', 'Questions? Call us on… or drop by any weekday.'] },
+    ],
+    tip: 'A leaflet (called a „Broschüre“ on the official task sheet) is not a mini-essay. It informs AND persuades a target audience, and the layout does half the work: a clear title, short headed sections, direct address and a call to action. Picture the reader holding it at a bus stop – everything has to land in seconds. Keep the register persuasive but clean: warmer than a report, cleaner than a blog. You write the text only – a title, headed sections and a call to action, never drawings or layout.',
+    modelText: {
+      title: 'Open Day at Schulzentrum Seetal – See Your Future in Action',
+      wordCount: '~250', register: 'Persuasive',
+      paragraphs: [
+        {
+          text: 'Open Day at Schulzentrum Seetal – See Your Future in Action',
+          isHeader: true,
+          annotations: [
+            { span: 'Open Day at Schulzentrum Seetal – See Your Future in Action', type: 'structure', label: 'Main title – names the event and sells it' },
+          ]
+        },
+        {
+          text: 'Not sure what to do after secondary school? Spend a morning with us and find out. On Saturday, 7 November, our whole school opens its doors: workshops, real projects and students who are happy to show you around. Come and see what studying here is actually like, with no pressure and no entrance test.',
+          annotations: [
+            { span: 'Not sure what to do after secondary school?', type: 'special', label: 'Question aimed straight at the reader' },
+            { span: 'workshops, real projects and students who are happy to show you around', type: 'content', label: 'Sells the benefit, not just the facts' },
+          ]
+        },
+        {
+          text: 'Try Before You Choose\nInstead of reading about our courses, you can try them. In our workshops you can build a small circuit, plan a three-course menu or design a marketing campaign, all in a single morning. Teachers and senior students work alongside you, so there is no way to get it wrong.',
+          annotations: [
+            { span: 'Try Before You Choose', type: 'structure', label: 'Subheading – breaks the text into scannable sections' },
+            { span: 'build a small circuit, plan a three-course menu or design a marketing campaign', type: 'content', label: 'Concrete, appealing detail' },
+          ]
+        },
+        {
+          text: 'Meet the People, Not Just the Building\nWant to know what life here is really like? Ask the people who live it. Current students will show you the labs and workshops and answer your questions about lessons, homework and life after graduation.',
+          annotations: [
+            { span: 'Meet the People, Not Just the Building', type: 'structure', label: 'Second subheading – parallel and benefit-led' },
+            { span: 'Ask the people who live it.', type: 'language', label: 'Direct address keeps the reader involved' },
+          ]
+        },
+        {
+          text: 'Something for Every Interest\nWhether you are drawn to technology, business or hospitality, there is a taster session waiting for you. Try your hand at coding, run a mini pop-up shop, or cook a small dish in our training kitchen. You will leave knowing which path actually suits you, not just which one sounds good in a brochure.',
+          annotations: [
+            { span: 'Whether you are drawn to technology, business or hospitality', type: 'content', label: 'Speaks to HTL, HAK and HLW readers alike' },
+            { span: 'Try your hand at coding, run a mini pop-up shop, or cook a small dish', type: 'special', label: 'Concrete, varied activities keep it persuasive' },
+          ]
+        },
+        {
+          text: 'Come and See for Yourself\nBring your parents, bring a friend, bring your questions. Entry is free and no registration is needed.\n\nWhen: Saturday, 7 November, 9 a.m. to 1 p.m.\nWhere: Schulzentrum Seetal, Bildungsweg 1, 1234 Seetal\nMore information: www.schulzentrum-seetal.example',
+          annotations: [
+            { span: 'Come and See for Yourself', type: 'special', label: 'Call to action – tells the reader exactly what to do' },
+            { span: 'Bring your parents, bring a friend, bring your questions.', type: 'language', label: 'Imperatives + repetition – persuasive leaflet style' },
+            { span: 'When: Saturday, 7 November, 9 a.m. to 1 p.m.\nWhere: Schulzentrum Seetal, Bildungsweg 1, 1234 Seetal\nMore information: www.schulzentrum-seetal.example', type: 'structure', label: 'Practical details – the facts people need' },
+          ]
+        },
+      ]
+    },
+  },
 ];
+
+/* ─── SCHOOL TYPES (AHS / BHS) ──────────────────────────────────
+   Sprachteil UND Bewertungsraster sind für AHS und BHS identisch
+   (SRDP Assessment Scale B2, Revision 2023, gültig ab Herbsttermin 2024 –
+   Kriterium 2 heißt bei beiden „Coherence and Cohesion").
+   Verschieden sind nur: Aufgabenanzahl (2 vs. 3), Zeit (120 vs. 195 min),
+   Textsorten (Essay nur AHS, Leaflet nur BHS), die Wörterbuch-Regel
+   und dass die BHS kein „Language in Use" als eigene Säule prüft. */
+SRDP.schools = {
+  ahs: {
+    id: 'ahs', label: 'AHS', long: 'AHS',
+    eyebrow: 'AHS Schriftliche Reifeprüfung · English B2',
+    brandTag: 'English Writing · B2 · AHS',
+    tasksWord: 'two', taskCount: 2,
+    timeStat: '120 min', timeStatSub: 'total writing time',
+    tasksStat: '2 tasks', tasksStatSub: '~400 + ~250 words',
+    overviewIntro: 'You have <strong style="color:var(--text)">120 minutes</strong> for <strong style="color:var(--text)">two tasks</strong>: one longer (~400 words, at B2 usually the essay) and one shorter (~250 words). Writing is one of four equally weighted sections of the written exam, alongside Reading, Listening and Language in Use.',
+    timeSplitTip: 'Time split that works: ~65 min for the 400-word task (incl. 5–10 min planning) · ~40 min for the 250-word task · the rest for proofreading both. Write your finishing times on the task sheet before you start.',
+    wordCountTip: 'Word count tolerance: ±10%. That is 360–440 words for 400-word tasks and 225–275 for 250-word tasks. If you are further off than that, Task Achievement is reduced by one band.',
+    dictionary: 'At AHS, dictionaries and reference works – electronic ones included – are not allowed anywhere in the standardised exam. That is less scary than it sounds: the tasks are built so that B2 vocabulary is enough, and when a word will not come, paraphrase it – the grid rewards that.',
+    provisional: false,
+  },
+  bhs: {
+    id: 'bhs', label: 'BHS', long: 'BHS',
+    eyebrow: 'BHS Reife- und Diplomprüfung · English B2',
+    brandTag: 'English Writing · B2 · BHS',
+    tasksWord: 'three', taskCount: 3,
+    timeStat: '195 min', timeStatSub: 'total writing time',
+    tasksStat: '3 tasks', tasksStatSub: '~250 words each',
+    overviewIntro: 'The BHS Writing section has <strong style="color:var(--text)">three tasks</strong>, usually around 250 words each (each task states its own target, ±10%), and you get <strong style="color:var(--text)">195 minutes</strong>. Writing is one of three sections of the written exam, alongside Reading and Listening – there is no separate Language in Use section. One BHS perk: (electronic) dictionaries are allowed, but only during the Writing section. The text types are article, report, blog, e-mail and leaflet – no essay.',
+    timeSplitTip: 'Time split that works: three tasks in 195 minutes is roughly 55–60 minutes each, planning included. Read every prompt twice, note your finishing times on the task sheet, and keep about 10 minutes at the end to proofread all three.',
+    wordCountTip: 'Word count tolerance: ±10%. Each task states its own target (usually around 250 words, so 225–275). If you are further off than that, Task Achievement is reduced by one band.',
+    dictionary: 'At BHS, (electronic) dictionaries are allowed – but only during the Writing section, not in Reading or Listening. Even so, the tasks are built so that B2 vocabulary is enough; when a word will not come, paraphrase it.',
+    provisional: false,
+  },
+};
 
 /* ─── E-MAIL SUB-TYPES ─────────────────────────────────────── */
 SRDP.emailSubTypes = [
@@ -513,7 +647,7 @@ SRDP.emailSubTypes = [
           ]
         },
         {
-          text: 'For the past two years, I have been a volunteer leader in a local scout group, where I plan weekly activities for children aged eight to twelve. This has taught me how to organise games, resolve conflicts calmly and take responsibility for the safety of a group. In addition, I have completed a first-aid course and speak fluent German and English. Last summer I also helped run a two-week day camp for forty children, where I was responsible for planning the daily schedule and supervising swimming sessions.',
+          text: 'For the past two years, I have been a volunteer leader in a local scout group, where I plan weekly activities for children aged eight to twelve. This has taught me how to organise games, resolve conflicts calmly and take responsibility for the safety of a group. In addition, I have completed a first-aid course and speak fluent German and English. Last summer I also helped run a two-week day camp for forty children, where I was responsible for planning the daily schedule and supervising swimming sessions, often for groups of twenty or more.',
           annotations: [
             { span: 'For the past two years, I have been', type: 'language', label: 'Present perfect — ongoing experience' },
             { span: 'This has taught me how to organise games, resolve conflicts calmly and take responsibility', type: 'content', label: 'Skills linked to the job — not just listed' },
@@ -575,7 +709,7 @@ SRDP.emailSubTypes = [
           ]
         },
         {
-          text: 'It is certainly true that schoolwork must come first. However, the article fails to consider what a few hours of work each week actually teach you about responsibility, time management and handling your own money. Speaking from my own experience as a student who works four hours every Saturday, my grades have not suffered — if anything, I have learned to organise my week far more effectively. Many of my classmates juggle a weekend job with school and sport without any drop in their marks. What they gain instead is confidence and a sense of independence that no classroom can teach.',
+          text: 'It is certainly true that schoolwork must come first. However, the article fails to consider what a few hours of work each week actually teach you about responsibility, time management and handling your own money. Speaking from my own experience as a student who works four hours every Saturday, my grades have not suffered — if anything, I have learned to organise my week far more effectively. Many of my classmates juggle a weekend job with school and sport without any drop in their marks. What they gain instead is confidence and a sense of independence that no classroom can teach, along with a first, valuable taste of real working life.',
           annotations: [
             { span: 'However, the article fails to consider', type: 'language', label: 'Formal disagreement phrase' },
             { span: 'Speaking from my own experience as a student who works four hours every Saturday', type: 'special', label: 'Personal, local angle — strengthens the letter' },

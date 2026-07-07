@@ -46,6 +46,11 @@ const BAND_ORDER = [0, 2, 4, 6, 8, 10];
 
 let rating = { TA: null, CC: null, LR: null, LA: null }; /* nur pro Sitzung, bewusst kein localStorage */
 
+/* Seit der Raster-Revision 2023 heißt Kriterium 2 bei AHS und BHS gleich: „Coherence & cohesion". */
+function critName(c) {
+  return c.name;
+}
+
 function ratingBlock() {
   return '<div class="gap-s"></div>' +
     M.sectionLabel('Rate yourself on the four criteria') +
@@ -53,7 +58,7 @@ function ratingBlock() {
     '<p style="font-size:.8125rem;color:var(--text-muted);margin-bottom:18px">Pick the description that honestly fits your text. Your rating is added to the AI feedback prompt so you can compare judgements.</p>' +
     CRITERIA.map(c =>
       '<div class="rate-row">' +
-        '<div class="rate-name">' + c.name + '</div>' +
+        '<div class="rate-name">' + critName(c) + '</div>' +
         '<div class="rate-seg" role="radiogroup" aria-label="' + esc(c.name) + ' self-rating" data-crit="' + c.id + '">' +
           BAND_ORDER.map(b =>
             '<button class="rate-btn' + (rating[c.id] === b ? ' sel' : '') + '" role="radio" aria-checked="' + (rating[c.id] === b) + '" data-action="rate-pick" data-crit="' + c.id + '" data-band="' + b + '" tabindex="' + (rating[c.id] === b || (rating[c.id] === null && b === 6) ? '0' : '-1') + '">' + b + '</button>').join('') +

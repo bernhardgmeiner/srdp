@@ -24,7 +24,7 @@ PAGES.grammar = {
                 '<div class="pair-cell"><div class="lab right-c">✓ CORRECT</div><span style="font-family:var(--font-mono);font-size:.8125rem">' + esc(p.right) + '</span><div style="font-size:.78rem;color:var(--text-muted);margin-top:5px">' + esc(p.note) + '</div></div>' +
               '</div>').join('') : '') +
             (g.table ?
-              '<div class="tbl-wrap"><table class="tbl" style="min-width:520px"><thead><tr><th>You write…</th><th>You think it means…</th><th>It actually means…</th><th>Use instead</th></tr></thead><tbody>' +
+              '<div class="tbl-wrap" tabindex="0" role="group" aria-label="Table (scroll sideways on small screens)"><table class="tbl" style="min-width:520px"><thead><tr><th>You write…</th><th>You think it means…</th><th>It actually means…</th><th>Use instead</th></tr></thead><tbody>' +
               g.table.map(r => '<tr><td style="font-family:var(--font-mono)">' + esc(r.word) + '</td><td>' + esc(r.youThink) + '</td><td>' + esc(r.itMeans) + '</td><td style="color:var(--green)">' + esc(r.correct) + '</td></tr>').join('') +
               '</tbody></table></div>' : '') +
             (g.rule ? '<div class="tip" style="margin-top:12px"><strong>Rule · </strong>' + esc(g.rule) + '</div>' : '') +
@@ -32,12 +32,12 @@ PAGES.grammar = {
         '</div>' +
         '<div class="gap"></div>' +
         sectionLabel('B2 linking words — upgrade your connectors') +
-        '<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Function</th><th>B1 (don&rsquo;t rely on these)</th><th>B2 (use these)</th></tr></thead><tbody>' +
+        '<div class="tbl-wrap" tabindex="0" role="group" aria-label="Table (scroll sideways on small screens)"><table class="tbl"><thead><tr><th>Function</th><th>B1 (don&rsquo;t rely on these)</th><th>B2 (use these)</th></tr></thead><tbody>' +
           SRDP.linkingWords.map(r => '<tr><td>' + esc(r.fn) + '</td><td class="cell-no">' + esc(r.basic) + '</td><td style="color:var(--text)">' + esc(r.b2) + '</td></tr>').join('') +
         '</tbody></table></div>' +
         '<div class="gap"></div>' +
         sectionLabel('Which text type does what?') +
-        '<div class="tbl-wrap"><table class="tbl"><thead><tr>' + SRDP.comparison.head.map(h => '<th>' + h + '</th>').join('') + '</tr></thead><tbody>' +
+        '<div class="tbl-wrap" tabindex="0" role="group" aria-label="Table (scroll sideways on small screens)"><table class="tbl"><thead><tr>' + SRDP.comparison.head.map(h => '<th>' + h + '</th>').join('') + '</tr></thead><tbody>' +
           SRDP.comparison.rows.map(r => '<tr>' + r.map((c, j) =>
             '<td class="' + (j > 0 && c === 'Yes' ? 'cell-yes' : j > 0 && c === 'No' ? 'cell-no' : '') + '">' + esc(c) + '</td>').join('') + '</tr>').join('') +
         '</tbody></table></div>' +
@@ -214,6 +214,10 @@ window.MWG.wireParaInputs = wireParaInputs;
 
 /* ─── PRACTICE ZONE ───────────────────────────────────────── */
 const przState = { tab: 'spot', revealed: {}, regRevealed: {} };
+function finalQuizForSchool() {
+  const s = M.school();
+  return SRDP.finalQuiz.filter(q => !q.schools || q.schools.indexOf(s) >= 0);
+}
 function practiceBody() {
   if (przState.tab === 'spot') {
     return sectionLabel('Spot the mistakes — conventions, not grammar') +
@@ -246,8 +250,9 @@ function practiceBody() {
       '</div>';
   }
   if (przState.tab === 'final') {
-    return sectionLabel('The final quiz — ' + SRDP.finalQuiz.length + ' questions across all text types') +
-      '<p style="font-size:.9375rem;color:var(--text-secondary);margin-bottom:24px;line-height:1.55">Twelve questions across everything on this site. If you can pass this, you are ready. Aim for 10 or better.</p>' +
+    const fq = finalQuizForSchool();
+    return sectionLabel('The final quiz — ' + fq.length + ' questions across all text types') +
+      '<p style="font-size:.9375rem;color:var(--text-secondary);margin-bottom:24px;line-height:1.55">' + fq.length + ' questions across everything on this site. If you can pass this, you are ready. Aim for 10 or better.</p>' +
       '<div data-quiz-host="final"></div>';
   }
   return '';
@@ -266,7 +271,7 @@ PAGES.practice = {
 };
 function wirePractice() {
   if (przState.tab === 'final') {
-    if (!M.quizStates.final) M.initQuiz('final', SRDP.finalQuiz, (score, total) => { if (score >= Math.ceil(total * 0.6)) M.markQuiz('final'); });
+    if (!M.quizStates.final) M.initQuiz('final', finalQuizForSchool(), (score, total) => { if (score >= Math.ceil(total * 0.6)) M.markQuiz('final'); });
     const host = M.$('[data-quiz-host="final"]');
     if (host) host.innerHTML = M.quizHTML('final');
   }

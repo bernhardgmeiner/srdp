@@ -8,7 +8,7 @@
 const $ = (s, el) => (el || document).querySelector(s);
 const $$ = (s, el) => Array.from((el || document).querySelectorAll(s));
 const esc = s => String(s == null ? '' : s)
-  .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 
 const TYPE_COLORS = { purple: 'var(--purple)', blue: 'var(--blue)', orange: 'var(--orange)', green: 'var(--green)', red: 'var(--red)' };
 const ANN = {
@@ -83,7 +83,7 @@ function annotated(para) {
   const inner = parts.map(p => {
     if (!p.type) return esc(p.text);
     const a = ANN[p.type] || ANN.language;
-    return '<mark class="ann" tabindex="0" style="--ann-c:' + a.c + ';--ann-bg:color-mix(in srgb,' + a.c + ' 15%,transparent)">' +
+    return '<mark class="ann" tabindex="0" aria-label="' + esc(p.label) + '" style="--ann-c:' + a.c + ';--ann-bg:color-mix(in srgb,' + a.c + ' 15%,transparent)">' +
       esc(p.text) + '<span class="bub">' + esc(p.label) + '</span></mark>';
   }).join('');
   return '<p' + (para.isHeader ? ' style="font-family:var(--font-mono);font-size:.8125rem;line-height:1.8"' : '') + '>' + inner + '</p>';
@@ -288,6 +288,43 @@ window.MWG = { $, $$, esc, TYPE_COLORS, ANN, PEEL, store, progress: () => progre
   annotated, modelBox, sectionLabel, pageHead, ddCols, chips, phraseGroups,
   initQuiz, quizHTML, quizAction, quizStates, initDnd, dndHTML, repaintDnd, wireDnd, dndStates, shuffle };
 
+/* ─── SCHOOL TYPE (AHS / BHS) ─────────────────────────────── */
+const SCHOOLS = ['ahs', 'bhs'];
+function getSchool() { const s = store('mwg_school'); return SCHOOLS.indexOf(s) >= 0 ? s : 'ahs'; }
+function schoolChosen() { return SCHOOLS.indexOf(store('mwg_school')) >= 0; }
+function schoolConfig() { return (window.SRDP && SRDP.schools && SRDP.schools[getSchool()]) || {}; }
+function typesForSchool() {
+  const s = getSchool();
+  return ((window.SRDP && SRDP.textTypes) || []).filter(t => !t.schools || t.schools.indexOf(s) >= 0);
+}
+/* Beurteilungsraster mit schultyp-abhängigem Kriterium 2 */
+function assessmentCriteria() {
+  const base = (window.SRDP && SRDP.assessment && SRDP.assessment.criteria) ? SRDP.assessment.criteria.slice() : [];
+  const c2 = schoolConfig().crit2;
+  if (c2 && base[1]) base[1] = c2;
+  return base;
+}
+function setSchool(s) {
+  if (SCHOOLS.indexOf(s) < 0) return;
+  store('mwg_school', s);
+  document.documentElement.setAttribute('data-school', s);
+  try {
+    for (var qk in quizStates) { delete quizStates[qk]; }
+    var vis = typesForSchool().map(function (t) { return t.id; });
+    var W = window.MWG;
+    if (W.scState && vis.indexOf(W.scState.type) < 0) W.scState.type = vis[0] || 'article';
+    if (W.clState && W.clState.type !== 'general' && vis.indexOf(W.clState.type) < 0) W.clState.type = 'general';
+    if (W.pbState && W.pbState.filter !== 'all' && vis.indexOf(W.pbState.filter) < 0) W.pbState.filter = 'all';
+    if (W.tbState && W.tbState.filter !== 'all' && vis.indexOf(W.tbState.filter) < 0) W.tbState.filter = 'all';
+  } catch (e) {}
+  buildNav();
+  const id = (location.hash || '#home').slice(1);
+  const hidden = ((window.SRDP && SRDP.textTypes) || []).some(t => t.id === id && t.schools && t.schools.indexOf(s) < 0);
+  if (hidden && location.hash && location.hash !== '#home') { location.hash = '#home'; } /* triggers route via hashchange */
+  else if (window.MWG.route) window.MWG.route();
+  announce('Switched to ' + (schoolConfig().label || s.toUpperCase()));
+}
+
 /* ─── NAV ─────────────────────────────────────────────────── */
 const NAV = [
   { divider: null, items: [{ id: 'home', label: 'Home' }] },
@@ -308,17 +345,24 @@ const NAV = [
     { id: 'paragraphs', label: 'Paragraph writing' },
     { id: 'grammar', label: 'Grammar kit' },
     { id: 'practice', label: 'Practice zone' },
+    { id: 'timer', label: 'Exam timer' },
   ]},
   { divider: 'About', items: [
     { id: 'teachers', label: 'For teachers' },
+    { id: 'parents', label: 'Für Eltern & Datenschutz' },
   ]},
 ];
-NAV[2].items = SRDP.textTypes.map(t => ({ id: t.id, label: t.name, color: t.color }));
+NAV[2].items = typesForSchool().map(t => ({ id: t.id, label: t.name, color: t.color }));
 
 function buildNav() {
   const nav = $('#sidenav');
+  NAV[2].items = typesForSchool().map(t => ({ id: t.id, label: t.name, color: t.color }));
+  const scfg = schoolConfig();
   nav.innerHTML =
-    '<div class="nav-brand" style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px"><div><div class="t1">Don&rsquo;t Panic, It&rsquo;s Just the Matura</div><div class="t2">English Writing · B2 · AHS</div></div><div style="display:flex;gap:6px;flex-shrink:0"><button class="nav-help" data-action="open-search" title="Search (Ctrl+K)" aria-label="Search this guide">⌕</button><button class="nav-help" data-action="start-tour" title="Replay the guided tour" aria-label="Replay the guided tour">?</button></div></div>' +
+    '<div class="nav-brand" style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px"><div><div class="t1">Don&rsquo;t Panic, It&rsquo;s Just the Matura</div><div class="t2">' + esc(scfg.brandTag || 'English Writing · B2') + '</div></div><div style="display:flex;gap:6px;flex-shrink:0"><button class="nav-help" data-action="open-search" title="Search (Ctrl+K)" aria-label="Search this guide">⌕</button><button class="nav-help" data-action="start-tour" title="Replay the guided tour" aria-label="Replay the guided tour">?</button></div></div>' +
+    '<div class="school-switch" role="group" aria-label="Schultyp (AHS oder BHS)">' +
+      SCHOOLS.map(function (s) { var sc = (window.SRDP && SRDP.schools && SRDP.schools[s]) || {}; var on = getSchool() === s; return '<button class="school-btn' + (on ? ' active' : '') + '" data-action="set-school" data-school="' + s + '" aria-pressed="' + on + '" title="Auf ' + esc(sc.label || s.toUpperCase()) + ' umschalten">' + esc(sc.label || s.toUpperCase()) + '</button>'; }).join('') +
+    '</div>' +
     '<div class="nav-scroll">' +
       NAV.map(sec =>
         (sec.divider ? '<div class="nav-divider">' + sec.divider + '</div>' : '') +
@@ -352,4 +396,11 @@ window.MWG.paintNav = paintNav;
 window.MWG.NAV = NAV;
 window.MWG.buildNav = buildNav;
 window.MWG.setTheme = setTheme;
+window.MWG.school = getSchool;
+window.MWG.schoolChosen = schoolChosen;
+window.MWG.schoolConfig = schoolConfig;
+window.MWG.typesForSchool = typesForSchool;
+window.MWG.assessmentCriteria = assessmentCriteria;
+window.MWG.setSchool = setSchool;
+window.MWG.SCHOOLS = SCHOOLS;
 })();

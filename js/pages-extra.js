@@ -16,15 +16,15 @@ const FAQ = [
   { q: "Do contractions (don't, it's) really cost marks?",
     a: "Not automatically. The grid rates whether your register fits the text type. In a blog or an informal e-mail, contractions are exactly right. In an essay, a report or a formal e-mail they pull your register down – one won't sink you, but a text full of them tells the examiner you can't hear the difference. Decide once before you write: formal or informal? Then commit." },
   { q: "Can I use a dictionary?",
-    a: "No. At AHS, dictionaries and reference works – electronic ones included – are not allowed anywhere in the standardised exam. (At BHS the rules are different, but this guide is built for AHS.) That is less scary than it sounds: the tasks are designed so that B2 vocabulary is enough. When a word refuses to come, paraphrase it – that is a skill the grid actually rewards." },
+    a: "It depends on your school type. At AHS, dictionaries and reference works – electronic ones included – are not allowed anywhere in the exam. At BHS, (electronic) dictionaries are allowed, but only during the Writing section. Either way, the tasks are built so that B2 vocabulary is enough: when a word will not come, paraphrase it – the grid rewards that." },
   { q: "What if I completely misread the task?",
     a: "The only true disaster is a text that ignores the set task altogether – an off-topic text or one that was obviously prepared in advance. That triggers the official VETO rule: Task Achievement is rated 0 and the other three criteria are not assessed at all. Writing the wrong text type alone does NOT trigger the veto, but it costs you heavily in Task Achievement. Your insurance policy costs 60 seconds: read the task twice and underline text type, audience and the three bullet points." },
   { q: "Can I invent facts, numbers and personal experiences?",
     a: "Yes. This is a language exam, not a fact check. The official guidance says content counts as relevant when it serves the task – even if it's not what the examiner expected. An invented survey, a made-up summer job in Italy: all fine, as long as it is plausible and actually develops the bullet point. What doesn't help is padding that ignores the task." },
   { q: "Do British and American spelling both count?",
-    a: "Both are accepted – colour or color, organise or organize. What you should avoid is mixing systems mid-text, because inconsistency starts to look like guessing. Pick the one you actually know (for most Austrian students that's British) and stay with it. If you want certainty for your school, verify this one with your teacher." },
-  { q: "What if I don't finish the second task?",
-    a: "An unfinished text is not an automatic zero – it is assessed with the same grid, and whatever stands on the page earns what it earns. But an incomplete text usually bleeds marks in Task Achievement (undeveloped content points) and Coherence (no ending). The rescue strategy is time management: set finishing times for both tasks before you start writing, and if time gets short, a short, complete text beats a long, unfinished one." },
+    a: "Both are generally accepted, though this is not spelled out in the official rules – colour or color, organise or organize. What you should avoid is mixing systems mid-text, because inconsistency starts to look like guessing. Pick the one you actually know (for most Austrian students that's British) and stay with it. If you want certainty for your school, verify this one with your teacher." },
+  { q: "What if I don't finish a task?",
+    a: "An unfinished text is not an automatic zero – it is assessed with the same grid, and whatever stands on the page earns what it earns. But an incomplete text usually bleeds marks in Task Achievement (undeveloped content points) and Coherence (no ending). The rescue strategy is time management: set finishing times for each task before you start writing, and if time gets short, a short, complete text beats a long, unfinished one." },
   { q: "How exact is 'around 400 words'?",
     a: "Exactly ±10% – that is the official rule, not folklore. 'Around 400' means 360–440 is safe; 'around 250' means 225–275. Inside the range, nobody counts pedantically. Outside it, Task Achievement drops one band. Note that more is not better anyway: hitting the range with dense, relevant content scores higher than 480 words of padding." },
   { q: "Can I write more than the three bullet points ask for?",
@@ -32,9 +32,9 @@ const FAQ = [
   { q: "Is the title part of the word count?",
     a: "There is no clear public rule on this, and counting practice can differ. The pragmatic answer: a title is four to eight words, so it almost never decides anything. If you are near the edge of the ±10% range, the title is not what saves you – cutting waffle is. If you want the exact counting convention for your school, ask your teacher." },
   { q: "Which task should I write first?",
-    a: "Your choice – the booklet doesn't care about order. A sensible default: start with the long task (usually the essay) while your head is fresh, give it ~65 minutes, then the short task in ~40, and keep the rest for proofreading both. If staring at the essay blocks you, warming up with the short task first is a legitimate strategy too. Decide before exam day, not during it." },
+    a: "Your choice – the booklet does not care about order. At AHS (two tasks, 120 minutes) a common default is to start with the long task, often the essay, for about 65 minutes, then the short task for about 40, keeping the rest to proofread both. At BHS (three tasks, 195 minutes) give each task roughly equal time, about 55–60 minutes including planning, and start with the type you feel most confident about. Decide your order before exam day, not during it." },
   { q: "Are the tasks the same at every school?",
-    a: "Yes. The written Matura is standardised: the tasks come centrally from the BMB, and every AHS candidate in Austria opens the same booklet on the same day at the same time. That is good news for you – it is exactly why the released past papers are such honest practice material." },
+    a: "Yes. The written Matura is standardised: the tasks come centrally from the BMB, and every candidate in your school type opens the same booklet on the same day at the same time. That is good news for you – it is exactly why the released past papers are such honest practice material." },
   { q: "What happens if my written exam is negative?",
     a: "It is not the end of the road. A negative Klausur can be repeated, and there is also the option of a mündliche Kompensationsprüfung – an oral compensation exam that can turn the grade around (see SchUG § 40). Your teachers will walk you through the procedure if it ever comes to that. Plan A, of course, is this guide." },
 ];
@@ -47,7 +47,7 @@ PAGES.faq = {
       '<div class="wrap"><div class="gap-s"></div>' +
         '<div class="acc">' + FAQ.map((f, i) =>
           '<div class="acc-item"><button class="acc-head" data-action="acc" aria-expanded="false"><span class="pm">+</span><span>' + esc(f.q) + '</span></button>' +
-          '<div class="acc-body"><p style="font-size:.9375rem;color:var(--text-secondary);line-height:1.65;padding:10px 0 4px">' + esc(f.a) + '</p></div></div>').join('') +
+          '<div class="acc-body"><p style="font-size:.9375rem;color:var(--text-secondary);line-height:1.65;padding:10px 0 4px">' + esc(typeof f.a === 'function' ? f.a() : f.a) + '</p></div></div>').join('') +
         '</div>' +
         '<div class="tip" style="margin-top:26px">Rules around exam-day logistics are applied by your school&rsquo;s exam team. When in doubt, your teacher&rsquo;s answer beats this page.</div>' +
         '<div style="height:72px"></div>' +
@@ -64,7 +64,7 @@ PAGES.teachers = {
       pageHead('About', 'For teachers', 'What this site is, and how to use it in your classroom. Short version: take it, it&rsquo;s free.') +
       '<div class="wrap"><div class="gap-s"></div>' +
         sectionLabel('What this is') +
-        '<p style="font-size:1rem;color:var(--text-secondary);line-height:1.65;max-width:720px;margin-bottom:14px">A free, independent revision site for the writing part of the English Matura (AHS, B2), built by <a href="https://www.bernhardgmeiner.com" target="_blank" rel="noopener">Bernhard Gmeiner</a>, an English teacher in Vienna, with the help of Claude Cowork. It follows the official SRDP documents – the B2 assessment grid (2023 revision), the text type characteristics, the ±10% rule, the veto rule – and turns them into guides, model texts, quizzes and practice tools that students can use on their own.</p>' +
+        '<p style="font-size:1rem;color:var(--text-secondary);line-height:1.65;max-width:720px;margin-bottom:14px">A free, independent revision site for the writing part of the English Matura (AHS and BHS, B2), built by <a href="https://www.bernhardgmeiner.com" target="_blank" rel="noopener">Bernhard Gmeiner</a>, an English teacher in Vienna, with the help of Claude Cowork. It follows the official SRDP documents – the B2 assessment grid (2023 revision), the text type characteristics, the ±10% rule, the veto rule – and turns them into guides, model texts, quizzes and practice tools that students can use on their own.</p>' +
         '<p style="font-size:1rem;color:var(--text-secondary);line-height:1.65;max-width:720px">No accounts, no tracking, no ads. Progress lives in the student&rsquo;s own browser and nowhere else.</p>' +
         '<div class="gap-s"></div>' +
         sectionLabel('Use it freely') +
@@ -82,7 +82,33 @@ PAGES.teachers = {
         '<p style="font-size:1rem;color:var(--text-secondary);line-height:1.65;max-width:720px">Corrections from colleagues are gold. If a fact, a model text or a quiz answer looks off, <a href="mailto:bernhard.gmeiner@gmail.com?subject=Matura%20Guide%20Feedback">send a short e-mail</a> naming the section. More about me at <a href="https://www.bernhardgmeiner.com" target="_blank" rel="noopener">bernhardgmeiner.com</a>.</p>' +
         '<div class="gap-s"></div>' +
         sectionLabel('Für Eltern') +
-        '<p lang="de" style="font-size:1rem;color:var(--text-secondary);line-height:1.65;max-width:720px">Diese Seite hilft Ihrem Kind bei der Vorbereitung auf die schriftliche Englisch-Matura (AHS, Niveau B2). Sie ist kostenlos, werbefrei und speichert keine Daten auf Servern – der Lernfortschritt bleibt im Browser Ihres Kindes. Die Inhalte orientieren sich an den offiziellen Unterlagen des Bildungsministeriums. Bewertet wird in der echten Matura von den Lehrer:innen Ihres Kindes mit der offiziellen Skala; diese Seite ersetzt keinen Unterricht, sie ergänzt ihn.</p>' +
+        '<p lang="de" style="font-size:1rem;color:var(--text-secondary);line-height:1.65;max-width:720px">Diese Seite hilft Ihrem Kind bei der Vorbereitung auf die schriftliche Englisch-Matura (AHS oder BHS, Niveau B2). Sie ist kostenlos, werbefrei und speichert keine Daten auf Servern – der Lernfortschritt bleibt im Browser Ihres Kindes. Die Inhalte orientieren sich an den offiziellen Unterlagen des Bildungsministeriums. Bewertet wird in der echten Matura von den Lehrer:innen Ihres Kindes mit der offiziellen Skala; diese Seite ersetzt keinen Unterricht, sie ergänzt ihn.</p>' +
+        '<div style="height:72px"></div>' +
+      '</div></div>';
+  },
+};
+
+PAGES.parents = {
+  title: 'Für Eltern & Datenschutz', track: 'parents',
+  render() {
+    return '<div class="page">' +
+      pageHead('Über die Seite', 'Für Eltern &amp; Datenschutz', 'Was diese Seite ist, was mit den Daten Ihres Kindes passiert und wie Sie unterstützen können.') +
+      '<div class="wrap" lang="de" style="max-width:760px"><div class="gap-s"></div>' +
+        sectionLabel('Was diese Seite ist') +
+        '<p style="font-size:1rem;color:var(--text-secondary);line-height:1.65;margin-bottom:14px">Eine kostenlose, unabhängige Übungsseite für den schriftlichen Teil der Englisch-Matura (AHS und BHS, Niveau B2), gemacht von <a href="https://www.bernhardgmeiner.com" target="_blank" rel="noopener">Bernhard Gmeiner</a>, einem Englischlehrer aus Wien. Sie orientiert sich an den offiziellen SRDP-Unterlagen des Bildungsministeriums, ist aber kein offizielles Dokument des BMB. Sie ergänzt den Unterricht, sie ersetzt ihn nicht.</p>' +
+        '<div class="gap-s"></div>' +
+        sectionLabel('Datenschutz – kurz und ehrlich') +
+        '<p style="font-size:1rem;color:var(--text-secondary);line-height:1.65;margin-bottom:12px">Kein Konto, keine Anmeldung, keine Werbung, kein Tracking. Der Lernfortschritt Ihres Kindes (besuchte Seiten, Quizergebnisse, Lernplan, Prüfungsdatum) wird ausschließlich lokal im Browser auf diesem Gerät gespeichert und an keinen Server geschickt. Wird der Browser geleert oder das Gerät gewechselt, ist der Fortschritt weg – das ist der Preis dafür, dass keine Daten das Gerät verlassen.</p>' +
+        '<p style="font-size:1rem;color:var(--text-secondary);line-height:1.65;margin-bottom:12px">Es gibt eine freiwillige KI-Funktion: Der Self-check erstellt auf Wunsch einen fertigen Text, den Ihr Kind selbst in ein KI-Werkzeug wie ChatGPT oder Claude kopieren kann, um Übungs-Feedback zu bekommen. Erst dann, und nur dann, verlässt der eingefügte Text dieses Gerät und geht an den jeweiligen Anbieter. Deshalb der Rat auf der Seite: nur Übungstexte verwenden, keine echten Namen oder persönlichen Daten. Ihre Schule kann außerdem eigene Regeln zum Einsatz von KI haben; die gelten zuerst.</p>' +
+        '<div class="gap-s"></div>' +
+        sectionLabel('Wie Sie unterstützen können') +
+        '<p style="font-size:1rem;color:var(--text-secondary);line-height:1.65;margin-bottom:12px">Am meisten hilft Regelmäßigkeit: lieber viele kurze Einheiten als ein langer Abend vor der Prüfung. Tragen Sie gemeinsam das Prüfungsdatum im <a href="#studyplan">Countdown-Lernplan</a> ein, dann zeigt die Seite jeden Tag, was dran ist. Fragen Sie Ihr Kind, was es gerade übt: etwas erklären zu müssen ist die halbe Miete. Und: kein Druck. Die Lerninhalte sind auf Englisch (das ist Absicht), diese Seite hier ist für Sie auf Deutsch.</p>' +
+        '<div class="gap-s"></div>' +
+        sectionLabel('Kein Ersatz für den Unterricht') +
+        '<p style="font-size:1rem;color:var(--text-secondary);line-height:1.65;margin-bottom:12px">Bewertet wird in der echten Matura ausschließlich von den Lehrer:innen Ihres Kindes mit der offiziellen Skala. Wo etwas von der Schule abhängt, steht das auf der Seite dabei. Im Zweifel zählt immer die Auskunft der Lehrkraft, nicht diese Seite.</p>' +
+        '<div class="gap-s"></div>' +
+        sectionLabel('Kontakt / Impressum') +
+        '<p style="font-size:1rem;color:var(--text-secondary);line-height:1.65">Bernhard Gmeiner, Wien · <a href="mailto:bernhard.gmeiner@gmail.com">bernhard.gmeiner@gmail.com</a> · <a href="https://www.bernhardgmeiner.com" target="_blank" rel="noopener">bernhardgmeiner.com</a>. Privates, nicht-kommerzielles Projekt. Fehler gefunden? Eine kurze E-Mail hilft, die Seite besser zu machen.</p>' +
         '<div style="height:72px"></div>' +
       '</div></div>';
   },
@@ -92,7 +118,7 @@ PAGES.teachers = {
 const HONEST = {
   essay: {
     title: 'Should the school day start later?',
-    meta: '~400 words · a realistic pass, not a model of perfection',
+    meta: '~300 words · a realistic pass, not a model of perfection',
     intro: 'Every model text on this site shows you what strong looks like. This one shows you what real looks like: a believable student essay that would pass – and exactly where it leaks marks. The numbered markers explain what each weak spot costs and how the strong version would sound.',
     paras: [
       "Everybody knows that teenagers are always tired in the morning.{{1}} In Austria the school starts{{2}} at eight o'clock and many students must get up at six. In this essay I want to write about the question if the school day should start later.{{3}}",
@@ -115,11 +141,11 @@ const HONEST = {
       "The conclusion only repeats the introduction's point about sleep and drops the other two arguments. A strong conclusion weighs all three and lands on a position.",
       "Ending on 'the politicians should think about it' outsources the essay's job. The task asked what YOU think – commit: 'Starting at half past eight would cost little and win back an hour of sleep – it is the obvious first step.'",
     ],
-    verdict: "Where would this land? Task Achievement around 6 – all three points are addressed with some development, conventions are basically there. Coherence around 5–6 – paragraphs exist, but label-style topic sentences and a repetitive conclusion weaken the line of thought. Range and Accuracy around 4–5 each: simple structures dominate, intensifiers repeat, and the since/for, article and if-clause errors are exactly the frequent, fixable kind – which is the encouraging part, because every single marker above is trainable.",
+    verdict: "Where would this land? Task Achievement around 6 – all three points are addressed with some development, conventions are basically there. Coherence around 5–6 – paragraphs exist, but label-style topic sentences and a repetitive conclusion weaken the line of thought. Range and Accuracy around 4–5 each: simple structures dominate, intensifiers repeat, and the since/for, article and if-clause errors are exactly the frequent, fixable kind – which is the encouraging part, because every single marker above is trainable. One leak the numbered markers do not tag: at about 300 words this essay is well under the ~400 the task asks for, and that shortfall alone costs a Task Achievement band – length is the cheapest mark to lose.",
   },
   email: {
     title: 'Complaint about a delayed delivery',
-    meta: '~250 words · a realistic pass, not a model of perfection',
+    meta: '~150 words · a realistic pass, not a model of perfection',
     intro: 'Same idea as the essay above: this formal e-mail would pass, but it drips marks in a dozen small places. The markers show where – and what the strong version would do instead.',
     paras: [
       "To: office@citysports.example\nFrom: lukas.maier@email.example\nDate: 12 March 2026\nSubject: Problem{{1}}",
@@ -144,7 +170,31 @@ const HONEST = {
       "'look forward to hear' – after 'look forward to', English needs the -ing form: 'I look forward to hearing from you.' Cheap to memorise, embarrassing to lose.",
       "'Best wishes' after 'Dear Sir or Madam' breaks the pairing rule: unknown name → 'Yours faithfully'. The closing is a two-second decision that examiners always see.",
     ],
-    verdict: "Where would this land? Task Achievement around 6 – purpose, complaint and request are all there, the subject line and the closing pair leak points. Coherence 6 – the order of ideas is actually fine. Range 5 – the register keeps slipping into spoken German-English. Accuracy 4–5 – 'informations', 'to hear', tense choices. Total effect: a pass with no room to spare, built almost entirely out of errors this site's Grammar kit covers.",
+    verdict: "Where would this land? Task Achievement around 6 – purpose, complaint and request are all there, the subject line and the closing pair leak points. Coherence 6 – the order of ideas is actually fine. Range 5 – the register keeps slipping into spoken German-English. Accuracy 4–5 – 'informations', 'to hear', tense choices. Total effect: a pass with no room to spare, built almost entirely out of errors this site's Grammar kit covers. And at about 150 words it is far under the ~250 target, which by itself drops Task Achievement a band before a single language error is counted.",
+  },
+  leaflet: {
+    title: 'Information about the Charity Run',
+    meta: '~170 words · a realistic pass, not a model of perfection',
+    intro: 'Same idea as the models above, but for the leaflet. This one would scrape a pass, yet it leaks marks exactly where BHS students lose them: a flat, report-style title, no subheadings, and no real call to action. The markers show where.',
+    paras: [
+      "Information about the Charity Run{{1}}",
+      "Our school organises a charity run and we want that many people are coming.{{2}} In this leaflet I give you some informations{{3}} about the event.",
+      "The run is since three years{{4}} a tradition at our school. Last year we collected over 2,000 Euro for a local animal shelter, and this year we want to collect even more. If you take part, you help animals who has{{5}} no home. You can run 5 or 10 kilometres, it depends on you.{{6}} There is also music and a buffet with cakes and drinks.",
+      "The atmosphere is always great and it makes a lot of fun.{{7}} Your family and friends can come and watch too. So I think everybody should come, because it is for a good thing and also very funny.{{8}}",
+      "It would be nice if many people come.{{9}}",
+    ],
+    notes: [
+      "A leaflet needs a title that pulls the reader in and short sections with their own subheadings. This one has a flat, notice-style title and runs as a single block with no subheadings at all – the biggest leaflet convention to lose, and it costs Task Achievement.",
+      "'we want that many people are coming' is German word order ('wir wollen, dass...'). English: 'we want many people to come'. And 'In this leaflet I give you information' is flat – a leaflet opens with a hook, not a table of contents.",
+      "'informations' does not exist – 'information' is uncountable.",
+      "'is since three years' – the classic since/for trap, plus tense: 'has been a tradition for three years'.",
+      "'animals who has no home' – animals take 'that', and it needs plural agreement: 'animals that have no home'.",
+      "'You can run 5 or 10 kilometres, it depends on you.' is a comma splice (two complete sentences joined by only a comma). Use a full stop, and turn it into a benefit rather than a flat statement.",
+      "'it makes a lot of fun' is a direct translation of 'macht Spaß'. English: 'it is a lot of fun' or 'great fun'.",
+      "'very funny' is a false friend: funny = lustig (comical). Here you mean 'fun' (enjoyable).",
+      "This is where the leaflet really leaks: there is no call to action and no practical details. A leaflet must tell the reader exactly what to do and give the facts – When? Where? How do I sign up? Ending on 'it would be nice if many people come' leaves the reader with nothing to act on.",
+    ],
+    verdict: "Where would this land? Task Achievement around 4–5 – the content is there, but the missing subheadings, the missing call to action and the missing date/time/place are exactly the leaflet conventions the grid rewards. Coherence around 5 – one undivided block. Range and Accuracy around 4 each: simple sentences plus the frequent, fixable German-into-English errors above. At about 170 words it is also under the ~250 the task expects, which costs another Task Achievement band on its own. The encouraging part: every marker here is trainable, and adding clear subheadings and a real call to action would raise the score quickly.",
   },
 };
 
@@ -177,6 +227,7 @@ M.honestModel = honestModel;
 M.hmJump = function (el) {
   const note = document.getElementById('hmNote-' + el.dataset.type + '-' + el.dataset.n);
   if (!note) return;
+  note.setAttribute('tabindex', '-1'); try { note.focus({ preventScroll: true }); } catch (e) {}
   try { note.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' }); } catch (e) {}
   note.classList.add('search-hit');
   setTimeout(() => note.classList.remove('search-hit'), 2000);

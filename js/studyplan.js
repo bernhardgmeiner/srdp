@@ -1,14 +1,13 @@
 /* ════════════════════════════════════════════════════════════
-   Countdown plan – 4-Wochen- und 7-Tage-Lernplan mit Countdown
+   Countdown plan – 4-Wochen- und 7-Tage-Lernplan, schultyp-abhängig
    ════════════════════════════════════════════════════════════ */
 (function () {
 'use strict';
 const M = window.MWG;
 const { $, $$, esc, store, sectionLabel, pageHead } = M;
 
-/* ─── Pläne ───────────────────────────────────────────────── */
+/* ─── AHS: 4-Wochen-Plan (zwei Aufgaben, mit Essay) ───────────── */
 const P4 = [
-  /* Woche 1 – Fundament */
   { w: 1, title: 'Read the rules of the game', tasks: [
     { t: 'Read <a href="#overview">Overview &amp; grading</a> from top to bottom. Slowly. This is the map for everything else.', min: 25 },
     { t: 'Close the page and write down the four criteria from memory. Check yourself.', min: 5 },
@@ -28,7 +27,6 @@ const P4 = [
     { t: 'Run yesterday&rsquo;s essay through the <a href="#selfcheck">Self-check studio</a> and fix what it finds.', min: 20 },
     { t: 'Look up your two most annoying mistakes in the <a href="#grammar">Grammar kit</a>.', min: 15 },
   ]},
-  /* Woche 2 – kurze Textsorten */
   { w: 2, title: 'The article', tasks: [
     { t: 'Work through the <a href="#article">article guide</a> and model text.', min: 25 },
     { t: 'Take the article quiz.', min: 10 },
@@ -47,7 +45,6 @@ const P4 = [
     { t: 'Learn the B2 linking words table in the <a href="#grammar">Grammar kit</a> – five new ones, used in real sentences.', min: 20 },
     { t: 'Do one topic in <a href="#topicvocab">Topic vocabulary</a> as flashcards.', min: 15 },
   ]},
-  /* Woche 3 – Blog, E-Mail, Sprache */
   { w: 3, title: 'The blog', tasks: [
     { t: 'Work through the <a href="#blog">blog guide</a> – register is everything here.', min: 25 },
     { t: 'Take the blog quiz.', min: 10 },
@@ -66,7 +63,6 @@ const P4 = [
     { t: 'Pick ten phrases from the <a href="#phrasebank">Phrase bank</a> you will actually use, and copy them into your notes.', min: 20 },
     { t: 'One more <a href="#topicvocab">flashcard</a> session – let the boxes do their work.', min: 15 },
   ]},
-  /* Woche 4 – Generalprobe */
   { w: 4, title: 'Dress rehearsal I', tasks: [
     { t: 'Full exam simulation from the <a href="#taskbank">Task bank</a>: one ~400-word and one ~250-word task, 120 minutes, no phone, no dictionary.', min: 120 },
   ]},
@@ -114,7 +110,116 @@ const P7 = [
   ]},
 ];
 
-const PLANS = { p4: { label: '4 weeks', days: P4 }, p7: { label: '7 days', days: P7 } };
+/* ─── BHS: 4-Wochen-Plan (drei Aufgaben, mit Leaflet statt Essay) ── */
+const P4B = [
+  { w: 1, title: 'Read the rules of the game', tasks: [
+    { t: 'Read <a href="#overview">Overview &amp; grading</a> from top to bottom. Slowly. This is the map for everything else.', min: 25 },
+    { t: 'Close the page and write down the four criteria from memory. Check yourself.', min: 5 },
+  ]},
+  { w: 1, title: 'Meet the leaflet', tasks: [
+    { t: 'Work through the <a href="#leaflet">leaflet guide</a>: layout, do&rsquo;s and don&rsquo;ts, weaker vs. stronger. It is the one text type that is new for BHS.', min: 25 },
+    { t: 'Take the leaflet quiz until you pass it.', min: 10 },
+  ]},
+  { w: 1, title: 'Paragraphs are the unit of thought', tasks: [
+    { t: 'Do the <a href="#paragraphs">Paragraph writing</a> section: the four layers, then at least two warm-ups.', min: 30 },
+    { t: 'Read the leaflet <a href="#leaflet">model text</a> and spot the title, subheadings and call to action.', min: 10 },
+  ]},
+  { w: 1, title: 'First real leaflet', tasks: [
+    { t: 'Pick a leaflet task from the <a href="#taskbank">Task bank</a> and write it. No timer yet, but in one sitting.', min: 45 },
+  ]},
+  { w: 1, title: 'Feedback day', tasks: [
+    { t: 'Run yesterday&rsquo;s leaflet through the <a href="#selfcheck">Self-check studio</a> and fix what it finds.', min: 20 },
+    { t: 'Look up your two most annoying mistakes in the <a href="#grammar">Grammar kit</a>.', min: 15 },
+  ]},
+  { w: 2, title: 'The article', tasks: [
+    { t: 'Work through the <a href="#article">article guide</a> and model text.', min: 25 },
+    { t: 'Take the article quiz.', min: 10 },
+  ]},
+  { w: 2, title: 'The report', tasks: [
+    { t: 'Work through the <a href="#report">report guide</a>. Note: headings are mandatory, numbering is not.', min: 25 },
+    { t: 'Take the report quiz.', min: 10 },
+  ]},
+  { w: 2, title: 'Write an article', tasks: [
+    { t: 'Write a ~250-word article from the <a href="#taskbank">Task bank</a>, then <a href="#selfcheck">self-check</a> it.', min: 45 },
+  ]},
+  { w: 2, title: 'Write a report', tasks: [
+    { t: 'Write a ~250-word report from the <a href="#taskbank">Task bank</a> (the guest-feedback one is good practice), then <a href="#selfcheck">self-check</a> it.', min: 45 },
+  ]},
+  { w: 2, title: 'Upgrade your connectors', tasks: [
+    { t: 'Learn the B2 linking words table in the <a href="#grammar">Grammar kit</a> – five new ones, used in real sentences.', min: 20 },
+    { t: 'Do one topic in <a href="#topicvocab">Topic vocabulary</a> as flashcards.', min: 15 },
+  ]},
+  { w: 3, title: 'The blog', tasks: [
+    { t: 'Work through the <a href="#blog">blog guide</a> – register is everything here.', min: 25 },
+    { t: 'Take the blog quiz.', min: 10 },
+  ]},
+  { w: 3, title: 'The e-mail', tasks: [
+    { t: 'Work through the <a href="#email">e-mail guide</a> and all four sub-types. Business enquiries and applications matter most at BHS.', min: 30 },
+    { t: 'Take the e-mail quiz.', min: 10 },
+  ]},
+  { w: 3, title: 'Write a formal e-mail', tasks: [
+    { t: 'Write a business enquiry or application from the <a href="#taskbank">Task bank</a>, then <a href="#selfcheck">self-check</a> it.', min: 45 },
+  ]},
+  { w: 3, title: 'German-to-English traps', tasks: [
+    { t: 'Do five topics in the <a href="#grammar">Grammar kit</a>: articles, since/for, if-clauses, false friends, word order.', min: 35 },
+  ]},
+  { w: 3, title: 'Phrase day', tasks: [
+    { t: 'Pick ten phrases from the <a href="#phrasebank">Phrase bank</a> you will actually use, and copy them into your notes.', min: 20 },
+    { t: 'One more <a href="#topicvocab">flashcard</a> session – let the boxes do their work.', min: 15 },
+  ]},
+  { w: 4, title: 'Dress rehearsal I', tasks: [
+    { t: 'Full exam simulation from the <a href="#taskbank">Task bank</a>: three ~250-word tasks (mix leaflet, article/report and an e-mail), 195 minutes. A dictionary is allowed, as in the real Writing section.', min: 195 },
+  ]},
+  { w: 4, title: 'Debrief day', tasks: [
+    { t: 'Run all three rehearsal texts through the <a href="#selfcheck">Self-check studio</a>, including the AI feedback prompt.', min: 35 },
+    { t: 'Write your personal top-5 mistake list. Keep it next to you this week.', min: 10 },
+  ]},
+  { w: 4, title: 'Practice zone day', tasks: [
+    { t: 'In the <a href="#practice">Practice zone</a>: Spot the mistakes, Register gym, and the final quiz.', min: 40 },
+  ]},
+  { w: 4, title: 'Close the gaps', tasks: [
+    { t: 'Retake your weakest quizzes (the menu shows which sections have no ✓✓ yet).', min: 25 },
+    { t: 'Read the <a href="#checklist">Writing checklist</a> once, slowly.', min: 15 },
+  ]},
+  { w: 4, title: 'Dress rehearsal II', tasks: [
+    { t: 'One more 195-minute run with three fresh <a href="#taskbank">tasks</a>. Then stop revising. Seriously.', min: 195 },
+  ]},
+];
+
+const P7B = [
+  { w: 0, title: 'The map and the leaflet', tasks: [
+    { t: 'Read <a href="#overview">Overview &amp; grading</a> – you need to know how points are won and lost.', min: 25 },
+    { t: 'Work through the <a href="#leaflet">leaflet guide</a> (new for BHS) and take the quiz.', min: 35 },
+  ]},
+  { w: 0, title: 'Write a leaflet', tasks: [
+    { t: 'Write a ~250-word leaflet from the <a href="#taskbank">Task bank</a> in about 40 minutes, then <a href="#selfcheck">self-check</a> it.', min: 65 },
+  ]},
+  { w: 0, title: 'The formal e-mail', tasks: [
+    { t: 'Work through the <a href="#email">e-mail guide</a> with sub-types, take the quiz.', min: 40 },
+    { t: 'Learn the opening/closing pairs by heart – they are free points.', min: 10 },
+  ]},
+  { w: 0, title: 'Your other short types', tasks: [
+    { t: 'Skim the <a href="#article">article</a> and <a href="#report">report</a> guides and take both quizzes.', min: 45 },
+  ]},
+  { w: 0, title: 'Write it under time', tasks: [
+    { t: 'Write a ~250-word text from the <a href="#taskbank">Task bank</a> in about 40 minutes, then <a href="#selfcheck">self-check</a> with AI feedback.', min: 60 },
+  ]},
+  { w: 0, title: 'Sharpen the language', tasks: [
+    { t: 'Grammar kit top five: articles, since/for, if-clauses, false friends, word order – in the <a href="#grammar">Grammar kit</a>.', min: 35 },
+    { t: 'Take the <a href="#practice">final quiz</a>.', min: 15 },
+  ]},
+  { w: 0, title: 'Full run, then rest', tasks: [
+    { t: 'Three tasks, 195 minutes, exam conditions, from the <a href="#taskbank">Task bank</a>.', min: 195 },
+    { t: 'Then close this site and sleep. A rested brain beats a crammed one.', min: 0 },
+  ]},
+];
+
+const PLANS = {
+  p4: { label: '4 weeks', days: P4 }, p7: { label: '7 days', days: P7 },
+  p4b: { label: '4 weeks', days: P4B }, p7b: { label: '7 days', days: P7B },
+};
+/* Schultyp-abhängiger Plan-Schlüssel: BHS bekommt eigene Pläne + eigenen Fortschritt */
+function planKey(base) { return (M.school && M.school() === 'bhs') ? base + 'b' : base; }
 
 /* ─── Datum / Countdown (Europe/Vienna, Tagesgrenze Mitternacht) ─ */
 function viennaToday() {
@@ -130,7 +235,7 @@ function daysLeft() {
 
 /* ─── Zustand ─────────────────────────────────────────────── */
 let tab = null;            /* 'p4' | 'p7' – null = automatisch */
-let dateCardHidden = false; /* „Skip for now" nur für diese Sitzung */
+let dateCardHidden = false;
 
 function planState() {
   const p = store('mwg_plan');
@@ -199,11 +304,12 @@ function dayCard(planId, i, day, today) {
 }
 
 function planBody() {
-  const planId = currentTab();
+  const base = currentTab();
+  const planId = planKey(base);
   const days = PLANS[planId].days;
   const today = todayIndex(planId);
   const dl = daysLeft();
-  const autoNote = (!tab && planId === 'p7' && dl !== null)
+  const autoNote = (!tab && base === 'p7' && dl !== null)
     ? '<div class="tip" style="margin-bottom:18px">Less than two weeks to go, so the 7-day plan is pre-selected. The 4-week tab is still there if you want the long version.</div>' : '';
   const allTasks = days.reduce((s, d) => s + d.tasks.length, 0);
   const doneTasks = days.reduce((s, d, i) => s + d.tasks.filter((_, ti) => isChecked(planId, i, ti)).length, 0);
@@ -211,7 +317,7 @@ function planBody() {
   let html = autoNote +
     '<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px"><span class="section-label" style="border:none;padding:0;margin:0">Your progress</span><span style="font-size:.875rem;color:var(--text-muted)">' + doneTasks + '/' + allTasks + ' tasks · ' + pct + '%</span></div>' +
     '<div class="qbar" style="margin-bottom:26px"><i style="width:' + pct + '%"></i></div>';
-  if (planId === 'p4') {
+  if (base === 'p4') {
     for (let w = 1; w <= 4; w++) {
       const wdays = days.map((d, i) => [d, i]).filter(x => x[0].w === w);
       const wTotal = wdays.reduce((s, x) => s + x[0].tasks.length, 0);
@@ -222,7 +328,8 @@ function planBody() {
       html += '<div class="gap-s"></div>';
     }
   } else {
-    html += '<p style="font-size:1rem;color:var(--text-secondary);margin-bottom:18px">So you have one week. Don&rsquo;t panic – a focused week beats a distracted month. One block per day, essay first.</p>' +
+    const first = (M.school && M.school() === 'bhs') ? 'Start with the leaflet – it is the one text type that is new for BHS.' : 'Essay first, while your head is fresh.';
+    html += '<p style="font-size:1rem;color:var(--text-secondary);margin-bottom:18px">So you have one week. Don&rsquo;t panic – a focused week beats a distracted month. One block per day. ' + first + '</p>' +
       days.map((d, i) => dayCard(planId, i, d, i === today)).join('');
   }
   return html;
@@ -231,13 +338,14 @@ function planBody() {
 PAGES.studyplan = {
   title: 'Countdown plan', track: 'studyplan',
   render() {
-    const planId = currentTab();
+    const base = currentTab();
     return '<div class="page">' +
       pageHead('Basics', 'Countdown plan', 'A day-by-day route to the written exam: read, practise, write, repeat. Tick things off – the plan remembers where you are.',
         '<div class="tabs">' +
-          ['p4', 'p7'].map(id => '<button class="tab' + (planId === id ? ' active' : '') + '" data-action="plan-tab" data-tab="' + id + '">' + PLANS[id].label + '</button>').join('') +
+          ['p4', 'p7'].map(id => '<button class="tab' + (base === id ? ' active' : '') + '" data-action="plan-tab" data-tab="' + id + '">' + PLANS[id].label + '</button>').join('') +
         '</div>') +
       '<div class="wrap"><div class="gap-s"></div>' +
+        (M.school() === 'bhs' ? '<div class="tip" style="margin-bottom:16px">This is the BHS plan: three tasks, 195 minutes, and the leaflet instead of the essay. Switch to AHS top left if you need that version.</div>' : '') +
         dateControls() +
         '<div class="gap-s"></div>' +
         '<div id="planBody">' + planBody() + '</div>' +
@@ -246,12 +354,12 @@ PAGES.studyplan = {
   },
 };
 
-/* ─── Home-Leiste (Anti-Banner-Regel: genau EIN Hinweis-Element) ─ */
+/* ─── Home-Leiste (genau EIN Hinweis-Element) ─── */
 function homeHint(progressHtml, next) {
   const d = store('mwg_examdate');
   if (d) {
     const dl = daysLeft();
-    const planId = currentTab();
+    const planId = planKey(currentTab());
     const day = firstOpenDay(planId) + 1;
     if (dl !== null && dl >= 0) {
       const green = dl <= 7;
@@ -280,7 +388,6 @@ M.planAction = function (act, el) {
     p[ds.plan][ds.day] = p[ds.plan][ds.day] || [];
     p[ds.plan][ds.day][+ds.task] = el.checked;
     store('mwg_plan', p);
-    /* nur den Plan-Body neu rendern – Scrollposition bleibt erhalten */
     const host = $('#planBody');
     if (host) host.innerHTML = planBody();
   }

@@ -23,10 +23,10 @@
 [data-theme="light"]{
   --bg:#f4f1ea; --surface:#ffffff; --surface-1:#eae6dd; --surface-2:#dcd7cc;
   --border:#e0dcd2; --border-strong:#161616;
-  --text:#161616; --text-secondary:#525252; --text-muted:#636363;
+  --text:#161616; --text-secondary:#525252; --text-muted:#595959;
   --hover:#f4f4f4;
   --primary:#0043ce; --primary-bg:#0f62fe; --primary-fg:#ffffff; --primary-hover:#0050e6; --primary-faint:#edf5ff;
-  --blue:#0f62fe; --purple:#8a3ffc; --orange:#a04200; --green:#198038; --red:#da1e28; --yellow:#8e6a00;
+  --blue:#0f62fe; --purple:#8a3ffc; --orange:#a04200; --green:#0e6e2e; --red:#a2191f; --yellow:#6b5000;
   --footer-bg:#161616; --footer-surface:#262626; --footer-ink:#ffffff; --footer-ink-muted:#c6c6c6;
 }
 [data-theme="dark"]{
@@ -35,7 +35,7 @@
   --text:#f4f4f4; --text-secondary:#c6c6c6; --text-muted:#a0a0a0;
   --hover:#333333;
   --primary:#78a9ff; --primary-bg:#0f62fe; --primary-fg:#ffffff; --primary-hover:#0353e9; --primary-faint:#1c2a41;
-  --blue:#78a9ff; --purple:#be95ff; --orange:#ff832b; --green:#42be65; --red:#fa4d56; --yellow:#f1c21b;
+  --blue:#78a9ff; --purple:#be95ff; --orange:#ff832b; --green:#42be65; --red:#ff8389; --yellow:#f1c21b;
   --footer-bg:#0b0b0b; --footer-surface:#262626; --footer-ink:#ffffff; --footer-ink-muted:#c6c6c6;
 }
 
@@ -58,8 +58,8 @@ a{color:var(--primary)}
 :focus-visible{outline:2px solid var(--primary);outline-offset:2px}
 
 /* ─── LAYOUT ─────────────────────────────────────────────── */
-#app{display:flex;min-height:100vh}
-#main{flex:1;min-width:0;height:100vh;overflow-y:auto}
+#app{display:flex;min-height:100vh;min-height:100dvh}
+#main{flex:1;min-width:0;height:100vh;height:100dvh;overflow-y:auto}
 .page{animation:fadeUp .22s ease-out}
 @keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 .wrap{max-width:960px;margin:0 auto;padding:0 48px}
@@ -84,6 +84,29 @@ a{color:var(--primary)}
 .toggle-track{width:32px;height:16px;border:1px solid var(--border-strong);position:relative;flex-shrink:0}
 .toggle-knob{position:absolute;top:2px;left:2px;width:11px;height:11px;background:var(--border-strong);transition:left .15s}
 [data-theme="dark"] .toggle-knob{left:17px}
+
+/* ─── SCHOOL SWITCH (AHS / BHS) ──────────────────────────── */
+.school-switch{display:flex;gap:0;padding:10px 16px;border-bottom:1px solid var(--border)}
+.school-btn{flex:1;padding:7px 8px;font-size:.8125rem;font-weight:600;letter-spacing:.32px;color:var(--text-secondary);background:transparent;border:1px solid var(--border-strong);cursor:pointer;transition:background .11s,color .11s}
+.school-btn + .school-btn{border-left:none}
+.school-btn:hover{background:var(--hover);color:var(--text)}
+.school-btn.active{background:var(--primary-bg);color:var(--primary-fg);border-color:var(--primary-bg)}
+.school-btn:focus-visible{outline:2px solid var(--primary);outline-offset:-2px}
+.school-btn.active:focus-visible{outline-color:var(--primary-fg)}
+
+/* ─── FIRST-VISIT SCHOOL CHOOSER ─────────────────────────── */
+.school-chooser{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.55);padding:20px}
+.school-chooser .sc-box{background:var(--surface);border:1px solid var(--border-strong);max-width:520px;width:100%;padding:30px 30px 26px}
+.school-chooser .sc-title{font-size:1.3rem;font-weight:600;letter-spacing:-.2px;margin-bottom:10px;color:var(--text)}
+.school-chooser .sc-sub{font-size:.9rem;color:var(--text-secondary);line-height:1.55;margin-bottom:22px}
+.school-chooser .sc-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.school-chooser .sc-card{display:flex;flex-direction:column;gap:6px;text-align:left;padding:16px;background:var(--surface-1);border:1px solid var(--border-strong);cursor:pointer;transition:background .11s,border-color .11s}
+.school-chooser .sc-card:hover{background:var(--primary-faint);border-color:var(--primary)}
+.school-chooser .sc-k{font-size:1.05rem;font-weight:600;color:var(--text)}
+.school-chooser .sc-d{font-size:.78rem;color:var(--text-muted);line-height:1.5}
+.school-chooser .sc-note{font-size:.75rem;color:var(--text-muted);margin-top:16px}
+.school-chooser .sc-card:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+@media(max-width:520px){.school-chooser .sc-cards{grid-template-columns:1fr}}
 
 /* ─── MOBILE NAV ─────────────────────────────────────────── */
 .mobile-bar{display:none;position:fixed;top:0;left:0;right:0;z-index:100;height:50px;background:var(--bg);border-bottom:1px solid var(--border);padding:0 14px;align-items:center;justify-content:space-between}
@@ -427,11 +450,30 @@ body.tour-on{overflow:hidden}
 .nav-hint b{display:block;font-weight:600;margin-bottom:1px}
 @keyframes hintIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
 /* ─── PRINT ──────────────────────────────────────────────── */
+.print-note{display:none}
 @media print{
-  #sidenav,.mobile-bar,.no-print,.tabs,#tourCatch,#tourSpot,#tourCard,.toast{display:none!important}
+  #sidenav,.mobile-bar,.no-print,.tabs,#tourCatch,#tourSpot,#tourCard,.toast,.school-chooser,.school-switch,.chip .ic{display:none!important}
   body{background:#fff;color:#000;font-size:10.5pt}
   #app{display:block}
   #main{height:auto;overflow:visible}
   .page-head{padding-top:0}
   mark.ann .bub{display:none!important}
+  .print-note{display:block!important;text-align:center;font-size:9pt;color:#444;margin:18px 20px 0;padding-top:10px;border-top:1px solid #bbb}
+  .acc-body{display:block!important}
 }
+
+/* ─── Exam timer / mock countdown ─────────────────────────── */
+.mock-card{border:1px solid var(--border);padding:26px 22px;text-align:center;max-width:520px}
+.mock-meta{font-size:.72rem;letter-spacing:.32px;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px}
+.mock-clock{font-family:var(--font-mono);font-size:3.75rem;line-height:1;font-weight:600;color:var(--text);font-variant-numeric:tabular-nums;letter-spacing:1px}
+.mock-clock.is-low,.mock-clock.is-done{color:var(--red)}
+.mock-bar{height:6px;background:var(--border);margin:18px 0 20px;overflow:hidden;border-radius:3px}
+.mock-bar-fill{height:100%;background:var(--primary);width:0;transition:width .5s linear}
+.mock-btns{display:flex;gap:10px;justify-content:center}
+.mock-lead{font-size:.9375rem;color:var(--text-secondary);line-height:1.6;max-width:640px;margin-bottom:14px}
+.mock-plan{list-style:none;padding:0;margin:0;max-width:520px}
+.mock-plan li{display:flex;gap:14px;align-items:baseline;padding:11px 0;border-bottom:1px solid var(--border)}
+.mp-min{font-family:var(--font-mono);font-size:.8125rem;color:var(--primary);min-width:62px;font-weight:600;flex-shrink:0}
+.mp-lab{font-size:.9375rem;color:var(--text);line-height:1.5}
+@media (prefers-reduced-motion: reduce){.mock-bar-fill{transition:none}}
+@media print{.mock-btns{display:none}}

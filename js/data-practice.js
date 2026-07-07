@@ -160,10 +160,17 @@ SRDP.dndSets = {
     { text: 'Furthermore, despite requesting a non-smoking room, I was placed in a room that smelled of smoke.', role: 'Second complaint point' },
     { text: 'I would therefore like to request a partial refund.\n\nYours faithfully,\nMax Huber', role: 'Demand + sign-off' },
   ],
+  leaflet: [
+    { text: 'Skate Jam – Roll Up to the Biggest Session of the Year', role: 'Main title – names the event and makes people want to read on' },
+    { text: 'Grab your board and head to the Seetal skate park this summer. One day, three ramps, live music and prizes for every ability.', role: 'Hook / intro – grabs attention and says what it is about' },
+    { text: 'Ride the New Ramps\nOur brand-new mini-ramp and rebuilt half-pipe are ready for you, whether you are landing your first ollie or your fiftieth kickflip.', role: 'Information section 1 – a benefit under its own subheading' },
+    { text: 'More Than Just Skating\nGrab a burger from the food stall, cool off with free water, and enter our best-trick contest to win real skate gear.', role: 'Information section 2 – a second benefit block, scannable' },
+    { text: 'Get Involved\nEntry is free and open to all ages – just bring a helmet.\nWhen: Saturday, 11 July, from 11 a.m.\nWhere: Seetal Skate Park, Uferweg 3', role: 'Call to action + practical details – what to do and the facts' },
+  ],
 };
 
 /* ─── AI FEEDBACK PROMPT TEMPLATE ──────────────────────────── */
-SRDP.aiPromptTemplate = (typeName, length, task, text) => `You are an experienced Austrian AHS English teacher assessing a practice text for the standardised written Reifeprüfung (SRDP), English B2, text type: ${typeName}, target length: about ${length} words.
+SRDP.aiPromptTemplate = (typeName, length, task, text) => `You are an experienced Austrian English teacher assessing a practice text for the standardised written Reife- und Diplomprüfung (SRDP), English B2, text type: ${typeName}, target length: about ${length} words.
 
 THE TASK THE STUDENT WAS GIVEN:
 ${task || '(no task provided — assess the text on text-type conventions alone)'}

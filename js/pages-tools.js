@@ -7,11 +7,17 @@ const M = window.MWG;
 const { esc, sectionLabel, pageHead, TYPE_COLORS } = M;
 
 /* ─── PHRASE BANK ─────────────────────────────────────────── */
+const _phraseCache = {};
 function allPhrases() {
+  const school = M.school();
+  if (_phraseCache[school]) return _phraseCache[school];
   const out = [];
-  SRDP.textTypes.forEach(t => t.phrases.forEach(g => g.items.forEach(p => out.push({ phrase: p, category: g.category, typeId: t.id, typeName: t.name, color: t.color }))));
-  SRDP.emailSubTypes.forEach(st => st.phrases.forEach(g => g.items.forEach(p => out.push({ phrase: p, category: st.name + ' — ' + g.category, typeId: 'email', typeName: 'E-Mail', color: 'red' }))));
+  const vis = t => !t.schools || t.schools.indexOf(school) >= 0;
+  SRDP.textTypes.filter(vis).forEach(t => t.phrases.forEach(g => g.items.forEach(p => out.push({ phrase: p, category: g.category, typeId: t.id, typeName: t.name, color: t.color }))));
+  const emailType = SRDP.textTypes.find(t => t.id === 'email');
+  if (!emailType || vis(emailType)) SRDP.emailSubTypes.forEach(st => st.phrases.forEach(g => g.items.forEach(p => out.push({ phrase: p, category: st.name + ' — ' + g.category, typeId: 'email', typeName: 'E-Mail', color: 'red' }))));
   SRDP.paragraphs.phraseGroups.forEach(g => g.phrases.forEach(p => out.push({ phrase: p, category: 'Paragraphs — ' + g.label, typeId: 'all', typeName: 'Any text', color: null })));
+  _phraseCache[school] = out;
   return out;
 }
 const pbState = { search: '', filter: 'all' };
@@ -43,7 +49,7 @@ PAGES.phrasebank = {
         '<a class="btn btn-ghost no-print" href="pdf/phrase-bank.pdf" target="_blank" rel="noopener" style="margin-bottom:20px">Download this page as a PDF <span>&darr;</span></a>' +
         '<div class="field" style="max-width:420px;margin-bottom:18px"><label for="pbSearch">Search</label><input type="text" id="pbSearch" placeholder="Search phrases…" value="' + esc(pbState.search) + '"></div>' +
         '<div class="tabs" style="border-bottom:1px solid var(--border);margin-bottom:26px">' +
-          [['all', 'All']].concat(SRDP.textTypes.map(t => [t.id, t.name])).map(f =>
+          [['all', 'All']].concat(M.typesForSchool().map(t => [t.id, t.name])).map(f =>
             '<button class="tab' + (pbState.filter === f[0] ? ' active' : '') + '" data-action="pb-filter" data-f="' + f[0] + '">' + f[1] + '</button>').join('') +
         '</div>' +
         '<div id="pbResults">' + pbResults() + '</div>' +
@@ -103,7 +109,7 @@ PAGES.checklist = {
       '<div class="wrap" style="max-width:780px"><div class="gap-s"></div>' +
         '<a class="btn btn-ghost no-print" href="pdf/checklist.pdf" target="_blank" rel="noopener" style="margin-bottom:20px">Download this page as a PDF <span>&darr;</span></a>' +
         '<div class="tabs" style="border-bottom:1px solid var(--border);margin-bottom:28px">' +
-          Object.keys(SRDP.checklists).map(id =>
+          ['general'].concat(M.typesForSchool().map(t => t.id)).filter(id => SRDP.checklists[id]).map(id =>
             '<button class="tab' + (clState.type === id ? ' active' : '') + '" data-action="cl-type" data-t="' + id + '">' + SRDP.checklists[id].label + '</button>').join('') +
         '</div>' +
         '<div id="clBody">' + clBody() + '</div>' +
@@ -119,7 +125,7 @@ const scState = { type: 'essay', target: 400 };
 const CONTRACTIONS = /\b(don't|can't|won't|isn't|aren't|wasn't|weren't|doesn't|didn't|couldn't|shouldn't|wouldn't|hasn't|haven't|hadn't|it's|that's|there's|here's|what's|who's|let's|i'm|i've|i'll|i'd|you're|you've|you'll|you'd|we're|we've|we'll|we'd|they're|they've|they'll|she's|he's|she'll|he'll|gonna|wanna|gotta)\b/gi;
 const INFORMAL = ['basically', 'stuff', 'guys', 'kids', 'loads of', 'lots of', 'a lot of', 'totally', 'awesome', 'cool', 'okay', 'ok', 'btw', 'huge', 'crazy', 'dumb', 'super', 'really really', 'kinda', 'sort of', 'pretty good', 'anyway'];
 const LINKERS = ['furthermore', 'moreover', 'in addition', 'what is more', 'however', 'nevertheless', 'nonetheless', 'on the other hand', 'on the one hand', 'although', 'even though', 'despite', 'in spite of', 'therefore', 'consequently', 'as a result', 'thus', 'hence', 'owing to', 'due to', 'for instance', 'for example', 'admittedly', 'while', 'whereas', 'to sum up', 'on balance', 'in conclusion', 'taking everything into account', 'first of all', 'to begin with', 'in contrast', 'as a consequence', 'firstly', 'secondly', 'finally'];
-const FORMAL_TYPES = { essay: true, report: true, email: true, article: false, blog: false };
+const FORMAL_TYPES = { essay: true, report: true, email: true, article: false, blog: false, leaflet: false };
 
 function analyze(text, type, target) {
   const f = [];
@@ -147,7 +153,7 @@ function analyze(text, type, target) {
     else add('ok', 'No contractions — correct for a formal text.');
     if (informalHits.length) add('warn', 'Possibly informal wording: ' + informalHits.slice(0, 6).map(w => '<code>' + esc(w) + '</code>').join(' ') + '. Replace with formal alternatives.');
   } else {
-    add('info', (contr.length ? contr.length + ' contractions found — fine for a ' + type + '.' : 'No contractions found — for a ' + type + ', a personal, natural voice is welcome.'));
+    add('info', (contr.length ? contr.length + ' contractions found — fine for a ' + type + '.' : 'No contractions found. For a ' + (type === 'leaflet' ? 'leaflet, keep it persuasive and reader-friendly, but not personal or slangy.' : type + ', a personal, natural voice is welcome.')));
   }
 
   /* linkers */
@@ -224,6 +230,16 @@ function analyze(text, type, target) {
     const anecdote = (text.match(/\b(my|me|I was|when I)\b/gi) || []).length;
     if (anecdote > 6) add('warn', 'Lots of first-person/personal phrasing — essays argue with generalisations, not personal stories. ("It is often the case that…" instead of "When I was…")');
   }
+  if (type === 'leaflet') {
+    const lfirst = (lines[0] || '').trim();
+    const looksTitle = lfirst.length > 0 && lfirst.split(' ').length <= 12 && '.:!?,'.indexOf(lfirst.slice(-1)) === -1;
+    add(looksTitle ? 'ok' : 'warn', looksTitle ? 'First line looks like a title.' : 'No title detected: a leaflet needs a clear title on the first line.');
+    const heads = lines.filter(function (l) { var tt = l.trim(); return tt.length > 0 && tt.split(' ').length <= 6 && '.!?:;,'.indexOf(tt.slice(-1)) === -1; }).length;
+    add(heads >= 2 ? 'ok' : 'warn', heads >= 2 ? heads + ' short heading-like lines found (subheadings).' : 'Few subheadings: break the leaflet into short, headed sections.');
+    const low = text.toLowerCase();
+    const cta = ['come', 'join', 'sign up', 'visit', 'call', 'find out', 'bring', 'do not miss', 'get in touch', 'contact'].some(function (wq) { return low.indexOf(wq) >= 0; });
+    add(cta ? 'ok' : 'warn', cta ? 'A call to action is present.' : 'No clear call to action: tell the reader what to do next (come along, sign up, get in touch).');
+  }
   add('info', 'This is a quick robot check of the surface. It cannot judge your ideas or your accuracy; for real feedback, use the AI prompt below or ask your teacher.');
   return f;
 }
@@ -244,7 +260,7 @@ PAGES.selfcheck = {
         '</div></div></div>' +
         '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:18px">' +
           '<div class="field"><label for="scType">Text type</label><select id="scType">' +
-            SRDP.textTypes.map(t => '<option value="' + t.id + '"' + (scState.type === t.id ? ' selected' : '') + '>' + t.name + '</option>').join('') +
+            M.typesForSchool().map(t => '<option value="' + t.id + '"' + (scState.type === t.id ? ' selected' : '') + '>' + t.name + '</option>').join('') +
           '</select></div>' +
           '<div class="field"><label for="scTarget">Target length</label><select id="scTarget">' +
             '<option value="250"' + (scState.target === 250 ? ' selected' : '') + '>~250 words</option>' +
@@ -259,7 +275,7 @@ PAGES.selfcheck = {
           '<button class="btn btn-primary" data-action="sc-run">Check my text</button>' +
           '<button class="btn btn-ghost" data-action="sc-prompt">Copy AI feedback prompt</button>' +
         '</div>' +
-        '<div style="margin-top:8px;font-size:.8125rem;color:var(--text-muted);line-height:1.5">The AI prompt copies your text plus the official SRDP criteria. When you paste it into ChatGPT, Claude or another tool, your text is sent to that provider, so use a practice text and leave out real names or personal details. An AI score is only rough practice feedback, not your real Matura mark. Nothing leaves this page unless you paste it there yourself.</div>' +
+        '<div style="margin-top:8px;font-size:.8125rem;color:var(--text-muted);line-height:1.5">The AI prompt copies your text plus the official SRDP criteria. When you paste it into ChatGPT, Claude or another tool, your text is sent to that provider, so use a practice text and leave out real names or personal details. An AI score is only rough practice feedback, not your real Matura mark. Nothing leaves this page unless you paste it there yourself. Your school may also have its own rules about using AI tools – follow those first.</div>' +
         '<div id="scResults" style="margin-top:28px"></div>' +
         '<div id="scRating">' + (M.scRatingBlock ? M.scRatingBlock() : '') + '</div>' +
         '<div style="height:72px"></div>' +
@@ -320,8 +336,19 @@ function taskCard(p, i) {
     '</div>' +
   '</div>';
 }
+function tbPrompts() {
+  const ids = M.typesForSchool().map(t => t.id);
+  return SRDP.prompts.map((p, i) => ({ p, i })).filter(x => ids.indexOf(x.p.type) >= 0);
+}
+function genPrompt() {
+  const cfg = M.schoolConfig();
+  const types = M.school() === 'ahs'
+    ? 'essay (~400 words), or article, report, blog or e-mail (~250 words)'
+    : 'article, report, blog, e-mail or leaflet (~250 words)';
+  return 'You are an experienced Austrian English teacher. Generate ONE realistic writing task for the standardised SRDP exam (' + (cfg.long || 'AHS') + ', English B2), text type of your choice: ' + types + '. Format: a 1–2 sentence situation; any input material the text type needs (a short statement to discuss for an essay, 4–5 survey figures for a report, a 3–4 sentence excerpt for a letter to the editor or blog comment, an advertisement for an application, or the topic and audience for a leaflet); a clear instruction naming text type, audience and word count; and exactly three bullet points, each starting with an operator (describe, explain, suggest…). Then ask me to write the text and wait. After I submit it, assess it with the four SRDP criteria (Task Achievement, Coherence and Cohesion, Lexical and Structural Range, Lexical and Structural Accuracy), each 0–10, with brief justifications and my five most important errors.';
+}
 function tbList() {
-  let list = SRDP.prompts.map((p, i) => ({ p, i }));
+  let list = tbPrompts();
   if (tbState.filter !== 'all') list = list.filter(x => x.p.type === tbState.filter);
   return list.map(x => taskCard(x.p, x.i)).join('');
 }
@@ -481,7 +508,7 @@ const TOPIC_VOCAB = [
     { w: "humanitarian aid", hint: "Emergency help — food, shelter, medicine. 'Humanitarian aid reaches the camps by convoy.'" },
   ] },
 ];
-/* TODO: pdf/topic-vocabulary.pdf deckt derzeit nur die ersten 8 Themen ab — bei Gelegenheit neu bauen (11 Themen). */
+/* pdf/topic-vocabulary.pdf deckt alle 11 Themen ab (via _dev/make-pdf.mjs). */
 PAGES.topicvocab = {
   title: 'Topic vocabulary', track: 'topicvocab',
   render() {
@@ -505,12 +532,12 @@ PAGES.taskbank = {
   title: 'Task bank', track: 'taskbank',
   render() {
     return '<div class="page">' +
-      pageHead('Tool', 'Task bank', SRDP.prompts.length + ' Matura-style writing tasks, each with the material you need: statements for essays, survey data for reports, source texts for letters and comments. Pick one yourself or roll the dice.') +
+      pageHead('Tool', 'Task bank', tbPrompts().length + ' Matura-style writing tasks, each with the material you need: statements for essays, survey data for reports, source texts for letters and comments, topics for leaflets. Pick one yourself or roll the dice.') +
       '<div class="wrap" style="max-width:860px"><div class="gap-s"></div>' +
-        '<div class="tip" style="margin-bottom:18px">These 24 tasks are Matura-style, built for practice. The officially released past papers are in the BMB download area: <a href="https://www.matura.gv.at/downloads" target="_blank" rel="noopener">matura.gv.at/downloads</a>.</div>' +
+        '<div class="tip" style="margin-bottom:18px">These ' + tbPrompts().length + ' tasks are Matura-style, built for practice. The officially released past papers are in the BMB download area: <a href="https://www.matura.gv.at/downloads" target="_blank" rel="noopener">matura.gv.at/downloads</a>.</div>' +
         '<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;border-bottom:1px solid var(--border)">' +
           '<div class="tabs">' +
-            [['all', 'All']].concat(SRDP.textTypes.map(t => [t.id, t.name])).map(f =>
+            [['all', 'All']].concat(M.typesForSchool().map(t => [t.id, t.name])).map(f =>
               '<button class="tab' + (tbState.filter === f[0] ? ' active' : '') + '" data-action="tb-filter" data-f="' + f[0] + '">' + f[1] + '</button>').join('') +
           '</div>' +
           '<button class="btn btn-primary btn-sm no-print" data-action="tb-random" style="margin-bottom:6px">🎲 Random task</button>' +
@@ -519,7 +546,7 @@ PAGES.taskbank = {
         '<div id="tbList" style="border:1px solid var(--border);border-top:none;margin-top:0">' + tbList() + '</div>' +
         '<div class="gap-s"></div>' +
         '<div class="tip">Want endless new tasks? Copy this generator prompt into ChatGPT or Claude: ' +
-          '<button class="btn btn-ghost btn-sm" style="margin-left:8px" data-copy="You are an experienced Austrian AHS English teacher. Generate ONE realistic writing task for the standardised Reifeprüfung (SRDP), English B2, text type of your choice (essay ~400 words, or article/report/blog/email ~250 words). Format: a 1–2 sentence situation; any input material the text type needs (a short statement to discuss for an essay, 4–5 survey figures for a report, a 3–4 sentence excerpt of the article or blog post for a letter to the editor or comment, the advertisement for an application); a clear instruction naming text type, audience and word count; and exactly three bullet points, each starting with an operator (describe, discuss, analyse, suggest…). Then ask me to write the text and wait. After I submit it, assess it with the four SRDP criteria (Task Achievement, Coherence & Cohesion, Lexical & Structural Range, Lexical & Structural Accuracy), each 0–10, with brief justifications and my five most important errors.">Copy generator prompt</button>' +
+          '<button class="btn btn-ghost btn-sm" style="margin-left:8px" data-copy="' + esc(genPrompt()) + '">Copy generator prompt</button>' +
         '</div>' +
         '<div style="height:72px"></div>' +
       '</div></div>';
@@ -528,5 +555,6 @@ PAGES.taskbank = {
 window.MWG.tbState = tbState;
 window.MWG.TOPIC_VOCAB = TOPIC_VOCAB;
 window.MWG.tbList = tbList;
+window.MWG.tbPrompts = tbPrompts;
 window.MWG.taskCard = taskCard;
 })();
