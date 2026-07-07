@@ -1,8 +1,9 @@
 {
   "name": "Don't Panic, It's Just the Matura",
   "short_name": "Matura Guide",
-  "description": "The free interactive B2 writing guide for the English Matura (AHS).",
+  "description": "The free interactive B2 writing guide for the English Matura (AHS & BHS).",
   "start_url": "/",
+  "id": "/",
   "scope": "/",
   "display": "standalone",
   "background_color": "#f4f1ea",

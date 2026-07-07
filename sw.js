@@ -1,6 +1,6 @@
 /* Service Worker — matura.bernhardgmeiner.com
    VERSION wird von _dev/bump-sw.mjs vor jedem Deploy auf einen Zeitstempel gesetzt. */
-const VERSION = '20260706190000';
+const VERSION = '20260707104043';
 const CACHE = 'mwg-' + VERSION;
 
 /* @assets:start (von bump-sw.mjs generiert) */
@@ -18,10 +18,15 @@ const ASSETS = [
   'js/data-content.js',
   'js/data-practice.js',
   'js/data-texttypes.js',
+  'js/flashcards.js',
+  'js/pages-extra.js',
   'js/pages-main.js',
   'js/pages-practice.js',
   'js/pages-tools.js',
   'js/pwa.js',
+  'js/search.js',
+  'js/selfrating.js',
+  'js/studyplan.js',
   'js/toc.js',
   'fonts/ibm-plex-mono-latin-400-normal.woff2',
   'fonts/ibm-plex-mono-latin-500-normal.woff2',
@@ -29,7 +34,37 @@ const ASSETS = [
   'fonts/ibm-plex-sans-latin-400-italic.woff2',
   'fonts/ibm-plex-sans-latin-400-normal.woff2',
   'fonts/ibm-plex-sans-latin-500-normal.woff2',
-  'fonts/ibm-plex-sans-latin-600-normal.woff2'
+  'fonts/ibm-plex-sans-latin-600-normal.woff2',
+  'article/',
+  'blog/',
+  'checklist/',
+  'email/',
+  'essay/',
+  'faq/',
+  'grammar/',
+  'leaflet/',
+  'overview/',
+  'paragraphs/',
+  'parents/',
+  'phrasebank/',
+  'practice/',
+  'report/',
+  'selfcheck/',
+  'studyplan/',
+  'taskbank/',
+  'teachers/',
+  'topicvocab/',
+  'pdf/article.pdf',
+  'pdf/blog.pdf',
+  'pdf/checklist.pdf',
+  'pdf/email.pdf',
+  'pdf/essay.pdf',
+  'pdf/leaflet.pdf',
+  'pdf/overview.pdf',
+  'pdf/phrase-bank.pdf',
+  'pdf/report.pdf',
+  'pdf/topic-vocabulary.pdf',
+  'og-image.png'
 ];
 /* @assets:end */
 
@@ -60,8 +95,7 @@ self.addEventListener('fetch', e => {
   if (req.mode === 'navigate' || url.pathname === '/' || url.pathname.endsWith('/index.html')) {
     e.respondWith(
       fetch(req).then(res => {
-        const copy = res.clone();
-        caches.open(CACHE).then(c => c.put(req, copy));
+        if (res.ok && res.type === 'basic') { const copy = res.clone(); caches.open(CACHE).then(c => c.put(req, copy)); }
         return res;
       }).catch(() =>
         caches.match(req).then(hit => hit || caches.match('index.html'))
