@@ -11,8 +11,11 @@ function qfWordCount(t) {
   return wc ? wc.value : '';
 }
 function qfBadge(t) {
-  if (M.school() === 'bhs' && ['article', 'report', 'email'].indexOf(t.id) >= 0) return '~250 words · one of three tasks';
-  return t.badge;
+  const bhs = M.school() === 'bhs';
+  if (t.id === 'essay') return 'AHS only';
+  if (t.id === 'leaflet') return 'BHS only · Broschüre';
+  if (t.id === 'blog') return 'Post or comment';
+  return bhs ? 'One of three tasks' : 'One of two tasks';  // article, report, e-mail
 }
 window.PAGES = window.PAGES || {};
 

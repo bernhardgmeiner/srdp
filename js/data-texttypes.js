@@ -106,8 +106,8 @@ SRDP.textTypes = [
     id: 'article', name: 'Article', tagline: 'Write for real readers',
     color: 'blue', badge: 'Long or short task', schools: ['ahs', 'bhs'],
     quickFacts: [
-      { label: 'Word count', value: '~250 or ~400' },
-      { label: 'Register', value: 'Match the audience' },
+      { label: 'Word count', value: '~250 or ~400 words' },
+      { label: 'Register', value: 'Depends on the audience' },
       { label: 'Title', value: 'Required — catchy!' },
       { label: 'Structure', value: '~5 paragraphs' },
     ],
@@ -185,7 +185,7 @@ SRDP.textTypes = [
     id: 'report', name: 'Report', tagline: 'Present findings and recommend action',
     color: 'orange', badge: 'Long or short task', schools: ['ahs', 'bhs'],
     quickFacts: [
-      { label: 'Word count', value: '~250 or ~400' },
+      { label: 'Word count', value: '~250 or ~400 words' },
       { label: 'Register', value: 'Formal, objective, neutral' },
       { label: 'Title', value: 'Subject line + section headings' },
       { label: 'Structure', value: 'Header + sections' },
@@ -277,9 +277,9 @@ SRDP.textTypes = [
     id: 'blog', name: 'Blog', tagline: 'Personal voice, invite interaction',
     color: 'green', badge: 'Post or comment', schools: ['ahs', 'bhs'],
     quickFacts: [
-      { label: 'Word count', value: '~250 or ~400' },
+      { label: 'Word count', value: '~250 or ~400 words' },
       { label: 'Register', value: 'Informal to semi-formal' },
-      { label: 'Title', value: 'Post: yes / Comment: no' },
+      { label: 'Title', value: 'Post only (not a comment)' },
       { label: 'Key feature', value: 'Personal, invite comments' },
     ],
     layout: [
@@ -357,7 +357,7 @@ SRDP.textTypes = [
     color: 'red', badge: 'Usually the short task', schools: ['ahs', 'bhs'],
     quickFacts: [
       { label: 'Word count', value: '~250 words (225–275)' },
-      { label: 'Register', value: 'Formal (mostly at B2)' },
+      { label: 'Register', value: 'Formal' },
       { label: 'Subject line', value: 'Required' },
       { label: 'Sign-off', value: 'Yours faithfully / sincerely' },
     ],
