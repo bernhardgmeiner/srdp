@@ -1,6 +1,6 @@
 /* Service Worker — matura.bernhardgmeiner.com
    VERSION wird von _dev/bump-sw.mjs vor jedem Deploy auf einen Zeitstempel gesetzt. */
-const VERSION = '20260707104043';
+const VERSION = '20260707204017';
 const CACHE = 'mwg-' + VERSION;
 
 /* @assets:start (von bump-sw.mjs generiert) */
@@ -13,21 +13,7 @@ const ASSETS = [
   'icons/icon-512.png',
   'icons/maskable-192.png',
   'icons/maskable-512.png',
-  'js/boot.js',
-  'js/core.js',
-  'js/data-content.js',
-  'js/data-practice.js',
-  'js/data-texttypes.js',
-  'js/flashcards.js',
-  'js/pages-extra.js',
-  'js/pages-main.js',
-  'js/pages-practice.js',
-  'js/pages-tools.js',
-  'js/pwa.js',
-  'js/search.js',
-  'js/selfrating.js',
-  'js/studyplan.js',
-  'js/toc.js',
+  'js/app.min.js',
   'fonts/ibm-plex-mono-latin-400-normal.woff2',
   'fonts/ibm-plex-mono-latin-500-normal.woff2',
   'fonts/ibm-plex-sans-latin-300-normal.woff2',
@@ -53,6 +39,7 @@ const ASSETS = [
   'studyplan/',
   'taskbank/',
   'teachers/',
+  'timer/',
   'topicvocab/',
   'pdf/article.pdf',
   'pdf/blog.pdf',

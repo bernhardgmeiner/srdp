@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-Disallow: /og-template.html
 Sitemap: https://matura.bernhardgmeiner.com/sitemap.xml
