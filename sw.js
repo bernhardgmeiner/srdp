@@ -1,6 +1,6 @@
 /* Service Worker — matura.bernhardgmeiner.com
    VERSION wird von _dev/bump-sw.mjs vor jedem Deploy auf einen Zeitstempel gesetzt. */
-const VERSION = '20260707223415';
+const VERSION = '20260707224636';
 const CACHE = 'mwg-' + VERSION;
 
 /* @assets:start (von bump-sw.mjs generiert) */

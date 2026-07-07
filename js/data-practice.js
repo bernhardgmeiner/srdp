@@ -109,6 +109,26 @@ Felix`,
       { mark: 'No qualifications, no availability for interview', fix: 'Applications need concrete skills/experience and a closing offer ("I am available for an interview…").' },
     ],
     verdict: 'Friendly chat message, not an application. The register alone would sink it.' },
+  { id: 'textF', schools: ['bhs'], title: 'Text F — "Leaflet" by a student',
+    text: `Information About Our School Garden Club
+
+The purpose of this leaflet is to inform the reader about the School Garden Club. The club was founded three years ago and has around twenty members who meet every week.
+
+The club has several advantages, but also a few disadvantages. On the one hand, members learn about plants and the environment. On the other hand, it takes up free time, so everyone has to decide for themselves.
+
+I joined last year and it completely changed my life. My friends and I have so much fun every single week.
+
+Thank you for reading this leaflet.`,
+    errors: [
+      { mark: 'Title "Information About Our School Garden Club"', fix: 'Flat, notice-style title. A leaflet needs a title that pulls the reader in, e.g. "Get Growing — Join the School Garden Club!"' },
+      { mark: '"The purpose of this leaflet is to inform the reader"', fix: 'Report-style opener. A leaflet opens with a hook aimed at the reader: "Ever fancied growing your own vegetables at school?"' },
+      { mark: 'One long block — no subheadings', fix: 'A leaflet is broken into short, headed sections. Add subheadings such as "What We Do" and "Why Join".' },
+      { mark: '"several advantages, but also a few disadvantages … On the one hand … On the other hand"', fix: 'Weighing pros and cons does not belong in a leaflet. A leaflet promotes one thing — sell the benefits, do not argue against yourself.' },
+      { mark: '"I joined last year and it completely changed my life"', fix: 'Personal story = blog register. A leaflet informs and persuades the reader; it is not about your own life.' },
+      { mark: 'No direct address and no call to action', fix: 'The reader is never addressed as "you" and never told what to do. End with a call to action: "Come along to our next meeting and see for yourself."' },
+      { mark: 'No practical details', fix: 'The facts the reader needs are missing: when and where the club meets, and how to sign up.' },
+    ],
+    verdict: 'This reads like a neutral report with a diary entry dropped into the middle. It informs, but it never grabs the reader, never persuades and never says what to do next — the three jobs a leaflet exists to do.' },
 ];
 
 /* ─── REGISTER GYM ─────────────────────────────────────────── */
