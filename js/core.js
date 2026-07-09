@@ -330,6 +330,7 @@ const NAV = [
   { divider: null, items: [{ id: 'home', label: 'Home' }] },
   { divider: 'Basics', items: [
     { id: 'overview', label: 'Overview & grading' },
+    { id: 'examiner', label: 'Grade like an examiner' },
     { id: 'studyplan', label: 'Countdown plan' },
     { id: 'faq', label: 'FAQ' },
   ]},

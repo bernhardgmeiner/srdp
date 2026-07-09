@@ -1,6 +1,6 @@
 /* Service Worker — matura.bernhardgmeiner.com
    VERSION wird von _dev/bump-sw.mjs vor jedem Deploy auf einen Zeitstempel gesetzt. */
-const VERSION = '20260707224636';
+const VERSION = '20260709054435';
 const CACHE = 'mwg-' + VERSION;
 
 /* @assets:start (von bump-sw.mjs generiert) */
@@ -22,6 +22,7 @@ const ASSETS = [
   'js/pages-extra.js',
   'js/pages-main.js',
   'js/pages-practice.js',
+  'js/pages-rating.js',
   'js/pages-timer.js',
   'js/pages-tools.js',
   'js/pwa.js',
@@ -41,6 +42,7 @@ const ASSETS = [
   'checklist/',
   'email/',
   'essay/',
+  'examiner/',
   'faq/',
   'grammar/',
   'leaflet/',

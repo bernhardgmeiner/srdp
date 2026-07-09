@@ -190,26 +190,33 @@ SRDP.dndSets = {
 };
 
 /* ─── AI FEEDBACK PROMPT TEMPLATE ──────────────────────────── */
-SRDP.aiPromptTemplate = (typeName, length, task, text) => `You are an experienced Austrian English teacher assessing a practice text for the standardised written Reife- und Diplomprüfung (SRDP), English B2, text type: ${typeName}, target length: about ${length} words.
+SRDP.aiPromptTemplate = (typeName, length, task, text) => `You are an experienced Austrian examiner rating a practice text for the standardised written Reife- und Diplomprüfung (SRDP), English, level B2. Text type: ${typeName}. Target length: about ${length} words. Work the way a trained rater panel does, in this order.
 
 THE TASK THE STUDENT WAS GIVEN:
-${task || '(no task provided — assess the text on text-type conventions alone)'}
+${task || '(no task provided — assess the text on the conventions of this text type alone)'}
 
 THE STUDENT'S TEXT:
 """
 ${text}
 """
 
-Please assess the text using the four official SRDP criteria, each on a 0–10 scale:
-1. Task Achievement (Erfüllung der Aufgabenstellung) — content points covered? text type conventions (layout, title/greeting/sign-off, register)? length?
-2. Coherence & Cohesion — structure, paragraphing, linking devices
-3. Lexical & Structural Range — variety of vocabulary and structures, complex forms, no lifting from the prompt
-4. Lexical & Structural Accuracy — grammar, word choice, spelling, punctuation
+STEP 1 — Expectation horizon (do this before you judge anything).
+In 3–4 sentences, describe what a solid B2 answer to THIS task should contain: its purpose and reader, the content points that must be covered, the conventions of a ${typeName}, and the register you would expect. This is your yardstick for Step 2.
 
-Format your answer like this:
-- A score (x/10) for each criterion with a 2–3 sentence justification
-- The 5 most important errors as a table: quote → correction → one-line explanation
-- Three concrete things to do differently next time
-- One thing the student already does well
+STEP 2 — Rate the four official criteria, each on the 0–10 scale (level 6 = B2 minimum met). Judge each criterion independently, in its own pass, and quote evidence from the text.
+1. Task Achievement — purpose and text-type requirements; are all content points developed (not merely mentioned) with relevant details/examples; title / subject line / greeting / sign-off / headings where the text type needs them. WORD COUNT: if the text is more than 10% over or under about ${length} words, drop this criterion by one band and say so explicitly.
+2. Coherence & Cohesion — the overall line of thought; logical paragraphs with topic sentences; the range and fit of linking devices (here you judge whether they fit, not whether they are correct English).
+3. Lexical & Structural Range — breadth of topic vocabulary and of structures, including some complex forms; any lifting of whole phrases from the task; appropriate register.
+4. Lexical & Structural Accuracy — grammar, word choice, spelling, punctuation. Note: a linking word can be appropriate (credited under criterion 2) and still be wrong in form (penalised here).
+Within each criterion the first descriptors weigh more than a title or the register, and the final band is a qualitative judgement, not the average of the descriptors.
 
-Be honest but encouraging. Do not rewrite the whole text.`;
+STEP 3 — Holistic verdict.
+Two or three sentences on the biggest strengths and on the two or three changes that would raise the grade most.
+
+FORMAT YOUR ANSWER:
+- Step 1: the expectation horizon.
+- Step 2: for each criterion, a band (x/10) with a 2–3 sentence justification that quotes the text.
+- The 5 most important errors as a table: quote → correction → one-line explanation.
+- Step 3: the holistic verdict, and one thing the student already does well.
+
+Be honest but encouraging, and do not rewrite the whole text.`;

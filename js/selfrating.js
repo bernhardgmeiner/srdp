@@ -9,7 +9,7 @@ const M = window.MWG;
 const { $, $$, esc } = M;
 
 const CRITERIA = [
-  { id: 'TA', name: 'Task achievement', note: 'Off the word count by more than ±10%? Then rate one band lower here – that is the official rule.', bands: {
+  { id: 'TA', name: 'Task Achievement', note: 'Off the word count by more than ±10%? Then rate one band lower here – that is the official rule.', bands: {
     10: 'I did exactly what the task asked: all three bullet points fully developed with relevant, well-chosen details, the text type fits, and my opening and ending do their job.',
     8: 'All three bullet points are developed with relevant details; small gaps in balance, or my title/opening/closing could be sharper.',
     6: 'All points are developed but with only a limited number of supporting details – or one point is thin while the other two carry it. Conventions mostly respected.',
@@ -17,7 +17,7 @@ const CRITERIA = [
     2: 'Only parts of the task are recognisable; most content points are barely touched.',
     0: 'My text does not answer this task at all (off topic or clearly prepared in advance – the veto case).',
   }},
-  { id: 'CC', name: 'Coherence & cohesion', note: '', bands: {
+  { id: 'CC', name: 'Coherence & Cohesion', note: '', bands: {
     10: 'My text reads as one clear line of thought from start to finish; paragraphs connect to each other and I use a variety of linking devices naturally.',
     8: 'Clear overall structure and logical order; varied linking words with maybe a bump or two in the flow.',
     6: 'Generally well organised in clear, logical paragraphs; I use a limited set of common linking devices, and they fit.',
@@ -25,7 +25,7 @@ const CRITERIA = [
     2: 'A reader has to work hard to follow my text; little visible organisation.',
     0: 'No recognisable structure.',
   }},
-  { id: 'LR', name: 'Lexical & structural range', note: '', bands: {
+  { id: 'LR', name: 'Lexical & Structural Range', note: '', bands: {
     10: 'I said everything I wanted to say without having to simplify: varied topic vocabulary, several complex structures, register right throughout.',
     8: 'Good variety in vocabulary and structures; occasional repetition; register right almost everywhere.',
     6: 'Enough vocabulary and structures for the task, including some complex sentence forms; some repetition and safe word choices (thing, good, nice).',
@@ -33,7 +33,7 @@ const CRITERIA = [
     2: 'Very limited language; I often could not express what I actually meant.',
     0: 'Too little own language to assess.',
   }},
-  { id: 'LA', name: 'Lexical & structural accuracy', note: '', bands: {
+  { id: 'LA', name: 'Lexical & Structural Accuracy', note: '', bands: {
     10: 'Only occasional slips; nothing disturbs the reading.',
     8: 'Mistakes exist but are rare and never cause misunderstanding; the complex forms I attempt mostly work.',
     6: 'A relatively high degree of control: errors happen, especially in complex sentences, but communication always works; spelling reasonably accurate.',
