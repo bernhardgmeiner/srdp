@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════════
-   App core — state, router, helpers
+   App core – state, router, helpers
    ════════════════════════════════════════════════════════════ */
 (function () {
 'use strict';
@@ -47,7 +47,7 @@ function fallbackCopy(text, done) {
   const ta = document.createElement('textarea');
   ta.value = text; ta.style.cssText = 'position:fixed;opacity:0';
   document.body.appendChild(ta); ta.select();
-  try { document.execCommand('copy'); done(); } catch (e) { toast('Copy failed — select and copy manually'); }
+  try { document.execCommand('copy'); done(); } catch (e) { toast('Copy failed – select and copy manually'); }
   document.body.removeChild(ta);
 }
 /* visible success feedback on a copy trigger: chips flip their icon, buttons swap their label */

@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════════
-   Boot — footer, router, event delegation
+   Boot – footer, router, event delegation
    ════════════════════════════════════════════════════════════ */
 (function () {
 'use strict';
@@ -29,7 +29,7 @@ function route() {
   if (M.buildPageTOC) M.buildPageTOC();
   if (page.track) M.markVisited(page.track);
   $$('#sidenav .nav-item').forEach(a => a.classList.toggle('active', a.dataset.nav === id));
-  document.title = page.title + ' — Matura Writing Guide B2';
+  document.title = page.title + ' – Matura Writing Guide B2';
   try { main.scrollTo({ top: 0 }); window.scrollTo({ top: 0 }); } catch (e) { main.scrollTop = 0; }
   $('#sidenav').classList.remove('open');
   const ov = $('.nav-overlay'); if (ov) ov.remove();
@@ -262,7 +262,7 @@ function showSchoolChooser() {
   const SC = (window.SRDP && SRDP.schools) || {};
   function card(id) {
     const c = SC[id] || {};
-    const d = id === 'ahs' ? 'Gymnasium · 2 Schreibaufgaben, mit Essay' : 'HAK, HTL, HLW u. a. · 3 Schreibaufgaben, mit Leaflet';
+    const d = id === 'ahs' ? 'Gymnasium · 2 Schreibaufgaben, mit Essay' : 'HAK, HTL, HUM, BA u. a. · 3 Schreibaufgaben, mit Leaflet';
     return '<button class="sc-card" data-action="set-school" data-school="' + id + '">' +
       '<span class="sc-k">' + esc(c.label || id.toUpperCase()) + '</span>' +
       '<span class="sc-d">' + esc(d) + '</span></button>';

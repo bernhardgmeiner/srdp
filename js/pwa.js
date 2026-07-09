@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════════
-   PWA — Service-Worker-Registrierung + Update-Toast
+   PWA – Service-Worker-Registrierung + Update-Toast
    ════════════════════════════════════════════════════════════ */
 (function () {
 'use strict';
@@ -38,7 +38,7 @@ window.addEventListener('load', () => {
         if (nw.state === 'installed' && navigator.serviceWorker.controller) showUpdateToast(nw);
       });
     });
-  }).catch(() => { /* Registrierung fehlgeschlagen — Seite läuft normal weiter */ });
+  }).catch(() => { /* Registrierung fehlgeschlagen – Seite läuft normal weiter */ });
 
   navigator.serviceWorker.addEventListener('controllerchange', () => {
     if (reloading || !userAskedReload) return;

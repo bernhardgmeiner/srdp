@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════════
-   Pages 1 — Home · Overview · Exam day · Text types
+   Pages 1 – Home · Overview · Exam day · Text types
    ════════════════════════════════════════════════════════════ */
 (function () {
 'use strict';
@@ -149,12 +149,12 @@ PAGES.overview = {
         '<div class="gap-s"></div>' +
         '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">' +
           '<div class="tip">' + (M.schoolConfig().wordCountTip || 'Word count tolerance: ±10%. If you are further off than that, Task Achievement is reduced by one band.') + '</div>' +
-          '<div class="tip">Almost every task gives three content points. Address each one — in its own body paragraph, and follow whatever your task sheet actually lists.</div>' +
+          '<div class="tip">Almost every task gives three content points. Address each one – in its own body paragraph, and follow whatever your task sheet actually lists.</div>' +
         '</div>' +
         '<div class="tip" style="margin-top:18px">Want the real thing? The tasks on this site are Matura-style, written for practice. The officially released past exam papers live in the BMB download area at <a href="https://www.matura.gv.at/downloads" target="_blank" rel="noopener">matura.gv.at/downloads</a> – same format, real exams.</div>' +
         '<div class="gap"></div>' +
-        sectionLabel('How you are graded — the four criteria', { id: 'criteria', label: 'The four criteria' }) +
-        '<p style="font-size:1.05rem;color:var(--text-secondary);line-height:1.55;margin-bottom:22px;max-width:720px">Each text is rated with the official analytic scale: four independent criteria, each scored <strong style="color:var(--text)">0–10</strong> and equally weighted — weaker areas can be compensated by stronger ones.</p>' +
+        sectionLabel('How you are graded – the four criteria', { id: 'criteria', label: 'The four criteria' }) +
+        '<p style="font-size:1.05rem;color:var(--text-secondary);line-height:1.55;margin-bottom:22px;max-width:720px">Each text is rated with the official analytic scale: four independent criteria, each scored <strong style="color:var(--text)">0–10</strong> and equally weighted – weaker areas can be compensated by stronger ones.</p>' +
         '<div class="grid g-auto-240">' +
           M.assessmentCriteria().map((c, i) =>
             '<div class="card" style="border-top:3px solid var(--primary)">' +
@@ -180,7 +180,7 @@ PAGES.overview = {
           [
             ['Writing only 2 of 3 bullet points', 'Task Achievement drops sharply', 'Tick off each bullet as you write it'],
             ['Ignoring the text type&rsquo;s rules (e.g. a report without headings)', 'Task Achievement drops – conventions are part of the criterion', 'Check the Layout box in the guide before you start'],
-            ['Copying words from the prompt', 'Range drops', 'Rephrase the task&rsquo;s words — use synonyms'],
+            ['Copying words from the prompt', 'Range drops', 'Rephrase the task&rsquo;s words – use synonyms'],
             ['Word count off by more than ±10%', 'Task Achievement drops one band', 'Count your words. Practise estimating.'],
             ['Formal style in a blog (or vice versa)', 'Wrong register = lower Task Achievement', 'Ask: formal or informal? Then commit.'],
             ['Only simple linking words', 'Low Coherence score', 'Use the B2 linking words table'],
@@ -260,7 +260,7 @@ function typePage(typeId) {
   if (tab === 'guide') {
     body = sectionLabel('Layout', { id: 'layout', label: 'Layout' }) +
       '<div class="layout-box" style="border-left-color:' + col + '">' +
-        t.layout.map(r => '<div><span class="part">' + esc(r.part) + '</span>' + (r.note ? '<span class="note">— ' + esc(r.note) + '</span>' : '') + '</div>').join('') +
+        t.layout.map(r => '<div><span class="part">' + esc(r.part) + '</span>' + (r.note ? '<span class="note">– ' + esc(r.note) + '</span>' : '') + '</div>').join('') +
       '</div><div class="gap-s"></div>' +
       sectionLabel('Do&rsquo;s and don&rsquo;ts', { id: 'dos', label: "Do's and don'ts" }) + ddCols(t.dos, t.donts) +
       (TYPE_EXAMPLES[typeId] ?

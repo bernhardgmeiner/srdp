@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════════
-   Pages 2 — Phrase bank · Checklist · Self-check · Task bank
+   Pages 2 – Phrase bank · Checklist · Self-check · Task bank
    ════════════════════════════════════════════════════════════ */
 (function () {
 'use strict';
@@ -15,8 +15,8 @@ function allPhrases() {
   const vis = t => !t.schools || t.schools.indexOf(school) >= 0;
   SRDP.textTypes.filter(vis).forEach(t => t.phrases.forEach(g => g.items.forEach(p => out.push({ phrase: p, category: g.category, typeId: t.id, typeName: t.name, color: t.color }))));
   const emailType = SRDP.textTypes.find(t => t.id === 'email');
-  if (!emailType || vis(emailType)) SRDP.emailSubTypes.forEach(st => st.phrases.forEach(g => g.items.forEach(p => out.push({ phrase: p, category: st.name + ' — ' + g.category, typeId: 'email', typeName: 'E-Mail', color: 'red' }))));
-  SRDP.paragraphs.phraseGroups.forEach(g => g.phrases.forEach(p => out.push({ phrase: p, category: 'Paragraphs — ' + g.label, typeId: 'all', typeName: 'Any text', color: null })));
+  if (!emailType || vis(emailType)) SRDP.emailSubTypes.forEach(st => st.phrases.forEach(g => g.items.forEach(p => out.push({ phrase: p, category: st.name + ' – ' + g.category, typeId: 'email', typeName: 'E-Mail', color: 'red' }))));
+  SRDP.paragraphs.phraseGroups.forEach(g => g.phrases.forEach(p => out.push({ phrase: p, category: 'Paragraphs – ' + g.label, typeId: 'all', typeName: 'Any text', color: null })));
   _phraseCache[school] = out;
   return out;
 }
@@ -95,8 +95,8 @@ function clBody() {
       (clState.submitted ? '<div style="margin-top:11px;font-size:.875rem;color:' + (score >= 90 ? 'var(--green)' : score >= 70 ? 'var(--yellow)' : 'var(--red)') + '">' +
         (score >= 90 ? 'Ready to hand in.' : score >= 70 ? 'Almost there. Look at the red items.' : 'Keep working. Several important items are unchecked.') + '</div>' : '') +
     '</div>' +
-    section('General — all text types', c.general.items) +
-    (clState.type !== 'general' ? section(c[clState.type].label + ' — specific', c[clState.type].items) : '') +
+    section('General – all text types', c.general.items) +
+    (clState.type !== 'general' ? section(c[clState.type].label + ' – specific', c[clState.type].items) : '') +
     '<div style="display:flex;gap:8px">' +
       (!clState.submitted ? '<button class="btn btn-primary" data-action="cl-submit">See score</button>' : '<button class="btn btn-ghost" data-action="cl-reset">Reset</button>') +
     '</div>';
@@ -135,25 +135,25 @@ function analyze(text, type, target) {
   const lo = Math.round(target * 0.9), hi = Math.round(target * 1.1);
 
   /* word count */
-  if (wc === 0) return [{ status: 'bad', html: 'No text yet — paste your text above and press <b>Check my text</b>.' }];
-  if (wc < lo) add('bad', '<b>' + wc + ' words</b> — below the safe range (' + lo + '–' + hi + ' for a ~' + target + '-word task). Develop your bullet points further.');
-  else if (wc > hi) add('bad', '<b>' + wc + ' words</b> — above the safe range (' + lo + '–' + hi + '). Cut repetition and filler; more text = more error opportunities.');
-  else add('ok', '<b>' + wc + ' words</b> — inside the safe range (' + lo + '–' + hi + '). ');
+  if (wc === 0) return [{ status: 'bad', html: 'No text yet – paste your text above and press <b>Check my text</b>.' }];
+  if (wc < lo) add('bad', '<b>' + wc + ' words</b> – below the safe range (' + lo + '–' + hi + ' for a ~' + target + '-word task). Develop your bullet points further.');
+  else if (wc > hi) add('bad', '<b>' + wc + ' words</b> – above the safe range (' + lo + '–' + hi + '). Cut repetition and filler; more text = more error opportunities.');
+  else add('ok', '<b>' + wc + ' words</b> – inside the safe range (' + lo + '–' + hi + '). ');
 
   /* paragraphs */
   const paras = text.split(/\n\s*\n/).filter(p => p.trim().length > 0);
   if (paras.length < 4) add('warn', '<b>' + paras.length + ' paragraph' + (paras.length === 1 ? '' : 's') + ' detected.</b> A Matura text usually needs 5–6 blocks (intro + one per bullet + conclusion). Separate paragraphs with an empty line.');
-  else add('ok', '<b>' + paras.length + ' paragraphs</b> — structure looks deliberate.');
+  else add('ok', '<b>' + paras.length + ' paragraphs</b> – structure looks deliberate.');
 
   /* register */
   const contr = text.match(CONTRACTIONS) || [];
   const informalHits = INFORMAL.filter(wrd => new RegExp('\\b' + wrd.replace(/ /g, '\\s+') + '\\b', 'i').test(text));
   if (FORMAL_TYPES[type]) {
-    if (contr.length) add('bad', '<b>' + contr.length + ' contraction' + (contr.length > 1 ? 's' : '') + '</b> found (' + contr.slice(0, 5).map(c => '<code>' + esc(c) + '</code>').join(' ') + (contr.length > 5 ? ' …' : '') + ') — write the full forms in formal texts.');
-    else add('ok', 'No contractions — correct for a formal text.');
+    if (contr.length) add('bad', '<b>' + contr.length + ' contraction' + (contr.length > 1 ? 's' : '') + '</b> found (' + contr.slice(0, 5).map(c => '<code>' + esc(c) + '</code>').join(' ') + (contr.length > 5 ? ' …' : '') + ') – write the full forms in formal texts.');
+    else add('ok', 'No contractions – correct for a formal text.');
     if (informalHits.length) add('warn', 'Possibly informal wording: ' + informalHits.slice(0, 6).map(w => '<code>' + esc(w) + '</code>').join(' ') + '. Replace with formal alternatives.');
   } else {
-    add('info', (contr.length ? contr.length + ' contractions found — fine for a ' + type + '.' : 'No contractions found. For a ' + (type === 'leaflet' ? 'leaflet, keep it persuasive and reader-friendly, but not personal or slangy.' : type + ', a personal, natural voice is welcome.')));
+    add('info', (contr.length ? contr.length + ' contractions found – fine for a ' + type + '.' : 'No contractions found. For a ' + (type === 'leaflet' ? 'leaflet, keep it persuasive and reader-friendly, but not personal or slangy.' : type + ', a personal, natural voice is welcome.')));
   }
 
   /* linkers */
@@ -169,8 +169,8 @@ function analyze(text, type, target) {
   if (passive) signals.push(passive + '× possible passive');
   if (rel) signals.push(rel + '× relative pronoun (which/who/whose)');
   if (cond) signals.push('a conditional pattern (if … would)');
-  if (signals.length >= 2) add('ok', '<b>Complex structures:</b> ' + signals.join(', ') + ' — good for your Range score. (Rough automatic estimate.)');
-  else add('warn', '<b>Few complex structures detected</b> (' + (signals.join(', ') || 'none') + '). Work in a passive, a conditional or a relative clause — simple-only grammar caps your Range.');
+  if (signals.length >= 2) add('ok', '<b>Complex structures:</b> ' + signals.join(', ') + ' – good for your Range score. (Rough automatic estimate.)');
+  else add('warn', '<b>Few complex structures detected</b> (' + (signals.join(', ') || 'none') + '). Work in a passive, a conditional or a relative clause – simple-only grammar caps your Range.');
 
   /* sentence stats */
   const sentences = text.replace(/\n+/g, ' ').split(/[.!?]+\s/).filter(s => s.trim().split(/\s+/).length > 2);
@@ -179,7 +179,7 @@ function analyze(text, type, target) {
     const avg = Math.round(lens.reduce((a, b) => a + b, 0) / lens.length);
     const maxLen = Math.max.apply(null, lens), minLen = Math.min.apply(null, lens);
     if (maxLen - minLen < 8) add('warn', 'Sentence lengths are uniform (avg ' + avg + ' words, range ' + minLen + '–' + maxLen + '). Mix short, punchy sentences with longer complex ones.');
-    else add('ok', 'Sentence variety: avg ' + avg + ' words, range ' + minLen + '–' + maxLen + ' — good rhythm.');
+    else add('ok', 'Sentence variety: avg ' + avg + ' words, range ' + minLen + '–' + maxLen + ' – good rhythm.');
     const starters = {};
     sentences.forEach(s => { const w = (s.trim().split(/\s+/)[0] || '').toLowerCase().replace(/[^a-z']/g, ''); if (w) starters[w] = (starters[w] || 0) + 1; });
     const rep = Object.keys(starters).filter(w => starters[w] >= 4);
@@ -189,46 +189,46 @@ function analyze(text, type, target) {
   /* questions / exclamations */
   const qs = (text.match(/\?/g) || []).length;
   const ex = (text.match(/!/g) || []).length;
-  if (type === 'essay' && qs > 1) add('warn', qs + ' question marks — in an essay, at most one rhetorical question (in the introduction).');
-  if ((type === 'article' || type === 'blog') && qs === 0) add('warn', 'No rhetorical questions — articles and blogs should engage the reader directly.');
-  if (FORMAL_TYPES[type] && ex > 0) add('bad', ex + ' exclamation mark' + (ex > 1 ? 's' : '') + ' — not appropriate in a formal ' + type + '.');
+  if (type === 'essay' && qs > 1) add('warn', qs + ' question marks – in an essay, at most one rhetorical question (in the introduction).');
+  if ((type === 'article' || type === 'blog') && qs === 0) add('warn', 'No rhetorical questions – articles and blogs should engage the reader directly.');
+  if (FORMAL_TYPES[type] && ex > 0) add('bad', ex + ' exclamation mark' + (ex > 1 ? 's' : '') + ' – not appropriate in a formal ' + type + '.');
 
   /* type-specific structure */
   const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
   if (type === 'email') {
     const hasHeader = /to\s*:/i.test(text) && /from\s*:/i.test(text) && /subject\s*:/i.test(text) && /date\s*:/i.test(text);
-    add(hasHeader ? 'ok' : 'bad', hasHeader ? 'Header complete (To / From / Date / Subject).' : '<b>Header incomplete</b> — a formal e-mail needs To, From, Date AND Subject lines.');
+    add(hasHeader ? 'ok' : 'bad', hasHeader ? 'Header complete (To / From / Date / Subject).' : '<b>Header incomplete</b> – a formal e-mail needs To, From, Date AND Subject lines.');
     const dearSir = /dear\s+(sir|madam|editor)/i.test(text);
     const dearName = /dear\s+(mr|ms|mrs|dr)\.?\s+\w+/i.test(text);
     const faith = /yours\s+faithfully/i.test(text);
     const sinc = /yours\s+sincerely/i.test(text);
-    if (!dearSir && !dearName) add('bad', 'No formal greeting found — open with <code>Dear Sir or Madam,</code> or <code>Dear Mr/Ms [Name],</code>.');
-    if (!faith && !sinc) add('bad', 'No sign-off found — close with <code>Yours faithfully,</code> (name unknown) or <code>Yours sincerely,</code> (name known).');
+    if (!dearSir && !dearName) add('bad', 'No formal greeting found – open with <code>Dear Sir or Madam,</code> or <code>Dear Mr/Ms [Name],</code>.');
+    if (!faith && !sinc) add('bad', 'No sign-off found – close with <code>Yours faithfully,</code> (name unknown) or <code>Yours sincerely,</code> (name known).');
     if (dearSir && sinc) add('bad', '<b>Mismatch:</b> "Dear Sir or Madam" must pair with <code>Yours faithfully</code>, not "sincerely".');
     if (dearName && faith) add('bad', '<b>Mismatch:</b> a named greeting (Dear Mr/Ms …) must pair with <code>Yours sincerely</code>.');
     if ((dearSir && faith) || (dearName && sinc)) add('ok', 'Greeting and sign-off match correctly.');
   }
   if (type === 'report') {
     const hasHeader = /from\s*:/i.test(text) && /subject\s*:/i.test(text) && /date\s*:/i.test(text);
-    add(hasHeader ? 'ok' : 'bad', hasHeader ? 'Header complete (Date / From / Subject).' : '<b>Header incomplete</b> — a report needs Date, From and Subject lines.');
+    add(hasHeader ? 'ok' : 'bad', hasHeader ? 'Header complete (Date / From / Subject).' : '<b>Header incomplete</b> – a report needs Date, From and Subject lines.');
     const headings = lines.filter(l => { const tt = l.trim(); return tt.length > 0 && tt.split(/\s+/).length <= 6 && !/[.!?:;,]$/.test(tt) && !/^(date|from|subject|to)\b/i.test(tt) && !/^report$/i.test(tt); }).length;
-    add(headings >= 3 ? 'ok' : 'warn', headings >= 3 ? headings + ' section headings found.' : 'Only ' + headings + ' section heading' + (headings === 1 ? '' : 's') + ' detected — give each section a short, clear heading such as Introduction, Findings or Recommendations. They do not need numbers.');
-    if (/dear\s+(sir|madam)/i.test(text)) add('bad', 'Reports have <b>no greeting</b> — delete "Dear Sir or Madam".');
+    add(headings >= 3 ? 'ok' : 'warn', headings >= 3 ? headings + ' section headings found.' : 'Only ' + headings + ' section heading' + (headings === 1 ? '' : 's') + ' detected – give each section a short, clear heading such as Introduction, Findings or Recommendations. They do not need numbers.');
+    if (/dear\s+(sir|madam)/i.test(text)) add('bad', 'Reports have <b>no greeting</b> – delete "Dear Sir or Madam".');
     const opinion = (text.match(/\bI (think|believe|feel)\b/gi) || []).length;
-    if (opinion > 1) add('warn', '"I think/believe/feel" appears ' + opinion + '× — keep opinion out of the body; only the recommendations may carry careful suggestions.');
+    if (opinion > 1) add('warn', '"I think/believe/feel" appears ' + opinion + '× – keep opinion out of the body; only the recommendations may carry careful suggestions.');
   }
   if (type === 'essay' || type === 'article') {
     const first = lines[0] || '';
     const looksTitle = first.length > 0 && first.split(/\s+/).length <= 12 && !/[.:!?,]$/.test(first) && !/^(dear|to:|from:)/i.test(first);
-    add(looksTitle ? 'ok' : 'warn', looksTitle ? 'First line looks like a title: <code>' + esc(first) + '</code>' : 'No title detected — ' + (type === 'essay' ? 'essays need a clear title on the first line.' : 'articles need a catchy title on the first line.'));
+    add(looksTitle ? 'ok' : 'warn', looksTitle ? 'First line looks like a title: <code>' + esc(first) + '</code>' : 'No title detected – ' + (type === 'essay' ? 'essays need a clear title on the first line.' : 'articles need a catchy title on the first line.'));
   }
   if (type === 'blog') {
-    add('info', 'Blog post: username + date/time at the top, catchy title, and an invitation to comment at the end. Blog comment: NO title — reference the original post in sentence one.');
+    add('info', 'Blog post: username + date/time at the top, catchy title, and an invitation to comment at the end. Blog comment: NO title – reference the original post in sentence one.');
     if (!/\?/.test(text)) add('warn', 'Consider ending with a question to invite comments.');
   }
   if (type === 'essay') {
     const anecdote = (text.match(/\b(my|me|I was|when I)\b/gi) || []).length;
-    if (anecdote > 6) add('warn', 'Lots of first-person/personal phrasing — essays argue with generalisations, not personal stories. ("It is often the case that…" instead of "When I was…")');
+    if (anecdote > 6) add('warn', 'Lots of first-person/personal phrasing – essays argue with generalisations, not personal stories. ("It is often the case that…" instead of "When I was…")');
   }
   if (type === 'leaflet') {
     const lfirst = (lines[0] || '').trim();
@@ -357,7 +357,7 @@ const TOPIC_VOCAB = [
   { topic: "Environment & climate", words: [
     { w: "climate change", hint: "The long-term change in the Earth's weather patterns. Works as the subject of strong openings: 'Climate change affects every one of us.'" },
     { w: "carbon footprint", hint: "The amount of CO2 your lifestyle produces. Often with 'reduce': 'Flying less is the fastest way to reduce your carbon footprint.'" },
-    { w: "renewable energy sources", hint: "Wind, solar, hydro — energy that does not run out. 'Austria invests heavily in renewable energy sources.'" },
+    { w: "renewable energy sources", hint: "Wind, solar, hydro – energy that does not run out. 'Austria invests heavily in renewable energy sources.'" },
     { w: "greenhouse gas emissions", hint: "The gases that heat up the planet. Usually with 'cut' or 'reduce': 'The EU wants to cut greenhouse gas emissions by 2030.'" },
     { w: "to cut down on waste", hint: "To reduce the amount you throw away. 'Schools could cut down on waste by banning plastic bottles.'" },
     { w: "a throwaway society", hint: "A society that buys, uses and bins things quickly. Good for critical writing: 'We live in a throwaway society.'" },
@@ -365,7 +365,7 @@ const TOPIC_VOCAB = [
     { w: "to raise awareness of", hint: "To make people notice a problem. 'The campaign raises awareness of plastic pollution.'" },
     { w: "sustainable development", hint: "Growth that does not destroy resources for the future. A key term in formal texts and reports." },
     { w: "to tackle pollution", hint: "To deal with pollution seriously. 'Tackle' also works with problems, causes, issues." },
-    { w: "single-use plastic", hint: "Plastic you use once and throw away — straws, cups, bags. 'The EU has banned many single-use plastics.'" },
+    { w: "single-use plastic", hint: "Plastic you use once and throw away – straws, cups, bags. 'The EU has banned many single-use plastics.'" },
     { w: "to combat global warming", hint: "To fight against global warming. More formal than 'fight': perfect for reports and articles." },
   ] },
   { topic: "Social media & technology", words: [
@@ -373,7 +373,7 @@ const TOPIC_VOCAB = [
     { w: "screen time", hint: "The hours you spend looking at screens. 'Parents worry about their children's screen time.'" },
     { w: "a digital detox", hint: "A planned break from phones and social media. 'A weekend digital detox did me a world of good.'" },
     { w: "to go viral", hint: "To spread extremely fast online. 'The video went viral within hours.'" },
-    { w: "an online presence", hint: "How you appear on the internet — profiles, posts, photos. 'Employers check applicants' online presence.'" },
+    { w: "an online presence", hint: "How you appear on the internet – profiles, posts, photos. 'Employers check applicants' online presence.'" },
     { w: "to spread fake news", hint: "To pass on false information as if it were true. 'Bots spread fake news faster than humans can correct it.'" },
     { w: "data privacy", hint: "Control over who sees and uses your personal information. 'Teenagers care more about data privacy than adults think.'" },
     { w: "to stay connected", hint: "To keep in contact, especially over distance. 'Social media helps families stay connected across continents.'" },
@@ -403,11 +403,11 @@ const TOPIC_VOCAB = [
     { w: "to put on weight", hint: "To become heavier. Neutral phrasing: 'Many students put on weight in stressful phases.'" },
     { w: "a work-life balance", hint: "The balance between job or school and free time. 'A healthy work-life balance prevents burnout.'" },
     { w: "to burn off calories", hint: "To use up energy through movement. 'A brisk walk burns off more calories than you think.'" },
-    { w: "a sedentary lifestyle", hint: "A lifestyle with too much sitting. Formal and precise — great for reports on health." },
+    { w: "a sedentary lifestyle", hint: "A lifestyle with too much sitting. Formal and precise – great for reports on health." },
     { w: "to cope with stress", hint: "To manage stress successfully. 'Sport helps me cope with stress before exams.'" },
     { w: "to stay in shape", hint: "To remain fit. 'You do not need a gym membership to stay in shape.'" },
     { w: "sleep deprivation", hint: "Not getting enough sleep. 'Sleep deprivation ruins concentration faster than any distraction.'" },
-    { w: "preventive healthcare", hint: "Medicine that stops illness before it starts — check-ups, vaccinations, healthy habits." },
+    { w: "preventive healthcare", hint: "Medicine that stops illness before it starts – check-ups, vaccinations, healthy habits." },
     { w: "to get into shape", hint: "To become fit (after not being fit). 'He got into shape for the ski season.'" },
   ] },
   { topic: "Work & career", words: [
@@ -417,15 +417,15 @@ const TOPIC_VOCAB = [
     { w: "to climb the career ladder", hint: "To move up to better positions. 'She climbed the career ladder within five years.'" },
     { w: "work experience", hint: "Practical experience of working. 'An internship gives you valuable work experience.'" },
     { w: "a nine-to-five job", hint: "A standard office job with fixed hours. Often slightly negative: 'He never wanted a nine-to-five job.'" },
-    { w: "to be self-employed", hint: "To work for yourself instead of a company. 'Being self-employed means freedom — and risk.'" },
+    { w: "to be self-employed", hint: "To work for yourself instead of a company. 'Being self-employed means freedom – and risk.'" },
     { w: "job security", hint: "How safe your job is from being lost. 'Public sector jobs offer more job security.'" },
     { w: "to work remotely", hint: "To work from home or anywhere outside the office. 'Half the team works remotely on Fridays.'" },
     { w: "to meet a deadline", hint: "To finish work on time. 'Journalists live from deadline to deadline.'" },
     { w: "a competitive field", hint: "An area where many people fight for few positions. 'Medicine is a highly competitive field.'" },
-    { w: "transferable skills", hint: "Skills useful in any job — teamwork, communication, problem-solving." },
+    { w: "transferable skills", hint: "Skills useful in any job – teamwork, communication, problem-solving." },
   ] },
   { topic: "Travel & tourism", words: [
-    { w: "to broaden the mind", hint: "Travel makes you more open and understanding. 'Travel broadens the mind' is a classic opener — use it with a twist." },
+    { w: "to broaden the mind", hint: "Travel makes you more open and understanding. 'Travel broadens the mind' is a classic opener – use it with a twist." },
     { w: "mass tourism", hint: "Tourism in huge, damaging numbers. 'Mass tourism is slowly destroying the places it loves.'" },
     { w: "off the beaten track", hint: "Away from the usual tourist routes. 'We found a village completely off the beaten track.'" },
     { w: "a once-in-a-lifetime trip", hint: "A journey you will probably only make once. 'For my grandparents, it was a once-in-a-lifetime trip.'" },
@@ -435,7 +435,7 @@ const TOPIC_VOCAB = [
     { w: "to travel on a budget", hint: "To travel cheaply. 'Interrail is the classic way to travel on a budget.'" },
     { w: "cultural exchange", hint: "Sharing traditions and views between cultures. 'School partnerships create real cultural exchange.'" },
     { w: "to soak up the atmosphere", hint: "To enjoy the feeling of a place. 'We sat in the square and soaked up the atmosphere.'" },
-    { w: "overtourism", hint: "When too many tourists overwhelm a place. Modern, precise term — examiners notice it." },
+    { w: "overtourism", hint: "When too many tourists overwhelm a place. Modern, precise term – examiners notice it." },
     { w: "a culture shock", hint: "The confusion of meeting a very different culture. 'Moving from a village to Tokyo was a culture shock.'" },
   ] },
   { topic: "Consumerism & money", words: [
@@ -448,9 +448,9 @@ const TOPIC_VOCAB = [
     { w: "to be in debt", hint: "To owe money. 'Many students leave university deeply in debt.'" },
     { w: "to spend money wisely", hint: "To make sensible spending choices. 'Learning to spend money wisely should be taught at school.'" },
     { w: "a tight budget", hint: "Very little money to work with. 'We planned the trip on a tight budget.'" },
-    { w: "conspicuous consumption", hint: "Buying expensive things to show off. Advanced term — use it once, precisely." },
+    { w: "conspicuous consumption", hint: "Buying expensive things to show off. Advanced term – use it once, precisely." },
     { w: "to cut back on spending", hint: "To reduce how much you spend. 'Families cut back on spending when prices rise.'" },
-    { w: "ethical shopping", hint: "Buying with attention to people and planet. 'Ethical shopping costs more — but who pays otherwise?'" },
+    { w: "ethical shopping", hint: "Buying with attention to people and planet. 'Ethical shopping costs more – but who pays otherwise?'" },
   ] },
   { topic: "Society & community", words: [
     { w: "to volunteer for a good cause", hint: "To work unpaid for something worthwhile. 'Thousands volunteer for good causes every weekend.'" },
@@ -488,7 +488,7 @@ const TOPIC_VOCAB = [
     { w: "a paywall", hint: "A barrier that makes you pay to read articles. 'Quality journalism increasingly sits behind a paywall.'" },
     { w: "public service broadcasting", hint: "Radio and TV financed by the public, like the ORF or the BBC. Useful in writing on trustworthy news." },
     { w: "investigative journalism", hint: "Journalism that uncovers hidden facts. 'Investigative journalism brought the scandal to light.'" },
-    { w: "a news outlet", hint: "A company that publishes news — paper, site or channel. 'Compare how two news outlets report the same story.'" },
+    { w: "a news outlet", hint: "A company that publishes news – paper, site or channel. 'Compare how two news outlets report the same story.'" },
     { w: "to fact-check a claim", hint: "To check whether a statement is true. 'Fact-check a claim before you share it.'" },
     { w: "clickbait headlines", hint: "Headlines designed only to make you click. 'Clickbait headlines promise more than the article delivers.'" },
     { w: "freedom of the press", hint: "The right of media to report without state control. 'Democracy dies without freedom of the press.'" },
@@ -506,7 +506,7 @@ const TOPIC_VOCAB = [
     { w: "a skilled worker", hint: "Someone with valuable professional training. 'Austria actively recruits skilled workers from abroad.'" },
     { w: "cultural identity", hint: "The feeling of belonging to a particular culture. 'You can build a new life without giving up your cultural identity.'" },
     { w: "to build a new life", hint: "To start again in a new place. 'They arrived with two suitcases and built a new life.'" },
-    { w: "humanitarian aid", hint: "Emergency help — food, shelter, medicine. 'Humanitarian aid reaches the camps by convoy.'" },
+    { w: "humanitarian aid", hint: "Emergency help – food, shelter, medicine. 'Humanitarian aid reaches the camps by convoy.'" },
   ] },
 ];
 /* pdf/topic-vocabulary.pdf deckt alle 11 Themen ab (via _dev/make-pdf.mjs). */

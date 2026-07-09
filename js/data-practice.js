@@ -4,7 +4,7 @@
 
 /* ─── SPOT THE MISTAKES ────────────────────────────────────── */
 SRDP.spotTexts = [
-  { id: 'textA', schools: ['ahs'], title: 'Text A — "Essay" by a student',
+  { id: 'textA', schools: ['ahs'], title: 'Text A – "Essay" by a student',
     text: `Hey guys! So there's been a lot of talk about banning phones in schools lately. I think it's a terrible idea and here's why.
 
 When my school tried a phone ban last year, I was so annoyed. I couldn't text my mum when I needed to, and honestly, it made me feel anxious. My best friend Lea had the same problem – she told me she felt "cut off from the world".
@@ -22,7 +22,7 @@ To sum up, phone bans are dumb. Schools should trust students more!!!`,
       { mark: 'No title', fix: 'Essays require a title.' },
     ],
     verdict: 'This reads like a blog post. Wrong register throughout.' },
-  { id: 'textB', title: 'Text B — "Report" by a student',
+  { id: 'textB', title: 'Text B – "Report" by a student',
     text: `To: The Principal
 From: Student Council
 Subject: Canteen Food
@@ -41,7 +41,7 @@ In conclusion, our canteen needs a complete makeover. The school should fire the
       { mark: '"fire the catering company"', fix: 'Too aggressive. Use: "It would be advisable to review the current catering contract."' },
     ],
     verdict: 'This reads like a personal complaint letter, not a report.' },
-  { id: 'textC', title: 'Text C — "Letter to the Editor" by a student',
+  { id: 'textC', title: 'Text C – "Letter to the Editor" by a student',
     text: `To: editor@dailynews.example
 From: mike99@email.example
 Date: 5 March 2026
@@ -65,7 +65,7 @@ Mike`,
       { mark: 'First name only ("Mike")', fix: 'Must give full name and town/city.' },
     ],
     verdict: 'Wrong register, missing structural elements.' },
-  { id: 'textD', title: 'Text D — "Blog comment" by a student',
+  { id: 'textD', title: 'Text D – "Blog comment" by a student',
     text: `The Question of Remote Learning
 
 It is widely acknowledged that remote learning has become a significant phenomenon in contemporary education. This comment will examine the advantages and disadvantages of this development.
@@ -77,15 +77,15 @@ Taking these points into consideration, it can be concluded that remote learning
 Yours faithfully,
 Thomas Maier`,
     errors: [
-      { mark: 'A title ("The Question of Remote Learning")', fix: "Blog comments have no title — that's for blog posts." },
+      { mark: 'A title ("The Question of Remote Learning")', fix: "Blog comments have no title – that's for blog posts." },
       { mark: 'No reference to the original post', fix: 'A comment MUST open by referencing the post: "Hi Sarah, I just read your post on remote learning…"' },
       { mark: '"It is widely acknowledged that…", "empirical studies have demonstrated"', fix: 'Academic essay language. Comments are personal and conversational.' },
-      { mark: '"This comment will examine…"', fix: 'Announcing your structure is essay style — and even there it is weak.' },
+      { mark: '"This comment will examine…"', fix: 'Announcing your structure is essay style – and even there it is weak.' },
       { mark: 'No personal experience or voice', fix: 'Blogs live on personality: "When my school went remote, I…"' },
       { mark: '"Yours faithfully," + full name', fix: "Comments don't have a formal sign-off. A username is enough." },
     ],
     verdict: 'A five-paragraph essay in disguise. Wrong genre from the first line.' },
-  { id: 'textE', title: 'Text E — "E-mail of application" by a student',
+  { id: 'textE', title: 'Text E – "E-mail of application" by a student',
     text: `To: jobs@sportcamp.example
 From: partyking2008@email.example
 Date: 2 May 2026
@@ -100,7 +100,7 @@ I can't work Mondays btw.
 See ya,
 Felix`,
     errors: [
-      { mark: '"partyking2008@email.example"', fix: 'Unprofessional address — use a neutral one (firstname.lastname@…).' },
+      { mark: '"partyking2008@email.example"', fix: 'Unprofessional address – use a neutral one (firstname.lastname@…).' },
       { mark: 'Subject: "job"', fix: 'Too vague. Name the position: "Application for Summer Camp Counsellor".' },
       { mark: '"Hey!"', fix: 'Formal greeting required: "Dear Sir or Madam," or the name from the ad.' },
       { mark: '"I really need the money because I want to buy a scooter"', fix: 'Focus on what you offer, not what you want to gain.' },
@@ -109,7 +109,7 @@ Felix`,
       { mark: 'No qualifications, no availability for interview', fix: 'Applications need concrete skills/experience and a closing offer ("I am available for an interview…").' },
     ],
     verdict: 'Friendly chat message, not an application. The register alone would sink it.' },
-  { id: 'textF', schools: ['bhs'], title: 'Text F — "Leaflet" by a student',
+  { id: 'textF', schools: ['bhs'], title: 'Text F – "Leaflet" by a student',
     text: `Information About Our School Garden Club
 
 The purpose of this leaflet is to inform the reader about the School Garden Club. The club was founded three years ago and has around twenty members who meet every week.
@@ -120,15 +120,15 @@ I joined last year and it completely changed my life. My friends and I have so m
 
 Thank you for reading this leaflet.`,
     errors: [
-      { mark: 'Title "Information About Our School Garden Club"', fix: 'Flat, notice-style title. A leaflet needs a title that pulls the reader in, e.g. "Get Growing — Join the School Garden Club!"' },
+      { mark: 'Title "Information About Our School Garden Club"', fix: 'Flat, notice-style title. A leaflet needs a title that pulls the reader in, e.g. "Get Growing – Join the School Garden Club!"' },
       { mark: '"The purpose of this leaflet is to inform the reader"', fix: 'Report-style opener. A leaflet opens with a hook aimed at the reader: "Ever fancied growing your own vegetables at school?"' },
-      { mark: 'One long block — no subheadings', fix: 'A leaflet is broken into short, headed sections. Add subheadings such as "What We Do" and "Why Join".' },
-      { mark: '"several advantages, but also a few disadvantages … On the one hand … On the other hand"', fix: 'Weighing pros and cons does not belong in a leaflet. A leaflet promotes one thing — sell the benefits, do not argue against yourself.' },
+      { mark: 'One long block – no subheadings', fix: 'A leaflet is broken into short, headed sections. Add subheadings such as "What We Do" and "Why Join".' },
+      { mark: '"several advantages, but also a few disadvantages … On the one hand … On the other hand"', fix: 'Weighing pros and cons does not belong in a leaflet. A leaflet promotes one thing – sell the benefits, do not argue against yourself.' },
       { mark: '"I joined last year and it completely changed my life"', fix: 'Personal story = blog register. A leaflet informs and persuades the reader; it is not about your own life.' },
       { mark: 'No direct address and no call to action', fix: 'The reader is never addressed as "you" and never told what to do. End with a call to action: "Come along to our next meeting and see for yourself."' },
       { mark: 'No practical details', fix: 'The facts the reader needs are missing: when and where the club meets, and how to sign up.' },
     ],
-    verdict: 'This reads like a neutral report with a diary entry dropped into the middle. It informs, but it never grabs the reader, never persuades and never says what to do next — the three jobs a leaflet exists to do.' },
+    verdict: 'This reads like a neutral report with a diary entry dropped into the middle. It informs, but it never grabs the reader, never persuades and never says what to do next – the three jobs a leaflet exists to do.' },
 ];
 
 /* ─── REGISTER GYM ─────────────────────────────────────────── */
@@ -153,14 +153,14 @@ SRDP.dndSets = {
     { text: 'Taking these points into consideration, it is clear that we must act now.', role: 'Conclusion' },
   ],
   article: [
-    { text: 'Have you ever tried going a whole week without your phone?', role: 'Opening hook — rhetorical question' },
+    { text: 'Have you ever tried going a whole week without your phone?', role: 'Opening hook – rhetorical question' },
     { text: 'The most surprising result was how much more time we all suddenly had.', role: 'Topic sentence' },
     { text: '"I never thought I\'d miss it so much," one classmate admitted.', role: 'Direct speech' },
     { text: 'However, by day three, most of us had started to feel surprisingly peaceful.', role: 'Contrasting sentence' },
-    { text: "So, could you do it? I'd love to hear your thoughts in the comments below.", role: 'Conclusion — leaves reader thinking' },
+    { text: "So, could you do it? I'd love to hear your thoughts in the comments below.", role: 'Conclusion – leaves reader thinking' },
   ],
   report: [
-    { text: 'The aim of this report is to present the findings of a survey on student wellbeing.', role: 'Introduction — states purpose' },
+    { text: 'The aim of this report is to present the findings of a survey on student wellbeing.', role: 'Introduction – states purpose' },
     { text: 'Key Findings', role: 'Section heading' },
     { text: 'The majority of respondents (68%) reported feeling stressed before exams.', role: 'Data presentation' },
     { text: 'Furthermore, 43% stated that they were unaware of available support services.', role: 'Additional finding' },
@@ -169,13 +169,13 @@ SRDP.dndSets = {
   blog: [
     { text: "OK, so here's something I never thought I'd say: I deleted Instagram. For a whole month.", role: 'Personal opening hook' },
     { text: 'The first three days were honestly awful. I kept reaching for my phone out of habit.', role: 'First body paragraph' },
-    { text: 'But then something weird happened — I started sleeping better and feeling less anxious.', role: 'Turning point' },
+    { text: 'But then something weird happened – I started sleeping better and feeling less anxious.', role: 'Turning point' },
     { text: 'By the end of the month, I had read two books and started going for evening walks.', role: 'Positive outcome' },
-    { text: 'So, what do you think? Have you ever tried a digital detox? Let me know below!', role: 'Conclusion — invites comments' },
+    { text: 'So, what do you think? Have you ever tried a digital detox? Let me know below!', role: 'Conclusion – invites comments' },
   ],
   email: [
     { text: 'To: info@hotel-vienna.example | Subject: Complaint regarding stay on 5 April', role: 'E-mail header' },
-    { text: 'I am writing to express my dissatisfaction with the service I received during my recent stay.', role: 'Opening — states purpose' },
+    { text: 'I am writing to express my dissatisfaction with the service I received during my recent stay.', role: 'Opening – states purpose' },
     { text: 'To begin with, the room had not been cleaned prior to my arrival, which was unacceptable.', role: 'First complaint point' },
     { text: 'Furthermore, despite requesting a non-smoking room, I was placed in a room that smelled of smoke.', role: 'Second complaint point' },
     { text: 'I would therefore like to request a partial refund.\n\nYours faithfully,\nMax Huber', role: 'Demand + sign-off' },
@@ -193,24 +193,24 @@ SRDP.dndSets = {
 SRDP.aiPromptTemplate = (typeName, length, task, text) => `You are an experienced Austrian examiner rating a practice text for the standardised written Reife- und Diplomprüfung (SRDP), English, level B2. Text type: ${typeName}. Target length: about ${length} words. Work the way a trained rater panel does, in this order.
 
 THE TASK THE STUDENT WAS GIVEN:
-${task || '(no task provided — assess the text on the conventions of this text type alone)'}
+${task || '(no task provided; assess the text on the conventions of this text type alone)'}
 
 THE STUDENT'S TEXT:
 """
 ${text}
 """
 
-STEP 1 — Expectation horizon (do this before you judge anything).
+STEP 1: Expectation horizon (do this before you judge anything).
 In 3–4 sentences, describe what a solid B2 answer to THIS task should contain: its purpose and reader, the content points that must be covered, the conventions of a ${typeName}, and the register you would expect. This is your yardstick for Step 2.
 
-STEP 2 — Rate the four official criteria, each on the 0–10 scale (level 6 = B2 minimum met). Judge each criterion independently, in its own pass, and quote evidence from the text.
-1. Task Achievement — purpose and text-type requirements; are all content points developed (not merely mentioned) with relevant details/examples; title / subject line / greeting / sign-off / headings where the text type needs them. WORD COUNT: if the text is more than 10% over or under about ${length} words, drop this criterion by one band and say so explicitly.
-2. Coherence & Cohesion — the overall line of thought; logical paragraphs with topic sentences; the range and fit of linking devices (here you judge whether they fit, not whether they are correct English).
-3. Lexical & Structural Range — breadth of topic vocabulary and of structures, including some complex forms; any lifting of whole phrases from the task; appropriate register.
-4. Lexical & Structural Accuracy — grammar, word choice, spelling, punctuation. Note: a linking word can be appropriate (credited under criterion 2) and still be wrong in form (penalised here).
+STEP 2: Rate the four official criteria, each on the 0–10 scale (level 6 = B2 minimum met). Judge each criterion independently, in its own pass, and quote evidence from the text.
+1. Task Achievement: purpose and text-type requirements; are all content points developed (not merely mentioned) with relevant details/examples; title / subject line / greeting / sign-off / headings where the text type needs them. WORD COUNT: if the text is more than 10% over or under about ${length} words, drop this criterion by one band and say so explicitly.
+2. Coherence & Cohesion: the overall line of thought; logical paragraphs with topic sentences; the range and fit of linking devices (here you judge whether they fit, not whether they are correct English).
+3. Lexical & Structural Range: breadth of topic vocabulary and of structures, including some complex forms; any lifting of whole phrases from the task; appropriate register.
+4. Lexical & Structural Accuracy: grammar, word choice, spelling, punctuation. Note: a linking word can be appropriate (credited under criterion 2) and still be wrong in form (penalised here).
 Within each criterion the first descriptors weigh more than a title or the register, and the final band is a qualitative judgement, not the average of the descriptors.
 
-STEP 3 — Holistic verdict.
+STEP 3: Holistic verdict.
 Two or three sentences on the biggest strengths and on the two or three changes that would raise the grade most.
 
 FORMAT YOUR ANSWER:
