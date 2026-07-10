@@ -143,9 +143,9 @@ PAGES.notebooklm = {
         sectionLabel('What is already inside') +
         '<div class="grid g-auto-240">' +
           card('Audio explainers', 'A short &ldquo;How to&hellip;&rdquo; brief for each text type, a longer interactive deep dive on the whole writing exam, a general overview, and a separate episode in German for parents. Press play and listen.') +
-          card('A revision guide', 'A written study guide that pulls the whole guide into one place, plus a mind map of how everything connects.') +
+          card('A revision guide', 'A written study guide that pulls the whole guide into one place, ready to read through in one sitting.') +
           card('Flashcards', 'Ready-made flashcards for quick self-testing on vocabulary, text-type conventions and grammar.') +
-          card('Make your own', 'From the same sources you can generate a slide deck, a video overview, a quiz, an infographic and more.') +
+          card('A mind map', 'A visual mind map that shows how the text types, grammar and skills fit together.') +
         '</div>' +
         '<div class="gap-s"></div>' +
         sectionLabel('How to use it') +
