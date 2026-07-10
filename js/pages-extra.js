@@ -114,6 +114,53 @@ PAGES.parents = {
   },
 };
 
+/* ─── NOTEBOOKLM STUDY COMPANION ─────────────────────────── */
+PAGES.notebooklm = {
+  title: 'NotebookLM study companion', track: 'notebooklm',
+  render() {
+    const NB = 'https://notebooklm.google.com/notebook/408309a8-0d35-414b-b7f5-9f6ba1a6b959';
+    const cta = '<div style="margin:18px 0"><a class="btn btn-primary" href="' + NB + '" target="_blank" rel="noopener">Open the NotebookLM notebook <span>&rarr;</span></a></div>';
+    const card = (h, b) => '<div class="card"><div style="font-weight:600;margin-bottom:8px">' + h + '</div><div style="font-size:.875rem;color:var(--text-secondary);line-height:1.6">' + b + '</div></div>';
+    const P = 'font-size:1rem;color:var(--text-secondary);line-height:1.65;max-width:720px';
+    const ask = [
+      'What is the difference between an essay and an article?',
+      'How do I start a letter to the editor?',
+      'Grade this text like an examiner: &hellip;',
+      'Give me a 250-word report task to practise, then a checklist for it.',
+    ];
+    const know = [
+      'You need to be signed in to a Google account to use it.',
+      'It is a practice aid, not an official grade. In the real Matura only your teachers assess, using the official scale.',
+      'Please do not paste real names or personal data into the chat, and follow your school&rsquo;s own rules on using AI first.',
+      'The notebook is kept in step with this guide and grows over time, so new explainers and material show up now and then. Worth checking back.',
+    ];
+    return '<div class="page">' +
+      pageHead('About', 'NotebookLM study companion', 'An AI study buddy that has read this whole guide. Ask it anything about the writing exam, or just listen to a short explainer on the way to school.') +
+      '<div class="wrap"><div class="gap-s"></div>' +
+        sectionLabel('What it is') +
+        '<p style="' + P + ';margin-bottom:14px">NotebookLM is a free tool from Google. This notebook has been given the entire content of this guide as its sources, and nothing else. That is the point: it answers from this material and links back to where each answer comes from, so it stays close to what the Matura actually rewards instead of inventing rules. You can chat with it in your own words, or open one of the ready-made explainers.</p>' +
+        cta +
+        sectionLabel('What is already inside') +
+        '<div class="grid g-auto-240">' +
+          card('Audio explainers', 'A short &ldquo;How to&hellip;&rdquo; brief for each text type, a longer interactive deep dive on the whole writing exam, a general overview, and a separate episode in German for parents. Press play and listen.') +
+          card('A revision guide', 'A written study guide that pulls the whole guide into one place, plus a mind map of how everything connects.') +
+          card('Flashcards', 'Ready-made flashcards for quick self-testing on vocabulary, text-type conventions and grammar.') +
+          card('Make your own', 'From the same sources you can generate a slide deck, a video overview, a quiz, an infographic and more.') +
+        '</div>' +
+        '<div class="gap-s"></div>' +
+        sectionLabel('How to use it') +
+        '<p style="' + P + '">Open the notebook and sign in with a Google account. Then type a question into the chat, or press play on one of the audio explainers. A few things worth asking:</p>' +
+        '<ul style="' + P + ';padding-left:20px">' + ask.map(q => '<li style="margin:6px 0">&ldquo;' + q + '&rdquo;</li>').join('') + '</ul>' +
+        '<div class="gap-s"></div>' +
+        sectionLabel('Good to know') +
+        '<ul style="' + P + ';padding-left:20px">' + know.map(k => '<li style="margin:8px 0">' + k + '</li>').join('') + '</ul>' +
+        '<div class="tip" lang="de" style="margin-top:18px">F&uuml;r Eltern: Eine eigene Audio-Folge erkl&auml;rt die Pr&uuml;fung auf Deutsch, direkt im Notebook.</div>' +
+        cta +
+        '<div style="height:72px"></div>' +
+      '</div></div>';
+  },
+};
+
 /* ─── THE HONEST MODEL (annotierte Realtexte) ─────────────── */
 const HONEST = {
   essay: {
