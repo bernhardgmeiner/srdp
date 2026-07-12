@@ -163,58 +163,6 @@ PAGES.notebooklm = {
   },
 };
 
-/* ─── LAST HOURS BEFORE THE EXAM (Notfall-Hilfe) ──────────── */
-PAGES.lasthours = {
-  title: 'Last hours', track: 'lasthours',
-  render() {
-    const P = 'font-size:1rem;color:var(--text-secondary);line-height:1.65;max-width:720px';
-    const UL = 'font-size:1rem;color:var(--text-secondary);line-height:1.6;max-width:720px;padding-left:20px';
-    return '<div class="page">' +
-      pageHead('Basics', 'Last hours before the exam', 'Sitting there with your heart racing? Breathe. This is the one page to read when there is no time left to learn anything new. Do not panic - it is just the Matura, and you already know more than you feel right now.') +
-      '<div class="wrap"><div class="gap-s"></div>' +
-        sectionLabel('If you only have one hour') +
-        '<p style="' + P + ';margin-bottom:12px">Forget new grammar. In the last hour you win marks by not throwing them away. These are the cheapest mistakes to avoid:</p>' +
-        '<ul style="' + UL + '">' +
-          '<li style="margin:8px 0">Read the task twice and write the exact text type at the top of your page. Getting the text type wrong is one of the most expensive mistakes you can make.</li>' +
-          '<li style="margin:8px 0">Split your time before you write a word. At AHS that is roughly 65 minutes for the long task and 40 for the short one; at BHS, three tasks means three slots of about 60 minutes each. Stop when a slot is over, even if the text is not perfect.</li>' +
-          '<li style="margin:8px 0">Stay inside the word count. Around 250 means 225&ndash;275; going under by more than ten per cent costs a whole Task Achievement band on its own.</li>' +
-          '<li style="margin:8px 0">Decide your register before the first sentence: formal or informal? Then commit to it - no half-formal e-mails.</li>' +
-          '<li style="margin:8px 0">Cover all three bullet points, and give each one roughly the same space. A missed bullet point is a missed band.</li>' +
-          '<li style="margin:8px 0">Leave five minutes at the end for proofreading. It is the highest-value five minutes in the whole exam.</li>' +
-        '</ul>' +
-        '<div class="gap-s"></div>' +
-        sectionLabel('The 60-second task check') +
-        '<p style="' + P + ';margin-bottom:12px">Before you write anything, spend one minute taking the task apart. It is the cheapest insurance in the room:</p>' +
-        '<ul style="' + UL + '">' +
-          '<li style="margin:8px 0"><strong>Text type:</strong> essay, article, e-mail, report, blog or leaflet? Each has its own conventions - get this right first.</li>' +
-          '<li style="margin:8px 0"><strong>Audience:</strong> who reads this - a headmaster, a friend, the readers of a magazine? Your register follows from the answer.</li>' +
-          '<li style="margin:8px 0"><strong>The three bullet points:</strong> underline them. They are your paragraph plan - one bullet point, one paragraph.</li>' +
-        '</ul>' +
-        '<div class="gap-s"></div>' +
-        sectionLabel('If your mind goes blank') +
-        '<p style="' + P + ';margin-bottom:12px">No ideas? That is normal under pressure. You do not need clever content; you need enough content. Try these ways in:</p>' +
-        '<ul style="' + UL + '">' +
-          '<li style="margin:8px 0"><strong>For and against:</strong> for any question, list one reason for and one against. That alone fills two paragraphs.</li>' +
-          '<li style="margin:8px 0"><strong>Cause and effect:</strong> take the topic and ask &ldquo;why?&rdquo; and &ldquo;what happens then?&rdquo; One cause and one consequence make a paragraph.</li>' +
-          '<li style="margin:8px 0"><strong>An everyday example:</strong> one small, concrete story from school, home or a job makes an abstract point real.</li>' +
-          '<li style="margin:8px 0"><strong>Answer the other side:</strong> name the obvious counter-argument and then say why you still disagree. Examiners love this move.</li>' +
-          '<li style="margin:8px 0">And remember: you are allowed to invent. A made-up survey, a summer job that never happened, a friend called Anna - all fine, as long as it is plausible and serves the task. This is a language exam, not a fact check.</li>' +
-        '</ul>' +
-        '<div class="gap-s"></div>' +
-        sectionLabel('Two minutes before you hand in') +
-        '<p style="' + P + ';margin-bottom:12px">Do not hand in the second you finish. Two minutes of checking catches the marks nobody should lose:</p>' +
-        '<ul style="' + UL + '">' +
-          '<li style="margin:8px 0">Word count roughly right? Count one line, count the lines, multiply.</li>' +
-          '<li style="margin:8px 0">Register consistent? In a formal text write out contractions (do not, it is); in a blog or informal e-mail, keep them.</li>' +
-          '<li style="margin:8px 0">since and for the right way round? &ldquo;For three years&rdquo;, not &ldquo;since three years&rdquo;.</li>' +
-          '<li style="margin:8px 0">Capital letters and full stops where they belong - sentence beginnings, the word &ldquo;I&rdquo;, names?</li>' +
-          '<li style="margin:8px 0">Text-type boxes ticked? Greeting and sign-off in an e-mail, subheadings in a leaflet, a real headline on an article.</li>' +
-        '</ul>' +
-        '<div class="tip" style="margin-top:20px">One clean, complete, on-task text beats a long, clever, half-finished one every time. You have prepared for this more than you feel right now - go and write it.</div>' +
-        '<div style="height:72px"></div>' +
-      '</div></div>';
-  },
-};
 
 /* ─── THE HONEST MODEL (annotierte Realtexte) ─────────────── */
 const HONEST = {

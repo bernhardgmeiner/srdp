@@ -333,7 +333,6 @@ const NAV = [
     { id: 'overview', label: 'Overview & grading' },
     { id: 'examiner', label: 'Grade like an examiner' },
     { id: 'studyplan', label: 'Countdown plan' },
-    { id: 'lasthours', label: 'Last hours' },
     { id: 'faq', label: 'FAQ' },
   ]},
   { divider: 'Text types', items: [] }, // filled below
