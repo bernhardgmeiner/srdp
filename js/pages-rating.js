@@ -15,9 +15,9 @@ const { $$, esc, sectionLabel, pageHead } = M;
 const BANDS = [0, 2, 4, 6, 8, 10];
 const CRIT = [
   { id: 'TA', name: 'Task Achievement' },
-  { id: 'CC', name: 'Coherence & Cohesion' },
-  { id: 'LR', name: 'Lexical & Structural Range' },
-  { id: 'LA', name: 'Lexical & Structural Accuracy' },
+  { id: 'CC', name: 'Coherence and Cohesion' },
+  { id: 'LR', name: 'Lexical and Structural Range' },
+  { id: 'LA', name: 'Lexical and Structural Accuracy' },
 ];
 
 /* B1 / B2 / C1 in one line each (own wording) */
@@ -117,9 +117,9 @@ const EXAMPLES = [
         'Register is well judged for an article, informal but controlled, which is exactly right here.',
       ] },
       LA: { band: 6, points: [
-        'A relatively high degree of control; the meaning is never in doubt.',
-        'A couple of small slips remain, e.g. "reaching in an empty pocket" (should be "into"); otherwise control is high.',
-        'Errors are rare and non-systematic, so accuracy holds at a comfortable B2.',
+        'Control is high and the one real slip ("reaching in an empty pocket" → "into") is genuinely isolated.',
+        'What keeps this at a solid B2 rather than higher is that the text rarely reaches for the complex structures where accuracy is really tested. The sentences stay fairly simple, so there is little subordination or tense-shifting to get wrong.',
+        'Here the ceiling is set not by mistakes but by ambition: to climb past a 6 the text would have to attempt harder structures and still keep them clean.',
       ] },
     },
     holistic: 'A genuinely enjoyable article that sounds like a person, not a template. The voice alone would earn a 7 for task work. It is the word count that quietly costs it: trimming a dozen words would have handed back the band it loses. The single most useful habit this text points to is not grammar at all, but counting your words and cutting on purpose.',
@@ -180,7 +180,7 @@ const EXAMPLES = [
     text: [
       { t: 'by mia_writes · 3 May 2026\n\nThirty Days Without the Scroll', mono: true },
       { t: 'I still remember the exact moment I decided to quit. It was 2 a.m., my eyes hurt, and I had just watched a total stranger reorganise their fridge for the fourth time. Something in me snapped. That night I deleted every social media app from my phone and promised myself thirty days without the endless scroll.' },
-      { t: 'The first few days were honestly pathetic. My thumb kept opening the empty space where the apps used to be, like a dog nosing at a bowl that is not there anymore. I felt weirdly out of the loop, convinced that something important was happening without me. Spoiler: it was not. The world carried on being exactly as boring and as wonderful as before, and somehow it managed without my likes.' },
+      { t: 'The first few days were honestly pathetic. My thumb kept opening the empty space where the apps used to be, like a dog nosing at a bowl that is not there any more. I felt weirdly out of the loop, convinced that something important was happening without me. Spoiler: it was not. The world carried on being exactly as boring and as wonderful as before, and somehow it managed without my likes.' },
       { t: 'What nobody warns you about is the sheer amount of time you suddenly have. I read two whole books. I called my grandmother. I went for long, aimless walks and actually noticed things: the light, the traffic, other people’s ridiculous dogs. By the end of the month I felt calmer than I had in years, as though someone had finally turned the volume of my brain down to a bearable level.' },
       { t: 'So, thirty days on, am I free forever? Not quite. I have put two apps back, but on my laptop only. Try it yourself. You might hate the first week, but stay with it.' },
     ],
@@ -239,7 +239,7 @@ const EXAMPLES = [
       ] },
       LR: { band: 6, points: [
         'Adequate range for an enquiry ("grateful", "accommodation", "host family", "excursions", "deadline").',
-        '"I would like to" recurs, and a few choices lean informal ("really helpful", "very thankful" where "grateful" fits better).',
+        '"I would like to" recurs, and a contraction ("it doesn’t say") plus the casual "really" ("really helpful") pull the register below the formal norm an enquiry needs, with "very thankful" sitting where "grateful" would fit better.',
         'Enough language to do the job, without much to spare.',
       ] },
       LA: { band: 6, points: [
@@ -518,7 +518,7 @@ const page = {
       '<p style="font-size:.85rem;color:var(--text-muted);margin-top:10px;max-width:720px">Everything on this site aims at the middle row. Glancing up to C1 shows why B2 does not have to be perfect; glancing down to B1 shows what "not quite B2 yet" actually looks like.</p>';
 
     const approp =
-      '<p class="ex-lead">Two criteria can judge the very same word. <strong style="color:var(--text)">Coherence &amp; Cohesion</strong> asks whether a linking word <em>fits</em>. <strong style="color:var(--text)">Accuracy</strong> asks whether it is <em>correct English</em>. A word can pass one and fail the other, and it is then counted under both: once as a plus, once as a minus.</p>' +
+      '<p class="ex-lead">Two criteria can judge the very same word. <strong style="color:var(--text)">Coherence and Cohesion</strong> asks whether a linking word <em>fits</em>. <strong style="color:var(--text)">Accuracy</strong> asks whether it is <em>correct English</em>. A word can pass one and fail the other, and it is then counted under both: once as a plus, once as a minus.</p>' +
       '<div class="ex-approp">' +
         APPROP.map(a => '<div class="row"><div class="q">“' + esc(a.s) + '”</div>' +
           '<div class="v ok">✓ Cohesion: ' + esc(a.ok) + '</div>' +

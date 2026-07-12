@@ -91,10 +91,10 @@ function cardsBody() {
   const showHint = !store('mwg_flash_hint');
   return '<div class="qmeta"><span>Card ' + (fState.i + 1) + ' of ' + total + '</span><span>' + esc(c.topic) + (b && b.box > 1 ? ' · box ' + b.box : '') + '</span></div>' +
     '<div class="qbar"><i style="width:' + (fState.i / total) * 100 + '%"></i></div>' +
-    '<button class="fcard' + (fState.flipped ? ' flipped' : '') + '" data-action="flash-flip" aria-label="Flashcard. Click or press Space to flip.">' +
+    '<button class="fcard' + (fState.flipped ? ' flipped' : '') + '" data-action="flash-flip">' +
       '<span class="fc-inner">' +
-        '<span class="fc-face fc-front"><span class="fc-word">' + esc(c.w) + '</span><span class="fc-tap">Tap or press Space to flip</span></span>' +
-        '<span class="fc-face fc-back"><span class="fc-hint">' + esc(c.hint) + '</span><span class="fc-small">' + esc(c.w) + '</span></span>' +
+        '<span class="fc-face fc-front"' + (fState.flipped ? ' aria-hidden="true"' : '') + '><span class="fc-word">' + esc(c.w) + '</span><span class="fc-tap">Tap or press Space to flip</span></span>' +
+        '<span class="fc-face fc-back"' + (fState.flipped ? '' : ' aria-hidden="true"') + '><span class="fc-hint">' + esc(c.hint) + '</span><span class="fc-small">' + esc(c.w) + '</span></span>' +
       '</span>' +
     '</button>' +
     '<div class="fc-btns">' +

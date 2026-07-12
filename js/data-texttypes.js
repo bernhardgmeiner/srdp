@@ -59,14 +59,14 @@ SRDP.textTypes = [
       title: 'The Hidden Cost of Fast Fashion', wordCount: '~400', register: 'Formal',
       paragraphs: [
         {
-          text: 'Have you ever stopped to think about where your clothes actually come from? The fashion industry has grown dramatically over the past two decades, with consumers now purchasing around 60% more clothing than they did in 2000. In my opinion, the environmental and social damage caused by fast fashion far outweighs the benefit of cheap clothing.',
+          text: 'Have you ever stopped to think about where your clothes actually come from? The fashion industry has grown dramatically over the past two decades, and by the mid-2010s the average shopper was already buying around 60% more clothing than in 2000. In my opinion, the environmental and social damage caused by fast fashion far outweighs the benefit of cheap clothing.',
           annotations: [
             { span: 'Have you ever stopped to think about where your clothes actually come from?', type: 'special', label: 'Rhetorical question hook' },
             { span: 'In my opinion, the environmental and social damage caused by fast fashion far outweighs the benefit of cheap clothing.', type: 'content', label: 'Thesis – opinion stated clearly' },
           ]
         },
         {
-          text: 'To begin with, the environmental impact of fast fashion is severe. The production of cheap garments requires enormous amounts of water and energy, and releases toxic chemicals into rivers and soil. According to the United Nations Environment Programme, the fashion industry is responsible for an estimated 2 to 8 per cent of global carbon emissions, alongside a significant share of industrial water pollution. Furthermore, most of these garments end up in landfill within a year of purchase. In addition, synthetic fabrics such as polyester are made from fossil fuels and shed tiny microplastics with every single wash. These particles flow into rivers and oceans, enter the food chain, and have even been detected in human blood.',
+          text: 'To begin with, the environmental impact of fast fashion is severe. The production of cheap garments requires enormous amounts of water and energy, and releases toxic chemicals into rivers and soil. According to the United Nations Environment Programme, the fashion industry is responsible for an estimated 2 to 8 per cent of global greenhouse gas emissions, alongside a significant share of industrial water pollution. Furthermore, a large share of these garments is worn only a handful of times before ending up in landfill. In addition, synthetic fabrics such as polyester are made from fossil fuels and shed tiny microplastics with every single wash. These particles flow into rivers and oceans, enter the food chain, and have even been detected in human blood.',
           annotations: [
             { span: 'To begin with, the environmental impact of fast fashion is severe.', type: 'content', label: 'Topic sentence (Point)' },
             { span: 'According to the United Nations Environment Programme', type: 'language', label: 'Evidence introducer' },
@@ -144,7 +144,7 @@ SRDP.textTypes = [
       { category: 'Conclusions',
         items: ['So next time you…', 'The question is not whether… but when.', "Perhaps it's time we all…", "Food for thought, isn't it?"] },
     ],
-    tip: 'Key difference – report vs. article: a report only informs. An article makes the reader feel; it is personal, emotional and engaging. Always check WHERE the article will appear – a school magazine needs a different voice than a serious newspaper.',
+    tip: 'Key difference – report vs. article: a report only informs. An article makes the reader feel; it is personal, emotional and engaging. Always check WHERE the article will appear – a school magazine needs a different voice from a serious newspaper.',
     modelText: {
       title: 'Screens Off, Life On?', wordCount: '~250', register: 'Semi-formal (school magazine)',
       paragraphs: [
@@ -580,7 +580,7 @@ SRDP.emailSubTypes = [
   {
     id: 'complaint', name: 'Letter / E-Mail of Complaint',
     purpose: 'You are unhappy with a product, service, or experience and you want something done about it. Stay firm but professional, never aggressive.',
-    layoutNotes: 'Use the standard email header (To/From/Date/Subject). State your reason in the first sentence. Describe problems clearly in the body. End with a specific, reasonable demand.',
+    layoutNotes: 'Use the standard e-mail header (To/From/Date/Subject). State your reason in the first sentence. Describe problems clearly in the body. End with a specific, reasonable demand.',
     dos: [
       'State clearly what went wrong and when',
       'Include specific details (dates, names, amounts)',
@@ -606,7 +606,7 @@ SRDP.emailSubTypes = [
   {
     id: 'application', name: 'Letter / E-Mail of Application',
     purpose: 'You are applying for a job, internship, volunteer position, or course. Be specific and confident, and show the employer why you are the right person.',
-    layoutNotes: "Standard email header. First paragraph: what you're applying for and where you saw it. Middle: your qualifications and relevant experience. Final paragraph: express enthusiasm and availability for interview.",
+    layoutNotes: "Standard e-mail header. First paragraph: what you're applying for and where you saw it. Middle: your qualifications and relevant experience. Final paragraph: express enthusiasm and availability for interview.",
     dos: [
       "State exactly what position you're applying for in the first sentence",
       'Mention where you saw the advertisement',
@@ -667,7 +667,7 @@ SRDP.emailSubTypes = [
   {
     id: 'editor', name: 'Letter to the Editor',
     purpose: 'You respond to an article or comment published in a newspaper or magazine. You must reference the original publication, then agree or disagree with the arguments made. This is one of the most frequently tested sub-types.',
-    layoutNotes: 'Standard email header (To: editor@publication.example). Greeting: "Dear Sir or Madam," or "Dear Editor,". FIRST SENTENCE must name the article, publication, and date. Sign off with Yours faithfully + full name + town/city.',
+    layoutNotes: 'Standard e-mail header (To: editor@publication.example). Greeting: "Dear Sir or Madam," or "Dear Editor,". FIRST SENTENCE must name the article, publication, and date. Sign off with Yours faithfully + full name + town/city.',
     dos: [
       'Name the article, publication, and date in your first sentence',
       'Take a clear position (agree, disagree, or partially agree)',
@@ -709,7 +709,7 @@ SRDP.emailSubTypes = [
           ]
         },
         {
-          text: 'It is certainly true that schoolwork must come first. However, the article fails to consider what a few hours of work each week actually teach you about responsibility, time management and handling your own money. Speaking from my own experience as a student who works four hours every Saturday, my grades have not suffered – if anything, I have learned to organise my week far more effectively. Many of my classmates juggle a weekend job with school and sport without any drop in their marks. What they gain instead is confidence and a sense of independence that no classroom can teach, along with a first, valuable taste of real working life.',
+          text: 'It is certainly true that schoolwork must come first. However, the article fails to consider what a few hours of work each week actually teach you about responsibility, time management and handling your own money. Speaking from my own experience as a student who works four hours every Saturday, I can honestly say that my grades have not suffered – if anything, I have learned to organise my week far more effectively. Many of my classmates juggle a weekend job with school and sport without any drop in their marks. What they gain instead is confidence and a sense of independence that no classroom can teach, along with a first, valuable taste of real working life.',
           annotations: [
             { span: 'However, the article fails to consider', type: 'language', label: 'Formal disagreement phrase' },
             { span: 'Speaking from my own experience as a student who works four hours every Saturday', type: 'special', label: 'Personal, local angle – strengthens the letter' },
@@ -729,7 +729,7 @@ SRDP.emailSubTypes = [
   {
     id: 'enquiry', name: 'E-Mail of Enquiry / Requesting Information',
     purpose: 'You want information about something – a product, a service, a course, an event, or a programme. You must be specific about what information you need.',
-    layoutNotes: 'Standard email header. State your purpose in the first sentence. Use indirect questions ("I would like to know whether…" rather than "Is there…?") for a more formal tone. Each paragraph covers one information request.',
+    layoutNotes: 'Standard e-mail header. State your purpose in the first sentence. Use indirect questions ("I would like to know whether…" rather than "Is there…?") for a more formal tone. Each paragraph covers one information request.',
     dos: [
       'State clearly who you are and why you are writing in the first sentence',
       'Use indirect questions for formal register',

@@ -234,8 +234,8 @@ function shuffle(arr) {
 }
 function initDnd(did, items) {
   const withOrder = items.map((it, i) => Object.assign({}, it, { order: i }));
-  let sh = shuffle(withOrder);
-  if (sh.every((s, i) => s.order === i)) sh = shuffle(withOrder); // avoid trivially solved
+  let sh = shuffle(withOrder), _g = 0;
+  while (withOrder.length > 1 && sh.every((s, i) => s.order === i) && _g++ < 25) sh = shuffle(withOrder); // avoid trivially solved
   dndStates[did] = { items: withOrder, shuffled: sh, checked: false };
 }
 function dndHTML(did) {
@@ -317,6 +317,7 @@ function setSchool(s) {
     if (W.pbState && W.pbState.filter !== 'all' && vis.indexOf(W.pbState.filter) < 0) W.pbState.filter = 'all';
     if (W.tbState && W.tbState.filter !== 'all' && vis.indexOf(W.tbState.filter) < 0) W.tbState.filter = 'all';
   } catch (e) {}
+  if (window.MWG.rebuildSearch) window.MWG.rebuildSearch();
   buildNav();
   const id = (location.hash || '#home').slice(1);
   const hidden = ((window.SRDP && SRDP.textTypes) || []).some(t => t.id === id && t.schools && t.schools.indexOf(s) < 0);
@@ -332,6 +333,7 @@ const NAV = [
     { id: 'overview', label: 'Overview & grading' },
     { id: 'examiner', label: 'Grade like an examiner' },
     { id: 'studyplan', label: 'Countdown plan' },
+    { id: 'lasthours', label: 'Last hours' },
     { id: 'faq', label: 'FAQ' },
   ]},
   { divider: 'Text types', items: [] }, // filled below
@@ -362,6 +364,7 @@ function buildNav() {
   const scfg = schoolConfig();
   nav.innerHTML =
     '<div class="nav-brand" style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px"><div><div class="t1">Don&rsquo;t Panic, It&rsquo;s Just the Matura</div><div class="t2">' + esc(scfg.brandTag || 'English Writing · B2') + '</div></div><div style="display:flex;gap:6px;flex-shrink:0"><button class="nav-help" data-action="open-search" title="Search (Ctrl+K)" aria-label="Search this guide">⌕</button><button class="nav-help" data-action="start-tour" title="Replay the guided tour" aria-label="Replay the guided tour">?</button></div></div>' +
+    '<div class="nav-school-label" style="padding:14px 22px 5px;font-size:.7rem;text-transform:uppercase;letter-spacing:.4px;color:var(--text-muted)">Schultyp</div>' +
     '<div class="school-switch" role="group" aria-label="Schultyp (AHS oder BHS)">' +
       SCHOOLS.map(function (s) { var sc = (window.SRDP && SRDP.schools && SRDP.schools[s]) || {}; var on = getSchool() === s; return '<button class="school-btn' + (on ? ' active' : '') + '" data-action="set-school" data-school="' + s + '" aria-pressed="' + on + '" title="Auf ' + esc(sc.label || s.toUpperCase()) + ' umschalten">' + esc(sc.label || s.toUpperCase()) + '</button>'; }).join('') +
     '</div>' +
@@ -376,6 +379,7 @@ function buildNav() {
         ).join('')
       ).join('') +
     '</div>' +
+    '<div style="padding:10px 22px 4px;font-size:.7rem;color:var(--text-muted);letter-spacing:.3px">&#10003; visited &middot; &#10003;&#10003; quiz passed</div>' +
     '<button class="theme-toggle" id="themeToggle"><span class="lab" id="themeLabel">Light theme</span><span class="toggle-track"><span class="toggle-knob"></span></span></button>';
   $('#themeToggle').addEventListener('click', () => {
     const dark = document.documentElement.getAttribute('data-theme') === 'dark';

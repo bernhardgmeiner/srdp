@@ -36,7 +36,7 @@ const FAQ = [
   { q: "Are the tasks the same at every school?",
     a: "Yes. The written Matura is standardised: the tasks come centrally from the BMB, and every candidate in your school type opens the same booklet on the same day at the same time. That is good news for you – it is exactly why the released past papers are such honest practice material." },
   { q: "What happens if my written exam is negative?",
-    a: "It is not the end of the road. A negative Klausur can be repeated, and there is also the option of a mündliche Kompensationsprüfung – an oral compensation exam that can turn the grade around (see SchUG § 40). Your teachers will walk you through the procedure if it ever comes to that. Plan A, of course, is this guide." },
+    a: "It is not the end of the road. A negative Klausur can be repeated, and there is also the option of a mündliche Kompensationsprüfung – an oral compensation exam that can turn the grade around. Your teachers will walk you through the exact procedure if it ever comes to that. Plan A, of course, is this guide." },
 ];
 
 PAGES.faq = {
@@ -72,7 +72,7 @@ PAGES.teachers = {
         '<div class="gap-s"></div>' +
         sectionLabel('Three ideas for your classroom') +
         '<div class="grid g-auto-240">' +
-          [['Task bank as Schularbeit prep', 'The 24 Matura-style tasks in the <a href="#taskbank">Task bank</a> come with source material and operators, ready for timed writing sessions. The random button settles the &ldquo;which topic&rdquo; discussion in one click.'],
+          [['Task bank as Schularbeit prep', 'The Matura-style tasks in the <a href="#taskbank">Task bank</a> come with source material and operators, ready for timed writing sessions. The random button settles the &ldquo;which topic&rdquo; discussion in one click.'],
            ['Self-check as a peer ritual', 'Before texts reach your desk, students run them through the <a href="#selfcheck">Self-check studio</a> and rate themselves on the four official criteria. Peer pairs compare ratings first – the arguments they have are half the learning.'],
            ['Countdown plan as a frame', 'The <a href="#studyplan">Countdown plan</a> gives the last four weeks before the Klausur a day-by-day structure. Assign it as the homework skeleton and spend lesson time on feedback instead of organisation.']
           ].map(c => '<div class="card"><div style="font-weight:600;margin-bottom:8px">' + c[0] + '</div><div style="font-size:.875rem;color:var(--text-secondary);line-height:1.6">' + c[1] + '</div></div>').join('') +
@@ -98,8 +98,10 @@ PAGES.parents = {
         '<p style="font-size:1rem;color:var(--text-secondary);line-height:1.65;margin-bottom:14px">Eine kostenlose, unabhängige Übungsseite für den schriftlichen Teil der Englisch-Matura (AHS und BHS, Niveau B2), gemacht von <a href="https://www.bernhardgmeiner.com" target="_blank" rel="noopener">Bernhard Gmeiner</a>, einem Englischlehrer aus Wien. Sie orientiert sich an den offiziellen SRDP-Unterlagen des Bildungsministeriums, ist aber kein offizielles Dokument des BMB. Sie ergänzt den Unterricht, sie ersetzt ihn nicht.</p>' +
         '<div class="gap-s"></div>' +
         sectionLabel('Datenschutz – kurz und ehrlich') +
-        '<p style="font-size:1rem;color:var(--text-secondary);line-height:1.65;margin-bottom:12px">Kein Konto, keine Anmeldung, keine Werbung, kein Tracking. Der Lernfortschritt Ihres Kindes (besuchte Seiten, Quizergebnisse, Lernplan, Prüfungsdatum) wird ausschließlich lokal im Browser auf diesem Gerät gespeichert und an keinen Server geschickt. Wird der Browser geleert oder das Gerät gewechselt, ist der Fortschritt weg – das ist der Preis dafür, dass keine Daten das Gerät verlassen.</p>' +
+        '<p style="font-size:1rem;color:var(--text-secondary);line-height:1.65;margin-bottom:12px">Kein Konto, keine Anmeldung, keine Werbung, kein Tracking. Der Lernfortschritt Ihres Kindes (besuchte Seiten, Quizergebnisse, Lernplan, Prüfungsdatum) wird ausschließlich lokal im Browser auf diesem Gerät gespeichert und an keinen Server geschickt. Wird der Browser geleert oder das Gerät gewechselt, ist der Fortschritt weg – das ist der Preis dafür, dass keine Daten das Gerät verlassen. Die Seite selbst liegt bei GitHub Pages (USA); beim Aufruf verarbeitet der Hoster – wie bei praktisch jeder Website – technisch bedingt die IP-Adresse in Server-Logs. Sonst wird nichts erhoben.</p>' +
         '<p style="font-size:1rem;color:var(--text-secondary);line-height:1.65;margin-bottom:12px">Es gibt eine freiwillige KI-Funktion: Der Self-check erstellt auf Wunsch einen fertigen Text, den Ihr Kind selbst in ein KI-Werkzeug wie ChatGPT oder Claude kopieren kann, um Übungs-Feedback zu bekommen. Erst dann, und nur dann, verlässt der eingefügte Text dieses Gerät und geht an den jeweiligen Anbieter. Deshalb der Rat auf der Seite: nur Übungstexte verwenden, keine echten Namen oder persönlichen Daten. Ihre Schule kann außerdem eigene Regeln zum Einsatz von KI haben; die gelten zuerst.</p>' +
+        '<p style="font-size:1rem;color:var(--text-secondary);line-height:1.65;margin-bottom:10px">Du kannst den gespeicherten Lernfortschritt jederzeit hier löschen.</p>' +
+        '<button class="btn btn-ghost" data-action="reset-progress">Fortschritt auf diesem Gerät zurücksetzen</button>' +
         '<div class="gap-s"></div>' +
         sectionLabel('Wie Sie unterstützen können') +
         '<p style="font-size:1rem;color:var(--text-secondary);line-height:1.65;margin-bottom:12px">Am meisten hilft Regelmäßigkeit: lieber viele kurze Einheiten als ein langer Abend vor der Prüfung. Tragen Sie gemeinsam das Prüfungsdatum im <a href="#studyplan">Countdown-Lernplan</a> ein, dann zeigt die Seite jeden Tag, was dran ist. Fragen Sie Ihr Kind, was es gerade übt: etwas erklären zu müssen ist die halbe Miete. Und: kein Druck. Die Lerninhalte sind auf Englisch (das ist Absicht), diese Seite hier ist für Sie auf Deutsch.</p>' +
@@ -108,7 +110,7 @@ PAGES.parents = {
         '<p style="font-size:1rem;color:var(--text-secondary);line-height:1.65;margin-bottom:12px">Bewertet wird in der echten Matura ausschließlich von den Lehrer:innen Ihres Kindes mit der offiziellen Skala. Wo etwas von der Schule abhängt, steht das auf der Seite dabei. Im Zweifel zählt immer die Auskunft der Lehrkraft, nicht diese Seite.</p>' +
         '<div class="gap-s"></div>' +
         sectionLabel('Kontakt / Impressum') +
-        '<p style="font-size:1rem;color:var(--text-secondary);line-height:1.65">Bernhard Gmeiner, Wien · <a href="mailto:bernhard.gmeiner@gmail.com">bernhard.gmeiner@gmail.com</a> · <a href="https://www.bernhardgmeiner.com" target="_blank" rel="noopener">bernhardgmeiner.com</a>. Privates, nicht-kommerzielles Projekt. Fehler gefunden? Eine kurze E-Mail hilft, die Seite besser zu machen.</p>' +
+        '<p style="font-size:1rem;color:var(--text-secondary);line-height:1.65">Bernhard Gmeiner, Wien · <a href="mailto:bernhard.gmeiner@gmail.com">bernhard.gmeiner@gmail.com</a> · <a href="https://www.bernhardgmeiner.com" target="_blank" rel="noopener">bernhardgmeiner.com</a>. Privates, nichtkommerzielles Projekt. Fehler gefunden? Eine kurze E-Mail hilft, die Seite besser zu machen.</p>' +
         '<div style="height:72px"></div>' +
       '</div></div>';
   },
@@ -156,6 +158,59 @@ PAGES.notebooklm = {
         '<ul style="' + P + ';padding-left:20px">' + know.map(k => '<li style="margin:8px 0">' + k + '</li>').join('') + '</ul>' +
         '<div class="tip" lang="de" style="margin-top:18px">F&uuml;r Eltern: Eine eigene Audio-Folge erkl&auml;rt die Pr&uuml;fung auf Deutsch, direkt im Notebook.</div>' +
         cta +
+        '<div style="height:72px"></div>' +
+      '</div></div>';
+  },
+};
+
+/* ─── LAST HOURS BEFORE THE EXAM (Notfall-Hilfe) ──────────── */
+PAGES.lasthours = {
+  title: 'Last hours', track: 'lasthours',
+  render() {
+    const P = 'font-size:1rem;color:var(--text-secondary);line-height:1.65;max-width:720px';
+    const UL = 'font-size:1rem;color:var(--text-secondary);line-height:1.6;max-width:720px;padding-left:20px';
+    return '<div class="page">' +
+      pageHead('Basics', 'Last hours before the exam', 'Sitting there with your heart racing? Breathe. This is the one page to read when there is no time left to learn anything new. Do not panic - it is just the Matura, and you already know more than you feel right now.') +
+      '<div class="wrap"><div class="gap-s"></div>' +
+        sectionLabel('If you only have one hour') +
+        '<p style="' + P + ';margin-bottom:12px">Forget new grammar. In the last hour you win marks by not throwing them away. These are the cheapest mistakes to avoid:</p>' +
+        '<ul style="' + UL + '">' +
+          '<li style="margin:8px 0">Read the task twice and write the exact text type at the top of your page. Getting the text type wrong is one of the most expensive mistakes you can make.</li>' +
+          '<li style="margin:8px 0">Split your time before you write a word. At AHS that is roughly 65 minutes for the long task and 40 for the short one; at BHS, three tasks means three slots of about 60 minutes each. Stop when a slot is over, even if the text is not perfect.</li>' +
+          '<li style="margin:8px 0">Stay inside the word count. Around 250 means 225&ndash;275; going under by more than ten per cent costs a whole Task Achievement band on its own.</li>' +
+          '<li style="margin:8px 0">Decide your register before the first sentence: formal or informal? Then commit to it - no half-formal e-mails.</li>' +
+          '<li style="margin:8px 0">Cover all three bullet points, and give each one roughly the same space. A missed bullet point is a missed band.</li>' +
+          '<li style="margin:8px 0">Leave five minutes at the end for proofreading. It is the highest-value five minutes in the whole exam.</li>' +
+        '</ul>' +
+        '<div class="gap-s"></div>' +
+        sectionLabel('The 60-second task check') +
+        '<p style="' + P + ';margin-bottom:12px">Before you write anything, spend one minute taking the task apart. It is the cheapest insurance in the room:</p>' +
+        '<ul style="' + UL + '">' +
+          '<li style="margin:8px 0"><strong>Text type:</strong> essay, article, e-mail, report, blog or leaflet? Each has its own conventions - get this right first.</li>' +
+          '<li style="margin:8px 0"><strong>Audience:</strong> who reads this - a headmaster, a friend, the readers of a magazine? Your register follows from the answer.</li>' +
+          '<li style="margin:8px 0"><strong>The three bullet points:</strong> underline them. They are your paragraph plan - one bullet point, one paragraph.</li>' +
+        '</ul>' +
+        '<div class="gap-s"></div>' +
+        sectionLabel('If your mind goes blank') +
+        '<p style="' + P + ';margin-bottom:12px">No ideas? That is normal under pressure. You do not need clever content; you need enough content. Try these ways in:</p>' +
+        '<ul style="' + UL + '">' +
+          '<li style="margin:8px 0"><strong>For and against:</strong> for any question, list one reason for and one against. That alone fills two paragraphs.</li>' +
+          '<li style="margin:8px 0"><strong>Cause and effect:</strong> take the topic and ask &ldquo;why?&rdquo; and &ldquo;what happens then?&rdquo; One cause and one consequence make a paragraph.</li>' +
+          '<li style="margin:8px 0"><strong>An everyday example:</strong> one small, concrete story from school, home or a job makes an abstract point real.</li>' +
+          '<li style="margin:8px 0"><strong>Answer the other side:</strong> name the obvious counter-argument and then say why you still disagree. Examiners love this move.</li>' +
+          '<li style="margin:8px 0">And remember: you are allowed to invent. A made-up survey, a summer job that never happened, a friend called Anna - all fine, as long as it is plausible and serves the task. This is a language exam, not a fact check.</li>' +
+        '</ul>' +
+        '<div class="gap-s"></div>' +
+        sectionLabel('Two minutes before you hand in') +
+        '<p style="' + P + ';margin-bottom:12px">Do not hand in the second you finish. Two minutes of checking catches the marks nobody should lose:</p>' +
+        '<ul style="' + UL + '">' +
+          '<li style="margin:8px 0">Word count roughly right? Count one line, count the lines, multiply.</li>' +
+          '<li style="margin:8px 0">Register consistent? In a formal text write out contractions (do not, it is); in a blog or informal e-mail, keep them.</li>' +
+          '<li style="margin:8px 0">since and for the right way round? &ldquo;For three years&rdquo;, not &ldquo;since three years&rdquo;.</li>' +
+          '<li style="margin:8px 0">Capital letters and full stops where they belong - sentence beginnings, the word &ldquo;I&rdquo;, names?</li>' +
+          '<li style="margin:8px 0">Text-type boxes ticked? Greeting and sign-off in an e-mail, subheadings in a leaflet, a real headline on an article.</li>' +
+        '</ul>' +
+        '<div class="tip" style="margin-top:20px">One clean, complete, on-task text beats a long, clever, half-finished one every time. You have prepared for this more than you feel right now - go and write it.</div>' +
         '<div style="height:72px"></div>' +
       '</div></div>';
   },
@@ -221,7 +276,7 @@ const HONEST = {
   },
   leaflet: {
     title: 'Information about the Charity Run',
-    meta: '~170 words · a realistic pass, not a model of perfection',
+    meta: '~140 words · a realistic pass, not a model of perfection',
     intro: 'Same idea as the models above, but for the leaflet. This one would scrape a pass, yet it leaks marks exactly where BHS students lose them: a flat, report-style title, no subheadings, and no real call to action. The markers show where.',
     paras: [
       "Information about the Charity Run{{1}}",
@@ -242,6 +297,71 @@ const HONEST = {
       "This is where the leaflet really leaks: there is no call to action and no practical details. A leaflet must tell the reader exactly what to do and give the facts – When? Where? How do I sign up? Ending on 'it would be nice if many people come' leaves the reader with nothing to act on.",
     ],
     verdict: "Where would this land? Task Achievement around 4–5 – the content is there, but the missing subheadings, the missing call to action and the missing date/time/place are exactly the leaflet conventions the grid rewards. Coherence around 5 – one undivided block. Range and Accuracy around 4 each: simple sentences plus the frequent, fixable German-into-English errors above. At about 170 words it is also under the ~250 the task expects, which costs another Task Achievement band on its own. The encouraging part: every marker here is trainable, and adding clear subheadings and a real call to action would raise the score quickly.",
+  },
+  article: {
+    title: 'Social media - curse or blessing?',
+    meta: '~200 words · a realistic pass, not a model of perfection',
+    intro: "Same idea as the other honest models, but for the article: this one would pass a school-magazine task, yet it reads more like a flat essay than a lively article, and a few Germanisms sneak in. The markers show where the marks leak and what the stronger version would do.",
+    paras: [
+      "Today everybody is talking about social media, and everybody has an opinion.{{1}} In this article I want to show you the good and the bad sides.{{2}} For young people like us it is really an important topic.",
+      "Let us start with the good sides. Social media helps us to stay in contact with our friends, also when they live far away. Since two years my cousin lives{{3}} in Spain, and without Instagram I would never know what she is doing. We can also learn a lot, because there are many informations{{4}} about every topic you can imagine. And honestly, it makes a lot of fun{{5}} to watch videos after a long day in the school.{{6}}",
+      "But of course there are bad sides too. Many students look at their phone the whole day and cannot concentrate proper{{7}} anymore. Others get real problems with their self-confidence, they compare themselves the whole time with perfect pictures.{{8}} My little brother is only thirteen and already he cannot put the phone away.",
+      "All in all, social media has good and bad sides, and everybody must find the right balance. For me it is a great thing, but we should never forget the real life.{{9}}",
+    ],
+    notes: [
+      "A school-magazine article lives from its opening: a question, an image, a surprising claim. 'Today everybody is talking about...' is a flat, essay-style opener with no angle, and it costs Task Achievement on article conventions. Stronger: 'Be honest - how many times did you check your phone before this sentence?'",
+      "Announcing the structure ('In this article I want to show you...') is essay habit, not article style. An article pulls the reader straight in and lets the piece show its shape instead of describing it.",
+      "'Since two years my cousin lives...' - the since/for trap plus a tense error. English needs duration with 'for' and a present perfect: 'For two years my cousin has been living in Spain.'",
+      "'many informations' - 'information' is uncountable and never takes an -s: 'there is a lot of information'.",
+      "'it makes a lot of fun' is a straight translation of 'macht Spass'. English does not 'make' fun: 'it is a lot of fun' or 'great fun'.",
+      "'a long day in the school' - German 'in der Schule'. When the building is used for its purpose, English drops the article: 'at school'.",
+      "'concentrate proper' - an adverb is needed: 'concentrate properly'. Adjective/adverb slips are high-frequency and cheap to catch when proofreading.",
+      "'...with their self-confidence, they compare themselves...' is a comma splice: two full sentences joined by only a comma. Split them or add a linker: '...with their self-confidence, because they constantly compare themselves with perfect pictures.'",
+      "'we should never forget the real life' - two things at once: 'the real life' should be 'real life' (no article for a general idea), and the ending is flat. A stronger article closes on a line that sticks: 'Social media is here to stay - the trick is to look up from it now and then.'",
+    ],
+    verdict: "Where would this land? Task Achievement around 5-6 - the topic is covered and both sides appear, but the flat opening, the announced structure and the weak ending miss the article conventions the grid rewards. Coherence around 6 - the two-sides plan is clear and easy to follow. Range around 4-5 - simple sentences and empty intensifiers ('really', 'a lot') dominate. Accuracy around 4-5 - the since/for, 'informations', article and adjective/adverb slips are the frequent, fixable kind. And at about 200 words it sits under the length the task sets (around 250), which on its own drops Task Achievement by one band before any language is judged. The good news stays the same: every marker here is trainable.",
+  },
+  report: {
+    title: 'Our school canteen: a student survey',
+    meta: '~175 words · a realistic pass, not a model of perfection',
+    intro: "Same idea as the models above, but for the report. This one would scrape a pass, yet it leaks marks exactly where students lose them in a report: a vague subject line, unnumbered headings and a register that keeps slipping. The markers show where.",
+    paras: [
+      "To: Mr Berger, headmaster\nFrom: The student council\nDate: 5 May 2026\nSubject: The canteen{{1}}",
+      "In this report I want to write about{{2}} the situation in our school canteen. Last month a survey was made{{3}} by the student council, and 120 students from all classes have answered our questions. The aim was to find out what the students really think.",
+      "The results{{4}}\nMost of the students are not happy with the canteen. Since one year{{5}} the prices are higher, but the quality is the same. Many students said also that there is not enough vegetarian food, this is a big problem for them.{{6}} The waiting time at lunch is much too long, and often the warm meals are already gone. Some also complained that there is no information about allergies on the food.",
+      "What we want{{7}}\nWe think that some things must be changed.{{8}} The school should offer more vegetarian meals and open a second counter. Also the prices for a warm meal should go down again. If this would happen{{9}}, the students would be much more happy.{{10}}",
+    ],
+    notes: [
+      "A report subject line must be specific enough to file at a glance: 'The canteen' says almost nothing. Stronger: 'Survey results and recommendations on the school canteen'.",
+      "'In this report I want to write about...' is essay register in a report. A report states its purpose formally and impersonally: 'This report presents the results of a student survey on the school canteen and makes recommendations.'",
+      "'a survey was made by the student council' - wrong verb in the passive. Surveys are 'carried out' or 'conducted', not 'made': 'A survey was carried out last month.'",
+      "'The results' as a section heading is vague and unnumbered. Reports are rewarded for clear, numbered headings - '1. Introduction', '2. Findings', '3. Recommendations' - so the reader can navigate at a glance.",
+      "'Since one year the prices are higher' - the since/for trap plus tense. English: 'For a year, prices have been higher.'",
+      "'...not enough vegetarian food, this is a big problem for them.' is a comma splice - two full sentences joined by a comma. Split them, and swap the empty 'big problem' for something precise: '...vegetarian food, which was the most frequent complaint.'",
+      "'What we want' is an informal, unnumbered heading. In a report this section is '3. Recommendations', and the tone stays neutral rather than sounding like a wish list.",
+      "'We think that some things must be changed' - subjective 'we think' plus a vague, agent-less passive. A report recommends concretely: 'The council recommends the following three changes.'",
+      "'If this would happen' - 'would' does not belong in the if-clause. B2 wants 'If this happened' or 'If these changes were made'.",
+      "'the students would be much more happy' - the comparative is 'happier', and 'much more happy' is spoken register. A report closes soberly: 'these measures would noticeably improve satisfaction.'",
+    ],
+    verdict: "Where would this land? Task Achievement around 5 - the report has a purpose, findings and a recommendation, but the vague subject and the missing numbered headings cost real marks on report conventions. Coherence around 5-6 - the reader can follow it, though the unlabelled sections make it feel more like a letter than a report. Range around 4-5 - simple sentences and 'big problem'-style filler. Accuracy around 4-5 - the passive, since/for, comma splice and if-clause errors are all the frequent, trainable kind. And at about 175 words it falls under the length the task sets (around 250), which by itself costs one Task Achievement band before the language is even weighed. Encouraging bottom line: every marker here is trainable.",
+  },
+  blog: {
+    title: 'How I taught myself to cook',
+    meta: '~215 words · a realistic pass, not a model of perfection',
+    intro: "Same idea as the honest models above, but for the blog. The voice is genuinely good - informal and personal, contractions and all - but it loses marks on structure and on the missing call to comment at the end. The markers show where, and note which 'errors' are actually fine in a blog.",
+    paras: [
+      "Okay, I have to be honest with you: two months ago I couldn't even boil an egg without burning something. My mum always cooked for me and I never really thought about it. But then she went for three weeks to my grandma, who was sick, and suddenly I was alone with an empty fridge and a very empty stomach. The first days were a catastrophe. I ordered pizza every evening, and after a while my body just said stop, this is too much.{{1}} So I decided to learn how to cook, and honestly, it changed more than I expected.{{2}}",
+      "At first I watched tons of videos and found so many informations{{3}} online that I had no idea where to start. Since two weeks I cook now{{4}} every day, and I've already got three or four dishes that I can make really good.{{5}} The best part isn't even the food, it's the feeling. When you make something with your own hands and it actually tastes nice, you feel really proud. And I'm saving a lot of money, because cooking at home is much cheaper than ordering all the time. My friends couldn't believe it when I cooked dinner for two of them last week. Cooking isn't a talent, it's just practice, and anyone can pick it up.{{6}}",
+    ],
+    notes: [
+      "'...my body just said stop, this is too much.' - two complete sentences with only a comma between them (a comma splice). The chatty voice is right for a blog; the punctuation still is not. Use a full stop or a dash: '...my body just said stop. This was too much.'",
+      "This is where the post should break. A blog lives in short, frequent paragraphs, but this text is only two big blocks - exactly at the turn from panic to decision a fresh, short paragraph should start. Walls of text cost Coherence and scare readers off.",
+      "'so many informations' - 'information' is uncountable and never takes an -s: 'so much information'.",
+      "'Since two weeks I cook now every day' - the since/for trap plus German word order. English: 'For two weeks now I have been cooking every day.'",
+      "'dishes that I can make really good' - an adverb is needed: 'really well'. (Note that the contractions in this post - couldn't, it's, I've - are all correct here: an informal blog wants them, so they cost nothing.)",
+      "A blog rarely just stops. This one ends on a neat line but never turns back to the reader - there is no question, no invitation to comment, no sign-off. Add one: 'Have you ever had to learn something from zero like this? Tell me in the comments - I need more recipes.'",
+    ],
+    verdict: "Where would this land? Task Achievement around 5-6 - it is a genuine, personal story that answers a blog task, but with no headline on the post, no clear reader address and no call to comment at the end, it misses blog conventions the grid rewards. Coherence around 5 - readable, yet the two giant paragraphs work against it. Range around 6 - the informal voice is actually a strength here, with some natural phrasing. Accuracy around 5 - 'informations', the since/for slip and 'really good' are the frequent, fixable kind, and the contractions, correct for a blog, cost nothing. At about 215 words it also sits under the length the task sets (around 250), which alone drops Task Achievement by a band. The encouraging part: every marker here is trainable.",
   },
 };
 

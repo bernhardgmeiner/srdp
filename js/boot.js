@@ -5,7 +5,7 @@
 'use strict';
 const M = window.MWG;
 const { $, $$, esc } = M;
-const SITE_FOOTER = '<footer class="site-footer no-print"><div class="ftin">' +'<div class="ft-cols">' +'<div><div class="ft-h">About this site</div><p>A free, independent revision site for the written part of the English Matura (AHS & BHS, B2). Made by an English teacher. It is not an official document of the BMB or any education authority.</p></div>' +'<div><div class="ft-h">Your data</div><p>No account, no tracking, no ads. Your progress is saved only in your own browser and is never sent anywhere. Everything runs on your device. Your progress is saved only in this browser on this device, so clearing your browser or switching devices resets it.</p></div>' +'<div><div class="ft-h" lang="de">Impressum / Kontakt</div><p lang="de">Bernhard Gmeiner, Wien<br>E-Mail: bernhard.gmeiner@gmail.com<br><a href="https://www.bernhardgmeiner.com" target="_blank" rel="noopener">bernhardgmeiner.com</a><br>Privates, nicht-kommerzielles Projekt.</p></div>' +'<div><div class="ft-h">Found a mistake? <span lang="de">/ Fehler gefunden?</span></div><p>Spotted a typo, a wrong fact or a broken link? <a href="mailto:bernhard.gmeiner@gmail.com?subject=Matura%20Guide%20Feedback">Send a short e-mail</a> and mention which section it is in. Every report makes the guide better.</p></div>' +'</div>' +'<div class="ft-base" lang="de">Diese Seite hilft bei der Vorbereitung auf die schriftliche Englisch-Matura (AHS & BHS, B2) und orientiert sich an der offiziellen SRDP-Beurteilungsskala. Bewertet wird in der echten Matura von deinen Lehrkr\u00e4ften mit der offiziellen Skala. \u00b7 Stand: Schuljahr 2025/26</div>' +'</div></footer><div class="print-note" lang="de">Unabhängige Übungsseite von Bernhard Gmeiner – kein offizielles Dokument des BMB. Übungsaufgaben sind nachgebaut. Es zählt die Bewertung deiner Lehrkräfte.</div>';
+const SITE_FOOTER = '<footer class="site-footer no-print"><div class="ftin">' +'<div class="ft-cols">' +'<div><div class="ft-h">About this site</div><p>A free, independent revision site for the written part of the English Matura (AHS & BHS, B2). Made by an English teacher. It is not an official document of the BMB or any education authority.</p></div>' +'<div><div class="ft-h">Your data</div><p>No account, no tracking, no ads. Your progress is saved only in this browser on this device, so clearing your browser or switching devices resets it. Nothing leaves your device unless you use the optional AI features yourself. Like any website, the host (GitHub Pages) logs your IP address in its server logs.</p></div>' +'<div><div class="ft-h" lang="de">Impressum / Kontakt</div><p lang="de">Bernhard Gmeiner, Wien<br>E-Mail: bernhard.gmeiner@gmail.com<br><a href="https://www.bernhardgmeiner.com" target="_blank" rel="noopener">bernhardgmeiner.com</a><br>Privates, nichtkommerzielles Projekt.</p></div>' +'<div><div class="ft-h">Found a mistake? <span lang="de">/ Fehler gefunden?</span></div><p>Spotted a typo, a wrong fact or a broken link? <a href="mailto:bernhard.gmeiner@gmail.com?subject=Matura%20Guide%20Feedback">Send a short e-mail</a> and mention which section it is in. Every report makes the guide better.</p></div>' +'</div>' +'<div class="ft-base" lang="de">Diese Seite hilft bei der Vorbereitung auf die schriftliche Englisch-Matura (AHS & BHS, B2) und orientiert sich an der offiziellen SRDP-Beurteilungsskala. Bewertet wird in der echten Matura von deinen Lehrkr\u00e4ften mit der offiziellen Skala. \u00b7 Stand: Schuljahr 2025/26</div>' +'</div></footer><div class="print-note" lang="de">Unabhängige Übungsseite von Bernhard Gmeiner – kein offizielles Dokument des BMB. Übungsaufgaben sind nachgebaut. Es zählt die Bewertung deiner Lehrkräfte.</div>';
 
 /* ─── ROUTER ──────────────────────────────────────────────── */
 let current = '';
@@ -28,7 +28,8 @@ function route() {
   if (page.wire) page.wire();
   if (M.buildPageTOC) M.buildPageTOC();
   if (page.track) M.markVisited(page.track);
-  $$('#sidenav .nav-item').forEach(a => a.classList.toggle('active', a.dataset.nav === id));
+  $$('#sidenav .nav-item').forEach(a => { const on = a.dataset.nav === id; a.classList.toggle('active', on); if (on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
+  const _mt = document.querySelector('.mobile-bar .t1'); if (_mt) _mt.textContent = page.title;
   document.title = page.title + ' – Matura Writing Guide B2';
   try { main.scrollTo({ top: 0 }); window.scrollTo({ top: 0 }); } catch (e) { main.scrollTop = 0; }
   $('#sidenav').classList.remove('open');
@@ -57,6 +58,14 @@ function ensureTourDom(){
   const w = document.createElement('div');
   w.innerHTML = '<div id="tourCatch" class="tour-catch"></div><div id="tourSpot" class="tour-spot"></div><div id="tourCard" class="tour-card" role="dialog" aria-modal="true" aria-label="Guided tour"></div>';
   document.body.appendChild(w);
+  var _card = document.getElementById('tourCard');
+  _card.addEventListener('keydown', function (e) {
+    if (e.key !== 'Tab') return;
+    var f = _card.querySelectorAll('button'); if (!f.length) return;
+    var first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
 }
 function positionTourCard(rect){
   const card = document.getElementById('tourCard');
@@ -92,8 +101,8 @@ function showTour(i){
   positionTourCard(rect);
   var _nb = card.querySelector('[data-action="tour-next"]'); if (_nb) { try { _nb.focus(); } catch (e) {} }
 }
-function startTour(){ tourActive = true; document.body.classList.add('tour-on'); if (window.innerWidth <= 840) { var _sn = document.getElementById('sidenav'); if (_sn) _sn.classList.add('open'); } showTour(0); }
-function endTour(){ tourActive = false; document.body.classList.remove('tour-on'); var _sn=document.getElementById('sidenav'); if(_sn) _sn.classList.remove('open'); var _ov=document.querySelector('.nav-overlay'); if(_ov) _ov.remove(); ['tourSpot','tourCard','tourCatch'].forEach(function(id){ const e=document.getElementById(id); if(e) e.style.display='none'; }); try{ M.store('mwg_tour_done','1'); }catch(e){} }
+function startTour(){ tourActive = true; document.body.classList.add('tour-on'); var _app = document.getElementById('app'); if (_app) { _app.setAttribute('inert', ''); _app.setAttribute('aria-hidden', 'true'); } if (window.innerWidth <= 840) { var _sn = document.getElementById('sidenav'); if (_sn) _sn.classList.add('open'); } showTour(0); }
+function endTour(){ tourActive = false; document.body.classList.remove('tour-on'); var _app=document.getElementById('app'); if(_app){ _app.removeAttribute('inert'); _app.removeAttribute('aria-hidden'); } var _sn=document.getElementById('sidenav'); if(_sn) _sn.classList.remove('open'); var _ov=document.querySelector('.nav-overlay'); if(_ov) _ov.remove(); ['tourSpot','tourCard','tourCatch'].forEach(function(id){ const e=document.getElementById(id); if(e) e.style.display='none'; }); try{ M.store('mwg_tour_done','1'); }catch(e){} var _h=document.querySelector('.nav-help[data-action="start-tour"]'); if(_h){ try{ _h.focus(); }catch(e){} } }
 function maybeShowHint(){
   try{ if (M.store('mwg_hint_seen')) return; }catch(e){ return; }
   if (window.innerWidth <= 840) return;
@@ -105,12 +114,13 @@ function maybeShowHint(){
   hint.innerHTML = '<b>New here?</b>Take a quick tour of the guide.';
   brand.appendChild(hint);
   var done = false;
-  function dismiss(){ if(done) return; done=true; help.classList.remove('pulse'); if(hint.parentNode) hint.remove(); try{ M.store('mwg_hint_seen','1'); }catch(e){} document.removeEventListener('click', onDoc, true); window.removeEventListener('hashchange', dismiss); }
-  function onDoc(e){ if (e.target.closest('.nav-hint')) return; dismiss(); }
-  hint.addEventListener('click', function(e){ e.stopPropagation(); dismiss(); startTour(); });
+  function dismiss(persist){ if(done) return; done=true; help.classList.remove('pulse'); if(hint.parentNode) hint.remove(); if(persist){ try{ M.store('mwg_hint_seen','1'); }catch(e){} } document.removeEventListener('click', onDoc, true); window.removeEventListener('hashchange', onNav); }
+  function onDoc(e){ if (e.target.closest('.nav-hint')) return; dismiss(true); }
+  function onNav(){ dismiss(true); }
+  hint.addEventListener('click', function(e){ e.stopPropagation(); dismiss(true); startTour(); });
   setTimeout(function(){ document.addEventListener('click', onDoc, true); }, 200);
-  window.addEventListener('hashchange', dismiss);
-  setTimeout(dismiss, 7000);
+  window.addEventListener('hashchange', onNav);
+  setTimeout(function(){ dismiss(false); }, 10000);
 }
 window.addEventListener('resize', function(){ if (tourActive) showTour(tourI); });
 M.startTour = startTour;
@@ -139,6 +149,12 @@ document.addEventListener('click', e => {
   else if (act === 'start-tour') { startTour(); }
   else if (act === 'set-school') { M.setSchool(el.dataset.school); const ch = document.getElementById('schoolChooser'); if (ch) ch.remove(); var appEl = document.getElementById('app'); if (appEl) { appEl.removeAttribute('inert'); appEl.removeAttribute('aria-hidden'); } var ab = document.querySelector('.school-btn.active'); if (ab) { try { ab.focus(); } catch (e) {} } }
   else if (act === 'open-search') { M.openSearch && M.openSearch(); }
+  else if (act === 'reset-progress') {
+    if (window.confirm('Reset all saved progress on this device? This clears visited sections, quiz results, flashcards, the study plan and your exam date. Your theme and school choice stay.')) {
+      try { Object.keys(localStorage).filter(function (k) { return k.indexOf('mwg_') === 0 && k !== 'mwg_theme' && k !== 'mwg_school'; }).forEach(function (k) { localStorage.removeItem(k); }); } catch (e) {}
+      location.reload();
+    }
+  }
   else if (act.indexOf('flash-') === 0) { M.flashAction && M.flashAction(act, el.dataset); }
   else if (act.indexOf('plan-') === 0) { M.planAction && M.planAction(act, el); }
   else if (act.indexOf('rate-') === 0) { M.rateAction && M.rateAction(act, el); }

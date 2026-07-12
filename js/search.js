@@ -12,9 +12,11 @@ let items = null, current = [], active = 0;
 
 function buildIndex() {
   items = [];
+  const _sch = M.school ? M.school() : 'ahs';
+  const _inSchool = t => !t.schools || t.schools.indexOf(_sch) >= 0;
   M.NAV.forEach(sec => sec.items.forEach(it =>
     items.push({ type: 'Pages', label: it.label, sub: sec.divider || 'Start', go: { page: it.id } })));
-  SRDP.textTypes.forEach(t => t.phrases.forEach(g => g.items.forEach(p =>
+  SRDP.textTypes.filter(_inSchool).forEach(t => t.phrases.forEach(g => g.items.forEach(p =>
     items.push({ type: 'Phrases', label: p, sub: t.name + ' – ' + g.category, copy: p, go: { page: 'phrasebank', search: p } }))));
   SRDP.emailSubTypes.forEach(st => st.phrases.forEach(g => g.items.forEach(p =>
     items.push({ type: 'Phrases', label: p, sub: 'E-Mail – ' + st.name, copy: p, go: { page: 'phrasebank', search: p } }))));
@@ -34,6 +36,7 @@ function buildIndex() {
       extra: (g.pairs || []).map(p => (p.wrong || '') + ' ' + (p.right || '')).join(' ').toLowerCase() }));
   SRDP.prompts.forEach((p, pi) => {
     const t = SRDP.textTypes.find(x => x.id === p.type);
+    if (t && !_inSchool(t)) return;
     items.push({ type: 'Tasks', label: p.topic, sub: (t ? t.name : p.type) + ' · ~' + p.length + ' words', go: { page: 'taskbank', task: pi },
       extra: (p.scenario + ' ' + p.instruction).toLowerCase() });
   });
@@ -66,14 +69,14 @@ function ensureDom() {
   overlay.id = 'searchOverlay';
   overlay.innerHTML =
     '<div class="search-panel" role="dialog" aria-modal="true" aria-label="Search this guide">' +
-      '<input type="text" id="srInput" placeholder="Search pages, phrases, vocabulary, grammar, tasks…" aria-label="Search" autocomplete="off">' +
-      '<div class="sr-results" id="srResults" aria-label="Search results"></div>' +
+      '<input type="text" id="srInput" placeholder="Search pages, phrases, vocabulary, grammar, tasks…" aria-label="Search" autocomplete="off" role="combobox" aria-expanded="true" aria-controls="srResults" aria-autocomplete="list">' +
+      '<div class="sr-results" id="srResults" role="listbox" aria-label="Search results"></div>' +
     '</div>';
   document.body.appendChild(overlay);
   input = $('#srInput');
   resultsEl = $('#srResults');
   overlay.addEventListener('mousedown', e => { if (e.target === overlay) closeSearch(); });
-  input.addEventListener('input', () => { current = query(input.value); active = 0; paint(); });
+  input.addEventListener('input', () => { current = query(input.value); active = 0; paint(); if (M.announce && input.value.trim()) M.announce(current.length + (current.length === 1 ? ' result' : ' results')); });
   resultsEl.addEventListener('click', e => {
     const copyBtn = e.target.closest('.sr-copy');
     if (copyBtn) {
@@ -93,11 +96,12 @@ function paint() {
   current.forEach((it, i) => {
     if (it.type !== lastType) { html += '<div class="sr-group">' + it.type + '</div>'; lastType = it.type; }
     html += '<div class="sr-row' + (i === active ? ' active' : '') + '">' +
-      '<button class="sr-main" data-i="' + i + '"><span>' + esc(it.label) + '</span><span class="sub">' + esc(it.sub) + '</span></button>' +
+      '<button class="sr-main" id="srOpt-' + i + '" role="option" aria-selected="' + (i === active) + '" data-i="' + i + '"><span>' + esc(it.label) + '</span><span class="sub">' + esc(it.sub) + '</span></button>' +
       (it.copy ? '<button class="sr-copy" data-i="' + i + '" aria-label="Copy to clipboard" title="Copy">⧉</button>' : '') +
     '</div>';
   });
   resultsEl.innerHTML = html;
+  if (input) input.setAttribute('aria-activedescendant', current.length ? 'srOpt-' + active : '');
   const act = resultsEl.querySelector('.sr-row.active');
   if (act) act.scrollIntoView({ block: 'nearest' });
 }
@@ -192,6 +196,7 @@ document.addEventListener('keydown', e => {
   }
 });
 
+M.rebuildSearch = function () { items = null; };
 M.openSearch = openSearch;
 M.closeSearch = closeSearch;
 })();

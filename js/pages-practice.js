@@ -59,8 +59,8 @@ PAGES.grammar = {
 
 /* ─── PARAGRAPH WRITING ───────────────────────────────────── */
 const paraTabs = { current: 'anatomy' };
-const warmupState = { i: 0, show: false };
-const taskState = { i: 0, show: false, analysis: false };
+const warmupState = { i: 0, show: false, drafts: {} };
+const taskState = { i: 0, show: false, analysis: false, drafts: {} };
 
 function peelMark(role, text) {
   const c = PEEL[role];
@@ -107,11 +107,12 @@ function paragraphsBody() {
     const typeColor = { CLAIM: 'var(--blue)', CONTRAST: 'var(--purple)', CAUSE: 'var(--orange)' };
     return sectionLabel('Warm-up ' + (warmupState.i + 1) + ' of ' + P.warmups.length + ' – find the topic sentence') +
       '<p style="font-size:.875rem;color:var(--text-secondary);line-height:1.7;margin-bottom:18px">The topic sentence is missing. Read the paragraph and write one that fits. Remember: a good topic sentence makes a clear, specific claim.</p>' +
+      '<div class="tip" style="margin-bottom:18px">Stuck for something to say? Try one of three moves: argue the other side and then answer it, follow a cause through to its effect, or reach for a concrete example – even an invented one. A plausible made-up survey or a personal story is completely allowed (this is a language exam, not a fact check), so the real trick is simply to keep the pen moving.</div>' +
       '<div style="border:1px solid var(--border);background:var(--surface);margin-bottom:18px">' +
         '<div style="padding:11px 19px;border-bottom:1px solid var(--border);font-size:.7rem;letter-spacing:.08em;color:var(--text-muted)">' + esc(wu.title.toUpperCase()) + '</div>' +
         '<div style="padding:14px 19px;border-bottom:1px solid var(--border);display:flex;gap:12px;background:color-mix(in srgb,' + PEEL.point + ' 6%,transparent);border-left:2px solid ' + PEEL.point + '">' +
           '<span style="color:' + PEEL.point + ';flex-shrink:0;margin-top:2px">①</span>' +
-          '<textarea id="wuInput" rows="2" placeholder="Write your topic sentence here…" style="flex:1;background:transparent;border:none;color:var(--text);font-size:.88rem;font-family:var(--font-sans);line-height:1.6;resize:none;outline:none"></textarea>' +
+          '<textarea id="wuInput" rows="2" placeholder="Write your topic sentence here…" style="flex:1;background:transparent;border:none;color:var(--text);font-size:.88rem;font-family:var(--font-sans);line-height:1.6;resize:none;outline:none">' + esc(warmupState.drafts[warmupState.i] || '') + '</textarea>' +
         '</div>' +
         [['explain', '②', 'SUPPORTING', wu.supporting], ['evidence', '③', 'EVIDENCE', wu.evidence], ['closing', '④', 'CLOSING', wu.closing]].map((r, i) =>
           '<div style="padding:13px 19px;' + (i < 2 ? 'border-bottom:1px solid var(--border);' : '') + 'display:flex;gap:12px">' +
@@ -146,7 +147,7 @@ function paragraphsBody() {
           '<div class="wa-row" style="--pc:' + PEEL[l.key] + '">' +
             '<div class="wa-side"><div class="pn">' + l.num + '</div><div class="pl">' + l.label + '</div></div>' +
             '<textarea class="pt-input" data-key="' + l.key + '" rows="' + (l.key === 'explain' ? 3 : 2) + '" placeholder="' +
-              (l.key === 'point' ? 'Write your topic sentence…' : l.key === 'explain' ? 'Explain the why/how…' : l.key === 'evidence' ? 'Give evidence – a fact, statistic, or example…' : 'Draw a conclusion or link forward…') + '"></textarea>' +
+              (l.key === 'point' ? 'Write your topic sentence…' : l.key === 'explain' ? 'Explain the why/how…' : l.key === 'evidence' ? 'Give evidence – a fact, statistic, or example…' : 'Draw a conclusion or link forward…') + '">' + esc((taskState.drafts[taskState.i] || {})[l.key] || '') + '</textarea>' +
           '</div>').join('') +
       '</div>' +
       '<div style="display:flex;gap:8px;align-items:center;margin-bottom:18px;flex-wrap:wrap">' +
@@ -204,12 +205,25 @@ PAGES.paragraphs = {
   wire() { wireParaInputs(); },
 };
 function wireParaInputs() {
-  const counter = M.$('#ptCount');
-  if (counter) {
-    M.$$('.pt-input').forEach(t => t.addEventListener('input', () => {
-      const wc = M.$$('.pt-input').map(x => x.value).join(' ').trim().split(/\s+/).filter(Boolean).length;
-      counter.textContent = wc + ' WORDS';
-    }));
+  /* Warm-up: persist the single topic-sentence draft per warm-up index (survives re-render). */
+  const wuInput = M.$('#wuInput');
+  if (wuInput) {
+    wuInput.addEventListener('input', () => { warmupState.drafts[warmupState.i] = wuInput.value; });
+  }
+  /* Full paragraphs: persist a draft per task index and PEEL field, and keep the word counter live. */
+  const inputs = M.$$('.pt-input');
+  if (inputs.length) {
+    const store = taskState.drafts[taskState.i] || (taskState.drafts[taskState.i] = {});
+    const counter = M.$('#ptCount');
+    const updateCount = () => {
+      if (!counter) return;
+      counter.textContent = inputs.map(x => x.value).join(' ').trim().split(/\s+/).filter(Boolean).length + ' WORDS';
+    };
+    inputs.forEach(t => {
+      const key = t.getAttribute('data-key');
+      t.addEventListener('input', () => { store[key] = t.value; updateCount(); });
+    });
+    updateCount();
   }
 }
 window.MWG.paraTabs = paraTabs;

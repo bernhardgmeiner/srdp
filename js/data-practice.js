@@ -34,7 +34,7 @@ Another thing that really annoys me is the prices. Everything has become so expe
 In conclusion, our canteen needs a complete makeover. The school should fire the catering company and find a new one.`,
     errors: [
       { mark: 'Missing Date in header', fix: 'Reports require Date, From, and Subject.' },
-      { mark: '"Dear Sir,"', fix: "Reports don't have greetings. That's for emails/letters." },
+      { mark: '"Dear Sir,"', fix: "Reports don't have greetings. That's for e-mails/letters." },
       { mark: 'No section headings', fix: 'Every report section needs a clear heading.' },
       { mark: '"I personally believe", "really annoys me"', fix: 'Reports present objective findings. Use data: "72% of respondents rated the food quality as poor".' },
       { mark: '"disgusting", "outrageous"', fix: 'Emotional language. Reports are neutral.' },
@@ -148,7 +148,7 @@ SRDP.dndSets = {
   essay: [
     { text: 'There is no doubt that climate change poses one of the greatest challenges of our time.', role: 'Introduction / thesis' },
     { text: 'To begin with, the environmental consequences of rising temperatures are already visible.', role: 'Topic sentence (paragraph 1)' },
-    { text: 'A recent study by NASA confirms that global temperatures have risen by 1.1°C since 1880.', role: 'Evidence / example' },
+    { text: 'A recent study by NASA confirms that global temperatures have risen by more than 1.2°C since 1880.', role: 'Evidence / example' },
     { text: 'Furthermore, the economic cost of inaction far outweighs the cost of prevention.', role: 'Second argument' },
     { text: 'Taking these points into consideration, it is clear that we must act now.', role: 'Conclusion' },
   ],
@@ -174,7 +174,7 @@ SRDP.dndSets = {
     { text: 'So, what do you think? Have you ever tried a digital detox? Let me know below!', role: 'Conclusion – invites comments' },
   ],
   email: [
-    { text: 'To: info@hotel-vienna.example | Subject: Complaint regarding stay on 5 April', role: 'E-mail header' },
+    { text: 'To: info@hotel-vienna.example | From: a.berger@email.example | Date: 7 April 2026 | Subject: Complaint regarding stay on 5 April', role: 'E-mail header' },
     { text: 'I am writing to express my dissatisfaction with the service I received during my recent stay.', role: 'Opening – states purpose' },
     { text: 'To begin with, the room had not been cleaned prior to my arrival, which was unacceptable.', role: 'First complaint point' },
     { text: 'Furthermore, despite requesting a non-smoking room, I was placed in a room that smelled of smoke.', role: 'Second complaint point' },
@@ -204,10 +204,10 @@ STEP 1: Expectation horizon (do this before you judge anything).
 In 3–4 sentences, describe what a solid B2 answer to THIS task should contain: its purpose and reader, the content points that must be covered, the conventions of a ${typeName}, and the register you would expect. This is your yardstick for Step 2.
 
 STEP 2: Rate the four official criteria, each on the 0–10 scale (level 6 = B2 minimum met). Judge each criterion independently, in its own pass, and quote evidence from the text.
-1. Task Achievement: purpose and text-type requirements; are all content points developed (not merely mentioned) with relevant details/examples; title / subject line / greeting / sign-off / headings where the text type needs them. WORD COUNT: if the text is more than 10% over or under about ${length} words, drop this criterion by one band and say so explicitly.
-2. Coherence & Cohesion: the overall line of thought; logical paragraphs with topic sentences; the range and fit of linking devices (here you judge whether they fit, not whether they are correct English).
-3. Lexical & Structural Range: breadth of topic vocabulary and of structures, including some complex forms; any lifting of whole phrases from the task; appropriate register.
-4. Lexical & Structural Accuracy: grammar, word choice, spelling, punctuation. Note: a linking word can be appropriate (credited under criterion 2) and still be wrong in form (penalised here).
+1. Task Achievement: purpose and text-type requirements; are all content points developed (not merely mentioned) with relevant details/examples; title / subject line / greeting / sign-off / headings where the text type needs them. WORD COUNT (already counted for you — apply it, do not recount): ${(function(){ var w=(String(text).trim().match(/\S+/g)||[]).length; var lo=Math.round(length*0.9), hi=Math.round(length*1.1); return w<lo? 'the text has '+w+' words, under the '+lo+'–'+hi+' range, so drop this criterion by one band.' : w>hi? 'the text has '+w+' words, over the '+lo+'–'+hi+' range, so drop this criterion by one band.' : 'the text has '+w+' words, inside the '+lo+'–'+hi+' range, so no length penalty applies here.'; })()}
+2. Coherence and Cohesion: the overall line of thought; logical paragraphs with topic sentences; the range and fit of linking devices (here you judge whether they fit, not whether they are correct English).
+3. Lexical and Structural Range: breadth of topic vocabulary and of structures, including some complex forms; any lifting of whole phrases from the task; appropriate register.
+4. Lexical and Structural Accuracy: grammar, word choice, spelling, punctuation. Note: a linking word can be appropriate (credited under criterion 2) and still be wrong in form (penalised here).
 Within each criterion the first descriptors weigh more than a title or the register, and the final band is a qualitative judgement, not the average of the descriptors.
 
 STEP 3: Holistic verdict.

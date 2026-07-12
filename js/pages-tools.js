@@ -121,7 +121,7 @@ window.MWG.clState = clState;
 window.MWG.clBody = clBody;
 
 /* ─── SELF-CHECK STUDIO ───────────────────────────────────── */
-const scState = { type: 'essay', target: 400 };
+const scState = { type: (M.typesForSchool && M.typesForSchool()[0] ? M.typesForSchool()[0].id : 'essay'), target: (M.school && M.school() === 'bhs') ? 250 : 400 };
 const CONTRACTIONS = /\b(don't|can't|won't|isn't|aren't|wasn't|weren't|doesn't|didn't|couldn't|shouldn't|wouldn't|hasn't|haven't|hadn't|it's|that's|there's|here's|what's|who's|let's|i'm|i've|i'll|i'd|you're|you've|you'll|you'd|we're|we've|we'll|we'd|they're|they've|they'll|she's|he's|she'll|he'll|gonna|wanna|gotta)\b/gi;
 const INFORMAL = ['basically', 'stuff', 'guys', 'kids', 'loads of', 'lots of', 'a lot of', 'totally', 'awesome', 'cool', 'okay', 'ok', 'btw', 'huge', 'crazy', 'dumb', 'super', 'really really', 'kinda', 'sort of', 'pretty good', 'anyway'];
 const LINKERS = ['furthermore', 'moreover', 'in addition', 'what is more', 'however', 'nevertheless', 'nonetheless', 'on the other hand', 'on the one hand', 'although', 'even though', 'despite', 'in spite of', 'therefore', 'consequently', 'as a result', 'thus', 'hence', 'owing to', 'due to', 'for instance', 'for example', 'admittedly', 'while', 'whereas', 'to sum up', 'on balance', 'in conclusion', 'taking everything into account', 'first of all', 'to begin with', 'in contrast', 'as a consequence', 'firstly', 'secondly', 'finally'];
@@ -130,7 +130,8 @@ const FORMAL_TYPES = { essay: true, report: true, email: true, article: false, b
 function analyze(text, type, target) {
   const f = [];
   const add = (status, html) => f.push({ status, html });
-  const words = text.match(/\S+/g) || [];
+  const bodyForCount = text.split('\n').filter(function (l) { return !/^\s*(to|from|subject|date)\s*:/i.test(l); }).join('\n');
+  const words = bodyForCount.match(/\S+/g) || [];
   const wc = words.length;
   const lo = Math.round(target * 0.9), hi = Math.round(target * 1.1);
 
@@ -149,7 +150,7 @@ function analyze(text, type, target) {
   const contr = text.match(CONTRACTIONS) || [];
   const informalHits = INFORMAL.filter(wrd => new RegExp('\\b' + wrd.replace(/ /g, '\\s+') + '\\b', 'i').test(text));
   if (FORMAL_TYPES[type]) {
-    if (contr.length) add('bad', '<b>' + contr.length + ' contraction' + (contr.length > 1 ? 's' : '') + '</b> found (' + contr.slice(0, 5).map(c => '<code>' + esc(c) + '</code>').join(' ') + (contr.length > 5 ? ' …' : '') + ') – write the full forms in formal texts.');
+    if (contr.length) add('bad', '<b>' + contr.length + ' contraction' + (contr.length > 1 ? 's' : '') + '</b> found (' + contr.slice(0, 5).map(c => '<code>' + esc(c) + '</code>').join(' ') + (contr.length > 5 ? ' …' : '') + ') – write the full forms in formal texts. (This affects Range/register, not Accuracy.)');
     else add('ok', 'No contractions – correct for a formal text.');
     if (informalHits.length) add('warn', 'Possibly informal wording: ' + informalHits.slice(0, 6).map(w => '<code>' + esc(w) + '</code>').join(' ') + '. Replace with formal alternatives.');
   } else {
@@ -158,7 +159,9 @@ function analyze(text, type, target) {
 
   /* linkers */
   const found = LINKERS.filter(l => new RegExp('\\b' + l.replace(/ /g, '\\s+') + '\\b', 'i').test(text));
+  const narrativeType = type === 'blog' || type === 'article';
   if (found.length >= 5) add('ok', '<b>' + found.length + ' different linking devices</b> found: ' + found.slice(0, 8).map(l => '<code>' + esc(l) + '</code>').join(' ') + (found.length > 8 ? ' …' : ''));
+  else if (narrativeType) add('info', '<b>' + found.length + ' linking device' + (found.length === 1 ? '' : 's') + '</b> detected (' + (found.map(l => '<code>' + esc(l) + '</code>').join(' ') || 'none') + '). In a narrative text, linking through pronouns and time markers is fine — a few clear connectors are enough.');
   else add('warn', 'Only <b>' + found.length + ' B2 linking device' + (found.length === 1 ? '' : 's') + '</b> detected (' + (found.map(l => '<code>' + esc(l) + '</code>').join(' ') || 'none') + '). Aim for at least 5 different ones.');
 
   /* complex structures */
@@ -211,7 +214,7 @@ function analyze(text, type, target) {
   if (type === 'report') {
     const hasHeader = /from\s*:/i.test(text) && /subject\s*:/i.test(text) && /date\s*:/i.test(text);
     add(hasHeader ? 'ok' : 'bad', hasHeader ? 'Header complete (Date / From / Subject).' : '<b>Header incomplete</b> – a report needs Date, From and Subject lines.');
-    const headings = lines.filter(l => { const tt = l.trim(); return tt.length > 0 && tt.split(/\s+/).length <= 6 && !/[.!?:;,]$/.test(tt) && !/^(date|from|subject|to)\b/i.test(tt) && !/^report$/i.test(tt); }).length;
+    const headings = lines.filter(l => { const tt = l.trim(); return tt.length > 0 && tt.split(/\s+/).length <= 6 && !/[.!?;,]$/.test(tt) && !/^(date|from|subject|to)\b/i.test(tt) && !/^report$/i.test(tt); }).length;
     add(headings >= 3 ? 'ok' : 'warn', headings >= 3 ? headings + ' section headings found.' : 'Only ' + headings + ' section heading' + (headings === 1 ? '' : 's') + ' detected – give each section a short, clear heading such as Introduction, Findings or Recommendations. They do not need numbers.');
     if (/dear\s+(sir|madam)/i.test(text)) add('bad', 'Reports have <b>no greeting</b> – delete "Dear Sir or Madam".');
     const opinion = (text.match(/\bI (think|believe|feel)\b/gi) || []).length;
@@ -219,7 +222,7 @@ function analyze(text, type, target) {
   }
   if (type === 'essay' || type === 'article') {
     const first = lines[0] || '';
-    const looksTitle = first.length > 0 && first.split(/\s+/).length <= 12 && !/[.:!?,]$/.test(first) && !/^(dear|to:|from:)/i.test(first);
+    const looksTitle = first.length > 0 && first.split(/\s+/).length <= 12 && !/[.:,]$/.test(first) && !/^(dear|to:|from:)/i.test(first);
     add(looksTitle ? 'ok' : 'warn', looksTitle ? 'First line looks like a title: <code>' + esc(first) + '</code>' : 'No title detected – ' + (type === 'essay' ? 'essays need a clear title on the first line.' : 'articles need a catchy title on the first line.'));
   }
   if (type === 'blog') {
@@ -232,12 +235,12 @@ function analyze(text, type, target) {
   }
   if (type === 'leaflet') {
     const lfirst = (lines[0] || '').trim();
-    const looksTitle = lfirst.length > 0 && lfirst.split(' ').length <= 12 && '.:!?,'.indexOf(lfirst.slice(-1)) === -1;
+    const looksTitle = lfirst.length > 0 && lfirst.split(' ').length <= 12 && '.:,'.indexOf(lfirst.slice(-1)) === -1;
     add(looksTitle ? 'ok' : 'warn', looksTitle ? 'First line looks like a title.' : 'No title detected: a leaflet needs a clear title on the first line.');
     const heads = lines.filter(function (l) { var tt = l.trim(); return tt.length > 0 && tt.split(' ').length <= 6 && '.!?:;,'.indexOf(tt.slice(-1)) === -1; }).length;
     add(heads >= 2 ? 'ok' : 'warn', heads >= 2 ? heads + ' short heading-like lines found (subheadings).' : 'Few subheadings: break the leaflet into short, headed sections.');
     const low = text.toLowerCase();
-    const cta = ['come', 'join', 'sign up', 'visit', 'call', 'find out', 'bring', 'do not miss', 'get in touch', 'contact'].some(function (wq) { return low.indexOf(wq) >= 0; });
+    const cta = ['come', 'join', 'sign up', 'visit', 'call', 'find out', 'bring', 'do not miss', 'get in touch', 'contact'].some(function (wq) { return new RegExp('\\b' + wq.replace(/ /g, '\\s+') + '\\b', 'i').test(low); });
     add(cta ? 'ok' : 'warn', cta ? 'A call to action is present.' : 'No clear call to action: tell the reader what to do next (come along, sign up, get in touch).');
   }
   add('info', 'This is a quick robot check of the surface. It cannot judge your ideas or your accuracy; for real feedback, use the AI prompt below or ask your teacher.');
@@ -289,10 +292,12 @@ PAGES.selfcheck = {
       const lo = Math.round(t * 0.9), hi = Math.round(t * 1.1);
       live.textContent = wc + ' words' + (wc ? ' (target ' + lo + '–' + hi + ')' : '');
       live.style.color = wc >= lo && wc <= hi ? 'var(--green)' : 'var(--text-secondary)';
+      try{ sessionStorage.setItem('mwg_sc_draft', txt.value); }catch(e){}
     };
     txt.addEventListener('input', upd);
     M.$('#scTarget').addEventListener('change', () => { scState.target = +M.$('#scTarget').value; upd(); });
     M.$('#scType').addEventListener('change', () => { scState.type = M.$('#scType').value; });
+    try{ var d = sessionStorage.getItem('mwg_sc_draft'); if (d && !txt.value) txt.value = d; }catch(e){}
     upd();
   },
 };

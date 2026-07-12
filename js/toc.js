@@ -10,7 +10,7 @@ const reduced = () => window.matchMedia && window.matchMedia('(prefers-reduced-m
 let spy = null, spyScroll = null;
 function buildPageTOC() {
   if (spy) { spy.disconnect(); spy = null; }
-  if (spyScroll) { $('#main').removeEventListener('scroll', spyScroll); spyScroll = null; }
+  if (spyScroll) { $('#main').removeEventListener('scroll', spyScroll); window.removeEventListener('scroll', spyScroll); spyScroll = null; }
   const main = $('#main');
   const targets = $$('[data-toc-anchor]', main);
   if (targets.length < 2) return;
@@ -32,8 +32,12 @@ function buildPageTOC() {
   });
   const paint = () => {
     const mainTop = main.getBoundingClientRect().top;
+    const winScrolls = main.scrollHeight <= main.clientHeight + 4; /* mobile: document scrolls, not #main */
     let active = targets[0].id;
-    if (main.scrollTop + main.clientHeight >= main.scrollHeight - 24) {
+    const atEnd = winScrolls
+      ? (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 24)
+      : (main.scrollTop + main.clientHeight >= main.scrollHeight - 24);
+    if (atEnd) {
       active = targets[targets.length - 1].id; /* Seitenende: letzter Abschnitt gewinnt */
     } else {
       for (const t of targets) {
@@ -44,6 +48,7 @@ function buildPageTOC() {
   };
   spyScroll = () => { if (spy && bar.isConnected) requestAnimationFrame(paint); };
   main.addEventListener('scroll', spyScroll, { passive: true });
+  window.addEventListener('scroll', spyScroll, { passive: true });
   spy = new IntersectionObserver(paint, { root: main, threshold: [0, 1] });
   targets.forEach(t => spy.observe(t));
   paint();
@@ -58,13 +63,17 @@ function initBackToTop() {
   btn.textContent = '↑';
   document.body.appendChild(btn);
   btn.addEventListener('click', () => {
-    try { main.scrollTo({ top: 0, behavior: reduced() ? 'auto' : 'smooth' }); } catch (e) { main.scrollTop = 0; }
+    const beh = reduced() ? 'auto' : 'smooth';
+    try { main.scrollTo({ top: 0, behavior: beh }); window.scrollTo({ top: 0, behavior: beh }); } catch (e) { main.scrollTop = 0; window.scrollTo(0, 0); }
   });
   let vis = false;
-  main.addEventListener('scroll', () => {
-    const v = main.scrollTop > 800;
+  const onScroll = () => {
+    const sc = Math.max(main.scrollTop || 0, window.scrollY || 0);
+    const v = sc > 800;
     if (v !== vis) { vis = v; btn.classList.toggle('show', v); }
-  }, { passive: true });
+  };
+  main.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('scroll', onScroll, { passive: true });
 }
 
 M.buildPageTOC = buildPageTOC;
