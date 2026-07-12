@@ -66,7 +66,7 @@ SRDP.textTypes = [
           ]
         },
         {
-          text: 'To begin with, the environmental impact of fast fashion is severe. The production of cheap garments requires enormous amounts of water and energy, and releases toxic chemicals into rivers and soil. According to the United Nations Environment Programme, the fashion industry is responsible for an estimated 2 to 8 per cent of global greenhouse gas emissions, alongside a significant share of industrial water pollution. Furthermore, a large share of these garments is worn only a handful of times before ending up in landfill. In addition, synthetic fabrics such as polyester are made from fossil fuels and shed tiny microplastics with every single wash. These particles flow into rivers and oceans, enter the food chain, and have even been detected in human blood.',
+          text: 'To begin with, the environmental impact of fast fashion is severe. The production of cheap garments requires enormous amounts of water and energy, and releases toxic chemicals into rivers and soil. According to the United Nations Environment Programme, the fashion industry is responsible for an estimated 2 to 8 per cent of global greenhouse gas emissions, alongside a significant share of industrial water pollution. Furthermore, a large share of these garments is worn only a handful of times before ending up in landfill. In addition, synthetic fabrics such as polyester are made from fossil fuels and shed tiny microplastics with every single wash. These particles flow into rivers and oceans, and have even been detected in human blood.',
           annotations: [
             { span: 'To begin with, the environmental impact of fast fashion is severe.', type: 'content', label: 'Topic sentence (Point)' },
             { span: 'According to the United Nations Environment Programme', type: 'language', label: 'Evidence introducer' },
@@ -90,11 +90,11 @@ SRDP.textTypes = [
           ]
         },
         {
-          text: 'Taking these points into consideration, it is clear that the true cost of fast fashion is paid not by consumers, but by workers and the planet. If we genuinely want to address the climate crisis, we must start by rethinking our relationship with the clothes we wear. Consumers can make a genuine difference by buying less, choosing quality over quantity and repairing what they already own.',
+          text: 'Taking these points into consideration, it is clear that the true cost of fast fashion is paid not by consumers, but by workers and the planet. If we genuinely want to address the climate crisis, we must start by rethinking our relationship with the clothes we wear. Consumers can make a genuine difference by buying less and repairing what they already own.',
           annotations: [
             { span: 'Taking these points into consideration,', type: 'language', label: 'Conclusion linker' },
             { span: 'If we genuinely want to address the climate crisis,', type: 'language', label: 'Conditional – complex structure' },
-            { span: 'buying less, choosing quality over quantity', type: 'content', label: 'Concrete call to action' },
+            { span: 'buying less and repairing what they already own', type: 'content', label: 'Concrete call to action' },
           ]
         },
       ]
@@ -362,8 +362,8 @@ SRDP.textTypes = [
       { label: 'Sign-off', value: 'Yours faithfully / sincerely' },
     ],
     layout: [
-      { part: 'To:', note: "[recipient's email]" },
-      { part: 'From:', note: '[your email]' },
+      { part: 'To:', note: "[recipient's e-mail]" },
+      { part: 'From:', note: '[your e-mail]' },
       { part: 'Date:', note: '[date]' },
       { part: 'Subject:', note: '[clear and descriptive]' },
       { part: 'Dear Sir or Madam, / Dear Mr/Ms [Name],', note: '' },

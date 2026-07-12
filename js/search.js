@@ -40,7 +40,7 @@ function buildIndex() {
     items.push({ type: 'Tasks', label: p.topic, sub: (t ? t.name : p.type) + ' · ~' + p.length + ' words', go: { page: 'taskbank', task: pi },
       extra: (p.scenario + ' ' + p.instruction).toLowerCase() });
   });
-  Object.keys(SRDP.checklists).forEach(k => SRDP.checklists[k].items.forEach(it =>
+  Object.keys(SRDP.checklists).filter(k => k === 'general' || SRDP.textTypes.some(t => t.id === k && _inSchool(t))).forEach(k => SRDP.checklists[k].items.forEach(it =>
     items.push({ type: 'Checklist', label: it.text, sub: 'Writing checklist – ' + SRDP.checklists[k].label, go: { page: 'checklist', cl: k } })));
   items.forEach(it => { it.l = it.label.toLowerCase(); it.s = (it.sub || '').toLowerCase(); });
 }

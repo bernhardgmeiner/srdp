@@ -161,7 +161,7 @@ function analyze(text, type, target) {
   const found = LINKERS.filter(l => new RegExp('\\b' + l.replace(/ /g, '\\s+') + '\\b', 'i').test(text));
   const narrativeType = type === 'blog' || type === 'article';
   if (found.length >= 5) add('ok', '<b>' + found.length + ' different linking devices</b> found: ' + found.slice(0, 8).map(l => '<code>' + esc(l) + '</code>').join(' ') + (found.length > 8 ? ' …' : ''));
-  else if (narrativeType) add('info', '<b>' + found.length + ' linking device' + (found.length === 1 ? '' : 's') + '</b> detected (' + (found.map(l => '<code>' + esc(l) + '</code>').join(' ') || 'none') + '). In a narrative text, linking through pronouns and time markers is fine — a few clear connectors are enough.');
+  else if (narrativeType) add('info', '<b>' + found.length + ' linking device' + (found.length === 1 ? '' : 's') + '</b> detected (' + (found.map(l => '<code>' + esc(l) + '</code>').join(' ') || 'none') + '). In a narrative text, linking through pronouns and time markers is fine – a few clear connectors are enough.');
   else add('warn', 'Only <b>' + found.length + ' B2 linking device' + (found.length === 1 ? '' : 's') + '</b> detected (' + (found.map(l => '<code>' + esc(l) + '</code>').join(' ') || 'none') + '). Aim for at least 5 different ones.');
 
   /* complex structures */

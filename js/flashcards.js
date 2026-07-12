@@ -58,7 +58,12 @@ function answer(knew) {
   repaint();
 }
 
-function flip() { fState.flipped = !fState.flipped; repaint(); }
+function flip() {
+  fState.flipped = !fState.flipped;
+  repaint();
+  const c = fState.queue[fState.i];
+  if (c && window.MWG && window.MWG.announce) window.MWG.announce(fState.flipped ? c.hint : c.w);
+}
 function exitCards() { fState.on = false; M.route(); }
 function startCards(scope) {
   fState.on = true;
@@ -70,7 +75,13 @@ function startCards(scope) {
 
 function repaint() {
   const host = $('#fcHost');
-  if (host) { host.innerHTML = cardsBody(); }
+  if (!host) return;
+  host.innerHTML = cardsBody();
+  wireCards();                       /* sonst verliert jede neue Karte ihre Swipe-Listener */
+  if (fState.on) {                   /* Fokus nicht auf <body> fallen lassen (Tastatur/Screenreader) */
+    const card = host.querySelector('.fcard');
+    if (card) { try { card.focus({ preventScroll: true }); } catch (e) {} }
+  }
 }
 
 function cardsBody() {
