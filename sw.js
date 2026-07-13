@@ -1,6 +1,6 @@
 /* Service Worker — matura.bernhardgmeiner.com
    VERSION wird von _dev/bump-sw.mjs vor jedem Deploy auf einen Zeitstempel gesetzt. */
-const VERSION = '20260712190000';
+const VERSION = '20260713140000';
 const CACHE = 'mwg-' + VERSION;
 
 /* @assets:start (von bump-sw.mjs generiert) */
@@ -73,8 +73,22 @@ const ASSETS = [
 ];
 /* @assets:end */
 
+/* Install: fehlertolerant precachen.
+   cache.addAll() ist atomar — eine einzige fehlende Datei (404) laesst die gesamte
+   Installation scheitern, der SW aktiviert nie mehr und niemand bekommt Updates.
+   Deshalb jedes Asset einzeln, Fehler werden geloggt statt den Install abzubrechen. */
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)));
+  e.waitUntil(
+    caches.open(CACHE).then(c =>
+      Promise.allSettled(ASSETS.map(a => c.add(a).catch(err => {
+        console.warn('[sw] Precache fehlgeschlagen:', a, err && err.message);
+        throw err;
+      })))
+    ).then(results => {
+      const failed = results.filter(r => r.status === 'rejected').length;
+      if (failed) console.warn('[sw] ' + failed + ' von ' + ASSETS.length + ' Assets nicht gecacht. SW installiert trotzdem.');
+    })
+  );
 });
 
 self.addEventListener('activate', e => {
@@ -109,7 +123,7 @@ self.addEventListener('fetch', e => {
     return;
   }
 
-  /* PDFs: nicht precachen (groß), aber nach dem ersten Download cache-first */
+  /* PDFs: cache-first (stehen im Precache; fehlt eine, wird sie hier nachgeladen) */
   if (url.pathname.includes('/pdf/')) {
     e.respondWith(
       caches.match(req).then(hit => hit || fetch(req).then(res => {
