@@ -35,15 +35,15 @@ const FAQ = [
     a: "Your choice – the booklet does not care about order. Give each task a planned time slot before you start, begin with the text type you feel most confident about, and keep a few minutes at the end to proofread all of them. Decide your order before exam day, not during it." },
   { q: "Are the tasks the same at every school?",
     a: "Yes. The written Matura is standardised: the tasks come centrally from the BMB, and every candidate in your school type opens the same booklet on the same day at the same time. That is good news for you – it is exactly why the released past papers are such honest practice material." },
-  { q: "What happens if my written exam is negative?",
-    a: "It is not the end of the road. A negative Klausur can be repeated, and there is also the option of a mündliche Kompensationsprüfung – an oral compensation exam that can turn the grade around. Your teachers will walk you through the exact procedure if it ever comes to that. Plan A, of course, is this guide." },
+  { q: "What happens if I fail the written exam?",
+    a: "It is not the end of the road. A failed Klausur can be repeated, and there is also the option of a mündliche Kompensationsprüfung – an oral compensation exam that can turn the grade around. Your teachers will walk you through the exact procedure if it ever comes to that. Plan A, of course, is this guide." },
 ];
 
 PAGES.faq = {
   title: 'FAQ', track: 'faq',
   render() {
     return '<div class="page">' +
-      pageHead('Basics', 'FAQ', 'The questions students actually ask before the writing exam – answered short and straight. Where something depends on your school, we say so instead of guessing.') +
+      pageHead('Learn', 'FAQ', 'The questions students actually ask before the writing exam – answered short and straight. Where something depends on your school, we say so instead of guessing.') +
       '<div class="wrap"><div class="gap-s"></div>' +
         '<div class="acc">' + FAQ.filter(f => !f.schools || f.schools.indexOf(M.school()) >= 0).map((f, i) =>
           '<div class="acc-item"><button class="acc-head" data-action="acc" aria-expanded="false"><span class="pm">+</span><span>' + esc(f.q) + '</span></button>' +
@@ -91,7 +91,7 @@ PAGES.teachers = {
 PAGES.parents = {
   title: 'Für Eltern & Datenschutz', track: 'parents',
   render() {
-    return '<div class="page">' +
+    return '<div class="page" lang="de">' +
       pageHead('Über die Seite', 'Für Eltern &amp; Datenschutz', 'Was diese Seite ist, was mit den Daten Ihres Kindes passiert und wie Sie unterstützen können.') +
       '<div class="wrap" lang="de" style="max-width:760px"><div class="gap-s"></div>' +
         sectionLabel('Was diese Seite ist') +
@@ -99,7 +99,7 @@ PAGES.parents = {
         '<div class="gap-s"></div>' +
         sectionLabel('Datenschutz – kurz und ehrlich') +
         '<p style="font-size:1rem;color:var(--text-secondary);line-height:1.65;margin-bottom:12px">Kein Konto, keine Anmeldung, keine Werbung, kein Tracking. Der Lernfortschritt Ihres Kindes (besuchte Seiten, Quizergebnisse, Lernplan, Prüfungsdatum) wird ausschließlich lokal im Browser auf diesem Gerät gespeichert und an keinen Server geschickt. Werden die Browserdaten gelöscht oder das Gerät gewechselt, ist der Fortschritt weg – das ist der Preis dafür, dass der Lernfortschritt das Gerät nicht verlässt. Die Seite selbst liegt bei GitHub Pages (USA); beim Aufruf verarbeitet der Hoster – wie bei praktisch jeder Website – technisch bedingt die IP-Adresse in Server-Logs. Sonst wird nichts erhoben.</p>' +
-        '<p style="font-size:1rem;color:var(--text-secondary);line-height:1.65;margin-bottom:12px">Es gibt eine freiwillige KI-Funktion: Der Self-check erstellt auf Wunsch einen fertigen Text, den Ihr Kind selbst in ein KI-Werkzeug wie ChatGPT oder Claude kopieren kann, um Übungs-Feedback zu bekommen. Erst dann, und nur dann, verlässt der eingefügte Text dieses Gerät und geht an den jeweiligen Anbieter. Deshalb der Rat auf der Seite: nur Übungstexte verwenden, keine echten Namen oder persönlichen Daten. Ihre Schule kann außerdem eigene Regeln zum Einsatz von KI haben; die gelten zuerst.</p>' +
+        '<p style="font-size:1rem;color:var(--text-secondary);line-height:1.65;margin-bottom:12px">Es gibt eine freiwillige KI-Funktion: Der Self-check erstellt auf Wunsch einen fertigen Prompt (eine Anfrage samt Übungstext), den Ihr Kind selbst in ein KI-Werkzeug wie ChatGPT oder Claude kopieren kann, um Übungs-Feedback zu bekommen. Erst dann, und nur dann, verlässt der eingefügte Text dieses Gerät und geht an den jeweiligen Anbieter. Deshalb der Rat auf der Seite: nur Übungstexte verwenden, keine echten Namen oder persönlichen Daten. Ihre Schule kann außerdem eigene Regeln zum Einsatz von KI haben; die gelten zuerst.</p>' +
         '<p style="font-size:1rem;color:var(--text-secondary);line-height:1.65;margin-bottom:10px">Sie können den gespeicherten Lernfortschritt jederzeit hier löschen.</p>' +
         '<button class="btn btn-ghost" data-action="reset-progress">Fortschritt auf diesem Gerät zurücksetzen</button>' +
         '<div class="gap-s"></div>' +
@@ -168,8 +168,8 @@ PAGES.notebooklm = {
 const HONEST = {
   essay: {
     title: 'Should the school day start later?',
-    meta: '~300 words · a realistic pass, not a model of perfection',
-    intro: 'Every model text on this site shows you what strong looks like. This one shows you what real looks like: a believable student essay that would pass – and exactly where it leaks marks. The numbered markers explain what each weak spot costs and how the strong version would sound.',
+    meta: '~300 words · a realistic borderline text, not a model',
+    intro: 'Every model text on this site shows you what strong looks like. This one shows you what real looks like: a believable student essay that sits right at the B2 line – and exactly where it leaks marks. (No single text passes or fails on its own: the grade comes from the whole exam. But every band you leak here has to be earned back somewhere else.) The numbered markers explain what each weak spot costs and how the strong version would sound.',
     paras: [
       "Everybody knows that teenagers are always tired in the morning.{{1}} In Austria the school starts{{2}} at eight o'clock and many students must get up at six. In this essay I want to write about the question if the school day should start later.{{3}}",
       "The first point is sleep.{{4}} Scientists say that teenagers need around nine hours of sleep, but most of them only get seven hours. Since three years{{5}} I go to school by bus and I see every morning students which{{6}} are sleeping on the bus. When school would start{{7}} at nine, everybody could sleep one hour more. This would be very good for the health and also for the marks, because tired students cannot concentrate good{{8}} in the lessons.",
@@ -191,12 +191,12 @@ const HONEST = {
       "The conclusion only repeats the introduction's point about sleep and drops the other two arguments. A strong conclusion weighs all three and lands on a position.",
       "Ending on 'the politicians should think about it' outsources the essay's job. The task asked what YOU think – commit: 'Starting at half past eight would cost little and win back an hour of sleep – it is the obvious first step.'",
     ],
-    verdict: "Where would this land? Task Achievement around 6 – all three points are addressed with some development, conventions are basically there. Coherence around 5–6 – paragraphs exist, but label-style topic sentences and a repetitive conclusion weaken the line of thought. Range and Accuracy around 4–5 each: simple structures dominate, intensifiers repeat, and the since/for, article and if-clause errors are exactly the frequent, fixable kind – which is the encouraging part, because every single marker above is trainable. One leak the numbered markers do not tag: at about 300 words this essay is well under the ~400 the task asks for, and that shortfall alone costs a Task Achievement band – length is the cheapest mark to lose.",
+    verdict: "Task Achievement around 6 – all three points are addressed with some development, conventions are basically there. Coherence around 5–6 – paragraphs exist, but label-style topic sentences and a repetitive conclusion weaken the line of thought. Range and Accuracy around 4–5 each: simple structures dominate, intensifiers repeat, and the since/for, article and if-clause errors are exactly the frequent, fixable kind – which is the encouraging part, because every single marker above is trainable. One leak the numbered markers do not tag: at about 300 words this essay is well under the ~400 the task asks for, and that shortfall alone costs a Task Achievement band – length is the cheapest mark to lose.",
   },
   email: {
     title: 'Complaint about a delayed delivery',
-    meta: '~150 words · a realistic pass, not a model of perfection',
-    intro: 'Same idea as the other honest models: this formal e-mail would pass, but it drips marks in a dozen small places. The markers show where – and what the strong version would do instead.',
+    meta: '~150 words · a realistic borderline text, not a model',
+    intro: 'Same idea as the other honest models: this formal e-mail sits near the B2 line, but it drips marks in a dozen small places. The markers show where – and what the strong version would do instead.',
     paras: [
       "To: office@citysports.example\nFrom: lukas.maier@email.example\nDate: 12 March 2026\nSubject: Problem{{1}}",
       "Dear Sir or Madam,",
@@ -209,23 +209,23 @@ const HONEST = {
     notes: [
       "A one-word subject line ('Problem') wastes the first impression and costs Task Achievement points on the title/subject descriptor. Strong: 'Delayed delivery of order #58291 – request for refund'.",
       "The purpose sentence is there (good!) but vague. Name the facts in line one: 'I am writing to complain about a delivery that is now three weeks overdue (order #58291).'",
-      "'On the website it said' – word-for-word German ('Auf der Website stand'). Natural English: 'Your website states that…'. Word order and dummy subjects are Grammar-kit territory.",
+      "'On the website it said' is fine in speech, but far too casual for a formal complaint. Formal: 'Your website states that…'. Register slips like this add up under Range.",
       "'until today' – German 'bis heute'. English: 'to this day' or simply 'I have still not received anything'.",
       "Tense: 'I didn't receive anything' closes the event; the waiting continues, so present perfect is needed: 'I have not received anything.' The since/for/present-perfect cluster is the most expensive habit in Austrian B2 writing.",
       "'two informations' – 'information' is uncountable, and it's the wrong word anyway: 'I have already contacted your service team twice.'",
       "'This is not okay for me' – spoken register in a formal complaint. The formal weapon is understatement: 'I find this lack of response disappointing.'",
       "'slowly I am getting nervous' – direct translation of 'langsam werde ich nervös', and too personal for the genre. Formal: 'the matter is now becoming urgent.'",
-      "Contractions ('don't', 'didn't') are fine in a blog – in a formal complaint they soften the register. Written out, the same sentence sounds professional.",
+      "Contractions ('don't', 'didn't') are fine in a blog – in a formal complaint they pull the register down. Written out, the same sentence sounds professional.",
       "The demand is the right move (clear request!) but the tone tips into rude and the deadline is unclear. Formal: 'I would therefore ask you either to deliver the shoes by 20 March or to refund the full amount.'",
       "'look forward to hear' – after 'look forward to', English needs the -ing form: 'I look forward to hearing from you.' Cheap to memorise, embarrassing to lose.",
       "'Best wishes' after 'Dear Sir or Madam' breaks the pairing rule: unknown name → 'Yours faithfully'. The closing is a two-second decision that examiners always see.",
     ],
-    verdict: "Where would this land? Task Achievement around 6 – purpose, complaint and request are all there, the subject line and the closing pair leak points. Coherence 6 – the order of ideas is actually fine. Range 5 – the register keeps slipping into spoken German-English. Accuracy 4–5 – 'informations', 'to hear', tense choices. Total effect: a pass with no room to spare, built almost entirely out of errors this site's Grammar kit covers. And at about 150 words it is far under the ~250 target, which by itself drops Task Achievement a band before a single language error is counted.",
+    verdict: "Task Achievement around 6 – purpose, complaint and request are all there, but the subject line and the closing pair leak points. Coherence 6 – the order of ideas is actually fine. Range 5 – the register keeps slipping into spoken German-English. Accuracy 4–5 – 'informations', 'to hear', tense choices. Total effect: a pass with no room to spare, built almost entirely out of errors this site's Grammar kit covers. And at about 150 words it is far under the ~250 target, which by itself drops Task Achievement a band before a single language error is counted.",
   },
   leaflet: {
     title: 'Information about the Charity Run',
-    meta: '~140 words · a realistic pass, not a model of perfection',
-    intro: 'Same idea as the models above, but for the leaflet. This one would scrape a pass, yet it leaks marks exactly where BHS students lose them: a flat, report-style title, no subheadings, and no real call to action. The markers show where.',
+    meta: '~140 words · a realistic borderline text, not a model',
+    intro: 'Same idea as the models above, but for the leaflet. This one lands just below the B2 line, and it leaks marks exactly where BHS students lose them: a flat, report-style title, no subheadings, and no real call to action. The markers show where.',
     paras: [
       "Information about the Charity Run{{1}}",
       "Our school organises a charity run and we want that many people are coming.{{2}} In this leaflet I give you some informations{{3}} about the event.",
@@ -244,12 +244,12 @@ const HONEST = {
       "'very funny' is a false friend: funny = lustig (comical). Here you mean 'fun' (enjoyable).",
       "This is where the leaflet really leaks: there is no call to action and no practical details. A leaflet must tell the reader exactly what to do and give the facts – When? Where? How do I sign up? Ending on 'it would be nice if many people come' leaves the reader with nothing to act on.",
     ],
-    verdict: "Where would this land? Task Achievement around 4–5 – the content is there, but the missing subheadings, the missing call to action and the missing date/time/place are exactly the leaflet conventions the grid rewards. Coherence around 5 – one undivided block. Range and Accuracy around 4 each: simple sentences plus the frequent, fixable German-into-English errors above. At about 140 words it is also under the ~250 the task expects, which costs another Task Achievement band on its own. Add clear subheadings and a real call to action and the score climbs fast, and neither of those asks for a single word of new English.",
+    verdict: "Task Achievement around 4–5 – the content is there, but the missing subheadings, the missing call to action and the missing date/time/place are exactly the leaflet conventions the grid rewards. Coherence around 5 – one undivided block. Range and Accuracy around 4 each: simple sentences plus the frequent, fixable German-into-English errors above. At about 140 words it is also under the ~250 the task expects, which costs another Task Achievement band on its own. Add clear subheadings and a real call to action and the score climbs fast, and neither of those asks for a single word of new English.",
   },
   article: {
-    title: 'Social media - curse or blessing?',
-    meta: '~200 words · a realistic pass, not a model of perfection',
-    intro: "Same idea as the other honest models, but for the article: this one would pass a school-magazine task, yet it reads more like a flat essay than a lively article, and a few Germanisms sneak in. The markers show where the marks leak and what the stronger version would do.",
+    title: 'Social media – curse or blessing?',
+    meta: '~200 words · a realistic borderline text, not a model',
+    intro: "Same idea as the other honest models, but for the article: this one answers a school-magazine task, yet it reads more like a flat essay than a lively article, and a few Germanisms sneak in. The markers show where the marks leak and what the stronger version would do.",
     paras: [
       "Today everybody is talking about social media, and everybody has an opinion.{{1}} In this article I want to show you the good and the bad sides.{{2}} For young people like us it is really an important topic.",
       "Let us start with the good sides. Social media helps us to stay in contact with our friends, also when they live far away. Since two years my cousin lives{{3}} in Spain, and without Instagram I would never know what she is doing. We can also learn a lot, because there are many informations{{4}} about every topic you can imagine. And honestly, it makes a lot of fun{{5}} to watch videos after a long day in the school.{{6}}",
@@ -257,22 +257,22 @@ const HONEST = {
       "All in all, social media has good and bad sides, and everybody must find the right balance. For me it is a great thing, but we should never forget the real life.{{9}}",
     ],
     notes: [
-      "A school-magazine article lives from its opening: a question, an image, a surprising claim. 'Today everybody is talking about...' is a flat, essay-style opener with no angle, and it costs Task Achievement on article conventions. Stronger: 'Be honest - how many times did you check your phone before this sentence?'",
+      "A school-magazine article lives from its opening: a question, an image, a surprising claim. 'Today everybody is talking about...' is a flat, essay-style opener with no angle, and it costs Task Achievement on article conventions. Stronger: 'Be honest – how many times did you check your phone before this sentence?'",
       "Announcing the structure ('In this article I want to show you...') is essay habit, not article style. An article pulls the reader straight in and lets the piece show its shape instead of describing it.",
-      "'Since two years my cousin lives...' - the since/for trap plus a tense error. English needs duration with 'for' and a present perfect: 'For two years my cousin has been living in Spain.'",
-      "'many informations' - 'information' is uncountable and never takes an -s: 'there is a lot of information'.",
-      "'it makes a lot of fun' is a straight translation of 'macht Spass'. English does not 'make' fun: 'it is a lot of fun' or 'great fun'.",
-      "'a long day in the school' - German 'in der Schule'. When the building is used for its purpose, English drops the article: 'at school'.",
-      "'concentrate proper' - an adverb is needed: 'concentrate properly'. Adjective/adverb slips are high-frequency and cheap to catch when proofreading.",
+      "'Since two years my cousin lives...' – the since/for trap plus a tense error. English needs duration with 'for' and a present perfect: 'For two years my cousin has been living in Spain.'",
+      "'many informations' – 'information' is uncountable and never takes an -s: 'there is a lot of information'.",
+      "'it makes a lot of fun' is a straight translation of 'macht Spaß'. English does not 'make' fun: 'it is a lot of fun' or 'great fun'.",
+      "'a long day in the school' – German 'in der Schule'. When the building is used for its purpose, English drops the article: 'at school'.",
+      "'concentrate proper' – an adverb is needed: 'concentrate properly'. Adjective/adverb slips are high-frequency and cheap to catch when proofreading.",
       "'...with their self-confidence, they compare themselves...' is a comma splice: two full sentences joined by only a comma. Split them or add a linker: '...with their self-confidence, because they constantly compare themselves with perfect pictures.'",
-      "'we should never forget the real life' - two things at once: 'the real life' should be 'real life' (no article for a general idea), and the ending is flat. A stronger article closes on a line that sticks: 'Social media is here to stay - the trick is to look up from it now and then.'",
+      "'we should never forget the real life' – two things at once: 'the real life' should be 'real life' (no article for a general idea), and the ending is flat. A stronger article closes on a line that sticks: 'Social media is here to stay – the trick is to look up from it now and then.'",
     ],
-    verdict: "Where would this land? Task Achievement around 5-6 - the topic is covered and both sides appear, but the flat opening, the announced structure and the weak ending miss the article conventions the grid rewards. Coherence around 6 - the two-sides plan is clear and easy to follow. Range around 4-5 - simple sentences and empty intensifiers ('really', 'a lot') dominate. Accuracy around 4-5 - the since/for, 'informations', article and adjective/adverb slips are the frequent, fixable kind. And at about 200 words it sits under the length the task sets (around 250), which on its own drops Task Achievement by one band before any language is judged. None of this is a talent problem. Fix the handful of habits above and the very same ideas land two bands higher.",
+    verdict: "Task Achievement around 5–6 – the topic is covered and both sides appear, but the flat opening, the announced structure and the weak ending miss the article conventions the grid rewards. Coherence around 6 – the two-sides plan is clear and easy to follow. Range around 4–5 – simple sentences and empty intensifiers ('really', 'a lot') dominate. Accuracy around 4–5 – the since/for, 'informations', article and adjective/adverb slips are the frequent, fixable kind. And at about 200 words it sits under the length the task sets (around 250), which on its own drops Task Achievement by one band before any language is judged. None of this is a talent problem. Fix the handful of habits above and the very same ideas land two bands higher.",
   },
   report: {
     title: 'Our school canteen: a student survey',
-    meta: '~175 words · a realistic pass, not a model of perfection',
-    intro: "Same idea as the models above, but for the report. This one would scrape a pass, yet it leaks marks exactly where students lose them in a report: a vague subject line, unnumbered headings and a register that keeps slipping. The markers show where.",
+    meta: '~175 words · a realistic borderline text, not a model',
+    intro: "Same idea as the models above, but for the report. This one lands just below the B2 line, and it leaks marks exactly where students lose them in a report: a vague subject line, vague headings and a register that keeps slipping. The markers show where.",
     paras: [
       "To: Mr Berger, headmaster\nFrom: The student council\nDate: 5 May 2026\nSubject: The canteen{{1}}",
       "In this report I want to write about{{2}} the situation in our school canteen. Last month a survey was made{{3}} by the student council, and 120 students from all classes have answered our questions. The aim was to find out what the students really think.",
@@ -282,34 +282,34 @@ const HONEST = {
     notes: [
       "A report subject line must be specific enough to file at a glance: 'The canteen' says almost nothing. Stronger: 'Survey results and recommendations on the school canteen'.",
       "'In this report I want to write about...' is essay register in a report. A report states its purpose formally and impersonally: 'This report presents the results of a student survey on the school canteen and makes recommendations.'",
-      "'a survey was made by the student council' - wrong verb in the passive. Surveys are 'carried out' or 'conducted', not 'made': 'A survey was carried out last month.'",
-      "'The results' as a section heading is vague and unnumbered. Reports are rewarded for clear, numbered headings - '1. Introduction', '2. Findings', '3. Recommendations' - so the reader can navigate at a glance.",
-      "'Since one year the prices are higher' - the since/for trap plus tense. English: 'For a year, prices have been higher.'",
-      "'...not enough vegetarian food, this is a big problem for them.' is a comma splice - two full sentences joined by a comma. Split them, and swap the empty 'big problem' for something precise: '...vegetarian food, which was the most frequent complaint.'",
-      "'What we want' is an informal, unnumbered heading. In a report this section is '3. Recommendations', and the tone stays neutral rather than sounding like a wish list.",
-      "'We think that some things must be changed' - subjective 'we think' plus a vague, agent-less passive. A report recommends concretely: 'The council recommends the following three changes.'",
-      "'If this would happen' - 'would' does not belong in the if-clause. B2 wants 'If this happened' or 'If these changes were made'.",
-      "'the students would be much more happy' - the comparative is 'happier', and 'much more happy' is spoken register. A report closes soberly: 'these measures would noticeably improve satisfaction.'",
+      "'a survey was made by the student council' – wrong verb in the passive. Surveys are 'carried out' or 'conducted', not 'made': 'A survey was carried out last month.'",
+      "'The results' as a section heading says nothing. Reports are rewarded for clear, meaningful headings that a reader can navigate at a glance – 'Introduction', 'Key findings', 'Recommendations' (numbering them is not required and the official sample texts do not).",
+      "'Since one year the prices are higher' – the since/for trap plus tense. English: 'For a year, prices have been higher.'",
+      "'...not enough vegetarian food, this is a big problem for them.' is a comma splice – two full sentences joined by a comma. Split them, and swap the empty 'big problem' for something precise: '...vegetarian food, which was the most frequent complaint.'",
+      "'What we want' is an informal heading. In a report this section is headed 'Recommendations', and the tone stays neutral rather than sounding like a wish list.",
+      "'We think that some things must be changed' – subjective 'we think' plus a vague, agent-less passive. A report recommends concretely: 'The council recommends the following three changes.'",
+      "'If this would happen' – 'would' does not belong in the if-clause. B2 wants 'If this happened' or 'If these changes were made'.",
+      "'the students would be much more happy' – the comparative is 'happier', and 'much more happy' is spoken register. A report closes soberly: 'these measures would noticeably improve satisfaction.'",
     ],
-    verdict: "Where would this land? Task Achievement around 5 - the report has a purpose, findings and a recommendation, but the vague subject and the missing numbered headings cost real marks on report conventions. Coherence around 5-6 - the reader can follow it, though the unlabelled sections make it feel more like a letter than a report. Range around 4-5 - simple sentences and 'big problem'-style filler. Accuracy around 4-5 - the passive, since/for, comma splice and if-clause errors are all the frequent, trainable kind. And at about 175 words it falls under the length the task sets (around 250), which by itself costs one Task Achievement band before the language is even weighed. Nothing here calls for better English, only for sharper headings and two minutes of proofreading.",
+    verdict: "Task Achievement around 5 – the report has a purpose, findings and a recommendation, but the vague subject line and the vague headings cost real marks on report conventions. Coherence around 5–6 – the reader can follow it, though the unlabelled sections make it feel more like a letter than a report. Range around 4–5 – simple sentences and 'big problem'-style filler. Accuracy around 4–5 – the passive, since/for, comma splice and if-clause errors are all the frequent, trainable kind. And at about 175 words it falls under the length the task sets (around 250), which by itself costs one Task Achievement band before the language is even weighed. Nothing here calls for better English, only for sharper headings and two minutes of proofreading.",
   },
   blog: {
     title: 'How I taught myself to cook',
-    meta: '~215 words · a realistic pass, not a model of perfection',
-    intro: "Same idea as the honest models above, but for the blog. The voice is genuinely good - informal and personal, contractions and all - but it loses marks on structure and on the missing call to comment at the end. The markers show where, and note which 'errors' are actually fine in a blog.",
+    meta: '~215 words · a realistic borderline text, not a model',
+    intro: "Same idea as the honest models above, but for the blog. The voice is genuinely good – informal and personal, contractions and all – but it loses marks on structure and on the missing call to comment at the end. The markers show where, and note which 'errors' are actually fine in a blog.",
     paras: [
       "Okay, I have to be honest with you: two months ago I couldn't even boil an egg without burning something. My mum always cooked for me and I never really thought about it. But then she went for three weeks to my grandma, who was sick, and suddenly I was alone with an empty fridge and a very empty stomach. The first days were a catastrophe. I ordered pizza every evening, and after a while my body just said stop, this is too much.{{1}} So I decided to learn how to cook, and honestly, it changed more than I expected.{{2}}",
       "At first I watched tons of videos and found so many informations{{3}} online that I had no idea where to start. Since two weeks I cook now{{4}} every day, and I've already got three or four dishes that I can make really good.{{5}} The best part isn't even the food, it's the feeling. When you make something with your own hands and it actually tastes nice, you feel really proud. And I'm saving a lot of money, because cooking at home is much cheaper than ordering all the time. My friends couldn't believe it when I cooked dinner for two of them last week. Cooking isn't a talent, it's just practice, and anyone can pick it up.{{6}}",
     ],
     notes: [
-      "'...my body just said stop, this is too much.' - two complete sentences with only a comma between them (a comma splice). The chatty voice is right for a blog; the punctuation still is not. Use a full stop or a dash: '...my body just said stop. This was too much.'",
-      "This is where the post should break. A blog lives in short, frequent paragraphs, but this text is only two big blocks - exactly at the turn from panic to decision a fresh, short paragraph should start. Walls of text cost Coherence and scare readers off.",
-      "'so many informations' - 'information' is uncountable and never takes an -s: 'so much information'.",
-      "'Since two weeks I cook now every day' - the since/for trap plus German word order. English: 'For two weeks now I have been cooking every day.'",
-      "'dishes that I can make really good' - an adverb is needed: 'really well'. (Note that the contractions in this post - couldn't, it's, I've - are all correct here: an informal blog wants them, so they cost nothing.)",
-      "A blog rarely just stops. This one ends on a neat line but never turns back to the reader - there is no question, no invitation to comment, no sign-off. Add one: 'Have you ever had to learn something from zero like this? Tell me in the comments - I need more recipes.'",
+      "'...my body just said stop, this is too much.' – two complete sentences with only a comma between them (a comma splice). The chatty voice is right for a blog; the punctuation still is not. Use a full stop or a dash: '...my body just said stop. This was too much.'",
+      "This is where the post should break. A blog lives in short, frequent paragraphs, but this text is only two big blocks – exactly at the turn from panic to decision a fresh, short paragraph should start. Walls of text cost Coherence and scare readers off.",
+      "'so many informations' – 'information' is uncountable and never takes an -s: 'so much information'.",
+      "'Since two weeks I cook now every day' – the since/for trap plus German word order. English: 'For two weeks now I have been cooking every day.'",
+      "'dishes that I can make really good' – an adverb is needed: 'really well'. (Note that the contractions in this post – couldn't, it's, I've – are all correct here: an informal blog wants them, so they cost nothing.)",
+      "A blog rarely just stops. This one ends on a neat line but never turns back to the reader – there is no question, no invitation to comment, no sign-off. Add one: 'Have you ever had to learn something from zero like this? Tell me in the comments – I need more recipes.'",
     ],
-    verdict: "Where would this land? Task Achievement around 5-6 - it is a genuine, personal story that answers a blog task, but with no headline on the post, no clear reader address and no call to comment at the end, it misses blog conventions the grid rewards. Coherence around 5 - readable, yet the two giant paragraphs work against it. Range around 6 - the informal voice is actually a strength here, with some natural phrasing. Accuracy around 5 - 'informations', the since/for slip and 'really good' are the frequent, fixable kind, and the contractions, correct for a blog, cost nothing. At about 215 words it also sits under the length the task sets (around 250), which alone drops Task Achievement by a band. Break the wall of text into shorter paragraphs, hand the reader a question at the end, and this suddenly reads like a real blog.",
+    verdict: "Task Achievement around 5–6 – it is a genuine, personal story that answers a blog task, but with no headline on the post, no clear reader address and no call to comment at the end, it misses blog conventions the grid rewards. Coherence around 5 – readable, yet the two giant paragraphs work against it. Range around 6 – the informal voice is actually a strength here, with some natural phrasing. Accuracy around 5 – 'informations', the since/for slip and 'really good' are the frequent, fixable kind, and the contractions, correct for a blog, cost nothing. At about 215 words it also sits under the length the task sets (around 250), which alone drops Task Achievement by a band. Break the wall of text into shorter paragraphs, hand the reader a question at the end, and this suddenly reads like a real blog.",
   },
 };
 

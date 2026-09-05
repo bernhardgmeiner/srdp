@@ -6,7 +6,7 @@
 const M = window.MWG;
 const { esc, sectionLabel, pageHead, PEEL } = M;
 function comparisonTable() {
-  const drop = M.school() === 'bhs' ? SRDP.comparison.head.indexOf('Essay') : -1;
+  const drop = M.school() === 'bhs' ? SRDP.comparison.head.indexOf('Essay') : SRDP.comparison.head.indexOf('Leaflet');
   const keep = arr => arr.filter((_, i) => i !== drop);
   return '<div class="tbl-wrap" tabindex="0" role="group" aria-label="Table (scroll sideways on small screens)"><table class="tbl"><thead><tr>' +
     keep(SRDP.comparison.head).map(h => '<th>' + esc(h) + '</th>').join('') + '</tr></thead><tbody>' +
@@ -21,7 +21,7 @@ PAGES.grammar = {
   render() {
     const d = SRDP;
     return '<div class="page">' +
-      pageHead('Skills', 'Grammar kit', d.grammar.length + ' places where German sneaks into your English. Each one with typical errors, corrections and a rule you can remember.') +
+      pageHead('Reference', 'Grammar kit', d.grammar.length + ' places where German sneaks into your English. Each one with typical errors, corrections and a rule you can remember.') +
       '<div class="wrap"><div class="gap-s"></div>' +
         sectionLabel('Common mistakes – click to open') +
         '<div class="acc">' + d.grammar.map(g =>
@@ -29,8 +29,8 @@ PAGES.grammar = {
           '<div class="acc-body"><p style="font-size:.9rem;color:var(--text-secondary);line-height:1.6;padding:10px 0 16px">' + esc(g.intro) + '</p>' +
             (g.pairs ? g.pairs.map(p =>
               '<div class="pair-row" style="border:1px solid var(--border);margin-bottom:8px">' +
-                '<div class="pair-cell"><div class="lab wrong-c">✗ TYPICAL ERROR</div><span style="font-family:var(--font-mono);font-size:.8125rem">' + esc(p.wrong) + '</span></div>' +
-                '<div class="pair-cell"><div class="lab right-c">✓ CORRECT</div><span style="font-family:var(--font-mono);font-size:.8125rem">' + esc(p.right) + '</span><div style="font-size:.78rem;color:var(--text-muted);margin-top:5px">' + esc(p.note) + '</div></div>' +
+                '<div class="pair-cell"><div class="lab wrong-c">' + (g.labels ? esc(g.labels[0]) : '✗ TYPICAL ERROR') + '</div><span style="font-family:var(--font-mono);font-size:.8125rem">' + esc(p.wrong) + '</span></div>' +
+                '<div class="pair-cell"><div class="lab right-c">' + (g.labels ? esc(g.labels[1]) : '✓ CORRECT') + '</div><span style="font-family:var(--font-mono);font-size:.8125rem">' + esc(p.right) + '</span><div style="font-size:.78rem;color:var(--text-muted);margin-top:5px">' + esc(p.note) + '</div></div>' +
               '</div>').join('') : '') +
             (g.table ?
               '<div class="tbl-wrap" tabindex="0" role="group" aria-label="Table (scroll sideways on small screens)"><table class="tbl" style="min-width:520px"><thead><tr><th>You write…</th><th>You think it means…</th><th>It actually means…</th><th>Use instead</th></tr></thead><tbody>' +
@@ -112,7 +112,7 @@ function paragraphsBody() {
         '<div style="padding:11px 19px;border-bottom:1px solid var(--border);font-size:.7rem;letter-spacing:.08em;color:var(--text-muted)">' + esc(wu.title.toUpperCase()) + '</div>' +
         '<div style="padding:14px 19px;border-bottom:1px solid var(--border);display:flex;gap:12px;background:color-mix(in srgb,' + PEEL.point + ' 6%,transparent);border-left:2px solid ' + PEEL.point + '">' +
           '<span style="color:' + PEEL.point + ';flex-shrink:0;margin-top:2px">①</span>' +
-          '<textarea id="wuInput" rows="2" placeholder="Write your topic sentence here…" style="flex:1;background:transparent;border:none;color:var(--text);font-size:.88rem;font-family:var(--font-sans);line-height:1.6;resize:none;outline:none">' + esc(warmupState.drafts[warmupState.i] || '') + '</textarea>' +
+          '<textarea id="wuInput" rows="2" placeholder="Write your topic sentence here…" style="flex:1;background:transparent;border:none;color:var(--text);font-size:.88rem;font-family:var(--font-sans);line-height:1.6;resize:none">' + esc(warmupState.drafts[warmupState.i] || '') + '</textarea>' +
         '</div>' +
         [['explain', '②', 'SUPPORTING', wu.supporting], ['evidence', '③', 'EVIDENCE', wu.evidence], ['closing', '④', 'CLOSING', wu.closing]].map((r, i) =>
           '<div style="padding:13px 19px;' + (i < 2 ? 'border-bottom:1px solid var(--border);' : '') + 'display:flex;gap:12px">' +
@@ -197,7 +197,7 @@ PAGES.paragraphs = {
   render() {
     const tabs = [['anatomy', 'Anatomy'], ['formulas', 'Topic sentences'], ['warmups', 'Warm-ups'], ['tasks', 'Full paragraphs'], ['phrases', 'Phrase bank'], ['recipe', 'The recipe']];
     return '<div class="page">' +
-      pageHead('Skills', 'Building a paragraph', 'Every good body paragraph does four jobs, in order. Learn them once and the blank page stops being a problem.',
+      pageHead('Practise', 'Building a paragraph', 'Every good body paragraph does four jobs, in order. Learn them once and the blank page stops being a problem.',
         '<div class="tabs">' + tabs.map(t => '<button class="tab' + (paraTabs.current === t[0] ? ' active' : '') + '" data-action="para-tab" data-tab="' + t[0] + '">' + t[1] + '</button>').join('') + '</div>') +
       '<div class="wrap"><div class="gap-s"></div><div id="paraBody">' + paragraphsBody() + '</div><div style="height:72px"></div></div>' +
     '</div>';
@@ -282,7 +282,7 @@ PAGES.practice = {
   render() {
     const tabs = [['spot', 'Spot the mistakes'], ['register', 'Register gym'], ['final', 'Final quiz']];
     return '<div class="page">' +
-      pageHead('Skills', 'Practice zone', 'Five student texts with planted mistakes, a register workout, and the final quiz for the week before the exam.',
+      pageHead('Practise', 'Practice zone', 'Five student texts with planted mistakes, a register workout, and the final quiz for the week before the exam.',
         '<div class="tabs">' + tabs.map(t => '<button class="tab' + (przState.tab === t[0] ? ' active' : '') + '" data-action="prz-tab" data-tab="' + t[0] + '">' + t[1] + '</button>').join('') + '</div>') +
       '<div class="wrap"><div class="gap-s"></div><div id="przBody">' + practiceBody() + '</div><div style="height:72px"></div></div>' +
     '</div>';
@@ -293,7 +293,7 @@ function wirePractice() {
   if (przState.tab === 'final') {
     if (!M.quizStates.final) M.initQuiz('final', finalQuizForSchool(), (score, total) => { if (score >= Math.ceil(total * 0.6)) M.markQuiz('final'); });
     const host = M.$('[data-quiz-host="final"]');
-    if (host) host.innerHTML = M.quizHTML('final');
+    if (host) M.setHTML(host, M.quizHTML('final'));
   }
 }
 window.MWG.przState = przState;

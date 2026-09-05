@@ -36,7 +36,7 @@ SRDP.textTypes = [
       "No contractions (don't, can't, it's)",
       'No colloquial or slang expressions',
       'No overly emotional language',
-      'No personal anecdotes ("When I was 12…") – use general or hypothetical examples',
+      'No personal anecdotes as your main evidence ("When I was 12…") – argue with general or hypothetical examples; a brief personal example is fine',
       'No over-generalisation ("All politicians are liars.")',
       'No simple linking words as your only connectors (and, but, because)',
       'No very short sentences one after another',
@@ -44,7 +44,7 @@ SRDP.textTypes = [
     ],
     phrases: [
       { category: 'Giving your opinion (without overusing "I")',
-        items: ['It is (firmly) believed that…', 'One can argue that…', 'Many people are convinced that…', 'As far as many people are concerned,…', 'It is often argued that…'] },
+        items: ['It is widely believed that…', 'One can argue that…', 'Many people are convinced that…', 'For many people,…', 'It is often argued that…'] },
       { category: 'When you do use "I"',
         items: ['In my opinion/view,…', 'I am inclined to believe that…', 'I (firmly) believe that…', 'I am (not) convinced that…'] },
       { category: 'Adding arguments',
@@ -75,7 +75,7 @@ SRDP.textTypes = [
           ]
         },
         {
-          text: 'Equally alarming are the working conditions in the factories that produce these clothes. Workers in countries such as Bangladesh and Cambodia are often forced to work twelve-hour shifts for wages that barely cover basic living costs. The Rana Plaza factory collapse in 2013, which killed over 1,100 garment workers, exposed the dangerous reality behind bargain-priced T-shirts. Despite promises of reform, investigations continue to reveal unsafe conditions. Independent investigations have also uncovered widespread child labour and the violent suppression of trade unions. While shoppers in Europe enjoy an endless supply of cheap outfits, the people who actually make them are denied safety, a living wage and basic security.',
+          text: 'Equally alarming are the working conditions in the factories that produce these clothes. Workers in countries such as Bangladesh and Cambodia are often forced to work twelve-hour shifts for wages that barely cover basic living costs. The Rana Plaza factory collapse in 2013, which killed over 1,100 garment workers, exposed the dangerous reality behind bargain-priced T-shirts. Despite promises of reform, investigations continue to reveal unsafe conditions. Independent researchers have also uncovered widespread child labour and the violent suppression of trade unions. While shoppers in Europe enjoy an endless supply of cheap outfits, the people who actually make them are denied safety, a living wage and basic security.',
           annotations: [
             { span: 'which killed over 1,100 garment workers,', type: 'language', label: 'Relative clause – adds detail elegantly' },
             { span: 'Despite', type: 'language', label: 'B2 contrasting linker' },
@@ -144,7 +144,7 @@ SRDP.textTypes = [
       { category: 'Conclusions',
         items: ['So next time you…', 'The question is not whether… but when.', "Perhaps it's time we all…", "Food for thought, isn't it?"] },
     ],
-    tip: 'Key difference – report vs. article: a report only informs. An article makes the reader feel; it is personal, emotional and engaging. Always check WHERE the article will appear – a school magazine needs a different voice from a serious newspaper.',
+    tip: 'Report vs. article: a report informs and recommends, neutrally. An article makes the reader feel; it is personal, emotional and engaging. Always check WHERE the article will appear – a school magazine needs a different voice from a serious newspaper.',
     modelText: {
       title: 'Screens Off, Life On?', wordCount: '~250', register: 'Semi-formal (school magazine)',
       paragraphs: [
@@ -156,7 +156,7 @@ SRDP.textTypes = [
           ]
         },
         {
-          text: 'When the experiment started, most participants felt anxious and disconnected. Several students admitted they instinctively reached into their pockets dozens of times a day. "I didn\'t even realise how addicted I was," one participant told me. However, by day three the first cracks began to show: a handful of students started talking during breaks instead of reaching for their phones. By the middle of the week, the mood had completely changed. Students who normally sat in silence were suddenly chatting, laughing and swapping stories at every break.',
+          text: 'When the experiment started, most participants felt anxious and disconnected. Several students admitted they instinctively reached into their pockets dozens of times a day. "I didn\'t even realise how addicted I was," one participant told me. However, by day three something began to shift: a handful of students started talking during breaks instead of reaching for their phones. By the middle of the week, the mood had completely changed. Students who normally sat in silence were suddenly chatting, laughing and swapping stories at every break.',
           annotations: [
             { span: '"I didn\'t even realise how addicted I was,"', type: 'special', label: 'Direct speech – suits articles, NOT reports' },
             { span: 'However,', type: 'language', label: 'B2 linking word' },
@@ -220,7 +220,7 @@ SRDP.textTypes = [
       { category: 'Introduction',
         items: ['As requested, I have prepared a report on…', 'The aim of this report is to…', 'This report examines/compares…', 'The data was collected through…'] },
       { category: 'Presenting data',
-        items: ['Twenty per cent of the people asked…', 'The majority of respondents…', 'One out of five stated that…', 'It is generally felt that…', 'A large proportion of those interviewed…'] },
+        items: ['Twenty per cent of the people asked…', 'The majority of respondents…', 'One in five stated that…', 'It is generally felt that…', 'A large proportion of those interviewed…'] },
       { category: 'Conclusion / Recommendations',
         items: ['On the basis of these findings,…', 'I would therefore recommend/suggest that…', 'It would seem that… is the best option.', 'In view of this, one can recommend…', 'It would also be advisable to…'] },
     ],
@@ -236,7 +236,7 @@ SRDP.textTypes = [
           ]
         },
         {
-          text: 'Introduction\nThis report presents the findings of a survey on stress levels conducted among 85 students in years 7 and 8. The aim is to identify the main causes of stress and suggest possible measures. The survey was carried out anonymously over a two-week period in February and consisted of ten questions on workload, sleep and support services.',
+          text: 'Introduction\nThis report presents the findings of a survey on stress levels conducted among 85 students in years 5 and 6. The aim is to identify the main causes of stress and suggest possible measures. The survey was carried out anonymously over a two-week period in February and consisted of ten questions on workload, sleep and support services.',
           annotations: [
             { span: 'Introduction', type: 'structure', label: 'Section heading' },
             { span: 'The aim is to identify the main causes of stress and suggest possible measures.', type: 'content', label: 'States purpose of report' },
@@ -353,11 +353,11 @@ SRDP.textTypes = [
 
   /* ─── E-MAIL ────────────────────────────────────────────── */
   {
-    id: 'email', name: 'E-Mail', tagline: 'Clear purpose, proper format',
+    id: 'email', name: 'E-mail', tagline: 'Clear purpose, proper format',
     color: 'red', badge: 'Usually the short task', schools: ['ahs', 'bhs'],
     quickFacts: [
       { label: 'Word count', value: '~250 words (225–275)' },
-      { label: 'Register', value: 'Formal' },
+      { label: 'Register', value: 'Usually formal' },
       { label: 'Subject line', value: 'Required' },
       { label: 'Sign-off', value: 'Yours faithfully / sincerely' },
     ],
@@ -379,7 +379,7 @@ SRDP.textTypes = [
       "Use full forms (do not instead of don't)",
       'Leave a blank line between paragraphs',
       'Match greeting to closing (Dear Sir → Yours faithfully)',
-      'Use "softer" verbs when criticising: I would like to point out, it seems to me',
+      'Use "softer" phrases when criticising: I would like to point out, it seems to me',
     ],
     donts: [
       'No contractions in formal e-mails',
@@ -399,7 +399,7 @@ SRDP.textTypes = [
       { category: 'Closings (all sub-types)',
         items: ['I look forward to hearing from you at your earliest convenience.', 'I look forward to receiving the information requested.', 'I am available for an interview at your convenience.', 'Thank you for your cooperation in correcting this matter.'] },
     ],
-    tip: 'Faithfully vs. sincerely: "Dear Sir/Madam" (name unknown) → Yours faithfully. "Dear Mr/Ms Brown" (name known) → Yours sincerely. Getting this wrong is an instant flag for examiners.',
+    tip: 'Faithfully vs. sincerely: "Dear Sir/Madam" (name unknown) → Yours faithfully. "Dear Mr/Ms Brown" (name known) → Yours sincerely. Getting this wrong is an instant flag for examiners. And if the task is an informal e-mail (to a friend, a host family, an exchange partner), the same rules apply the other way round: "Hi Anna," / "Dear Tom,", contractions are fine, and you close with "Best wishes" or "Take care". Read the task: the recipient decides the register.',
     modelText: {
       title: 'Complaint regarding Summer Language Course in Brighton', wordCount: '~250', register: 'Formal',
       paragraphs: [
@@ -411,7 +411,7 @@ SRDP.textTypes = [
           ]
         },
         {
-          text: 'Dear Sir or Madam,\n\nI am writing to express my dissatisfaction with the two-week language course I attended at your Brighton school from 1 to 14 July 2025. Although your website promised small class sizes and experienced teachers, my experience was far from what had been advertised. I had specifically chosen your school because of these promises, so the reality on arrival was a serious disappointment.',
+          text: 'Dear Sir or Madam,\n\nI am writing to express my dissatisfaction with the two-week language course I attended at your Brighton school from 16 to 27 March 2026. Although your website promised small class sizes and experienced teachers, my experience was far from what had been advertised. I had specifically chosen your school because of these promises, so the reality on arrival was a serious disappointment.',
           annotations: [
             { span: 'Dear Sir or Madam,', type: 'structure', label: 'Formal greeting (name unknown)' },
             { span: 'I am writing to express my dissatisfaction with', type: 'language', label: 'Set phrase – complaint opener' },
@@ -486,7 +486,7 @@ SRDP.textTypes = [
       { category: 'Practical information & closings',
         items: ['When: Saturday, 14 June, from 10 a.m.', 'Where: the main hall, Hauptstraße 1.', 'Entry is free. / Tickets: €5.', 'For more information, visit www.…', 'Questions? Call us on… or drop by any weekday.'] },
     ],
-    tip: 'A leaflet (called a „Broschüre“ on the official task sheet) is not one long block of prose. It informs AND persuades a target audience, and the layout does half the work: a clear title, short headed sections, direct address and a call to action. Picture the reader holding it at a bus stop – everything has to land in seconds. Keep the register persuasive but clean: warmer than a report, cleaner than a blog. You write the text only – a title, headed sections and a call to action, never drawings or layout.',
+    tip: 'A leaflet (the German curriculum documents call it a „Broschüre“) is not one long block of prose. It informs AND persuades a target audience, and the layout does half the work: a clear title, short headed sections, direct address and a call to action. Picture the reader holding it at a bus stop – everything has to land in seconds. Keep the register persuasive but clean: warmer than a report, cleaner than a blog. You write the text only – a title, headed sections and a call to action, never drawings or layout.',
     modelText: {
       title: 'Open Day at Schulzentrum Seetal – See Your Future in Action',
       wordCount: '~250', register: 'Persuasive',
@@ -499,9 +499,9 @@ SRDP.textTypes = [
           ]
         },
         {
-          text: 'Not sure what to do after secondary school? Spend a morning with us and find out. On Saturday, 7 November, our whole school opens its doors: workshops, real projects and students who are happy to show you around. Come and see what studying here is actually like, with no pressure and no entrance test.',
+          text: 'Not sure what to do after lower secondary school? Spend a morning with us and find out. On Saturday, 7 November, our whole school opens its doors: workshops, real projects and students who are happy to show you around. Come and see what studying here is actually like, with no pressure and no entrance test.',
           annotations: [
-            { span: 'Not sure what to do after secondary school?', type: 'special', label: 'Question aimed straight at the reader' },
+            { span: 'Not sure what to do after lower secondary school?', type: 'special', label: 'Question aimed straight at the reader' },
             { span: 'workshops, real projects and students who are happy to show you around', type: 'content', label: 'Sells the benefit, not just the facts' },
           ]
         },
@@ -568,7 +568,7 @@ SRDP.schools = {
     timeStat: '195 min', timeStatSub: 'total writing time',
     tasksStat: '3 tasks', tasksStatSub: '~250 words each',
     overviewIntro: 'The BHS Writing section has <strong style="color:var(--text)">three tasks</strong>, usually around 250 words each (each task states its own target, ±10%), and you get <strong style="color:var(--text)">195 minutes</strong>. Writing is one of three sections of the written exam, alongside Reading and Listening – there is no separate Language in Use section. One BHS perk: (electronic) dictionaries are allowed, but only during the Writing section. The text types are article, report, blog, e-mail and leaflet – no essay.',
-    timeSplitTip: 'Time split that works: three tasks in 195 minutes is roughly 55–60 minutes each, planning included. Read every prompt twice, note your finishing times on the task sheet, and keep about 10 minutes at the end to proofread all three.',
+    timeSplitTip: 'Time split that works: three tasks in 195 minutes is roughly 55–60 minutes each, planning included. Read every prompt twice, note your finishing times on the task sheet, and keep about 15 minutes at the end to proofread all three.',
     wordCountTip: 'Word count tolerance: ±10%. Each task states its own target (usually around 250 words, so 225–275). If you are further off than that, Task Achievement is reduced by one band.',
     dictionary: 'At BHS, (electronic) dictionaries are allowed – but only during the Writing section, not in Reading or Listening. Even so, the tasks are built so that B2 vocabulary is enough; when a word will not come, paraphrase it.',
     provisional: false,
@@ -578,7 +578,7 @@ SRDP.schools = {
 /* ─── E-MAIL SUB-TYPES ─────────────────────────────────────── */
 SRDP.emailSubTypes = [
   {
-    id: 'complaint', name: 'Letter / E-Mail of Complaint',
+    id: 'complaint', name: 'Letter / E-mail of Complaint',
     purpose: 'You are unhappy with a product, service, or experience and you want something done about it. Stay firm but professional, never aggressive.',
     layoutNotes: 'Use the standard e-mail header (To/From/Date/Subject). State your reason in the first sentence. Describe problems clearly in the body. End with a specific, reasonable demand.',
     dos: [
@@ -604,7 +604,7 @@ SRDP.emailSubTypes = [
     modelNote: 'The full model text on the "Model text" tab of the e-mail guide is a complaint – study it there.',
   },
   {
-    id: 'application', name: 'Letter / E-Mail of Application',
+    id: 'application', name: 'Letter / E-mail of Application',
     purpose: 'You are applying for a job, internship, volunteer position, or course. Be specific and confident, and show the employer why you are the right person.',
     layoutNotes: "Standard e-mail header. First paragraph: what you're applying for and where you saw it. Middle: your qualifications and relevant experience. Final paragraph: express enthusiasm and availability for interview.",
     dos: [
@@ -628,7 +628,7 @@ SRDP.emailSubTypes = [
       { category: 'Suitability', items: ['I believe I am suitable for this position as I…', 'I consider myself to be enthusiastic, hard-working, and reliable.', 'My experience in… has prepared me well for…', 'I have developed strong skills in… through my work at…'] },
       { category: 'Closing', items: ['I am available for an interview at your convenience.', 'I look forward to discussing my application further.', 'Please do not hesitate to contact me if you require any further information.', 'I would welcome the opportunity to contribute to your organisation.'] },
     ],
-    tip: 'Tense tip: use present simple for current skills ("I am a reliable person"), past simple for past experience ("I worked for…"), present perfect for ongoing activities ("I have been studying…"). Mixing these correctly shows B2 grammar range.',
+    tip: 'Tense tip: use present simple for current skills ("I am a reliable person"), past simple for past experience ("I worked for…"), present perfect continuous for ongoing activities ("I have been studying…"). Mixing these correctly shows B2 grammar range.',
     modelText: {
       title: 'Application for Summer Camp Counsellor', wordCount: '~250', register: 'Formal',
       paragraphs: [
@@ -655,7 +655,7 @@ SRDP.emailSubTypes = [
           ]
         },
         {
-          text: 'I would welcome the opportunity to bring my energy and experience to Lakeside Camps this summer. I am available for an online interview at your convenience and would be happy to provide references. Please find my CV attached. I love being outdoors, and I would like to help children enjoy the kind of great summer I had at camp myself.\n\nYours sincerely,\nLukas Steiner',
+          text: 'I love being outdoors, and I would like to help children enjoy the kind of great summer I had at camp myself. I would therefore welcome the opportunity to bring my energy and experience to Lakeside Camps this summer. I am available for an online interview at your convenience and would be happy to provide references. Please find my CV attached.\n\nYours sincerely,\nLukas Steiner',
           annotations: [
             { span: 'I am available for an online interview at your convenience', type: 'language', label: 'Standard closing move for applications' },
             { span: 'Yours sincerely,', type: 'structure', label: 'Correct: name known → sincerely' },
@@ -666,7 +666,7 @@ SRDP.emailSubTypes = [
   },
   {
     id: 'editor', name: 'Letter to the Editor',
-    purpose: 'You respond to an article or comment published in a newspaper or magazine. You must reference the original publication, then agree or disagree with the arguments made. This is one of the most frequently tested sub-types.',
+    purpose: 'You respond to an article or comment published in a newspaper or magazine. You must reference the original publication, then agree or disagree with the arguments made. It is a classic exam task.',
     layoutNotes: 'Standard e-mail header (To: editor@publication.example). Greeting: "Dear Sir or Madam," or "Dear Editor,". FIRST SENTENCE must name the article, publication, and date. Sign off with Yours faithfully + full name + town/city.',
     dos: [
       'Name the article, publication, and date in your first sentence',
@@ -678,13 +678,13 @@ SRDP.emailSubTypes = [
     ],
     donts: [
       "Don't forget to reference the original article – this is essential",
-      'Don\'t use a name-based greeting ("Dear Mr. Johnson") – you don\'t know the editor',
+      'Don\'t use a name-based greeting ("Dear Mr Johnson") – you don\'t know the editor',
       "Don't write without a clear position",
       "Don't use contractions or informal language",
       'Don\'t close with "Yours sincerely" – it must be "Yours faithfully"',
     ],
     phrases: [
-      { category: 'Opening – reference the article', items: ['I am writing in response to the article entitled "…", which appeared in… on [date].', 'I have just read your article on… and feel I must respond.', "I am writing with reference to the article published in last month's issue of… .", 'Your recent article on… raises issues which I feel strongly about.'] },
+      { category: 'Opening – reference the article', items: ['I am writing in response to the article entitled "…", which appeared in… on [date].', 'I have just read your article on… and feel I must respond.', "I am writing with reference to the article published in last month's issue of…", 'Your recent article on… raises issues which I feel strongly about.'] },
       { category: 'Agreeing', items: ['I completely agree with the view expressed in your article that…', 'I was pleased to read your article on…, as it reflects my own experience.', 'It is certainly true that…', 'The author makes an excellent point when they argue that…'] },
       { category: 'Disagreeing', items: ['I am afraid I must respectfully disagree with the position expressed.', 'While I understand the argument, I cannot agree that…', 'The author fails to consider…', 'It is simply not true that…', 'While I completely agree that…, I cannot accept…'] },
       { category: 'Conclusion / Call to action', items: ['I sincerely hope that… will reconsider this position.', "May I draw your readers' attention to…", 'What we must do is ensure that…', 'I urge your readers to…', 'I hope this letter will contribute to a wider debate on this issue.'] },
@@ -727,7 +727,7 @@ SRDP.emailSubTypes = [
     },
   },
   {
-    id: 'enquiry', name: 'E-Mail of Enquiry / Requesting Information',
+    id: 'enquiry', name: 'E-mail of Enquiry / Requesting Information',
     purpose: 'You want information about something – a product, a service, a course, an event, or a programme. You must be specific about what information you need.',
     layoutNotes: 'Standard e-mail header. State your purpose in the first sentence. Use indirect questions ("I would like to know whether…" rather than "Is there…?") for a more formal tone. Each paragraph covers one information request.',
     dos: [
@@ -750,7 +750,7 @@ SRDP.emailSubTypes = [
     ],
     tip: 'Indirect questions ("I would like to know whether…") are more formal than direct questions ("Is there…?"). Use them throughout and the examiner sees solid B2 control of register and grammar.',
     modelText: {
-      title: 'Enquiry about Volunteer Programme in Scotland', wordCount: '~230', register: 'Formal',
+      title: 'Enquiry about Volunteer Programme in Scotland', wordCount: '~250', register: 'Formal',
       paragraphs: [
         {
           text: 'To: info@highlandvolunteers.example\nFrom: paul.wagner@email.example\nDate: 20 January 2026\nSubject: Enquiry about Volunteer Programme in Scotland',
@@ -760,14 +760,14 @@ SRDP.emailSubTypes = [
           ]
         },
         {
-          text: 'Dear Sir or Madam,\n\nI am writing to enquire about the four-week conservation volunteer programme in the Scottish Highlands, which I found on your website. I am an 18-year-old student from Austria and I am planning to spend part of my summer doing meaningful work abroad. I am particularly interested in projects involving woodland restoration and the protection of native wildlife.',
+          text: 'Dear Sir or Madam,\n\nI am writing to enquire about the four-week conservation volunteer programme in the Scottish Highlands, which I found on your website. I am an 18-year-old student from Austria and I am planning to spend part of my summer doing meaningful work abroad. I am particularly interested in projects involving woodland restoration and the protection of native wildlife, and the July dates would fit my summer holidays perfectly.',
           annotations: [
             { span: 'I am writing to enquire about', type: 'language', label: 'Set phrase – enquiry opener' },
             { span: 'I am an 18-year-old student from Austria', type: 'content', label: 'Says who you are – gives context' },
           ]
         },
         {
-          text: 'First of all, I would like to know whether the programme is open to participants without previous experience in conservation work. Furthermore, could you please tell me what kind of accommodation is provided and whether meals are included in the participation fee? Finally, I would be grateful if you could inform me of the total costs and the application deadline for July. I would also appreciate some information about the typical daily routine and whether volunteers are given any free time to explore the surrounding area. Knowing this in advance would help me decide whether the programme is the right fit.',
+          text: 'First of all, I would like to know whether the programme is open to participants without previous experience in conservation work. Furthermore, could you please tell me what kind of accommodation is provided and whether meals are included in the participation fee? Finally, I would be grateful if you could inform me of the total costs and the application deadline for July. I would also appreciate some information about the typical daily routine and whether volunteers are given any free time to explore the surrounding area. In addition, I would be grateful for the contact details of a former participant who might be willing to share their experience, as a first-hand account would help me decide whether the programme is the right fit for me.',
           annotations: [
             { span: 'I would like to know whether', type: 'language', label: 'Indirect question – formal register' },
             { span: 'could you please tell me what kind of accommodation is provided', type: 'language', label: 'Indirect question – note the word order' },
@@ -776,7 +776,7 @@ SRDP.emailSubTypes = [
           ]
         },
         {
-          text: 'I would appreciate a prompt reply, as I need to make my travel arrangements by the end of February. Thank you very much in advance for your help. In addition, I would be grateful for the contact details of a former participant who might be willing to share their experience.\n\nYours faithfully,\nPaul Wagner',
+          text: 'I would appreciate a prompt reply, as I need to make my travel arrangements by the end of February. Thank you very much in advance for your help, and I look forward to hearing from you.\n\nYours faithfully,\nPaul Wagner',
           annotations: [
             { span: 'I would appreciate a prompt reply, as I need to make my travel arrangements by the end of February.', type: 'language', label: 'Polite urgency + reason' },
           ]

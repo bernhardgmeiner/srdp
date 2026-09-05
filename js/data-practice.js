@@ -140,7 +140,7 @@ SRDP.registerGym = [
   { informal: 'Anyway, just get back to me as soon as you can, OK?', formal: 'I look forward to hearing from you at your earliest convenience.', hint: 'Closing formula (e-mail / letter)' },
   { informal: "The hotel room was gross and the staff couldn't care less.", formal: 'The room was not up to the standard advertised, and the staff appeared unwilling to address our concerns.', hint: 'Complaint body' },
   { informal: "You guys should totally hire me, I'm great with kids.", formal: 'I believe I am well suited to this position, as I have considerable experience working with children.', hint: 'Application' },
-  { informal: "Anyway, that's why I think it's a bad idea.", formal: 'Taking these points into consideration, this proposal appears unlikely to succeed.', hint: 'Conclusion' },
+  { informal: "Anyway, that's why I think it's a bad idea.", formal: 'Taking these points into consideration, I would argue that this proposal is unlikely to succeed.', hint: 'Conclusion' },
 ];
 
 /* ─── DRAG & DROP SETS ─────────────────────────────────────── */
@@ -157,7 +157,7 @@ SRDP.dndSets = {
     { text: 'The most surprising result was how much more time we all suddenly had.', role: 'Topic sentence' },
     { text: '"I never thought I\'d miss it so much," one classmate admitted.', role: 'Direct speech' },
     { text: 'However, by day three, most of us had started to feel surprisingly peaceful.', role: 'Contrasting sentence' },
-    { text: "So, could you do it? I'd love to hear your thoughts in the comments below.", role: 'Conclusion – leaves reader thinking' },
+    { text: "So, could you do it? I'd love to hear whether you would give it a try.", role: 'Conclusion – leaves reader thinking' },
   ],
   report: [
     { text: 'The aim of this report is to present the findings of a survey on student wellbeing.', role: 'Introduction – states purpose' },
@@ -174,7 +174,7 @@ SRDP.dndSets = {
     { text: 'So, what do you think? Have you ever tried a digital detox? Let me know below!', role: 'Conclusion – invites comments' },
   ],
   email: [
-    { text: 'To: info@hotel-vienna.example | From: a.berger@email.example | Date: 7 April 2026 | Subject: Complaint regarding stay on 5 April', role: 'E-mail header' },
+    { text: 'To: info@hotel-vienna.example | From: max.huber@email.example | Date: 7 April 2026 | Subject: Complaint regarding stay on 5 April', role: 'E-mail header' },
     { text: 'I am writing to express my dissatisfaction with the service I received during my recent stay.', role: 'Opening – states purpose' },
     { text: 'To begin with, the room had not been cleaned prior to my arrival, which was unacceptable.', role: 'First complaint point' },
     { text: 'Furthermore, despite requesting a non-smoking room, I was placed in a room that smelled of smoke.', role: 'Second complaint point' },
@@ -185,7 +185,7 @@ SRDP.dndSets = {
     { text: 'Grab your board and head to the Seetal skate park this summer. One day, three ramps, live music and prizes for every ability.', role: 'Hook / intro – grabs attention and says what it is about' },
     { text: 'Ride the New Ramps\nOur brand-new mini-ramp and rebuilt half-pipe are ready for you, whether you are landing your first ollie or your fiftieth kickflip.', role: 'Information section 1 – a benefit under its own subheading' },
     { text: 'More Than Just Skating\nGrab a burger from the food stall, cool off with free water, and enter our best-trick contest to win real skate gear.', role: 'Information section 2 – a second benefit block, scannable' },
-    { text: 'Get Involved\nEntry is free and open to all ages – just bring a helmet.\nWhen: Saturday, 11 July, from 11 a.m.\nWhere: Seetal Skate Park, Uferweg 3', role: 'Call to action + practical details – what to do and the facts' },
+    { text: 'Get Involved\nEntry is free and open to all ages – just bring a helmet.\nWhen: Saturday, 11 July, from 11 a.m.\nWhere: Seetal skate park, Uferweg 3', role: 'Call to action + practical details – what to do and the facts' },
   ],
 };
 
@@ -204,7 +204,7 @@ STEP 1: Expectation horizon (do this before you judge anything).
 In 3–4 sentences, describe what a solid B2 answer to THIS task should contain: its purpose and reader, the content points that must be covered, the conventions of a ${typeName}, and the register you would expect. This is your yardstick for Step 2.
 
 STEP 2: Rate the four official criteria, each on the 0–10 scale (level 6 = B2 minimum met). Judge each criterion independently, in its own pass, and quote evidence from the text.
-1. Task Achievement: purpose and text-type requirements; are all content points developed (not merely mentioned) with relevant details/examples; title / subject line / greeting / sign-off / headings where the text type needs them. WORD COUNT (already counted for you – apply it, do not recount): ${(function(){ var w=(String(text).trim().match(/\S+/g)||[]).length; var lo=Math.round(length*0.9), hi=Math.round(length*1.1); return w<lo? 'the text has '+w+' words, under the '+lo+'–'+hi+' range, so drop this criterion by one band.' : w>hi? 'the text has '+w+' words, over the '+lo+'–'+hi+' range, so drop this criterion by one band.' : 'the text has '+w+' words, inside the '+lo+'–'+hi+' range, so no length penalty applies here.'; })()}
+1. Task Achievement: purpose and text-type requirements; are all content points developed (not merely mentioned) with relevant details/examples; title / subject line / greeting / sign-off / headings where the text type needs them. WORD COUNT (already counted for you – apply it, do not recount): ${(function(){ var w=(String(text).split('\n').filter(function(l){ return !/^\s*(to|from|subject|date)\s*:/i.test(l); }).join('\n').trim().match(/\S+/g)||[]).length; var lo=Math.round(length*0.9), hi=Math.round(length*1.1); return w<lo? 'the text has '+w+' words, under the '+lo+'–'+hi+' range, so drop this criterion by one band.' : w>hi? 'the text has '+w+' words, over the '+lo+'–'+hi+' range, so drop this criterion by one band.' : 'the text has '+w+' words, inside the '+lo+'–'+hi+' range, so no length penalty applies here.'; })()}
 2. Coherence and Cohesion: the overall line of thought; logical paragraphs with topic sentences; the range and fit of linking devices (here you judge whether they fit, not whether they are correct English).
 3. Lexical and Structural Range: breadth of topic vocabulary and of structures, including some complex forms; any lifting of whole phrases from the task; appropriate register.
 4. Lexical and Structural Accuracy: grammar, word choice, spelling, punctuation. Note: a linking word can be appropriate (credited under criterion 2) and still be wrong in form (penalised here).

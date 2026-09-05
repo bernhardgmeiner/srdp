@@ -2,25 +2,25 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://matura.bernhardgmeiner.com/</loc></url>
   <url><loc>https://matura.bernhardgmeiner.com/overview/</loc></url>
-  <url><loc>https://matura.bernhardgmeiner.com/examiner/</loc></url>
-  <url><loc>https://matura.bernhardgmeiner.com/studyplan/</loc></url>
-  <url><loc>https://matura.bernhardgmeiner.com/faq/</loc></url>
   <url><loc>https://matura.bernhardgmeiner.com/essay/</loc></url>
   <url><loc>https://matura.bernhardgmeiner.com/article/</loc></url>
   <url><loc>https://matura.bernhardgmeiner.com/report/</loc></url>
   <url><loc>https://matura.bernhardgmeiner.com/blog/</loc></url>
   <url><loc>https://matura.bernhardgmeiner.com/email/</loc></url>
   <url><loc>https://matura.bernhardgmeiner.com/leaflet/</loc></url>
+  <url><loc>https://matura.bernhardgmeiner.com/studyplan/</loc></url>
   <url><loc>https://matura.bernhardgmeiner.com/phrasebank/</loc></url>
   <url><loc>https://matura.bernhardgmeiner.com/checklist/</loc></url>
   <url><loc>https://matura.bernhardgmeiner.com/selfcheck/</loc></url>
-  <url><loc>https://matura.bernhardgmeiner.com/taskbank/</loc></url>
   <url><loc>https://matura.bernhardgmeiner.com/topicvocab/</loc></url>
-  <url><loc>https://matura.bernhardgmeiner.com/paragraphs/</loc></url>
-  <url><loc>https://matura.bernhardgmeiner.com/grammar/</loc></url>
-  <url><loc>https://matura.bernhardgmeiner.com/practice/</loc></url>
-  <url><loc>https://matura.bernhardgmeiner.com/timer/</loc></url>
-  <url><loc>https://matura.bernhardgmeiner.com/notebooklm/</loc></url>
+  <url><loc>https://matura.bernhardgmeiner.com/taskbank/</loc></url>
+  <url><loc>https://matura.bernhardgmeiner.com/faq/</loc></url>
   <url><loc>https://matura.bernhardgmeiner.com/teachers/</loc></url>
   <url><loc>https://matura.bernhardgmeiner.com/parents/</loc></url>
+  <url><loc>https://matura.bernhardgmeiner.com/notebooklm/</loc></url>
+  <url><loc>https://matura.bernhardgmeiner.com/grammar/</loc></url>
+  <url><loc>https://matura.bernhardgmeiner.com/paragraphs/</loc></url>
+  <url><loc>https://matura.bernhardgmeiner.com/practice/</loc></url>
+  <url><loc>https://matura.bernhardgmeiner.com/timer/</loc></url>
+  <url><loc>https://matura.bernhardgmeiner.com/examiner/</loc></url>
 </urlset>

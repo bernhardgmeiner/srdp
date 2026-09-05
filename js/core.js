@@ -192,8 +192,15 @@ function quizHTML(qid) {
     (sel !== null ? '<button class="btn btn-primary" style="margin-top:16px" data-action="quiz-next" data-quiz="' + qid + '">' + (st.current < runLen - 1 ? 'Next question <span>→</span>' : 'See results <span>→</span>') + '</button>' : '') +
   '</div>';
 }
+/* Antwortoptionen mischen, damit die richtige Antwort nicht an der Position erkennbar ist */
+function shuffleOptions(questions) {
+  return questions.map(q => {
+    const order = shuffle(q.options.map((_, i) => i));
+    return Object.assign({}, q, { options: order.map(i => q.options[i]), correct: order.indexOf(q.correct) });
+  });
+}
 function initQuiz(qid, questions, onComplete) {
-  quizStates[qid] = { questions, current: 0, selected: null, answers: [], done: false, onComplete, queue: null, retry: false };
+  quizStates[qid] = { questions: shuffleOptions(questions), current: 0, selected: null, answers: [], done: false, onComplete, queue: null, retry: false };
 }
 function quizAction(action, qid, i) {
   const st = quizStates[qid]; if (!st) return;
@@ -214,7 +221,7 @@ function quizAction(action, qid, i) {
       }
     }
   } else if (action === 'quiz-restart') {
-    st.current = 0; st.selected = null; st.answers = []; st.done = false; st.queue = null; st.retry = false;
+    st.questions = shuffleOptions(st.questions); st.current = 0; st.selected = null; st.answers = []; st.done = false; st.queue = null; st.retry = false;
   } else if (action === 'quiz-retry-wrong') {
     const missIdx = st.answers.filter(a => !a.correct).map(a => a.q);
     if (!missIdx.length) return;
@@ -222,7 +229,7 @@ function quizAction(action, qid, i) {
     st.current = 0; st.selected = null; st.answers = []; st.done = false;
   }
   const host = $('[data-quiz-host="' + qid + '"]');
-  if (host) host.innerHTML = quizHTML(qid);
+  if (host) setHTML(host, quizHTML(qid));
 }
 
 /* ─── drag & drop engine ──────────────────────────────────── */
@@ -258,7 +265,7 @@ function dndHTML(did) {
 }
 function repaintDnd(did) {
   const host = $('[data-dnd-host="' + did + '"]');
-  if (host) { host.innerHTML = dndHTML(did); wireDnd(did); }
+  if (host) { setHTML(host, dndHTML(did)); wireDnd(did); }
 }
 function wireDnd(did) {
   const st = dndStates[did];
@@ -283,9 +290,31 @@ function wireDnd(did) {
   });
 }
 
+/* ─── innerHTML ersetzen, ohne den Tastaturfokus auf <body> fallen zu lassen ───
+   Merkt sich das fokussierte Element (id oder data-Attribute), setzt den Inhalt neu
+   und fokussiert dasselbe Element wieder – oder das erste bedienbare Element im Host. */
+function focusKey(el) {
+  if (!el || el === document.body || el === document.documentElement) return null;
+  if (el.id) return '#' + CSS.escape(el.id);
+  const attrs = Array.prototype.filter.call(el.attributes, a => a.name.indexOf('data-') === 0 && a.name !== 'data-copy' && a.name !== 'data-orig-label')
+    .map(a => '[' + a.name + '="' + CSS.escape(a.value) + '"]').join('');
+  return attrs ? el.tagName.toLowerCase() + attrs : null;
+}
+function setHTML(host, html) {
+  if (!host) return;
+  const had = host.contains(document.activeElement);
+  const key = had ? focusKey(document.activeElement) : null;
+  host.innerHTML = html;
+  if (!had) return;
+  let el = null;
+  if (key) { try { el = host.querySelector(key); } catch (e) { el = null; } }
+  if (!el || el.disabled) el = host.querySelector('button:not([disabled]):not([tabindex="-1"]), [href], input, select, textarea, [tabindex="0"]');
+  if (el) { try { el.focus({ preventScroll: true }); } catch (e) {} }
+}
+
 /* expose to other script blocks */
 window.MWG = { $, $$, esc, TYPE_COLORS, ANN, PEEL, store, progress: () => progress, markVisited, markQuiz, toast, announce, copyText, flashCopied,
-  annotated, modelBox, sectionLabel, pageHead, ddCols, chips, phraseGroups,
+  annotated, modelBox, sectionLabel, pageHead, ddCols, chips, phraseGroups, setHTML,
   initQuiz, quizHTML, quizAction, quizStates, initDnd, dndHTML, repaintDnd, wireDnd, dndStates, shuffle };
 
 /* ─── SCHOOL TYPE (AHS / BHS) ─────────────────────────────── */
@@ -321,7 +350,7 @@ function setSchool(s) {
   buildNav();
   const id = (location.hash || '#home').slice(1);
   const hidden = ((window.SRDP && SRDP.textTypes) || []).some(t => t.id === id && t.schools && t.schools.indexOf(s) < 0);
-  if (hidden && location.hash && location.hash !== '#home') { location.hash = '#home'; } /* triggers route via hashchange */
+  if (hidden && location.hash && location.hash !== '#home') { location.hash = '#home'; toast('That text type is not part of the ' + (schoolConfig().label || s.toUpperCase()) + ' exam, so you are back on the home page.'); } /* triggers route via hashchange */
   else if (window.MWG.route) window.MWG.route();
   announce('Switched to ' + (schoolConfig().label || s.toUpperCase()));
 }
@@ -329,30 +358,34 @@ function setSchool(s) {
 /* ─── NAV ─────────────────────────────────────────────────── */
 const NAV = [
   { divider: null, items: [{ id: 'home', label: 'Home' }] },
-  { divider: 'Basics', items: [
+  /* Gruppen nach Tätigkeit: Learn (verstehen) · Text types · Practise (schreiben/üben) ·
+     Reference (nachschlagen) · Plan (Zeit) · About */
+  { divider: 'Learn', items: [
     { id: 'overview', label: 'Overview & grading' },
     { id: 'examiner', label: 'Grade like an examiner' },
-    { id: 'studyplan', label: 'Countdown plan' },
     { id: 'faq', label: 'FAQ' },
   ]},
   { divider: 'Text types', items: [] }, // filled below
-  { divider: 'Tools', items: [
-    { id: 'phrasebank', label: 'Phrase bank' },
-    { id: 'checklist', label: 'Writing checklist' },
-    { id: 'selfcheck', label: 'Self-check studio' },
-    { id: 'taskbank', label: 'Task bank' },
-    { id: 'topicvocab', label: 'Topic vocabulary' },
-  ]},
-  { divider: 'Skills & practice', items: [
+  { divider: 'Practise', items: [
     { id: 'paragraphs', label: 'Paragraph writing' },
-    { id: 'grammar', label: 'Grammar kit' },
+    { id: 'taskbank', label: 'Task bank' },
+    { id: 'selfcheck', label: 'Self-check studio' },
     { id: 'practice', label: 'Practice zone' },
+  ]},
+  { divider: 'Reference', items: [
+    { id: 'phrasebank', label: 'Phrase bank' },
+    { id: 'topicvocab', label: 'Topic vocabulary' },
+    { id: 'grammar', label: 'Grammar kit' },
+    { id: 'checklist', label: 'Writing checklist' },
+  ]},
+  { divider: 'Plan', items: [
+    { id: 'studyplan', label: 'Countdown plan' },
     { id: 'timer', label: 'Exam timer' },
   ]},
   { divider: 'About', items: [
     { id: 'notebooklm', label: 'NotebookLM' },
     { id: 'teachers', label: 'For teachers' },
-    { id: 'parents', label: 'Für Eltern & Datenschutz' },
+    { id: 'parents', label: 'Für Eltern & Datenschutz', lang: 'de' },
   ]},
 ];
 NAV[2].items = typesForSchool().map(t => ({ id: t.id, label: t.name, color: t.color }));
@@ -363,23 +396,23 @@ function buildNav() {
   const scfg = schoolConfig();
   nav.innerHTML =
     '<div class="nav-brand" style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px"><div><div class="t1">Don&rsquo;t Panic, It&rsquo;s Just the Matura</div><div class="t2">' + esc(scfg.brandTag || 'English Writing · B2') + '</div></div><div style="display:flex;gap:6px;flex-shrink:0"><button class="nav-help" data-action="open-search" title="Search (Ctrl+K)" aria-label="Search this guide">⌕</button><button class="nav-help" data-action="start-tour" title="Replay the guided tour" aria-label="Replay the guided tour">?</button></div></div>' +
-    '<div class="nav-school-label" style="padding:14px 22px 5px;font-size:.7rem;text-transform:uppercase;letter-spacing:.4px;color:var(--text-muted)">Schultyp</div>' +
+    '<div class="nav-school-label" style="padding:10px 22px 4px;font-size:.75rem;text-transform:uppercase;letter-spacing:.4px;color:var(--text-muted)">School type <span lang="de">(Schultyp)</span></div>' +
     '<div class="school-switch" role="group" aria-label="Schultyp (AHS oder BHS)">' +
-      SCHOOLS.map(function (s) { var sc = (window.SRDP && SRDP.schools && SRDP.schools[s]) || {}; var on = getSchool() === s; return '<button class="school-btn' + (on ? ' active' : '') + '" data-action="set-school" data-school="' + s + '" aria-pressed="' + on + '" title="Auf ' + esc(sc.label || s.toUpperCase()) + ' umschalten">' + esc(sc.label || s.toUpperCase()) + '</button>'; }).join('') +
+      SCHOOLS.map(function (s) { var sc = (window.SRDP && SRDP.schools && SRDP.schools[s]) || {}; var on = getSchool() === s; return '<button class="school-btn' + (on ? ' active' : '') + '" data-action="set-school" data-school="' + s + '" aria-pressed="' + on + '" title="Switch to ' + esc(sc.label || s.toUpperCase()) + '">' + esc(sc.label || s.toUpperCase()) + '</button>'; }).join('') +
     '</div>' +
     '<div class="nav-scroll">' +
       NAV.map(sec =>
         (sec.divider ? '<div class="nav-divider">' + sec.divider + '</div>' : '') +
         sec.items.map(it =>
           '<a class="nav-item" href="#' + it.id + '" data-nav="' + it.id + '">' +
-            (it.color ? '<span class="nav-dot" style="background:' + TYPE_COLORS[it.color] + '"></span>' : '') +
-            '<span>' + it.label + '</span><span class="nav-check" data-check="' + it.id + '"></span>' +
+            (it.color ? '<span class="nav-dot" aria-hidden="true" style="background:' + TYPE_COLORS[it.color] + '"></span>' : '') +
+            '<span' + (it.lang ? ' lang="' + it.lang + '"' : '') + '>' + esc(it.label) + '</span><span class="nav-check" data-check="' + it.id + '"></span>' +
           '</a>'
         ).join('')
       ).join('') +
     '</div>' +
-    '<div style="padding:10px 22px 4px;font-size:.7rem;color:var(--text-muted);letter-spacing:.3px">&#10003; visited &middot; &#10003;&#10003; quiz passed</div>' +
-    '<button class="theme-toggle" id="themeToggle"><span class="lab" id="themeLabel">Light theme</span><span class="toggle-track"><span class="toggle-knob"></span></span></button>';
+    '<div style="padding:6px 22px 2px;font-size:.75rem;color:var(--text-muted);letter-spacing:.3px">&#10003; visited &middot; &#10003;&#10003; quiz passed</div>' +
+    '<button class="theme-toggle" id="themeToggle" role="switch" aria-checked="' + (document.documentElement.getAttribute('data-theme') === 'dark') + '" aria-label="Dark mode"><span class="lab" id="themeLabel">' + (document.documentElement.getAttribute('data-theme') === 'dark' ? 'Dark mode' : 'Light mode') + '</span><span class="toggle-track"><span class="toggle-knob"></span></span></button>';
   $('#themeToggle').addEventListener('click', () => {
     const dark = document.documentElement.getAttribute('data-theme') === 'dark';
     setTheme(dark ? 'light' : 'dark');
@@ -388,7 +421,8 @@ function buildNav() {
 function setTheme(t) {
   document.documentElement.setAttribute('data-theme', t);
   store('mwg_theme', t);
-  const l = $('#themeLabel'); if (l) l.textContent = t === 'dark' ? 'Dark theme' : 'Light theme';
+  const l = $('#themeLabel'); if (l) l.textContent = t === 'dark' ? 'Dark mode' : 'Light mode';
+  const tg = $('#themeToggle'); if (tg) tg.setAttribute('aria-checked', t === 'dark');
 }
 function paintNav() {
   $$('[data-check]').forEach(el => {

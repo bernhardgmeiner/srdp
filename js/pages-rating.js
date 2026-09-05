@@ -77,7 +77,7 @@ const EXAMPLES = [
         'These are non-systematic and easy to fix, exactly the kind of error that separates a 6 from an 8 here.',
       ] },
     },
-    holistic: 'A competent, readable essay that argues its case and is easy to follow. Two things hold it back: the position could be sharper from the very first paragraph, and the third and fourth prompts deserve the same development as the first. The grammar slips ("advices", "Everyone have", "depends of") are the cheap, trainable kind. Clean those up and the whole text moves up a band.',
+    holistic: 'A competent, readable essay that argues its case and is easy to follow. Two things hold it back: the position could be sharper from the very first paragraph, and the second and third prompts deserve the same development as the first. The grammar slips ("advices", "Everyone have", "depends of") are the cheap, trainable kind. Clean those up and the whole text moves up a band.',
   },
 
   /* 2 · ARTICLE (all): good, but over the word limit, TA penalty */
@@ -119,7 +119,7 @@ const EXAMPLES = [
       LA: { band: 6, points: [
         'Control is high and the one real slip ("reaching in an empty pocket" → "into") is genuinely isolated.',
         'What keeps this at a solid B2 rather than higher is that the text rarely reaches for the complex structures where accuracy is really tested. The sentences stay fairly simple, so there is little subordination or tense-shifting to get wrong.',
-        'Here the ceiling is set not by mistakes but by ambition: to climb past a 6 the text would have to attempt harder structures and still keep them clean.',
+        'Here the ceiling is set by ambition rather than by mistakes: the top accuracy descriptors talk about control of complex structures, and this text hardly attempts any. Range takes the bigger hit for that (see above); under Accuracy it simply means there is no evidence for an 8.',
       ] },
     },
     holistic: 'A genuinely enjoyable article that sounds like a person, not a template. The voice alone would earn a 7 for task work. It is the word count that quietly costs it: trimming a dozen words would have handed back the band it loses. The single most useful habit this text points to is not grammar at all, but counting your words and cutting on purpose.',
@@ -527,7 +527,7 @@ const page = {
       '<p style="font-size:.9rem;color:var(--text-secondary);margin-top:10px;max-width:720px">So reach for linking words freely, since they lift your Coherence score. Then, when you proofread, check their <em>form</em>, because the same words are counted again under Accuracy.</p>';
 
     return pageHead(
-      'Basics',
+      'Learn',
       'Grade like an examiner',
       'Reading about the four criteria is one thing. Watching them land on a real text is another. Here is how a rater actually works, with a set of texts for you to grade yourself before the panel shows its hand.'
     ) +
@@ -548,6 +548,7 @@ const page = {
       '<p class="ex-lead">Each text below is written in the B2 style, with the kind of strengths and slips real exam texts have. For every criterion, commit to a band first, then reveal what a rater panel decided, and why. The gap between your guess and theirs is where the learning is.</p>' +
       '<p style="font-size:.9rem;color:var(--text-secondary);margin:0 0 6px;max-width:720px">The buttons show the six described levels (0, 2, 4, 6, 8, 10). Raters also use the in-between levels (1, 3, 5, 7, 9) for a text that sits between two descriptions, so a few verdicts land on an odd number the buttons don&rsquo;t show. That is normal.</p>' +
       '<p style="font-size:.8rem;color:var(--text-muted);margin-bottom:6px">These texts were written for this site as realistic examples. They are not real candidates’ work.</p>' +
+      '<nav class="ex-jump no-print" aria-label="Jump to an example">' + exs.map(function (ex, i) { const tt = typeMeta(ex.type); return '<button class="pt-chip" type="button" data-scroll-to="ex-' + ex.id + '">' + (i + 1) + ' · ' + esc((tt.name || ex.type).replace(/^The\s+/i, '')) + '</button>'; }).join('') + '</nav>' +
       exs.map(function (ex, i) { return exampleCard(ex, i, exs.length); }).join('') +
       '<div style="height:72px"></div>' +
     '</div>';

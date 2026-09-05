@@ -33,8 +33,11 @@ function plan() { return PLANS[(M.school && M.school() === 'bhs') ? 'bhs' : 'ahs
 function ensureState() {
   const school = M.school ? M.school() : 'ahs';
   if (!st || st.school !== school) {
+    const wasRunning = !!(st && st.running);
+    stopIv();
     st = { school: school, total: plan().total * 60, remaining: plan().total * 60, endAt: null, running: false };
     lastMk = -1;
+    if (wasRunning && M.toast) M.toast('School type changed, so the exam clock was reset to ' + plan().total + ' minutes.');
   }
   return st;
 }
@@ -48,15 +51,26 @@ function startIv() {
     if (!document.getElementById('mockClock')) { stopIv(); return; }  /* Seite verlassen: selbst stoppen, Zustand behalten */
     const v = value();
     paint(v);
-    if (v <= 0) { st.running = false; st.endAt = null; st.remaining = 0; stopIv(); if (M.announce) M.announce('Time is up. Pens down.'); if (M.toast) M.toast('Time is up. Pens down.'); }
+    if (v <= 0) { st.running = false; st.endAt = null; st.remaining = 0; stopIv(); titleClock(0); if (M.announce) M.announce('Time is up. Pens down.'); if (M.toast) M.toast('Time is up. Pens down.'); }
     else { milestone(v); }
   }, 1000);
 }
+/* Meilensteine als Schwellen: feuern auch, wenn der Tick (gedrosselter Hintergrund-Tab,
+   gesperrtes Handy) die Sekunde verpasst hat. lastMk = kleinste bereits gemeldete Schwelle. */
 function milestone(v) {
   const half = Math.round(st.total / 2);
-  const map = {}; map[half] = 'Halfway through.'; map[15 * 60] = 'Fifteen minutes left.'; map[5 * 60] = 'Five minutes left.'; map[60] = 'One minute left.';
-  if (map[v] && lastMk !== v) { lastMk = v; if (M.announce) M.announce(map[v]); if (M.toast) M.toast(map[v]); }
+  const marks = [[half, 'Halfway through.'], [15 * 60, 'Fifteen minutes left.'], [5 * 60, 'Five minutes left.'], [60, 'One minute left.']];
+  for (let i = 0; i < marks.length; i++) {
+    const m = marks[i];
+    if (v <= m[0] && (lastMk === -1 || m[0] < lastMk)) { lastMk = m[0]; if (M.announce) M.announce(m[1]); if (M.toast) M.toast(m[1]); }
+  }
 }
+/* Restzeit im Tab-Titel, damit man sie auch in einem anderen Tab sieht */
+function titleClock(v) {
+  const base = document.title.replace(/^[⏱✓] [^–]+ – /, '');
+  document.title = (st && st.running) ? '⏱ ' + fmt(v) + ' – ' + base : (st && st.remaining <= 0 && v <= 0 ? '✓ Time is up – ' + base : base);
+}
+document.addEventListener('visibilitychange', function () { if (st && st.running && !document.hidden) { const v = value(); paint(v); if (v > 0) milestone(v); } });
 function btnLabel(v) { return st.running ? 'Pause' : (v <= 0 ? 'Reset' : (v === st.total ? 'Start' : 'Resume')); }
 function paint(v) {
   const clock = document.getElementById('mockClock');
@@ -65,6 +79,7 @@ function paint(v) {
   if (fill) fill.style.width = Math.min(100, 100 * (1 - v / st.total)) + '%';
   const sb = document.getElementById('mockStart');
   if (sb) sb.textContent = btnLabel(v);
+  titleClock(v);
 }
 
 M.mockAction = function (act) {
@@ -84,7 +99,7 @@ PAGES.timer = {
     ensureState();
     const p = plan(), v = value();
     return '<div class="page">' +
-      pageHead('Skills & practice', 'Exam timer', 'Rehearse the real thing: the exam clock for your school type, with a sensible split across the tasks. Start it when you sit down to a full practice paper – beating the clock is a skill you train, not a talent.') +
+      pageHead('Plan', 'Exam timer', 'Rehearse the real thing: the exam clock for your school type, with a sensible split across the tasks. Start it when you sit down to a full practice paper – beating the clock is a skill you train, not a talent.') +
       '<div class="wrap"><div class="gap-s"></div>' +
         '<div class="mock-card">' +
           '<div class="mock-meta">' + esc(p.label) + '</div>' +

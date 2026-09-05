@@ -142,7 +142,7 @@ document.addEventListener('keydown', e => {
   if (!fState.on) return;
   const so = document.getElementById('searchOverlay');
   if (so && so.style.display === 'flex') return;
-  if (e.key === ' ') { e.preventDefault(); if (fState.i < fState.queue.length) flip(); }
+  if (e.key === ' ') { const tg = e.target; if (tg && tg.closest && tg.closest('button, a, input, select, textarea')) return; e.preventDefault(); if (fState.i < fState.queue.length) flip(); }
   else if (e.key === '1') { if (fState.i < fState.queue.length) answer(true); }
   else if (e.key === '2') { if (fState.i < fState.queue.length) answer(false); }
   else if (e.key === 'Escape') exitCards();

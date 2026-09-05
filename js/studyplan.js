@@ -250,11 +250,16 @@ function currentTab() {
   const dl = daysLeft();
   return (dl !== null && dl >= 0 && dl < 14) ? 'p7' : 'p4';
 }
+/* "Today"-Marker: Der 4-Wochen-Plan hat 20 Lerntage auf 28 Kalendertage verteilt,
+   der 7-Tage-Plan 7 auf 7. Kalendertage bis zur Prüfung werden proportional auf
+   den Plan abgebildet. Vor Planbeginn und am Prüfungstag gibt es keinen Marker. */
+function planSpan(planId) { return /^p4/.test(planId) ? 28 : 7; }
 function todayIndex(planId) {
   const dl = daysLeft();
-  if (dl === null || dl < 0) return -1;
-  const len = PLANS[planId].days.length;
-  return Math.max(0, Math.min(len - 1, len - dl));
+  if (dl === null || dl <= 0) return -1;
+  const len = PLANS[planId].days.length, span = planSpan(planId);
+  if (dl > span) return -1;
+  return Math.max(0, Math.min(len - 1, Math.floor((span - dl) * len / span)));
 }
 function firstOpenDay(planId) {
   const days = PLANS[planId].days;
@@ -271,7 +276,8 @@ function dateControls() {
     const dl = daysLeft();
     return '<div class="plan-date">' +
       (dl >= 0
-        ? '<strong>' + (dl === 0 ? 'Today is the day. Breathe – you know this.' : dl + ' day' + (dl === 1 ? '' : 's') + ' until the exam.') + '</strong>'
+        ? '<strong>' + (dl === 0 ? 'Today is the day. Breathe – you know this.' : dl + ' day' + (dl === 1 ? '' : 's') + ' until the exam.') + '</strong>' +
+          (dl > planSpan(planKey(currentTab())) ? ' The ' + (currentTab() === 'p4' ? '4-week' : '7-day') + ' plan starts in ' + (dl - planSpan(planKey(currentTab()))) + ' day' + (dl - planSpan(planKey(currentTab())) === 1 ? '' : 's') + '; until then, work through it at your own pace.' : '')
         : '<strong>The saved exam date has passed.</strong>') +
       ' <button class="tc-skip" data-action="plan-changedate">Change date</button></div>';
   }
@@ -340,7 +346,7 @@ PAGES.studyplan = {
   render() {
     const base = currentTab();
     return '<div class="page">' +
-      pageHead('Basics', 'Countdown plan', 'A day-by-day route to the written exam: read, practise, write, repeat. Tick things off – the plan remembers where you are.',
+      pageHead('Plan', 'Countdown plan', 'A day-by-day route to the written exam: read, practise, write, repeat. Tick things off – the plan remembers where you are.',
         '<div class="tabs">' +
           ['p4', 'p7'].map(id => '<button class="tab' + (base === id ? ' active' : '') + '" data-action="plan-tab" data-tab="' + id + '">' + PLANS[id].label + '</button>').join('') +
         '</div>') +
@@ -389,7 +395,7 @@ M.planAction = function (act, el) {
     p[ds.plan][ds.day][+ds.task] = el.checked;
     store('mwg_plan', p);
     const host = $('#planBody');
-    if (host) host.innerHTML = planBody();
+    if (host) M.setHTML(host, planBody());
   }
   else if (act === 'plan-tab') { tab = ds.tab; M.route(); }
   else if (act === 'plan-setdate') {

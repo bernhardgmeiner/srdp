@@ -19,7 +19,7 @@ function buildIndex() {
   SRDP.textTypes.filter(_inSchool).forEach(t => t.phrases.forEach(g => g.items.forEach(p =>
     items.push({ type: 'Phrases', label: p, sub: t.name + ' – ' + g.category, copy: p, go: { page: 'phrasebank', search: p } }))));
   SRDP.emailSubTypes.forEach(st => st.phrases.forEach(g => g.items.forEach(p =>
-    items.push({ type: 'Phrases', label: p, sub: 'E-Mail – ' + st.name, copy: p, go: { page: 'phrasebank', search: p } }))));
+    items.push({ type: 'Phrases', label: p, sub: 'E-mail – ' + st.name, copy: p, go: { page: 'phrasebank', search: p } }))));
   SRDP.paragraphs.phraseGroups.forEach(g => g.phrases.forEach(p =>
     items.push({ type: 'Phrases', label: p, sub: 'Paragraphs – ' + g.label, copy: p, go: { page: 'phrasebank', search: p } })));
   (M.TOPIC_VOCAB || []).forEach((t, ti) => t.words.forEach(w => {
@@ -27,7 +27,7 @@ function buildIndex() {
     items.push({ type: 'Vocabulary', label, sub: t.topic, copy: label, go: { page: 'topicvocab', acc: ti, chip: label } });
   }));
   SRDP.emailSubTypes.forEach((st, si) =>
-    items.push({ type: 'Pages', label: st.name + ' (formal e-mail)', sub: 'Text types – E-Mail sub-type', go: { page: 'email', emailTab: si } }));
+    items.push({ type: 'Pages', label: st.name + ' (formal e-mail)', sub: 'Text types – E-mail sub-type', go: { page: 'email', emailTab: si } }));
   items.push({ type: 'Pages', label: 'B2 linking words', sub: 'Grammar kit – connectors table', go: { page: 'grammar', findLabel: 'B2 linking words' } });
   SRDP.linkingWords.forEach(r =>
     items.push({ type: 'Phrases', label: r.b2, sub: 'Linking words – ' + r.fn + ' (instead of: ' + r.basic + ')', copy: r.b2.split(' · ').join(', '), go: { page: 'grammar', findLabel: 'B2 linking words' } }));
@@ -94,8 +94,8 @@ function paint() {
   if (!current.length) { resultsEl.innerHTML = '<div class="sr-empty">No results for &ldquo;' + esc(input.value) + '&rdquo;.</div>'; return; }
   let html = '', lastType = null;
   current.forEach((it, i) => {
-    if (it.type !== lastType) { html += '<div class="sr-group">' + it.type + '</div>'; lastType = it.type; }
-    html += '<div class="sr-row' + (i === active ? ' active' : '') + '">' +
+    if (it.type !== lastType) { html += '<div class="sr-group" role="presentation">' + it.type + '</div>'; lastType = it.type; }
+    html += '<div class="sr-row' + (i === active ? ' active' : '') + '" role="presentation">' +
       '<button class="sr-main" id="srOpt-' + i + '" role="option" aria-selected="' + (i === active) + '" data-i="' + i + '"><span>' + esc(it.label) + '</span><span class="sub">' + esc(it.sub) + '</span></button>' +
       (it.copy ? '<button class="sr-copy" data-i="' + i + '" aria-label="Copy to clipboard" title="Copy">⧉</button>' : '') +
     '</div>';
@@ -126,6 +126,7 @@ function openSearch() {
   ensureDom();
   lastFocus = document.activeElement;
   overlay.style.display = 'flex';
+  const appEl = document.getElementById('app'); if (appEl) { appEl.setAttribute('inert', ''); appEl.setAttribute('aria-hidden', 'true'); }
   input.value = ''; current = []; active = 0; paint();
   input.focus();
   document.addEventListener('keydown', onKey, true);
@@ -133,6 +134,7 @@ function openSearch() {
 function closeSearch() {
   if (!overlay) return;
   overlay.style.display = 'none';
+  const appEl = document.getElementById('app'); if (appEl) { appEl.removeAttribute('inert'); appEl.removeAttribute('aria-hidden'); }
   document.removeEventListener('keydown', onKey, true);
   if (lastFocus && lastFocus.focus) { try { lastFocus.focus(); } catch (e) {} }
 }

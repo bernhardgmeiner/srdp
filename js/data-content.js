@@ -41,9 +41,9 @@ SRDP.grammar = [
     pairs: [
       { wrong: 'I have been living here since five years.', right: 'I have been living here for five years.', note: 'Period of time → for' },
       { wrong: 'I have been living here for 2019.', right: 'I have been living here since 2019.', note: 'Point in time → since' },
-      { wrong: 'I study English since I am six.', right: 'I have been studying English since I was six.', note: 'since requires present perfect + past simple' },
+      { wrong: 'I study English since I am six.', right: 'I have been studying English since I was six.', note: 'main clause present perfect, since-clause past simple' },
     ],
-    rule: 'FOR + period (for three years, for a long time, for ages). SINCE + point in time (since 2019, since Monday, since I was young). Since always pairs with present perfect.' },
+    rule: 'FOR + period (for three years, for a long time, for ages). SINCE + point in time (since 2019, since Monday, since I was young). The since-clause names the starting point (past simple); the main clause is usually present perfect: I have lived here since I was ten.' },
   { id: 'conditionals', title: 'Conditionals for B2 writing',
     intro: 'Conditionals are the quickest way to show range. Using only "If… will…" keeps you at B1.',
     pairs: [
@@ -52,12 +52,12 @@ SRDP.grammar = [
       { wrong: "Unless you won't study, you'll fail.", right: "Unless you study, you'll fail.", note: 'Unless = if not – no negative needed' },
     ],
     rule: 'In formal argument writing, use the 2nd conditional (If + past simple, would + infinitive) for hypothetical situations. This immediately signals B2 range. Also use "were to" for more formal hypotheticals: "If the government were to act now…"' },
-  { id: 'passive', title: 'The passive voice',
-    intro: "The passive voice is expected in formal writing (reports, articles, e-mails). Many Austrian students avoid it – don't.",
+  { id: 'passive', title: 'The passive voice', labels: ['INFORMAL / SPOKEN', 'REPORT STYLE'],
+    intro: "The passive voice is expected in formal writing (reports, articles, e-mails). Many Austrian students avoid it – don't. Note: the sentences on the left are not wrong; they are just the less formal version.",
     pairs: [
       { wrong: 'They collected the data through surveys.', right: 'The data was collected through surveys.', note: 'Passive removes agent – formal and concise' },
       { wrong: 'People have made some improvements.', right: 'Some improvements have been made.', note: 'Impersonal passive – typical in reports' },
-      { wrong: 'Factories are producing too much waste.', right: 'Too much waste is being produced by factories.', note: 'Passive shifts focus to what matters' },
+      { wrong: 'Somebody should do something about the waste.', right: 'Too much waste is being produced, and this needs to be addressed.', note: 'Passive shifts focus to what matters – and drops the vague "somebody"' },
     ],
     rule: 'Use the passive when: (1) who did something is unknown or unimportant, (2) you want to sound objective (reports), (3) you want to vary your sentence structures. Always show you can use it – at least 2–3 times per text.' },
   { id: 'wordorder', title: 'Word order',
@@ -129,10 +129,10 @@ SRDP.grammar = [
 /* ─── QUIZZES per text type ────────────────────────────────── */
 SRDP.quizzes = {
   essay: [
-    { q: 'Can you use personal anecdotes in an essay?', options: ['Yes, they make it more interesting', 'No – use general or hypothetical examples instead', 'Only in the introduction', 'Only in the conclusion'], correct: 1, explanation: 'Essays require generalisations, not personal stories. Use "Studies show…" or "Imagine a student who…" instead.' },
+    { q: 'Can personal anecdotes carry the argument in an essay?', options: ['Yes, they are the strongest evidence', 'No – argue with general or hypothetical examples; a brief personal example may support them', 'Only in the introduction', 'Only in the conclusion'], correct: 1, explanation: 'Essays are built on generalisations, not on personal stories. A short personal example can illustrate a point, but the argument itself needs general evidence: "Research shows…", "Imagine a student who…".' },
     { q: 'What are the four layers of a strong body paragraph?', options: ['Point → Explain → Evidence → Link/close', 'Hook → Story → Moral → Question', 'Opinion → Opinion → Opinion → Summary', 'Question → Answer → Question → Answer'], correct: 0, explanation: 'Topic sentence (Point) → Explain why/how → Evidence or example → Closing sentence that draws a consequence or links forward. See the "Paragraph writing" section.' },
     { q: 'An essay task says "argue for OR against". What should you do?', options: ['Write about both sides equally', 'Choose one clear position and defend it throughout', 'Write about both sides, then choose in the conclusion', "It's optional – you can do either"], correct: 1, explanation: '"Argue" means take a clear position. Unlike "discuss", you are not presenting both sides equally – you defend one view.' },
-    { q: 'Your essay currently uses only simple sentences. What happens to your score?', options: ['Range score is capped at a low band even if all sentences are correct', 'Nothing – accuracy matters more than complexity', 'You get full marks for accuracy', 'Range is unaffected; only accuracy counts'], correct: 0, explanation: 'The assessment scale explicitly rewards structural range. Only simple, B1-level grammar keeps Range (and with it Accuracy) in the lower bands, no matter how correct it is.' },
+    { q: 'Your essay currently uses only simple sentences. What happens to your score?', options: ['Range score is capped at a low band even if all sentences are correct', 'Nothing – accuracy matters more than complexity', 'You get full marks for accuracy', 'Range is unaffected; only accuracy counts'], correct: 0, explanation: 'The assessment scale explicitly rewards structural range. Only simple, B1-level grammar keeps Range in the lower bands, no matter how correct it is.' },
     { q: 'Which of these works best as a formal essay conclusion?', options: ['"So yeah, that\'s basically it!"', '"To sum up, guys, this is a really big problem."', '"Taking these points into consideration, it is clear that…"', '"In conclusion, this is important."'], correct: 2, explanation: '"Taking these points into consideration" is a proper B2 conclusion linker that signals a considered close. The others are too informal ("guys", "yeah") or say nothing ("this is important").' },
     { q: 'How long should your Matura essay be?', options: ['Around 250 words', 'Around 400 words – 360 to 440 is safe', 'As long as possible', 'There is no word count for essays'], correct: 1, explanation: 'The essay is the long task: ~400 words. With the ±10% tolerance, anything between 360 and 440 words is fine.' },
     { q: 'Which opening is best for a formal essay introduction?', options: ['"When I was twelve, my parents bought me a smartphone."', '"Have you ever wondered why we spend so much of our lives online?"', '"This essay will now discuss the topic of social media."', '"OMG, social media is everywhere these days!"'], correct: 1, explanation: 'A rhetorical question or striking fact makes a strong, formal hook. Personal anecdotes (A) belong in blogs, announcing your essay (C) is weak style, and (D) is far too informal.' },
@@ -168,7 +168,7 @@ SRDP.quizzes = {
     { q: 'What must the FIRST sentence of a letter to the editor contain?', options: ['Your name and age', 'A rhetorical question', 'The article title, the publication and the date', 'Your strongest argument'], correct: 2, explanation: '"I am writing in response to the article entitled “…”, which appeared in [publication] on [date]." – a clear reference to the article you are responding to is the expected opening.' },
     { q: 'In an e-mail of enquiry, which question form is most formal?', options: ['"Is there accommodation?"', '"Tell me about the accommodation."', '"I would like to know whether accommodation is provided."', '"Accommodation??"'], correct: 2, explanation: 'Indirect questions ("I would like to know whether…", "Could you please tell me what…") are the polite, formal standard at B2.' },
     { q: 'What belongs in the first paragraph of an application e-mail?', options: ['Your salary expectations', 'The position you are applying for and where you saw the advertisement', 'A funny personal story', 'Your full CV'], correct: 1, explanation: '"I am writing to apply for the position of… as advertised in/on…" – position + source, in the very first sentence.' },
-    { q: 'How many header elements does a formal e-mail need?', options: ['Two: To and Subject', 'Three: To, From, Date', 'Four: To, From, Date, Subject', 'None – just start with the greeting'], correct: 2, explanation: 'All four: To, From, Date, and a clear Subject line. Missing header elements cost Task Achievement points.' },
+    { q: 'How many header elements does a formal e-mail need?', options: ['Two: To and Subject', 'Three: To, From, Date', 'Four: To, From, Date, Subject', 'None – just start with the greeting'], correct: 2, explanation: 'All four: To, From, Date, and a clear Subject line. The subject line is the one the grid really cares about; a missing header block makes the text look less like an e-mail and can cost you under Task Achievement.' },
     { q: 'Your complaint demands action. Which closing is best?', options: ['"Fix this now or else!"', '"I would be grateful if you could rectify this matter and I look forward to your reply within 14 days."', '"Whatever you can do is fine, I guess."', '"Call me maybe."'], correct: 1, explanation: 'Firm but professional: a clear demand, a polite formula, and a deadline. Aggression and vagueness both lose marks.' },
   ],
   leaflet: [
@@ -183,7 +183,7 @@ SRDP.quizzes = {
 
 /* ─── FINAL MIXED QUIZ ─────────────────────────────────────── */
 SRDP.finalQuiz = [
-  { q: 'Which text type ALWAYS needs section headings?', options: ['Report', 'Article', 'E-mail', 'Blog post'], correct: 0, explanation: 'The report is the only text type with section headings. Headings in an e-mail or blog post would be a convention error.' },
+  { q: 'Which text type ALWAYS needs section headings?', options: ['Report', 'Article', 'E-mail', 'Blog post'], correct: 0, explanation: 'Of these four, only the report has section headings (at BHS the leaflet needs subheadings too). Headings in an e-mail or blog post would be a convention error.' },
   { q: 'The task says: "Write a blog comment (around 250 words)." Do you write a title?', options: ['Yes – every text needs a title', 'No – comments have no title; reference the original post instead', 'Only if you have space left', 'Yes, but in lower case'], correct: 1, explanation: 'Blog comments have no title. They open by referencing the post you are responding to.' },
   { q: 'How much time do you have for the whole Writing section (AHS, B2)?', schools: ['ahs'], options: ['90 minutes', '100 minutes', '120 minutes', '150 minutes'], correct: 2, explanation: '120 minutes for two tasks: roughly 65 minutes for the long task and 40 for the short one, leaving time to proofread both.' },
   { q: 'How much time do you have for the whole Writing section (BHS, B2)?', schools: ['bhs'], options: ['120 minutes', '150 minutes', '195 minutes', '240 minutes'], correct: 2, explanation: '195 minutes for three tasks of around 250 words each – roughly 55–60 minutes per task, planning and proofreading included.' },
@@ -348,13 +348,13 @@ SRDP.prompts = [
     scenario: 'For a cross-curricular health project, your class is producing a leaflet to encourage students to eat more healthily at school.',
     instruction: 'Write a leaflet (around 250 words) for your fellow students. Give it a title and use subheadings.',
     bullets: ['explain why healthy eating matters for students', 'give practical, realistic tips for the school day', 'motivate readers to make one change this week'] },
-  { type: 'email', length: 250, topic: 'Business enquiry to a supplier',
+  { type: 'email', length: 250, schools: ['bhs'], topic: 'Business enquiry to a supplier',
     scenario: 'During your practical training in a company\'s purchasing department, your supervisor asks you to contact an English-speaking supplier.',
     material: { kind: 'text', label: 'Your supervisor\'s note', source: 'Internal note',
       lines: ['"Please ask GreenPack Ltd for current prices for recycled packaging, minimum order quantities and delivery times to Austria. We need the goods by mid-October."'] },
     instruction: 'Write a formal e-mail of enquiry (around 250 words) to the supplier on behalf of your company.',
     bullets: ['introduce yourself and your company briefly', 'ask about prices, minimum order quantities and delivery times', 'state your deadline and ask for a prompt reply'] },
-  { type: 'report', length: 250, topic: 'Guest / customer feedback',
+  { type: 'report', length: 250, schools: ['bhs'], topic: 'Guest / customer feedback',
     scenario: 'You work part-time at a hotel. Management surveyed guests and asked you to summarise the results in English for the international owners.',
     material: { kind: 'data', label: 'Guest survey – 140 guests, past season',
       lines: ['Overall satisfaction: 3.4 out of 5', 'Best rated: friendliness of staff (4.5) and breakfast (4.1)', 'Worst rated: Wi-Fi (2.1) and room cleanliness (2.6)', '61% would recommend the hotel to others', '48% found check-in too slow at peak times'] },
@@ -364,7 +364,7 @@ SRDP.prompts = [
     scenario: 'For your marketing project, your student mini-company is launching a reusable water bottle and needs a leaflet to hand out at a trade fair.',
     instruction: 'Write a lively, persuasive leaflet (around 250 words) for potential customers. Give it a catchy title and use subheadings.',
     bullets: ['introduce the product and what makes it special', 'explain the benefits for the customer and the environment', 'give the price, where to buy it, and a clear call to action'] },
-  { type: 'email', length: 250, topic: 'Application answering a job ad',
+  { type: 'email', length: 250, schools: ['bhs'], topic: 'Application answering a job ad',
     scenario: 'You have found an advertisement for a summer job that fits your BHS training.',
     material: { kind: 'text', label: 'The advertisement', source: 'alpinehotels.example – Summer Reception Assistant',
       lines: ['"We are looking for a reception assistant for July and August. Tasks: welcoming guests, answering e-mails and phone calls in German and English, simple bookings. We expect good English, a friendly manner and reliability. Apply by e-mail to Mr Berger with your relevant experience."'] },
@@ -397,16 +397,16 @@ SRDP.operators = [
 
 /* ─── TEXT TYPE COMPARISON ─────────────────────────────────── */
 SRDP.comparison = {
-  head: ['Feature', 'Essay', 'Article', 'Report', 'Blog', 'E-Mail'],
+  head: ['Feature', 'Essay', 'Article', 'Report', 'Blog', 'E-mail', 'Leaflet'],
   rows: [
-    ['Contractions?', 'No', 'Depends', 'No', 'Yes', 'No'],
-    ['Personal examples?', 'No', 'Yes', 'No', 'Yes', 'Depends'],
-    ['Rhetorical questions?', 'Intro only', 'Yes, many', 'No', 'Yes', 'No'],
-    ['Section headings?', 'No', 'No', 'Yes', 'No', 'No'],
-    ['Recommendations?', 'No', 'Optional', 'Yes', 'Optional', 'Depends'],
-    ['Address reader?', 'No', 'Yes', 'No', 'Yes', 'Yes'],
-    ['Emotional language?', 'No', 'Yes', 'No', 'Yes', 'Measured'],
-    ['Title?', 'Yes', 'Yes – catchy', 'Subject + headings', 'Post: yes / Comment: no', 'Subject line'],
+    ['Contractions?', 'No', 'Depends', 'No', 'Yes', 'Depends', 'Yes'],
+    ['Personal examples?', 'Sparingly', 'Yes', 'No', 'Yes', 'Depends', 'Rarely'],
+    ['Rhetorical questions?', 'Intro only', 'Yes, many', 'No', 'Yes', 'No', 'Yes'],
+    ['Section headings?', 'No', 'No', 'Yes', 'No', 'No', 'Yes – subheadings'],
+    ['Recommendations?', 'If the task asks', 'Optional', 'Yes', 'Optional', 'Depends', 'Call to action'],
+    ['Address reader?', 'Rarely', 'Yes', 'No', 'Yes', 'Yes', 'Yes – directly'],
+    ['Emotional language?', 'No', 'Yes', 'No', 'Yes', 'Measured', 'Yes – persuasive'],
+    ['Title?', 'Yes', 'Yes – catchy', 'Subject + headings', 'Post: yes / Comment: no', 'Subject line', 'Yes – catchy'],
   ],
 };
 
@@ -438,7 +438,7 @@ SRDP.checklists = {
     { id: 'word_count', text: 'Word count is within ±10% of the number the task states (for a 250-word task, 225–275).', weight: 2 },
     { id: 'topic_sents', text: 'Every body paragraph starts with a clear topic sentence.', weight: 2 },
     { id: 'linking', text: 'Used at least 5 different B2 linking words (Furthermore, However, Consequently…).', weight: 2 },
-    { id: 'no_lifting', text: 'Did NOT copy words or phrases directly from the task prompt.', weight: 3 },
+    { id: 'no_lifting', text: 'Did NOT copy sentences from the task prompt or the input material – figures and ideas are rephrased and interpreted, not repeated.', weight: 3 },
     { id: 'complex_gram', text: 'Used at least 2 complex structures (passive voice, conditional, relative clause).', weight: 2 },
     { id: 'proofread', text: 'Proofread for personal weaknesses (articles, third-person -s, tenses).', weight: 2 },
   ]},
@@ -471,12 +471,12 @@ SRDP.checklists = {
     { id: 'b_ref', text: 'Blog comment ONLY: opening sentence refers to the original post, ideally by name.', weight: 3 },
     { id: 'b_invite', text: 'Blog post: conclusion invites readers to comment.', weight: 2 },
   ]},
-  email: { label: 'E-Mail', items: [
+  email: { label: 'E-mail', items: [
     { id: 'em_header', text: 'Header includes To, From, Date, and Subject line.', weight: 3 },
     { id: 'em_greeting', text: 'Used a formal greeting (Dear Sir or Madam, / Dear Mr/Ms [Name],).', weight: 2 },
     { id: 'em_purpose', text: 'First sentence states clearly why I am writing.', weight: 2 },
     { id: 'em_signoff', text: 'Correct sign-off: Yours faithfully (name unknown) / Yours sincerely (name known).', weight: 2 },
-    { id: 'em_no_contr', text: 'No contractions used (wrote "do not" not "don\'t").', weight: 2 },
+    { id: 'em_no_contr', text: 'Register matches the recipient: no contractions in a formal e-mail (wrote "do not" not "don\'t"); a relaxed tone only if the task is informal.', weight: 2 },
     { id: 'em_subtype', text: 'Followed conventions for sub-type (complaint / application / letter to editor / enquiry).', weight: 2 },
   ]},
   leaflet: { label: 'Leaflet', items: [
@@ -554,7 +554,7 @@ SRDP.paragraphs = {
         { text: 'Although most students believe they can multitask, research shows that phones seriously reduce their ability to focus.', type: 'CONTRAST' },
       ] },
     { id: 'fastfood', title: 'Warm-up 3: Fast Food & Health',
-      supporting: 'A typical fast food meal contains more calories, fat, and sugar than what a teenager needs for an entire day. Eating this regularly makes it very difficult to maintain a healthy weight.',
+      supporting: 'A typical fast food meal contains more calories, fat, and sugar than a teenager needs in an entire day. Eating this regularly makes it very difficult to maintain a healthy weight.',
       evidence: 'In Austria, the number of overweight young people has increased steadily over the past decade, and health experts say that the growing popularity of fast food chains is one of the key reasons.',
       closing: 'If young people do not learn to make healthier food choices now, they risk developing serious health problems later in life.',
       modelSentences: [

@@ -1,6 +1,6 @@
 /* Service Worker — matura.bernhardgmeiner.com
    VERSION wird von _dev/bump-sw.mjs vor jedem Deploy auf einen Zeitstempel gesetzt. */
-const VERSION = '20260713140000';
+const VERSION = '20260905124711';
 const CACHE = 'mwg-' + VERSION;
 
 /* @assets:start (von bump-sw.mjs generiert) */
@@ -65,6 +65,7 @@ const ASSETS = [
   'pdf/email.pdf',
   'pdf/essay.pdf',
   'pdf/leaflet.pdf',
+  'pdf/overview-bhs.pdf',
   'pdf/overview.pdf',
   'pdf/phrase-bank.pdf',
   'pdf/report.pdf',
@@ -134,7 +135,19 @@ self.addEventListener('fetch', e => {
     return;
   }
 
-  /* Rest (js/css/fonts/icons): cache-first mit Netz-Fallback */
+  /* JS + CSS: network-first, damit nach einem Deploy nicht neues HTML mit altem Script
+     läuft (Dateinamen sind unversioniert). Offline kommt die gecachte Fassung. */
+  if (/\.(js|css)$/.test(url.pathname)) {
+    e.respondWith(
+      fetch(req).then(res => {
+        if (res.ok && res.type === 'basic') { const copy = res.clone(); caches.open(CACHE).then(c => c.put(req, copy)); }
+        return res;
+      }).catch(() => caches.match(req))
+    );
+    return;
+  }
+
+  /* Rest (fonts/icons/Bilder): cache-first mit Netz-Fallback */
   e.respondWith(
     caches.match(req).then(hit => hit || fetch(req).then(res => {
       if (res.ok) { const copy = res.clone(); caches.open(CACHE).then(c => c.put(req, copy)); }

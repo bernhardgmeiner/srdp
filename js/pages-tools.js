@@ -44,9 +44,9 @@ PAGES.phrasebank = {
   render() {
     const n = allPhrases().length;
     return '<div class="page">' +
-      pageHead('Tool', 'Phrase bank', n + ' exam-ready phrases. Click any phrase to copy it instantly.') +
+      pageHead('Reference', 'Phrase bank', n + ' exam-ready phrases. Click any phrase to copy it instantly.') +
       '<div class="wrap"><div class="gap-s"></div>' +
-        '<a class="btn btn-ghost no-print" href="pdf/phrase-bank.pdf" target="_blank" rel="noopener" style="margin-bottom:20px">Download this page as a PDF <span>&darr;</span></a>' +
+        '<a class="btn btn-ghost no-print" href="/pdf/phrase-bank.pdf" target="_blank" rel="noopener" style="margin-bottom:20px">Download this page as a PDF <span>&darr;</span></a>' +
         '<div class="field" style="max-width:420px;margin-bottom:18px"><label for="pbSearch">Search</label><input type="text" id="pbSearch" placeholder="Search phrases…" value="' + esc(pbState.search) + '"></div>' +
         '<div class="tabs" style="border-bottom:1px solid var(--border);margin-bottom:26px">' +
           [['all', 'All']].concat(M.typesForSchool().map(t => [t.id, t.name])).map(f =>
@@ -83,7 +83,7 @@ function clBody() {
     list.map(it => {
       const checked = !!clState.checks[it.id];
       const flagged = clState.submitted && !checked;
-      return '<div class="cl-item' + (checked ? ' checked' : '') + (flagged ? ' flagged' : '') + '" data-action="cl-toggle" data-id="' + it.id + '" role="checkbox" aria-checked="' + checked + '" tabindex="0">' +
+      return '<div class="cl-item' + (checked ? ' checked' : '') + (flagged ? ' flagged' : '') + '" data-action="cl-toggle" data-id="' + it.id + '" role="checkbox" aria-checked="' + checked + '"' + (clState.submitted ? ' aria-disabled="true"' : '') + ' tabindex="0">' +
         '<span class="cl-box">' + (checked ? '✓' : '') + '</span>' +
         '<span class="cl-text">' + esc(it.text) + (it.weight >= 3 ? '<span class="hi-pri">High priority</span>' : '') + '</span></div>';
     }).join('') + '</div></div>';
@@ -105,9 +105,9 @@ PAGES.checklist = {
   title: 'Writing checklist', track: 'checklist',
   render() {
     return '<div class="page">' +
-      pageHead('Tool', 'Writing checklist', 'Use this before you put your pen down. Tick each item you are confident about. The high-priority items cost the most marks.') +
+      pageHead('Reference', 'Writing checklist', 'Use this before you put your pen down. Tick each item you are confident about. The high-priority items cost the most marks.') +
       '<div class="wrap" style="max-width:780px"><div class="gap-s"></div>' +
-        '<a class="btn btn-ghost no-print" href="pdf/checklist.pdf" target="_blank" rel="noopener" style="margin-bottom:20px">Download this page as a PDF <span>&darr;</span></a>' +
+        '<a class="btn btn-ghost no-print" href="/pdf/checklist.pdf" target="_blank" rel="noopener" style="margin-bottom:20px">Download this page as a PDF <span>&darr;</span></a>' +
         '<div class="tabs" style="border-bottom:1px solid var(--border);margin-bottom:28px">' +
           ['general'].concat(M.typesForSchool().map(t => t.id)).filter(id => SRDP.checklists[id]).map(id =>
             '<button class="tab' + (clState.type === id ? ' active' : '') + '" data-action="cl-type" data-t="' + id + '">' + SRDP.checklists[id].label + '</button>').join('') +
@@ -127,9 +127,22 @@ const INFORMAL = ['basically', 'stuff', 'guys', 'kids', 'loads of', 'lots of', '
 const LINKERS = ['furthermore', 'moreover', 'in addition', 'what is more', 'however', 'nevertheless', 'nonetheless', 'on the other hand', 'on the one hand', 'although', 'even though', 'despite', 'in spite of', 'therefore', 'consequently', 'as a result', 'thus', 'hence', 'owing to', 'due to', 'for instance', 'for example', 'admittedly', 'while', 'whereas', 'to sum up', 'on balance', 'in conclusion', 'taking everything into account', 'first of all', 'to begin with', 'in contrast', 'as a consequence', 'firstly', 'secondly', 'finally'];
 const FORMAL_TYPES = { essay: true, report: true, email: true, article: false, blog: false, leaflet: false };
 
-function analyze(text, type, target) {
+function analyze(text, type, target, task) {
   const f = [];
   const add = (status, html) => f.push({ status, html });
+  /* Lifting: Wortfolgen (6+ Wörter), die wörtlich aus der Aufgabe/dem Material stammen */
+  const lifted = [];
+  if (task && task.trim()) {
+    const norm = s => s.toLowerCase().replace(/[’']/g, "'").replace(/[^a-z0-9' ]+/g, ' ').replace(/\s+/g, ' ').trim();
+    const tw = norm(task).split(' '), xw = norm(text).split(' ');
+    const grams = new Set();
+    for (let i = 0; i + 6 <= tw.length; i++) grams.add(tw.slice(i, i + 6).join(' '));
+    let i = 0;
+    while (i + 6 <= xw.length) {
+      const g = xw.slice(i, i + 6).join(' ');
+      if (grams.has(g)) { let j = i + 6; while (j < xw.length && grams.has(xw.slice(j - 5, j + 1).join(' '))) j++; lifted.push(xw.slice(i, j).join(' ')); i = j; } else i++;
+    }
+  }
   const bodyForCount = text.split('\n').filter(function (l) { return !/^\s*(to|from|subject|date)\s*:/i.test(l); }).join('\n');
   const words = bodyForCount.match(/\S+/g) || [];
   const wc = words.length;
@@ -200,7 +213,7 @@ function analyze(text, type, target) {
   const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
   if (type === 'email') {
     const hasHeader = /to\s*:/i.test(text) && /from\s*:/i.test(text) && /subject\s*:/i.test(text) && /date\s*:/i.test(text);
-    add(hasHeader ? 'ok' : 'bad', hasHeader ? 'Header complete (To / From / Date / Subject).' : '<b>Header incomplete</b> – a formal e-mail needs To, From, Date AND Subject lines.');
+    add(hasHeader ? 'ok' : 'warn', hasHeader ? 'Header complete (To / From / Date / Subject).' : '<b>Header incomplete</b> – a formal e-mail is expected to show To, From, Date and, above all, a clear Subject line.');
     const dearSir = /dear\s+(sir|madam|editor)/i.test(text);
     const dearName = /dear\s+(mr|ms|mrs|dr)\.?\s+\w+/i.test(text);
     const faith = /yours\s+faithfully/i.test(text);
@@ -213,7 +226,7 @@ function analyze(text, type, target) {
   }
   if (type === 'report') {
     const hasHeader = /from\s*:/i.test(text) && /subject\s*:/i.test(text) && /date\s*:/i.test(text);
-    add(hasHeader ? 'ok' : 'bad', hasHeader ? 'Header complete (Date / From / Subject).' : '<b>Header incomplete</b> – a report needs Date, From and Subject lines.');
+    add(hasHeader ? 'ok' : 'warn', hasHeader ? 'Header complete (Date / From / Subject).' : '<b>Header incomplete</b> – a report is expected to open with Date, From and a clear Subject line.');
     const headings = lines.filter(l => { const tt = l.trim(); return tt.length > 0 && tt.split(/\s+/).length <= 6 && !/[.!?;,]$/.test(tt) && !/^(date|from|subject|to)\b/i.test(tt) && !/^report$/i.test(tt); }).length;
     add(headings >= 3 ? 'ok' : 'warn', headings >= 3 ? headings + ' section headings found.' : 'Only ' + headings + ' section heading' + (headings === 1 ? '' : 's') + ' detected – give each section a short, clear heading such as Introduction, Findings or Recommendations. They do not need numbers.');
     if (/dear\s+(sir|madam)/i.test(text)) add('bad', 'Reports have <b>no greeting</b> – delete "Dear Sir or Madam".');
@@ -243,6 +256,10 @@ function analyze(text, type, target) {
     const cta = ['come', 'join', 'sign up', 'visit', 'call', 'find out', 'bring', 'do not miss', 'get in touch', 'contact'].some(function (wq) { return new RegExp('\\b' + wq.replace(/ /g, '\\s+') + '\\b', 'i').test(low); });
     add(cta ? 'ok' : 'warn', cta ? 'A call to action is present.' : 'No clear call to action: tell the reader what to do next (come along, sign up, get in touch).');
   }
+  if (task && task.trim()) {
+    if (lifted.length) add('warn', '<b>' + lifted.length + ' passage' + (lifted.length === 1 ? '' : 's') + ' lifted from the task</b> – word for word: ' + lifted.slice(0, 3).map(function (l) { return '“' + M.esc(l.length > 70 ? l.slice(0, 70) + '…' : l) + '”'; }).join(', ') + '. Rephrase in your own words; lifted language earns nothing under Range.');
+    else add('ok', 'No sentences lifted from the task – the wording is your own.');
+  }
   add('info', 'This is a quick robot check of the surface. It cannot judge your ideas or your accuracy; for real feedback, use the AI prompt below or ask your teacher.');
   return f;
 }
@@ -250,7 +267,7 @@ PAGES.selfcheck = {
   title: 'Self-check studio', track: 'selfcheck',
   render() {
     return '<div class="page">' +
-      pageHead('Tool', 'Self-check studio', 'Paste your practice text for a quick convention check: word count, register, layout. For real feedback, copy the ready-made AI prompt at the bottom.') +
+      pageHead('Practise', 'Self-check studio', 'Paste your practice text for a quick convention check: word count, register, layout. For real feedback, copy the ready-made AI prompt at the bottom.') +
       '<div class="wrap" style="max-width:860px"><div class="gap-s"></div>' +
         '<div class="acc" style="margin-bottom:22px"><div class="acc-item"><button class="acc-head" data-action="acc" aria-expanded="false"><span class="pm">+</span><span>How this check works, and what it cannot do</span></button>' +
         '<div class="acc-body">' +
@@ -270,7 +287,7 @@ PAGES.selfcheck = {
             (M.school() === 'ahs' ? '<option value="400"' + (scState.target === 400 ? ' selected' : '') + '>~400 words</option>' : '') +
           '</select></div>' +
         '</div>' +
-        '<div class="field" style="margin-bottom:16px"><label for="scTask">The task you answered (optional, but it makes the AI prompt much better)</label>' +
+        '<div class="field" style="margin-bottom:16px"><label for="scTask">The task you answered (optional – it makes the AI prompt much better and lets the check spot sentences lifted from the task)</label>' +
           '<textarea id="scTask" rows="3" placeholder="Paste the task here, including the three bullet points…"></textarea></div>' +
         '<div class="field"><label for="scText">Your text <span id="scLive" style="margin-left:8px;color:var(--text-secondary)"></span></label>' +
           '<textarea id="scText" rows="14" placeholder="Paste or type your practice text here…"></textarea></div>' +
@@ -296,8 +313,14 @@ PAGES.selfcheck = {
     };
     txt.addEventListener('input', upd);
     M.$('#scTarget').addEventListener('change', () => { scState.target = +M.$('#scTarget').value; upd(); });
-    M.$('#scType').addEventListener('change', () => { scState.type = M.$('#scType').value; });
-    try{ var d = sessionStorage.getItem('mwg_sc_draft'); if (d && !txt.value) txt.value = d; }catch(e){}
+    M.$('#scType').addEventListener('change', () => {
+      scState.type = M.$('#scType').value;
+      /* Ziellänge an die Textsorte koppeln: Essay ~400, alles andere ~250 (wenn die Option existiert) */
+      const want = scState.type === 'essay' ? '400' : '250';
+      const sel = M.$('#scTarget');
+      if (sel && [...sel.options].some(o => o.value === want) && sel.value !== want) { sel.value = want; scState.target = +want; upd(); }
+    });
+    try{ var d = sessionStorage.getItem('mwg_sc_draft'); if (d && !txt.value) txt.value = d; var tk = M.$('#scTask'); var dt = sessionStorage.getItem('mwg_sc_task'); if (tk) { if (dt && !tk.value) tk.value = dt; tk.addEventListener('input', function () { try { sessionStorage.setItem('mwg_sc_task', tk.value); } catch (e) {} }); } }catch(e){}
     upd();
   },
 };
@@ -344,7 +367,7 @@ function taskCard(p, i) {
 function tbPrompts() {
   const ids = M.typesForSchool().map(t => t.id);
   const bhs = M.school() === 'bhs';
-  return SRDP.prompts.map((p, i) => ({ p, i })).filter(x => ids.indexOf(x.p.type) >= 0 && (!bhs || x.p.length <= 250));
+  return SRDP.prompts.map((p, i) => ({ p, i })).filter(x => ids.indexOf(x.p.type) >= 0 && (!bhs || x.p.length <= 250) && (!x.p.schools || x.p.schools.indexOf(M.school()) >= 0));
 }
 function genPrompt() {
   const cfg = M.schoolConfig();
@@ -519,9 +542,9 @@ PAGES.topicvocab = {
   title: 'Topic vocabulary', track: 'topicvocab',
   render() {
     return '<div class="page">' +
-      pageHead('Tool', 'Topic vocabulary', 'Collocations for the most common Matura topics. Topic-specific vocabulary is what lifts your Lexical Range score above the safe basics. Open a topic and click any phrase to copy it.') +
+      pageHead('Reference', 'Topic vocabulary', 'Collocations for the most common Matura topics. Topic-specific vocabulary is what lifts your Lexical Range score above the safe basics. Open a topic and click any phrase to copy it.') +
       '<div class="wrap"><div class="gap-s"></div>' +
-        '<div class="no-print" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px"><button class="btn btn-primary" data-action="flash-start" data-topic="all">Practise all topics as flashcards <span>→</span></button><a class="btn btn-ghost" href="pdf/topic-vocabulary.pdf" target="_blank" rel="noopener">Download as a PDF <span>&darr;</span></a></div>' +
+        '<div class="no-print" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px"><button class="btn btn-primary" data-action="flash-start" data-topic="all">Practise all topics as flashcards <span>→</span></button><a class="btn btn-ghost" href="/pdf/topic-vocabulary.pdf" target="_blank" rel="noopener">Download this page as a PDF <span>&darr;</span></a></div>' +
         '<div class="tip" style="margin-bottom:22px">Phrases here are for the <strong>content</strong> of your text (the ideas in your body paragraphs). For structure and linking, use the <a href="#phrasebank">phrase bank</a>.</div>' +
         '<div class="acc">' + TOPIC_VOCAB.map(function(t, ti){
           var m = M.flashMastered ? M.flashMastered(ti, t.words) : 0;
@@ -538,9 +561,23 @@ PAGES.taskbank = {
   title: 'Task bank', track: 'taskbank',
   render() {
     return '<div class="page">' +
-      pageHead('Tool', 'Task bank', tbPrompts().length + ' Matura-style writing tasks, each with the material you need: survey data for reports, source texts for letters and comments, and statements or topics to respond to. Pick one yourself or roll the dice.') +
+      pageHead('Practise', 'Task bank', tbPrompts().length + ' Matura-style writing tasks, each with the material you need: survey data for reports, source texts for letters and comments, and statements or topics to respond to. Pick one yourself or roll the dice.') +
       '<div class="wrap" style="max-width:860px"><div class="gap-s"></div>' +
         '<div class="tip" style="margin-bottom:18px">These ' + tbPrompts().length + ' tasks are Matura-style, built for practice. The officially released past papers are in the BMB download area: <a href="https://www.matura.gv.at/downloads" target="_blank" rel="noopener">matura.gv.at/downloads</a>.</div>' +
+        '<div class="acc" style="margin-bottom:22px"><div class="acc-item"><button class="acc-head" data-action="acc" aria-expanded="false"><span class="pm">+</span><span>How to use the input material (and how not to)</span></button>' +
+        '<div class="acc-body">' +
+          '<p style="font-size:.9375rem;color:var(--text-secondary);line-height:1.6;margin:10px 0 12px">Many tasks give you material: survey figures, a quote, an advert, a short text. It is there to be <strong style="color:var(--text)">used</strong>, not copied. Copying sentences from the task or the material word for word is called <em>lifting</em>: it counts as your language only if it is your language, so lifted phrases earn nothing under Range, and figures that are simply repeated without a point earn nothing under Task Achievement. The rule in three steps:</p>' +
+          '<ol style="margin:0 0 14px 18px;font-size:.9375rem;color:var(--text-secondary);line-height:1.7">' +
+            '<li><strong style="color:var(--text)">Pick</strong> the two or three facts that serve your bullet points. You do not have to use everything.</li>' +
+            '<li><strong style="color:var(--text)">Rephrase</strong> them in your own words and grammar (“21% visit monthly” → “Only one student in five uses the library more than once a month”).</li>' +
+            '<li><strong style="color:var(--text)">Interpret</strong>: say what the fact means for your argument or recommendation. A number without a point is decoration.</li>' +
+          '</ol>' +
+          '<div class="pair-row" style="border:1px solid var(--border);margin-bottom:12px">' +
+            '<div class="pair-cell"><div class="lab wrong-c">✗ LIFTED</div><span style="font-size:.875rem;color:var(--text-secondary);line-height:1.55">78% of respondents said they valued having a library, only 21% visited it more than once a month. The main reasons given were limited opening hours and a lack of quiet study space.</span></div>' +
+            '<div class="pair-cell"><div class="lab right-c">✓ USED</div><span style="font-size:.875rem;color:var(--text-secondary);line-height:1.55">Almost four in five students say they value the library, yet only one in five actually uses it more than once a month. The gap has two clear causes, and both can be fixed: the doors close too early, and there is nowhere quiet to work.</span></div>' +
+          '</div>' +
+          '<p style="font-size:.875rem;color:var(--text-muted);line-height:1.55;margin:0">Quotes are the one exception: you may quote a short phrase from a source text if you mark it as a quotation and react to it. Everything else goes through your own words. The Self-check studio flags sentences that match the task word for word if you paste the task in as well.</p>' +
+        '</div></div></div>' +
         '<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;border-bottom:1px solid var(--border)">' +
           '<div class="tabs">' +
             [['all', 'All']].concat(M.typesForSchool().map(t => [t.id, t.name])).map(f =>

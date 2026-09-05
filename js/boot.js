@@ -5,7 +5,7 @@
 'use strict';
 const M = window.MWG;
 const { $, $$, esc } = M;
-const SITE_FOOTER = '<footer class="site-footer no-print"><div class="ftin">' +'<div class="ft-cols">' +'<div><div class="ft-h">About this site</div><p>A free, independent revision site for the written part of the English Matura (AHS & BHS, B2). Made by an English teacher. It is not an official document of the BMB or any education authority.</p></div>' +'<div><div class="ft-h">Your data</div><p>No account, no tracking, no ads. Your progress is saved only in this browser on this device, so clearing your browser or switching devices resets it. Nothing leaves your device unless you use the optional AI features yourself. Like any website, the host (GitHub Pages) logs your IP address in its server logs.</p></div>' +'<div><div class="ft-h" lang="de">Impressum / Kontakt</div><p lang="de">Bernhard Gmeiner, Wien<br>E-Mail: bernhard.gmeiner@gmail.com<br><a href="https://www.bernhardgmeiner.com" target="_blank" rel="noopener">bernhardgmeiner.com</a><br>Privates, nichtkommerzielles Projekt.</p></div>' +'<div><div class="ft-h">Found a mistake? <span lang="de">/ Fehler gefunden?</span></div><p>Spotted a typo, a wrong fact or a broken link? <a href="mailto:bernhard.gmeiner@gmail.com?subject=Matura%20Guide%20Feedback">Send a short e-mail</a> and mention which section it is in. Every report makes the guide better.</p></div>' +'</div>' +'<div class="ft-base" lang="de">Diese Seite hilft bei der Vorbereitung auf die schriftliche Englisch-Matura (AHS & BHS, B2) und orientiert sich an der offiziellen SRDP-Beurteilungsskala. Bewertet wird in der echten Matura von deinen Lehrkr\u00e4ften. \u00b7 Stand: Schuljahr 2025/26</div>' +'</div></footer><div class="print-note" lang="de">Unabhängige Übungsseite von Bernhard Gmeiner – kein offizielles Dokument des BMB. Übungsaufgaben sind nachgebaut. Es zählt die Bewertung deiner Lehrkräfte.</div>';
+const SITE_FOOTER = '<footer class="site-footer no-print"><div class="ftin">' +'<div class="ft-cols">' +'<div><div class="ft-h">About this site</div><p>A free, independent revision site for the written part of the English Matura (AHS & BHS, B2). Made by an English teacher. It is not an official document of the BMB or any education authority.</p></div>' +'<div><div class="ft-h">Your data</div><p>No account, no tracking, no ads. Your progress is saved only in this browser on this device, so clearing your browser or switching devices resets it. Nothing leaves your device unless you use the optional AI features yourself. Like any website, the host (GitHub Pages) logs your IP address in its server logs.</p></div>' +'<div><div class="ft-h" lang="de">Impressum / Kontakt</div><p lang="de">Bernhard Gmeiner, Wien<br>E-Mail: bernhard.gmeiner@gmail.com<br><a href="https://www.bernhardgmeiner.com" target="_blank" rel="noopener">bernhardgmeiner.com</a><br>Privates, nichtkommerzielles Projekt.</p></div>' +'<div><div class="ft-h">Found a mistake? <span lang="de">/ Fehler gefunden?</span></div><p>Spotted a typo, a wrong fact or a broken link? <a href="mailto:bernhard.gmeiner@gmail.com?subject=Matura%20Guide%20Feedback">Send a short e-mail</a> and mention which section it is in. Every report makes the guide better.</p></div>' +'</div>' +'<div class="ft-base" lang="de">Diese Seite hilft bei der Vorbereitung auf die schriftliche Englisch-Matura (AHS & BHS, B2) und orientiert sich an der offiziellen SRDP-Beurteilungsskala. Bewertet wird in der echten Matura von den Lehrkr\u00e4ften der Schule. \u00b7 Stand: Schuljahr 2025/26</div>' +'</div></footer><div class="print-note" lang="de">Unabhängige Übungsseite von Bernhard Gmeiner – kein offizielles Dokument des BMB. Übungsaufgaben sind nachgebaut. Es zählt die Bewertung deiner Lehrkräfte.</div>';
 
 /* ─── ROUTER ──────────────────────────────────────────────── */
 let current = '';
@@ -16,16 +16,24 @@ const pathPage = (pathMatch && window.PAGES && PAGES[pathMatch[1]]) ? pathMatch[
 function route() {
   if (tourActive) endTour();
   let id = (location.hash || (pathPage ? '#' + pathPage : '#home')).slice(1);
-  if (!PAGES[id]) id = 'home';
+  /* "#main" ist der Skip-Link, keine Seite: nur den Inhalt fokussieren */
+  if (id === 'main') { const mn = $('#main'); if (mn) { try { mn.focus(); } catch (e) {} } try { history.replaceState(null, '', location.pathname + (current && current !== pathPage ? '#' + current : '')); } catch (e) {} if (current) return; id = pathPage || 'home'; }
+  if (!Object.prototype.hasOwnProperty.call(PAGES, id)) { if (current) return; id = 'home'; }
   /* Textsorte, die es im aktuellen Schultyp nicht gibt (z. B. essay bei BHS,
-     leaflet bei AHS) → auf Home umleiten, auch bei Deep-Links */
-  if (window.SRDP && SRDP.textTypes.some(t => t.id === id && t.schools && t.schools.indexOf(M.school()) < 0)) id = 'home';
+     leaflet bei AHS): Bei einem Deep-Link (Erstaufruf) den Schultyp passend
+     umschalten, sonst auf Home umleiten und das sagen. */
+  const tt = window.SRDP && SRDP.textTypes.find(t => t.id === id && t.schools && t.schools.indexOf(M.school()) < 0);
+  if (tt) {
+    if (!current && !M.schoolChosen()) { M.setSchool(tt.schools[0]); M.buildNav(); M.autoSchool = true; }
+    else { const label = (SRDP.schools && SRDP.schools[tt.schools[0]] && SRDP.schools[tt.schools[0]].label) || tt.schools[0].toUpperCase(); id = 'home'; setTimeout(function () { M.toast('The ' + tt.name.toLowerCase() + ' is a ' + label + ' text type. Switch the school type in the menu to see it.'); }, 50); }
+  }
   const prev = current;
   current = id;
   const page = PAGES[id];
   const main = $('#main');
   main.innerHTML = page.render() + SITE_FOOTER;
   if (page.wire) page.wire();
+  decorateTabs(main);
   if (M.buildPageTOC) M.buildPageTOC();
   if (page.track) M.markVisited(page.track);
   $$('#sidenav .nav-item').forEach(a => { const on = a.dataset.nav === id; a.classList.toggle('active', on); if (on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
@@ -34,11 +42,20 @@ function route() {
   try { main.scrollTo({ top: 0 }); window.scrollTo({ top: 0 }); } catch (e) { main.scrollTop = 0; }
   $('#sidenav').classList.remove('open');
   const ov = $('.nav-overlay'); if (ov) ov.remove();
+  const bg = $('#burger'); if (bg) bg.setAttribute('aria-expanded', 'false');
   if (id !== prev) { try { main.focus(); } catch (e) {} if (M.announce) M.announce(page.title); }
   else { const at = main.querySelector('.tabs .tab.active'); if (at) { try { at.focus(); } catch (e) {} } }
   M.paintNav();
 }
-function rerender(partId, html, wire) { const el = $(partId); if (el) { el.innerHTML = html; wire && wire(); } }
+function rerender(partId, html, wire) { const el = $(partId); if (el) { M.setHTML(el, html); wire && wire(); decorateTabs(el); } }
+/* Tab-Leisten für Screenreader: role=tablist/tab + aria-selected (Filterleisten inklusive) */
+function decorateTabs(root) {
+  $$('.tabs', root).forEach(bar => {
+    bar.setAttribute('role', 'tablist');
+    $$('.tab', bar).forEach(b => { b.setAttribute('role', 'tab'); b.setAttribute('aria-selected', b.classList.contains('active') ? 'true' : 'false'); });
+  });
+}
+M.decorateTabs = decorateTabs;
 
 /* ─── GUIDED TOUR ─────────────────────────────────────────── */
 const TOUR = [
@@ -46,9 +63,9 @@ const TOUR = [
   { sel:'[data-nav="overview"]', title:'Start with the overview', text:'How the Writing section is built, how much time you get, and how the four criteria are graded. Read it once and the rest makes more sense.' },
   { sel:'[data-nav="studyplan"]', title:'Your countdown plan', text:'A day-by-day study plan for the last four weeks (or the last seven days). Set your exam date and the plan tells you what to do today.' },
   { sel:'[data-nav="article"]', title:'The text types', text:'Each text type has a guide, a model text, a phrase list, a quiz and a drag-and-drop builder. Open one and switch tabs along the top.' },
-  { sel:'[data-nav="phrasebank"]', title:'Tools that do the work', text:'A searchable phrase bank, a self-assessment checklist, and the Self-check studio that scans a draft you paste in.' },
+  { sel:'[data-nav="phrasebank"]', title:'Reference: look things up', text:'A searchable phrase bank, topic vocabulary with flashcards, the grammar kit and the writing checklist. Open them while you write.' },
   { sel:'[data-nav="selfcheck"]', title:'Self-check studio', text:'Paste a draft and get instant feedback on length, register and conventions, plus a ready-made prompt for an AI second opinion.' },
-  { sel:'[data-nav="taskbank"]', title:'Task bank and practice', text:'Real Matura-style prompts with source material, plus a practice zone to spot mistakes and take the final quiz.' },
+  { sel:'[data-nav="taskbank"]', title:'Practise: write and check', text:'Matura-style prompts with source material, paragraph training, a practice zone to spot mistakes, and the final quiz.' },
   { sel:'#themeToggle', title:'Theme and progress', text:'Switch between light and dark here. Visited sections and quiz results are saved on this device, so the menu remembers where you were.' },
   { sel:null, title:'You are set', text:'Pick any section in the menu to start. You can replay this tour any time from the ? button at the top of the menu, or the button on the home page.' },
 ];
@@ -102,7 +119,7 @@ function showTour(i){
   var _nb = card.querySelector('[data-action="tour-next"]'); if (_nb) { try { _nb.focus(); } catch (e) {} }
 }
 function startTour(){ tourActive = true; document.body.classList.add('tour-on'); var _app = document.getElementById('app'); if (_app) { _app.setAttribute('inert', ''); _app.setAttribute('aria-hidden', 'true'); } if (window.innerWidth <= 840) { var _sn = document.getElementById('sidenav'); if (_sn) _sn.classList.add('open'); } showTour(0); }
-function endTour(){ tourActive = false; document.body.classList.remove('tour-on'); var _app=document.getElementById('app'); if(_app){ _app.removeAttribute('inert'); _app.removeAttribute('aria-hidden'); } var _sn=document.getElementById('sidenav'); if(_sn) _sn.classList.remove('open'); var _ov=document.querySelector('.nav-overlay'); if(_ov) _ov.remove(); ['tourSpot','tourCard','tourCatch'].forEach(function(id){ const e=document.getElementById(id); if(e) e.style.display='none'; }); try{ M.store('mwg_tour_done','1'); }catch(e){} var _h=document.querySelector('.nav-help[data-action="start-tour"]'); if(_h){ try{ _h.focus(); }catch(e){} } }
+function endTour(){ tourActive = false; document.body.classList.remove('tour-on'); var _app=document.getElementById('app'); if(_app){ _app.removeAttribute('inert'); _app.removeAttribute('aria-hidden'); } var _sn=document.getElementById('sidenav'); if(_sn) _sn.classList.remove('open'); var _ov=document.querySelector('.nav-overlay'); if(_ov) _ov.remove(); var _bg=document.getElementById('burger'); if(_bg) _bg.setAttribute('aria-expanded','false'); ['tourSpot','tourCard','tourCatch'].forEach(function(id){ const e=document.getElementById(id); if(e) e.style.display='none'; }); try{ M.store('mwg_tour_done','1'); }catch(e){} var _h=(window.innerWidth<=840)?_bg:document.querySelector('.nav-help[data-action="start-tour"]'); if(_h){ try{ _h.focus(); }catch(e){} } }
 function maybeShowHint(){
   try{ if (M.store('mwg_hint_seen')) return; }catch(e){ return; }
   if (window.innerWidth <= 840) return;
@@ -134,6 +151,8 @@ document.addEventListener('click', e => {
     M.copyText(copyEl.dataset.copy, () => M.flashCopied(copyEl));
     return;
   }
+  const jump = e.target.closest('[data-scroll-to]');
+  if (jump) { const tgt = document.getElementById(jump.dataset.scrollTo); if (tgt) { tgt.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' }); tgt.setAttribute('tabindex', '-1'); try { tgt.focus({ preventScroll: true }); } catch (err) {} } return; }
   const row = e.target.closest('[data-goto]');
   if (row) { location.hash = '#' + row.dataset.goto; return; }
 
@@ -147,7 +166,7 @@ document.addEventListener('click', e => {
   }
   else if (act === 'print') { window.print(); }
   else if (act === 'start-tour') { startTour(); }
-  else if (act === 'set-school') { M.setSchool(el.dataset.school); const ch = document.getElementById('schoolChooser'); if (ch) ch.remove(); var appEl = document.getElementById('app'); if (appEl) { appEl.removeAttribute('inert'); appEl.removeAttribute('aria-hidden'); } var ab = document.querySelector('.school-btn.active'); if (ab) { try { ab.focus(); } catch (e) {} } }
+  else if (act === 'set-school') { M.autoSchool = false; M.setSchool(el.dataset.school); const ch = document.getElementById('schoolChooser'); if (ch) ch.remove(); var appEl = document.getElementById('app'); if (appEl) { appEl.removeAttribute('inert'); appEl.removeAttribute('aria-hidden'); } var ab = document.querySelector('.school-btn.active'); if (ab) { try { ab.focus(); } catch (e) {} } }
   else if (act === 'open-search') { M.openSearch && M.openSearch(); }
   else if (act === 'reset-progress') {
     if (window.confirm('Gespeicherten Fortschritt auf diesem Gerät löschen? Das entfernt besuchte Seiten, Quizergebnisse, Karteikarten, Lernplan und Prüfungsdatum. Design und Schultyp bleiben erhalten.')) {
@@ -205,7 +224,7 @@ document.addEventListener('click', e => {
     const text = $('#scText').value;
     const type = $('#scType').value;
     const target = +$('#scTarget').value;
-    const findings = M.analyze(text, type, target);
+    const findings = M.analyze(text, type, target, $('#scTask') ? $('#scTask').value : '');
     const icons = { ok: '✓', warn: '!', bad: '✗', info: 'i' };
     rerender('#scResults',
       '<h2 class="section-label">Findings</h2><div style="border:1px solid var(--border)">' +
@@ -230,7 +249,7 @@ document.addEventListener('click', e => {
     if (!pool.length) { M.toast('No tasks for this filter yet'); return; }
     const p = pool[Math.floor(Math.random() * pool.length)];
     rerender('#tbRandom', '<div style="border:2px solid var(--primary);border-bottom:none;margin-top:0"><div style="padding:10px 22px;background:var(--primary-faint);font-size:.75rem;letter-spacing:.32px;color:var(--primary)">🎲 Your random task. No take-backs, start writing!</div>' + M.taskCard(p, 0) + '</div>');
-    try { $('#tbRandom').scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (err) {}
+    try { $('#tbRandom').scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' }); } catch (err) {}
   }
   /* paragraphs */
   else if (act === 'para-tab') { M.paraTabs.current = el.dataset.tab; route(); }
@@ -273,12 +292,12 @@ $('#burger').addEventListener('click', () => {
 
 /* ─── FIRST-VISIT SCHOOL CHOOSER ──────────────────────────── */
 function showSchoolChooser() {
-  if (M.schoolChosen && M.schoolChosen()) return;
+  if (M.schoolChosen && M.schoolChosen() && !M.autoSchool) return;
   if (document.getElementById('schoolChooser')) return;
   const SC = (window.SRDP && SRDP.schools) || {};
   function card(id) {
     const c = SC[id] || {};
-    const d = id === 'ahs' ? 'Gymnasium · 2 Schreibaufgaben, mit Essay' : 'HAK, HTL, HUM, BA u. a. · 3 Schreibaufgaben, mit Leaflet';
+    const d = id === 'ahs' ? 'Gymnasium · 2 writing tasks, with the essay' : 'HAK, HTL, HUM, BAfEP and others · 3 writing tasks, with the leaflet';
     return '<button class="sc-card" data-action="set-school" data-school="' + id + '">' +
       '<span class="sc-k">' + esc(c.label || id.toUpperCase()) + '</span>' +
       '<span class="sc-d">' + esc(d) + '</span></button>';
@@ -290,13 +309,14 @@ function showSchoolChooser() {
   w.setAttribute('aria-modal', 'true');
   w.setAttribute('aria-labelledby', 'scTitle'); w.setAttribute('aria-describedby', 'scSub');
   w.innerHTML = '<div class="sc-box">' +
-    '<div class="sc-title" id="scTitle" lang="de">Willkommen! Wähle deinen Schultyp</div>' +
-    '<div class="sc-sub" id="scSub" lang="de">Grammatik, Wortschatz und die Sprach-Tools gelten für beide gleich – auch das Bewertungsraster. Unterschiedlich sind nur die Textsorten und die Anzahl der Schreibaufgaben (AHS: 2, BHS: 3). Du kannst oben links jederzeit umschalten.</div>' +
+    '<div class="sc-title" id="scTitle">Welcome! Which school type are you at?</div>' +
+    '<div class="sc-sub" id="scSub">Grammar, vocabulary and the language tools are the same for both, and so is the assessment grid. Only the text types and the number of writing tasks differ (AHS: 2, BHS: 3). <span lang="de">Willkommen! Wähle deinen Schultyp – du kannst oben links jederzeit umschalten.</span></div>' +
     '<div class="sc-cards">' + card('ahs') + card('bhs') + '</div>' +
+    '<button class="sc-skip" data-action="set-school" data-school="ahs">Not sure? Start with AHS – you can switch any time in the menu.</button>' +
   '</div>';
   document.body.appendChild(w);
   var appEl = document.getElementById('app'); if (appEl) { appEl.setAttribute('inert', ''); appEl.setAttribute('aria-hidden', 'true'); }
-  w.addEventListener('keydown', function (e) { if (e.key === 'Escape') { var chE = document.getElementById('schoolChooser'); if (chE) chE.remove(); var appE = document.getElementById('app'); if (appE) { appE.removeAttribute('inert'); appE.removeAttribute('aria-hidden'); } return; } if (e.key !== 'Tab') return; var cards = w.querySelectorAll('.sc-card'); if (!cards.length) return; var f0 = cards[0], fn = cards[cards.length - 1]; if (e.shiftKey && document.activeElement === f0) { e.preventDefault(); fn.focus(); } else if (!e.shiftKey && document.activeElement === fn) { e.preventDefault(); f0.focus(); } });
+  w.addEventListener('keydown', function (e) { if (e.key === 'Escape') { var sk = w.querySelector('.sc-skip'); if (sk) sk.click(); return; } if (e.key !== 'Tab') return; var cards = w.querySelectorAll('.sc-card, .sc-skip'); if (!cards.length) return; var f0 = cards[0], fn = cards[cards.length - 1]; if (e.shiftKey && document.activeElement === f0) { e.preventDefault(); fn.focus(); } else if (!e.shiftKey && document.activeElement === fn) { e.preventDefault(); f0.focus(); } });
   const first = w.querySelector('.sc-card'); if (first) { try { first.focus(); } catch (e) {} }
 }
 M.showSchoolChooser = showSchoolChooser;
@@ -308,6 +328,6 @@ M.buildNav();
 M.initBackToTop();
 window.addEventListener('hashchange', route);
 route();
-if (M.schoolChosen()) setTimeout(maybeShowHint, 600);
+if (M.schoolChosen() && !M.autoSchool) setTimeout(maybeShowHint, 600);
 else showSchoolChooser();
 })();

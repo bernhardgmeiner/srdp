@@ -109,7 +109,7 @@ M.rateAction = function (act, el) {
   } else if (act === 'rate-clear') {
     rating = { TA: null, CC: null, LR: null, LA: null };
     const host = document.getElementById('scRating');
-    if (host) host.innerHTML = ratingBlock();
+    if (host) M.setHTML(host, ratingBlock());
   }
 };
 
