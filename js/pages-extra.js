@@ -101,7 +101,7 @@ PAGES.parents = {
         '<p style="font-size:1rem;color:var(--text-secondary);line-height:1.65;margin-bottom:12px">Kein Konto, keine Anmeldung, keine Werbung, kein Tracking. Der Lernfortschritt Ihres Kindes (besuchte Seiten, Quizergebnisse, Lernplan, Prüfungsdatum) wird ausschließlich lokal im Browser auf diesem Gerät gespeichert und an keinen Server geschickt. Werden die Browserdaten gelöscht oder das Gerät gewechselt, ist der Fortschritt weg – das ist der Preis dafür, dass der Lernfortschritt das Gerät nicht verlässt. Die Seite selbst liegt bei GitHub Pages (USA); beim Aufruf verarbeitet der Hoster – wie bei praktisch jeder Website – technisch bedingt die IP-Adresse in Server-Logs. Sonst wird nichts erhoben.</p>' +
         '<p style="font-size:1rem;color:var(--text-secondary);line-height:1.65;margin-bottom:12px">Es gibt eine freiwillige KI-Funktion: Der Self-check erstellt auf Wunsch einen fertigen Prompt (eine Anfrage samt Übungstext), den Ihr Kind selbst in ein KI-Werkzeug wie ChatGPT oder Claude kopieren kann, um Übungs-Feedback zu bekommen. Erst dann, und nur dann, verlässt der eingefügte Text dieses Gerät und geht an den jeweiligen Anbieter. Deshalb der Rat auf der Seite: nur Übungstexte verwenden, keine echten Namen oder persönlichen Daten. Ihre Schule kann außerdem eigene Regeln zum Einsatz von KI haben; die gelten zuerst.</p>' +
         '<p style="font-size:1rem;color:var(--text-secondary);line-height:1.65;margin-bottom:10px">Sie können den gespeicherten Lernfortschritt jederzeit hier löschen.</p>' +
-        '<button class="btn btn-ghost" data-action="reset-progress">Fortschritt auf diesem Gerät zurücksetzen</button>' +
+        '<button class="btn btn-ghost" data-action="reset-progress" data-lang="de">Fortschritt auf diesem Gerät zurücksetzen</button>' +
         '<div class="gap-s"></div>' +
         sectionLabel('Wie Sie unterstützen können') +
         '<p style="font-size:1rem;color:var(--text-secondary);line-height:1.65;margin-bottom:12px">Am meisten hilft Regelmäßigkeit: lieber viele kurze Einheiten als ein langer Abend vor der Prüfung. Tragen Sie gemeinsam das Prüfungsdatum im <a href="#studyplan">Countdown-Lernplan</a> ein, dann zeigt die Seite jeden Tag, was dran ist. Fragen Sie Ihr Kind, was es gerade übt: etwas erklären zu müssen ist die halbe Miete. Und: kein Druck. Die Lerninhalte sind auf Englisch (das ist Absicht), diese Seite hier ist für Sie auf Deutsch.</p>' +
@@ -116,12 +116,12 @@ PAGES.parents = {
   },
 };
 
-/* ─── NOTEBOOKLM STUDY COMPANION ─────────────────────────── */
+/* ─── GEMINI NOTEBOOK STUDY COMPANION (frueher NotebookLM) ─────────────────────────── */
 PAGES.notebooklm = {
-  title: 'NotebookLM study companion', track: 'notebooklm',
+  title: 'Gemini Notebook study companion', track: 'notebooklm',
   render() {
-    const NB = 'https://notebooklm.google.com/notebook/408309a8-0d35-414b-b7f5-9f6ba1a6b959';
-    const cta = '<div style="margin:18px 0"><a class="btn btn-primary" href="' + NB + '" target="_blank" rel="noopener">Open the NotebookLM notebook <span>&rarr;</span></a></div>';
+    const NB = 'https://notebook.google.com/notebook/408309a8-0d35-414b-b7f5-9f6ba1a6b959';
+    const cta = '<div style="margin:18px 0"><a class="btn btn-primary" href="' + NB + '" target="_blank" rel="noopener">Open the Gemini Notebook <span>&rarr;</span></a></div>';
     const card = (h, b) => '<div class="card"><div style="font-weight:600;margin-bottom:8px">' + h + '</div><div style="font-size:.875rem;color:var(--text-secondary);line-height:1.6">' + b + '</div></div>';
     const P = 'font-size:1rem;color:var(--text-secondary);line-height:1.65;max-width:720px';
     const ask = [
@@ -137,10 +137,10 @@ PAGES.notebooklm = {
       'The notebook is kept in step with this guide and grows over time, so new explainers and material show up now and then. Worth checking back.',
     ];
     return '<div class="page">' +
-      pageHead('About', 'NotebookLM study companion', 'An AI study buddy that has read this whole guide. Ask it anything about the writing exam, or just listen to a short explainer on the way to school.') +
+      pageHead('About', 'Gemini Notebook study companion', 'An AI study buddy that has read this whole guide. Ask it anything about the writing exam, or just listen to a short explainer on the way to school.') +
       '<div class="wrap"><div class="gap-s"></div>' +
         sectionLabel('What it is') +
-        '<p style="' + P + ';margin-bottom:14px">NotebookLM is a free tool from Google. This notebook has been given the entire content of this guide as its sources, and nothing else. That is the point: it answers from this material and links back to where each answer comes from, so it stays close to what the Matura actually rewards instead of inventing rules. You can chat with it in your own words, or open one of the ready-made explainers.</p>' +
+        '<p style="' + P + ';margin-bottom:14px">Gemini Notebook (until mid-2026 known as NotebookLM) is a free tool from Google. This notebook has been given the entire content of this guide as its sources, and nothing else. That is the point: it answers from this material and links back to where each answer comes from, so it stays close to what the Matura actually rewards instead of inventing rules. You can chat with it in your own words, or open one of the ready-made explainers.</p>' +
         cta +
         sectionLabel('What is already inside') +
         '<div class="grid g-auto-240">' +

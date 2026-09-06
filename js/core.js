@@ -383,7 +383,7 @@ const NAV = [
     { id: 'timer', label: 'Exam timer' },
   ]},
   { divider: 'About', items: [
-    { id: 'notebooklm', label: 'NotebookLM' },
+    { id: 'notebooklm', label: 'Gemini Notebook' },
     { id: 'teachers', label: 'For teachers' },
     { id: 'parents', label: 'Für Eltern & Datenschutz', lang: 'de' },
   ]},
