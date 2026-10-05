@@ -16,6 +16,9 @@ function buildIndex() {
   const _inSchool = t => !t.schools || t.schools.indexOf(_sch) >= 0;
   M.NAV.forEach(sec => sec.items.forEach(it =>
     items.push({ type: 'Pages', label: it.label, sub: sec.divider || 'Start', go: { page: it.id } })));
+  /* Seiten, die im Menü unter einer anderen hängen */
+  items.push({ type: 'Pages', label: 'Topic vocabulary', sub: 'Reference – Phrases & vocabulary', go: { page: 'topicvocab' } });
+  items.push({ type: 'Pages', label: 'Final checklist', sub: 'Practise – Self-check & checklist', go: { page: 'checklist' } });
   SRDP.textTypes.filter(_inSchool).forEach(t => t.phrases.forEach(g => g.items.forEach(p =>
     items.push({ type: 'Phrases', label: p, sub: t.name + ' – ' + g.category, copy: p, go: { page: 'phrasebank', search: p } }))));
   SRDP.emailSubTypes.forEach(st => st.phrases.forEach(g => g.items.forEach(p =>
@@ -28,7 +31,7 @@ function buildIndex() {
   }));
   SRDP.emailSubTypes.forEach((st, si) =>
     items.push({ type: 'Pages', label: st.name + ' (formal e-mail)', sub: 'Text types – E-mail sub-type', go: { page: 'email', emailTab: si } }));
-  items.push({ type: 'Pages', label: 'B2 linking words', sub: 'Grammar kit – connectors table', go: { page: 'grammar', findLabel: 'B2 linking words' } });
+  items.push({ type: 'Pages', label: 'B2 linking words', sub: 'Grammar kit – linking words table', go: { page: 'grammar', findLabel: 'B2 linking words' } });
   SRDP.linkingWords.forEach(r =>
     items.push({ type: 'Phrases', label: r.b2, sub: 'Linking words – ' + r.fn + ' (instead of: ' + r.basic + ')', copy: r.b2.split(' · ').join(', '), go: { page: 'grammar', findLabel: 'B2 linking words' } }));
   SRDP.grammar.forEach((g, gi) =>
@@ -41,11 +44,15 @@ function buildIndex() {
       extra: (p.scenario + ' ' + p.instruction).toLowerCase() });
   });
   Object.keys(SRDP.checklists).filter(k => k === 'general' || SRDP.textTypes.some(t => t.id === k && _inSchool(t))).forEach(k => SRDP.checklists[k].items.forEach(it =>
-    items.push({ type: 'Checklist', label: it.text, sub: 'Writing checklist – ' + SRDP.checklists[k].label, go: { page: 'checklist', cl: k } })));
+    items.push({ type: 'Checklist', label: it.text, sub: 'Final checklist – ' + SRDP.checklists[k].label, go: { page: 'checklist', cl: k } })));
+  (SRDP.faq || []).forEach((f, fi) => {
+    if (f.schools && f.schools.indexOf(_sch) < 0) return;
+    items.push({ type: 'FAQ', label: f.q, sub: 'FAQ', go: { page: 'faq', faq: f.q }, extra: (f.a || '').toLowerCase() });
+  });
   items.forEach(it => { it.l = it.label.toLowerCase(); it.s = (it.sub || '').toLowerCase(); });
 }
 
-const TYPE_PRIO = { Pages: 0, Phrases: 1, Vocabulary: 2, Grammar: 3, Tasks: 4, Checklist: 5 };
+const TYPE_PRIO = { Pages: 0, FAQ: 1, Phrases: 2, Vocabulary: 3, Grammar: 4, Tasks: 5, Checklist: 6 };
 function query(q) {
   q = q.trim().toLowerCase();
   if (!q) return [];
@@ -69,8 +76,8 @@ function ensureDom() {
   overlay.id = 'searchOverlay';
   overlay.innerHTML =
     '<div class="search-panel" role="dialog" aria-modal="true" aria-label="Search this guide">' +
-      '<input type="text" id="srInput" placeholder="Search pages, phrases, vocabulary, grammar, tasks…" aria-label="Search" autocomplete="off" role="combobox" aria-expanded="true" aria-controls="srResults" aria-autocomplete="list">' +
-      '<div class="sr-results" id="srResults" role="listbox" aria-label="Search results"></div>' +
+      '<input type="text" id="srInput" placeholder="Search pages, phrases, vocabulary, grammar, tasks…" aria-label="Search" autocomplete="off" role="combobox" aria-expanded="true" aria-controls="srResults" aria-haspopup="grid" aria-autocomplete="list">' +
+      '<div class="sr-results" id="srResults" role="grid" aria-label="Search results"></div>' +
     '</div>';
   document.body.appendChild(overlay);
   input = $('#srInput');
@@ -91,13 +98,15 @@ function ensureDom() {
 
 function paint() {
   if (!input.value.trim()) { resultsEl.innerHTML = '<div class="sr-empty">Type to search. Try &ldquo;linking&rdquo;, &ldquo;complaint&rdquo; or &ldquo;since&rdquo;.</div>'; return; }
-  if (!current.length) { resultsEl.innerHTML = '<div class="sr-empty">No results for &ldquo;' + esc(input.value) + '&rdquo;.</div>'; return; }
+  if (!current.length) { resultsEl.innerHTML = '<div class="sr-empty">No results for &ldquo;' + esc(input.value) + '&rdquo;. Try a shorter word, for example &ldquo;linking&rdquo; or &ldquo;complaint&rdquo;.</div>'; return; }
   let html = '', lastType = null;
   current.forEach((it, i) => {
     if (it.type !== lastType) { html += '<div class="sr-group" role="presentation">' + it.type + '</div>'; lastType = it.type; }
-    html += '<div class="sr-row' + (i === active ? ' active' : '') + '" role="presentation">' +
-      '<button class="sr-main" id="srOpt-' + i + '" role="option" aria-selected="' + (i === active) + '" data-i="' + i + '"><span>' + esc(it.label) + '</span><span class="sub">' + esc(it.sub) + '</span></button>' +
-      (it.copy ? '<button class="sr-copy" data-i="' + i + '" aria-label="Copy to clipboard" title="Copy">⧉</button>' : '') +
+    /* grid: one row per result, cell 1 = open the result, cell 2 = copy the phrase */
+    html += '<div class="sr-row' + (i === active ? ' active' : '') + '" role="row">' +
+      '<div class="sr-cell sr-cell-main" role="gridcell" id="srOpt-' + i + '" aria-selected="' + (i === active) + '">' +
+        '<button class="sr-main" data-i="' + i + '"><span>' + esc(it.label) + '</span><span class="sub">' + esc(it.sub) + '</span></button></div>' +
+      (it.copy ? '<div class="sr-cell" role="gridcell"><button class="sr-copy" data-i="' + i + '" aria-label="Copy: ' + esc(it.copy) + '" title="Copy">⧉</button></div>' : '') +
     '</div>';
   });
   resultsEl.innerHTML = html;
@@ -170,6 +179,10 @@ function afterJump(g) {
       if (head) head.setAttribute('aria-expanded', 'true');
       el = acc;
     }
+  }
+  if (g.faq) {
+    const head = $$('.acc-head', main).find(h => h.textContent.indexOf(g.faq) >= 0);
+    if (head) { const item = head.closest('.acc-item'); item.classList.add('open'); head.setAttribute('aria-expanded', 'true'); el = item; }
   }
   if (g.chip) { const chip = $$('.chip', main).find(c => c.dataset.copy === g.chip); if (chip) el = chip; }
   if (g.search !== undefined) el = $('.chip', main);

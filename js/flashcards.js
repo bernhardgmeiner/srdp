@@ -71,6 +71,7 @@ function startCards(scope) {
   fState.queue = buildQueue(scope);
   fState.i = 0; fState.flipped = false; fState.known = 0; fState.unknown = 0; fState.missed = [];
   M.route();
+  const card = document.querySelector('#fcHost .fcard'); if (card) { try { card.focus(); } catch (e) {} }
 }
 
 function repaint() {
@@ -79,7 +80,7 @@ function repaint() {
   host.innerHTML = cardsBody();
   wireCards();                       /* sonst verliert jede neue Karte ihre Swipe-Listener */
   if (fState.on) {                   /* Fokus nicht auf <body> fallen lassen (Tastatur/Screenreader) */
-    const card = host.querySelector('.fcard');
+    const card = host.querySelector('.fcard') || host.querySelector('button');
     if (card) { try { card.focus({ preventScroll: true }); } catch (e) {} }
   }
 }
@@ -92,7 +93,7 @@ function cardsBody() {
       '<p style="font-size:1rem;color:var(--text-secondary);margin-bottom:6px">' + fState.known + ' known · ' + fState.unknown + ' to review.</p>' +
       '<p style="font-size:.8125rem;color:var(--text-muted);margin-bottom:22px">Cards you knew move up a box and come back less often. Cards you missed return next session.</p>' +
       '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
-        '<button class="btn btn-primary" data-action="flash-again">Again <span>→</span></button>' +
+        '<button class="btn btn-primary" data-action="flash-again">Practise these cards again <span aria-hidden="true">→</span></button>' +
         '<button class="btn btn-ghost" data-action="flash-exit">Back to the list</button>' +
       '</div>' +
     '</div>';
@@ -113,7 +114,7 @@ function cardsBody() {
       '<button class="btn btn-primary" data-action="flash-know">✓ Knew it <kbd>1</kbd></button>' +
     '</div>' +
     (showHint ? '<div class="fc-swipehint">On touch screens you can also swipe: right = knew it, left = didn&rsquo;t. <span aria-hidden="true">← ✗ · ✓ →</span></div>' : '') +
-    '<button class="tc-skip" data-action="flash-exit" style="margin-top:18px">Exit flashcards (Esc)</button>';
+    '<button class="btn-text fc-exit" data-action="flash-exit">Exit flashcards (Esc)</button>';
 }
 
 function cardsPage() {
@@ -138,14 +139,19 @@ function wireCards() {
   }, { passive: true });
 }
 
+/* Shortcuts (WCAG 2.1.4): 1, 2 and Space only act while focus is inside the card area
+   (#fcHost – the card gets focus after every repaint). Escape works anywhere on this screen. */
 document.addEventListener('keydown', e => {
   if (!fState.on) return;
   const so = document.getElementById('searchOverlay');
   if (so && so.style.display === 'flex') return;
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
+  if (e.key === 'Escape') { exitCards(); return; }
+  const host = document.getElementById('fcHost');
+  if (!host || !host.contains(document.activeElement)) return;
   if (e.key === ' ') { const tg = e.target; if (tg && tg.closest && tg.closest('button, a, input, select, textarea')) return; e.preventDefault(); if (fState.i < fState.queue.length) flip(); }
   else if (e.key === '1') { if (fState.i < fState.queue.length) answer(true); }
   else if (e.key === '2') { if (fState.i < fState.queue.length) answer(false); }
-  else if (e.key === 'Escape') exitCards();
 });
 
 M.flashAction = function (act, ds) {

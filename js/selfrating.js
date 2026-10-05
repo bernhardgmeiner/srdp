@@ -1,7 +1,7 @@
 /* ════════════════════════════════════════════════════════════
    Self-check studio: SRDP-Selbst-Rating (Beurteilungsraster B2)
    Deskriptoren abgeleitet vom offiziellen Raster des BMB (Stand 2023):
-   11 Stufen 0–10, beschrieben sind 0/2/4/6/8/10, Stufe 6 = B2-Minimum.
+   11 Bands 0–10, beschrieben sind 0/2/4/6/8/10, Band 6 = B2-Minimum.
    ════════════════════════════════════════════════════════════ */
 (function () {
 'use strict';
@@ -9,18 +9,18 @@ const M = window.MWG;
 const { $, $$, esc } = M;
 
 const CRITERIA = [
-  { id: 'TA', name: 'Task Achievement', note: 'Off the word count by more than ±10%? Then rate one band lower here – that is the official rule.', bands: {
-    10: 'I did exactly what the task asked: all three bullet points fully developed with relevant, well-chosen details, the text type fits, and my opening and ending do their job.',
-    8: 'All three bullet points are developed with relevant details; small gaps in balance, or my title/opening/closing could be sharper.',
-    6: 'All points are developed but with only a limited number of supporting details – or one point is thin while the other two carry it. Conventions mostly respected.',
+  { id: 'TA', name: 'Task Achievement', note: 'More than 10% too long or too short? Then choose one band lower here. That is the official rule.', bands: {
+    10: 'I did exactly what the task asked. All three content points are fully developed with relevant, well-chosen details, the text type fits, and my opening and ending do their job.',
+    8: 'All three content points are developed with relevant details. The points are not quite balanced, or my title, opening or ending could be sharper.',
+    6: 'All content points are developed, but with only a few supporting details. Or one point is thin and the other two carry the text. I mostly follow the conventions of the text type.',
     4: 'I mentioned the content points but did not really develop them; details or required elements (title, greeting, closing) are missing.',
     2: 'Only parts of the task are recognisable; most content points are barely touched.',
-    0: 'My text does not answer this task at all (off topic or clearly prepared in advance – the veto case).',
+    0: 'My text does not answer this task at all (off topic or clearly prepared in advance). This is the veto case.',
   }},
   { id: 'CC', name: 'Coherence and Cohesion', note: '', bands: {
-    10: 'My text reads as one clear line of thought from start to finish; paragraphs connect to each other and I use a variety of linking devices naturally.',
+    10: 'My text reads as one clear line of thought from start to finish. The paragraphs connect to each other, and I use many different linking words naturally.',
     8: 'Clear overall structure and logical order; varied linking words with maybe a bump or two in the flow.',
-    6: 'Generally well organised in clear, logical paragraphs; I use a limited set of common linking devices, and they fit.',
+    6: 'Generally well organised in clear, logical paragraphs. I use a small set of common linking words, and they fit.',
     4: 'Mostly short, simple sentences strung together; paragraph breaks unclear or random.',
     2: 'A reader has to work hard to follow my text; little visible organisation.',
     0: 'No recognisable structure.',
@@ -54,8 +54,8 @@ function critName(c) {
 function ratingBlock() {
   return '<div class="gap-s"></div>' +
     M.sectionLabel('Rate yourself on the four criteria') +
-    '<p style="font-size:.9375rem;color:var(--text-secondary);line-height:1.55;margin-bottom:6px;max-width:720px">This is the official 0–10 scale your teachers use. The grid describes levels 0, 2, 4, 6, 8 and 10 – the levels in between are for texts that sit between two descriptions. <strong style="color:var(--text)">Level 6 means: B2 minimum met.</strong></p>' +
-    '<p style="font-size:.8125rem;color:var(--text-muted);margin-bottom:18px">Pick the description that honestly fits your text. Your rating is added to the AI feedback prompt so you can compare judgements.</p>' +
+    '<p class="text-md text-secondary mb-1" style="line-height:1.55;max-width:720px">This is the official 0–10 scale your teachers use. The grid describes bands 0, 2, 4, 6, 8 and 10. The odd-numbered bands in between (1, 3, 5, 7, 9) are for texts that sit between two descriptions. <strong style="color:var(--text)">Band 6 means: B2 minimum met.</strong></p>' +
+    '<p class="text-sm muted" style="margin-bottom:18px">Pick the description that honestly fits your text. Your rating is added to the AI feedback prompt so you can compare the two.</p>' +
     CRITERIA.map(c =>
       '<div class="rate-row">' +
         '<div class="rate-name">' + critName(c) + '</div>' +
@@ -64,13 +64,13 @@ function ratingBlock() {
             '<button class="rate-btn' + (rating[c.id] === b ? ' sel' : '') + '" role="radio" aria-checked="' + (rating[c.id] === b) + '" data-action="rate-pick" data-crit="' + c.id + '" data-band="' + b + '" tabindex="' + (rating[c.id] === b || (rating[c.id] === null && b === 6) ? '0' : '-1') + '">' + b + '</button>').join('') +
         '</div>' +
         '<div class="rate-desc" id="rateDesc' + c.id + '" aria-live="polite">' +
-          (rating[c.id] !== null ? esc(c.bands[rating[c.id]]) : '<span style="color:var(--text-muted)">Tap a level to see what it means.</span>') +
+          (rating[c.id] !== null ? esc(c.bands[rating[c.id]]) : '<span class="muted">Tap a band to see what it means.</span>') +
         '</div>' +
         (c.note ? '<div class="rate-note">' + c.note + '</div>' : '') +
       '</div>').join('') +
     '<div style="display:flex;gap:14px;align-items:baseline;flex-wrap:wrap;margin-top:6px">' +
       '<div id="rateSum" class="rate-sum">' + sumLine() + '</div>' +
-      '<button class="tc-skip" data-action="rate-clear">Clear rating</button>' +
+      '<button class="btn-text" data-action="rate-clear">Reset my rating</button>' +
     '</div>';
 }
 function sumLine() {

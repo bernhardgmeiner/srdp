@@ -20,122 +20,185 @@ function qfBadge(t) {
 window.PAGES = window.PAGES || {};
 
 /* ─── HOME ────────────────────────────────────────────────── */
+/* Lernseiten, die in den Fortschritt zählen (ohne FAQ, Teachers, Parents, Notebook, Plan, Timer) */
+function learnIds() {
+  return ['overview', 'examiner'].concat(M.typesForSchool().map(t => t.id))
+    .concat(['paragraphs', 'grammar', 'phrasebank', 'topicvocab', 'taskbank', 'selfcheck', 'checklist', 'practice']);
+}
+/* Empfohlene Reihenfolge für "Next up" (ohne Prüfungsdatum) */
+function pathIds() {
+  const types = M.typesForSchool().map(t => t.id);
+  return ['overview', types[0], 'paragraphs', 'taskbank', 'selfcheck', 'examiner']
+    .concat(types.slice(1)).concat(['grammar', 'phrasebank', 'topicvocab', 'checklist', 'practice']);
+}
+function navLabel(id) {
+  let lab = id;
+  M.NAV.forEach(sec => sec.items.forEach(it => { if (it.id === id) lab = it.label; }));
+  const t = SRDP.textTypes.find(x => x.id === id);
+  return t ? 'The ' + t.name.toLowerCase() : lab;
+}
+M.learnIds = learnIds;
+
+/* Aktiver Plan (Schularbeit oder Matura), nur wenn ein Datum gespeichert ist; der nähere gewinnt */
+function activePlan() {
+  const sa = M.testPlan ? M.testPlan.status() : null;
+  const ma = M.planStatus ? M.planStatus() : null;
+  const saOk = sa && sa.daysLeft !== null && sa.daysLeft >= 0;
+  const maOk = ma && ma.daysLeft !== null && ma.daysLeft >= 0;
+  if (saOk && (!maOk || sa.daysLeft <= ma.daysLeft)) return { kind: 'test', s: sa };
+  if (maOk) return { kind: 'matura', s: ma };
+  return null;
+}
+M.activePlan = activePlan;
+
+function planCard() {
+  const ap = activePlan();
+  if (!ap) return '';
+  const s = ap.s, dl = s.daysLeft;
+  const what = ap.kind === 'test' ? 'your Schularbeit (' + esc(s.label) + ')' : 'the Matura';
+  if (dl === 0) {
+    return '<section class="start-card is-green no-print" aria-labelledby="startH">' +
+      '<h2 class="start-h" id="startH">Today is ' + what + '. Good luck!</h2>' +
+      '<p class="start-p">Read the task twice, plan your time and keep time for proofreading. For a last look, open the <a href="#checklist">final checklist</a>.</p>' +
+    '</section>';
+  }
+  let title, tasks;
+  if (ap.kind === 'test') {
+    tasks = s.nextTasks || [];
+    title = s.nextOffset === 0 ? 'Today' : 'Next';
+  } else {
+    const day = M.planDay(s.planId, s.dayIndex);
+    tasks = day ? day.tasks : [];
+    title = (s.isToday ? 'Today' : (s.started ? 'Next' : 'Your first step')) + ': Day ' + s.dayNumber + ' – ' + esc(s.dayTitle);
+  }
+  const mins = tasks.reduce((a, t) => a + (t.min || 0), 0);
+  return '<section class="start-card' + (dl <= 7 ? ' is-green' : '') + ' no-print" aria-labelledby="startH">' +
+    '<div class="start-top"><span class="start-days">' + dl + ' day' + (dl === 1 ? '' : 's') + ' until ' + (ap.kind === 'test' ? 'your Schularbeit' : 'the Matura') + '</span>' +
+      '<span class="start-meta">' + s.done + ' of ' + s.total + ' tasks done</span></div>' +
+    '<h2 class="start-h" id="startH">' + title + '</h2>' +
+    (tasks.length ? '<ul class="start-tasks">' + tasks.map(t => '<li>' + t.t + (t.min ? ' <span class="start-min">' + t.min + ' min</span>' : '') + '</li>').join('') + '</ul>' : '') +
+    '<div class="start-row">' +
+      '<a class="btn btn-primary" href="#studyplan">Open my plan <span aria-hidden="true">&rarr;</span></a>' +
+      (mins ? '<span class="start-min">About ' + mins + ' minutes</span>' : '') +
+    '</div>' +
+  '</section>';
+}
+
+function waysBlock() {
+  const ways = [
+    ['<button type="button" class="way-card" data-scroll-to="types">', '</button>', 'Learn a text type', 'Guides, model texts, phrases and a quiz for each text type. Good for class and for revising.'],
+    ['<a class="way-card" href="#taskbank">', '</a>', 'Write a text and check it', 'Pick a task, write it, and let the self-check look at your draft. Good for homework.'],
+    ['<a class="way-card" href="#studyplan">', '</a>', 'Plan for a test', 'A day-by-day plan for your next Schularbeit or for the Matura, plus a mock exam.'],
+  ];
+  return '<nav class="ways no-print" aria-label="What do you want to do?">' + ways.map(w =>
+    w[0] + '<span class="way-t">' + w[2] + ' <span aria-hidden="true">&rarr;</span></span><span class="way-d">' + w[3] + '</span>' + w[1]).join('') + '</nav>';
+}
+
 PAGES.home = {
   title: 'Home',
   render() {
     const prog = M.progress();
-    const navFlat = [];
-    M.NAV.forEach(sec => sec.items.forEach(it => { if (it.id !== 'home') navFlat.push(it); }));
-    const trackable = navFlat.map(it => it.id);
-    const visited = trackable.filter(id => prog[id] && prog[id].visited).length;
+    const ids = learnIds();
+    const visited = ids.filter(id => prog[id] && prog[id].visited).length;
     const quizIds = M.typesForSchool().map(t => t.id).concat('final');
     const quizzes = quizIds.filter(id => prog[id] && prog[id].quiz).length;
-    const pct = Math.round((visited / trackable.length) * 100);
-    const next = navFlat.find(it => !(prog[it.id] && prog[it.id].visited)) || null;
-    return '<div class="page">' +
-      '<div class="page-head" style="padding-bottom:56px"><div class="inner" style="max-width:1100px">' +
-        '<div class="eyebrow"><span lang="de">' + esc(M.schoolConfig().eyebrow || 'Schriftliche Reifeprüfung · English B2') + ' (<a href="https://www.bernhardgmeiner.com" target="_blank" rel="noopener">Bernhard Gmeiner</a>)</span></div>' +
-        '<h1 class="title" style="font-size:clamp(2.3rem,5.5vw,4.4rem);max-width:880px">Don&rsquo;t panic, it&rsquo;s just the Matura.</h1>' +
-        '<p class="lead">Everything you need for the ' + (M.schoolConfig().tasksWord || 'two') + ' writing tasks of the English Matura. Start with the overview, or jump straight to the text type you are practising this week.</p>' +'<p lang="de" style="font-size:.9375rem;color:var(--text-muted);max-width:620px;margin:-14px 0 26px;line-height:1.5">Diese Seite hilft bei der Vorbereitung auf die schriftliche Englisch-Matura (' + esc(M.schoolConfig().label || 'AHS') + ', B2). Alle Lerninhalte sind auf Englisch.</p>' +
-        '<div style="display:flex;gap:1px;flex-wrap:wrap">' +
-          '<a class="btn btn-primary" href="#overview" style="min-width:200px">Start with the overview <span>→</span></a>' +
-          '<a class="btn btn-ghost" href="#' + ((M.typesForSchool()[0] || {}).id || 'article') + '" style="min-width:170px">Jump to the ' + esc(((M.typesForSchool()[0] || {}).name || 'text types').toLowerCase()) + ' <span>→</span></a>' +
-        '</div>' +
+    const hasDate = !!activePlan();
+    const nextId = pathIds().find(id => !(prog[id] && prog[id].visited));
+    const sc = M.schoolConfig();
+    const first = M.typesForSchool()[0] || { id: 'article', name: 'Article' };
+    return '<div class="page home">' +
+      '<div class="page-head home-head"><div class="inner home-inner">' +
+        '<div class="eyebrow"><span lang="de">' + esc(sc.eyebrow || 'Schriftliche Reifeprüfung · English B2') + ' (<a href="https://www.bernhardgmeiner.com" target="_blank" rel="noopener">Bernhard Gmeiner</a>)</span></div>' +
+        '<h1 class="title home-title">Don&rsquo;t panic, it&rsquo;s just the Matura.</h1>' +
+        '<p class="lead">Guides, model texts and practice tasks for every text type of the written English exam. For homework, Schularbeiten and the Matura (' + esc(sc.label || 'AHS') + ', B2).</p>' +
+        '<p class="home-de" lang="de">Diese Seite begleitet durch die Oberstufe: Textsorten lernen, Hausübungen schreiben, auf Schularbeiten und die Matura vorbereiten. Alle Lerninhalte sind auf Englisch. <a href="#parents">Für Eltern</a></p>' +
+        planCard() +
+        waysBlock() +
       '</div></div>' +
-      '<div class="wrap" style="max-width:1100px">' +
-        (M.homeHint ? M.homeHint(visited > 0 ? 'Your progress: ' + visited + '/' + trackable.length + ' sections · ' + quizzes + '/' + quizIds.length + ' quizzes' : '', next) : '') +
+      '<div class="wrap home-wrap">' +
+        (visited > 0
+          ? '<div class="home-prog no-print"><span>Your progress: <strong>' + visited + ' of ' + ids.length + '</strong> sections visited · <strong>' + quizzes + ' of ' + quizIds.length + '</strong> quizzes passed</span>' +
+            (!hasDate && nextId ? '<a href="#' + nextId + '">Next up: ' + esc(navLabel(nextId)) + ' <span aria-hidden="true">&rarr;</span></a>' : '') + '</div>'
+          : '') +
         '<div class="gap-s"></div>' +
-        sectionLabel('How to use this guide') +
-        '<p style="font-size:1rem;color:var(--text-secondary);line-height:1.6;max-width:680px;margin-bottom:22px">New here? These four steps are the short version. Follow them in order, or jump straight to whatever you are practising this week.</p>' +
-        '<div class="grid g-auto-240">' +
-          [
-            ['overview', '01', 'Read the overview', 'How the Writing section works and how your texts are graded.'],
-            [((M.typesForSchool()[0] || {}).id || 'article'), '02', 'Pick a text type', 'Each text type has a guide, a model text, phrases and a quiz.'],
-            ['selfcheck', '03', 'Draft and self-check', 'Paste your text in for instant checks on length, register and conventions.'],
-            ['taskbank', '04', 'Practise for real', 'Matura-style prompts in the Task bank, then test yourself in the Practice zone.'],
-          ].map(function(s, si){ var stepCols = ['var(--blue)', 'var(--purple)', 'var(--green)', 'var(--orange)']; return '<a class="card link" href="#' + s[0] + '" style="text-decoration:none;border-left:3px solid ' + stepCols[si] + '">' +
-              '<div style="font-weight:300;font-size:1.7rem;line-height:1;color:var(--primary);margin-bottom:12px">' + s[1] + '</div>' +
-              '<div style="font-weight:600;font-size:1rem;color:var(--text);margin-bottom:7px">' + s[2] + '</div>' +
-              '<div style="font-size:.875rem;color:var(--text-muted);line-height:1.5">' + s[3] + '</div>' +
-              '<div class="go">Open <span>&rarr;</span></div>' +
-            '</a>'; }).join('') +
-        '</div>' +
-        '<div style="margin-top:16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap">' +
-          '<button class="btn btn-ghost" data-action="start-tour">Take the guided tour <span>&rarr;</span></button>' +
-          '<span style="font-size:.8125rem;color:var(--text-muted)">A two-minute walkthrough of every section. You can stop any time.</span>' +
-        '</div>' +
-        '' +
-        '<div class="gap-s"></div>' +
-        sectionLabel('The Writing section at a glance') +
-        '<div class="grid g-auto-150">' +
-          [[(M.schoolConfig().timeStat || '120 min'), (M.schoolConfig().timeStatSub || 'total writing time')], [(M.schoolConfig().tasksStat || '2 tasks'), (M.schoolConfig().tasksStatSub || '~400 + ~250 words')], ['4 × 0–10', 'equally weighted criteria'], ['±10%', 'word count tolerance']].map(s =>
-            '<div class="card"><div class="stat-v">' + s[0] + '</div><div class="stat-l">' + s[1] + '</div></div>').join('') +
-        '</div>' +
-        '<div class="gap"></div>' +
-        sectionLabel('The text types') +
+        '<h2 class="section-label" id="types" tabindex="-1">The text types</h2>' +
         '<div class="grid g-auto-280">' +
           M.typesForSchool().map(t => {
-            const p = M.progress()[t.id];
-            return '<a class="card link" href="#' + t.id + '" style="text-decoration:none;border-left:3px solid ' + TYPE_COLORS[t.color] + '">' +
-              '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">' +
-                '<span style="display:inline-flex;align-items:center;gap:8px;font-size:.875rem;font-weight:600;color:var(--text)"><span style="width:10px;height:10px;background:' + TYPE_COLORS[t.color] + '"></span>' + t.name + '</span>' +
-                (p && p.quiz ? '<span style="font-size:.75rem;color:var(--green)">✓ quiz done</span>' : p && p.visited ? '<span style="font-size:.75rem;color:var(--text-muted)">read</span>' : '') +
-              '</div>' +
-              '<div style="font-size:1rem;color:var(--text);margin-bottom:8px;line-height:1.4">' + esc(t.tagline) + '</div>' +
-              '<div style="font-size:.875rem;color:var(--text-muted)">' + esc(qfWordCount(t)) + ' · ' + esc(t.quickFacts[1].value) + '</div>' +
-              '<div class="go">Open guide <span>→</span></div>' +
+            const p = prog[t.id] || {};
+            const mark = (on, lab) => '<span class="tt-step' + (on ? ' on' : '') + '">' + (on ? '✓ ' : '') + lab + '</span>';
+            return '<a class="card link tt-card" href="#' + t.id + '" style="--tc:' + TYPE_COLORS[t.color] + '">' +
+              '<span class="tt-name"><span class="tt-dot" aria-hidden="true"></span>' + esc(t.name) + '</span>' +
+              '<span class="tt-tag">' + esc(t.tagline) + '</span>' +
+              '<span class="tt-meta">' + esc(qfWordCount(t)) + ' · ' + esc(t.quickFacts[1].value) + '</span>' +
+              '<span class="tt-steps">' + mark(p.visited, 'Guide') + mark(p.model, 'Model text') + mark(p.quiz, 'Quiz') + '</span>' +
             '</a>';
           }).join('') +
         '</div>' +
         '<div class="gap"></div>' +
-        sectionLabel('Practise') +
-        '<div class="grid g-auto-220">' +
-          [
-            ['paragraphs', 'Paragraph writing', 'The four-layer paragraph, step by step'],
-            ['taskbank', 'Task bank', 'Matura-style tasks with input material for every text type'],
-            ['selfcheck', 'Self-check studio', 'Paste your text, get instant convention checks'],
-            ['practice', 'Practice zone', 'Spot mistakes, fix the register, final quiz'],
-          ].map(t =>
-            '<a class="card link" href="#' + t[0] + '" style="text-decoration:none">' +
-              '<div style="font-size:1.15rem;color:var(--text);margin-bottom:8px;line-height:1.33">' + t[1] + '</div>' +
-              '<div style="font-size:.875rem;color:var(--text-muted);line-height:1.5">' + t[2] + '</div>' +
-              '<div class="go">Open <span>→</span></div>' +
-            '</a>').join('') +
+        sectionLabel('The written Matura at a glance') +
+        '<div class="grid g-auto-150">' +
+          [[(sc.timeStat || '120 min'), (sc.timeStatSub || 'total writing time')], [(sc.tasksStat || '2 tasks'), (sc.tasksStatSub || '~400 + ~250 words')], ['4 × 0–10', 'equally weighted criteria'], ['±10%', 'word count tolerance']].map(s =>
+            '<div class="card"><div class="stat-v">' + s[0] + '</div><div class="stat-l">' + s[1] + '</div></div>').join('') +
         '</div>' +
+        '<p class="home-more"><a href="#overview">How the four criteria work and how bands become a grade <span aria-hidden="true">&rarr;</span></a></p>' +
         '<div class="gap"></div>' +
-        sectionLabel('Reference') +
-        '<div class="grid g-auto-220">' +
+        sectionLabel('Practise and look things up') +
+        '<ul class="home-links">' +
           [
-            ['phrasebank', 'Phrase bank', 'Exam-ready phrases, one-click copy'],
-            ['topicvocab', 'Topic vocabulary', 'Collocations for the most common Matura topics'],
-            ['grammar', 'Grammar kit', 'The 14 classic Austrian mistakes'],
-            ['checklist', 'Writing checklist', 'Self-assess before you put your pen down'],
-          ].map(t =>
-            '<a class="card link" href="#' + t[0] + '" style="text-decoration:none">' +
-              '<div style="font-size:1.15rem;color:var(--text);margin-bottom:8px;line-height:1.33">' + t[1] + '</div>' +
-              '<div style="font-size:.875rem;color:var(--text-muted);line-height:1.5">' + t[2] + '</div>' +
-              '<div class="go">Open <span>→</span></div>' +
-            '</a>').join('') +
-        '</div>' +
+            ['taskbank', 'Task bank', 'Matura-style tasks with input material'],
+            ['timer', 'Mock exam', 'A full Matura paper against the clock, then check your texts'],
+            ['selfcheck', 'Self-check & checklist', 'Paste a draft and get quick feedback'],
+            ['studyplan', 'Study plan', 'For your next Schularbeit or the Matura'],
+            ['examiner', 'Grade like an examiner', 'Rate example texts, then compare'],
+            ['paragraphs', 'Paragraph writing', 'Four steps to a good body paragraph'],
+            ['practice', 'Practice zone', 'Spot mistakes, switch register, final quiz'],
+            ['phrasebank', 'Phrases & vocabulary', 'Phrases and topic words to copy'],
+            ['grammar', 'Grammar kit', 'Where German sneaks into your English'],
+          ].map(l => '<li><a href="#' + l[0] + '"><span class="hl-t">' + l[1] + '</span><span class="hl-d">' + l[2] + '</span></a></li>').join('') +
+        '</ul>' +
         '<div class="gap"></div>' +
-        sectionLabel('Common pitfalls that cost the most marks') +
-        '<p style="font-size:.875rem;color:var(--text-muted);margin:-6px 0 16px;max-width:620px">A quick selection. The <a href="#overview">overview</a> has the full list of the eight most expensive mistakes. The good news: every one of these is a cheap fix once you can name it.</p>' +
+        sectionLabel('Six mistakes that cost the most marks') +
+        '<p class="home-intro">All six are habits you can change. The <a href="#overview">overview</a> explains each one and lists two more.</p>' +
         '<div class="grid g-auto-280">' +
           [
-            ['Missing a bullet point', 'Task Achievement drops sharply'],
-            ['Lifting from the prompt', 'Range score suffers'],
-            ['Only simple grammar', 'Range stays in the low bands'],
-            ['Wrong text type register', 'Formal style in a blog = penalty'],
-            ['Word count off by >±10%', 'Task Achievement drops one band'],
-            ['Skipping proofreading', 'Errors you would catch in 3 minutes'],
+            ['A content point is missing', 'Task Achievement drops sharply.'],
+            ['Sentences copied from the task', 'Copied language does not count for Range.'],
+            ['Only simple grammar', 'Range stays in the low bands.'],
+            ['Wrong register for the text type', 'A formal blog or a chatty report loses marks.'],
+            ['More than 10% too long or too short', 'Task Achievement drops one band.'],
+            ['No time left to proofread', 'You lose marks for errors you would find in three minutes.'],
           ].map(w =>
-            '<div class="card" style="border-left:3px solid var(--red)"><div style="font-size:.9375rem;font-weight:600;color:var(--text);margin-bottom:4px">' + w[0] + '</div><div style="font-size:.875rem;color:var(--text-muted)">' + w[1] + '</div></div>').join('') +
+            '<div class="card pit-card"><div class="pit-t">' + w[0] + '</div><div class="pit-d">' + w[1] + '</div></div>').join('') +
         '</div>' +
-        '<div style="height:72px"></div>' +
+        '<div class="page-end"></div>' +
       '</div>' +
     '</div>';
   },
 };
+
+/* Notenberechnung: Korrektur- und Beurteilungsanleitung SRP LFS B1/B2 (AHS bzw. BHS), BMB/IQS, Sept. 2024 */
+function gradeBlock() {
+  const bhs = M.school() === 'bhs';
+  const steps = bhs ? [
+    'Your three texts get <strong>12 band scores</strong> (3 texts × 4 criteria, each 0–10). That is 120 points at most, and all three texts count the same.',
+    'They are converted into the <strong>50 points</strong> of the Writing section: your total ÷ 120 × 50. Reading and listening count 25 points each.',
+    'To pass, you need at least <strong>60 of 100 points</strong> overall and at least <strong>25 points</strong> in each area: reading + listening, and writing.',
+  ] : [
+    'Your two texts get <strong>8 band scores</strong> (2 texts × 4 criteria, each 0–10). That is 80 points at most, and both texts count the same.',
+    'They are converted into the <strong>25 points</strong> of the Writing section: your total ÷ 80 × 25. Reading, listening and language in use count 25 points each.',
+    'To pass, you need at least <strong>60 of 100 points</strong> overall and at least <strong>25 points</strong> in each area: reading + listening, and language in use + writing.',
+  ];
+  const example = bhs
+    ? 'Example: band 6 on all twelve criteria is 72 of 120, which gives 30 of 50 points (60%).'
+    : 'Example: band 6 on all eight criteria is 48 of 80, which gives 15 of 25 points (60%).';
+  return '<ol class="grade-steps">' + steps.map(x => '<li>' + x + '</li>').join('') + '</ol>' +
+    '<div class="tbl-wrap" tabindex="0" role="group" aria-label="Grade thresholds"><table class="tbl tbl-narrow"><thead><tr><th scope="col">Points (of 100)</th><th scope="col">Grade <span lang="de">(Note)</span></th></tr></thead><tbody>' +
+      [['90 or more', 'Sehr gut'], ['80 or more', 'Gut'], ['70 or more', 'Befriedigend'], ['60 or more', 'Genügend'], ['under 60, or under 25 in one area', 'Nicht genügend']]
+        .map(r => '<tr><td>' + r[0] + '</td><td lang="de">' + r[1] + '</td></tr>').join('') +
+    '</tbody></table></div>' +
+    '<div class="tip mt-4">' + example + ' Band 6 is the B2 minimum. A weaker text can still be balanced by the other parts of the exam.</div>' +
+    '<p class="text-xs muted mt-3">Source: the official correction and assessment guide for the written exam in modern foreign languages (BMB/IQS, September 2024). Your teachers apply it. If anything is unclear, ask them.</p>';
+}
 
 /* ─── OVERVIEW & GRADING ──────────────────────────────────── */
 PAGES.overview = {
@@ -143,7 +206,7 @@ PAGES.overview = {
   render() {
     const d = SRDP;
     return '<div class="page">' +
-      pageHead('Learn', 'Overview &amp; grading', 'How the Writing section works and how your texts are graded. Ten minutes here saves you marks everywhere else.') +
+      pageHead('Learn', 'Overview &amp; grading', 'How the Writing section works, how your texts are graded and how the bands become your grade. Read this page first. It takes about ten minutes.') +
       '<div class="wrap"><div class="gap-s"></div>' +
         '<a class="btn btn-ghost no-print" href="/pdf/overview' + (M.school() === 'bhs' ? '-bhs' : '') + '.pdf" target="_blank" rel="noopener" style="margin-bottom:20px">Download this page as a PDF (' + esc(M.schoolConfig().label || 'AHS') + ') <span>&darr;</span></a>' +
         sectionLabel('The Writing section', { id: 'writing', label: 'The Writing section' }) +
@@ -160,13 +223,13 @@ PAGES.overview = {
         '<div class="gap-s"></div>' +
         '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">' +
           '<div class="tip">' + (M.schoolConfig().wordCountTip || 'Word count tolerance: ±10%. If you are further off than that, Task Achievement is reduced by one band.') + '</div>' +
-          '<div class="tip">Almost every task gives three content points. Address each one – in its own body paragraph, and follow whatever your task sheet actually lists.</div>' +
-          '<div class="tip"><strong>Register</strong> = how formal or casual your language is – the difference between a letter to a company and a message to a friend.</div>' +
+          '<div class="tip">Almost every task lists three <strong>content points</strong> (the three bullet points in the task). Cover each one, usually in its own body paragraph.</div>' +
+          '<div class="tip"><strong>Register</strong> means how formal or casual your language is. Compare a letter to a company with a message to a friend.</div>' +
         '</div>' +
-        '<div class="tip" style="margin-top:18px">Want the real thing? The tasks on this site are Matura-style, written for practice. The officially released past exam papers live in the BMB download area at <a href="https://www.matura.gv.at/downloads" target="_blank" rel="noopener">matura.gv.at/downloads</a> – same format, real exams.</div>' +
+        '<div class="tip mt-5">Practise with real exams too. The tasks on this site are written in the Matura style. The official past papers are in the BMB download area at <a href="https://www.matura.gv.at/downloads" target="_blank" rel="noopener">matura.gv.at/downloads</a>.</div>' +
         '<div class="gap"></div>' +
         sectionLabel('How you are graded – the four criteria', { id: 'criteria', label: 'The four criteria' }) +
-        '<p style="font-size:1.05rem;color:var(--text-secondary);line-height:1.55;margin-bottom:22px;max-width:720px">Each text is rated with the official analytic scale: four independent criteria, each scored <strong style="color:var(--text)">0–10</strong> and equally weighted – weaker areas can be compensated for by stronger ones.</p>' +
+        '<p class="lead-sm mb-5">Each text is rated with the official scale: four criteria, each scored <strong>0–10</strong> and weighted equally. A weaker criterion can be balanced by a stronger one.</p>' +
         '<div class="grid g-auto-240">' +
           M.assessmentCriteria().map((c, i) =>
             '<div class="card" style="border-top:3px solid var(--primary)">' +
@@ -185,23 +248,17 @@ PAGES.overview = {
           '<div class="acc-item' + (i === 0 ? ' open' : '') + '"><button class="acc-head" data-action="acc" aria-expanded="' + (i === 0 ? 'true' : 'false') + '"><span class="pm">+</span><span>' + b.band + ' · ' + b.label + '</span></button>' +
           '<div class="acc-body"><p style="font-size:.9rem;color:var(--text-secondary);line-height:1.6;padding-top:10px">' + b.desc + '</p></div></div>').join('') +
         '</div>' +
-        '<div style="margin-top:10px;font-size:.75rem;color:var(--text-muted)">Simplified from the official B2 rating scale (BMB, 2023 revision). The grid describes levels 0, 2, 4, 6, 8 and 10; the odd levels in between are for texts that sit between two descriptions. Your teachers grade with the full official scale.</div>' +
+        '<p class="text-xs muted mt-3">Simplified from the official B2 assessment scale (BMB, 2023 revision). The scale describes bands 0, 2, 4, 6, 8 and 10. The odd-numbered bands (1, 3, 5, 7, 9) are for texts between two descriptions. Your teachers grade with the full official scale.</p>' +
+        '<div class="gap"></div>' +
+        sectionLabel('From bands to your grade', { id: 'grade', label: 'Your grade' }) +
+        gradeBlock() +
         '<div class="gap"></div>' +
         sectionLabel('The 8 most expensive mistakes', { id: 'mistakes', label: 'The 8 expensive mistakes' }) +
-        '<p style="font-size:.9375rem;color:var(--text-secondary);line-height:1.55;margin:-4px 0 16px;max-width:680px">None of these is a talent problem. Each one is a habit you can train away in an afternoon.</p>' +
+        '<p class="lead-sm mb-4">Each one is a habit you can change.</p>' +
         '<div class="tbl-wrap" tabindex="0" role="group" aria-label="Table (scroll sideways on small screens)"><table class="tbl"><thead><tr><th>Mistake</th><th>What it costs</th><th>The fix</th></tr></thead><tbody>' +
-          [
-            ['Writing only 2 of 3 bullet points', 'Task Achievement drops sharply', 'Tick off each bullet as you write it'],
-            ['Ignoring the text type&rsquo;s rules (e.g. a report without headings)', 'Task Achievement drops – conventions are part of the criterion', 'Check the Layout box in the guide before you start'],
-            ['Copying words from the prompt or the input material', 'Range drops – lifted language is not your language', 'Rephrase, then interpret: what does the figure mean for your point?'],
-            ['Word count off by more than ±10%', 'Task Achievement drops one band', 'Count your words. Practise estimating.'],
-            ['Formal style in a blog (or vice versa)', 'Wrong register = lower Task Achievement', 'Ask: formal or informal? Then commit.'],
-            ['Only simple linking words', 'Low Coherence score', 'Use the B2 linking words table'],
-            ['No topic sentences', 'Paragraphs feel random, weak Coherence', 'First sentence of each paragraph = the point'],
-            ['Forgetting to proofread', 'Errors you would catch in 3 minutes', 'Always save 5–10 min at the end'],
-          ].map(r => '<tr><td>' + r[0] + '</td><td style="color:var(--red)">' + r[1] + '</td><td>→ ' + r[2] + '</td></tr>').join('') +
+          SRDP.mistakes.map(r => '<tr><td>' + r[0] + '</td><td style="color:var(--red)">' + r[1] + '</td><td>→ ' + r[2] + '</td></tr>').join('') +
         '</tbody></table></div>' +
-        '<div style="height:72px"></div>' +
+        '<div class="page-end"></div>' +
       '</div>' +
     '</div>';
   },
@@ -209,31 +266,37 @@ PAGES.overview = {
 
 /* ─── TEXT TYPE PAGES ─────────────────────────────────────── */
 const typeTabs = {};
-const TYPE_EXAMPLES = {
-  essay: { weak: 'Social media has many advantages and disadvantages for young people today.', strong: 'For teenagers, the real cost of social media is not screen time. It is a slowly shrinking attention span.', why: 'A strong essay opens each paragraph with one clear, arguable point. The weaker version lists everything and commits to nothing, so the examiner cannot follow your line of argument.' },
-  article: { weak: 'In this article I am going to tell you about the advantages of doing sport.', strong: 'Ask anyone who has hit the wall at kilometre 30: running is at least half a mental game.', why: 'An article has to pull the reader in. Announcing your plan reads flat, while a concrete hook makes someone want to read on. That is exactly what the task rewards.' },
-  report: { weak: 'I really think the school canteen is terrible and nobody likes it.', strong: 'Under heading 2, Findings: 68 per cent of the 120 students surveyed rated the canteen food as poor or very poor.', why: 'A report stays factual and impersonal and presents its evidence under clear headings. Personal outbursts cost you marks for register and task achievement.' },
-  blog: { weak: 'One should carefully consider the various advantages before deciding to take a gap year.', strong: 'I used to think a gap year was just an expensive way to put off real life. Then I took one, and it changed my mind.', why: 'Blogs work through a personal, informal voice with contractions and a short story. Formal phrasing like one should consider is formal register dropped into the wrong text type.' },
-  email: { weak: 'Hi! Your headphones broke after two days and I want my money back, thanks.', strong: 'Dear Sir or Madam, I am writing to request a refund for the headphones I bought on 3 May, which stopped working after two days.', why: 'A formal e-mail names its purpose in the first line and keeps a polite, formal register throughout. The casual version would be marked down for register and tone.' },
-  leaflet: { weak: 'This leaflet provides information about the annual town festival taking place in the market square.', strong: 'Live music, free food and the whole town in one square: the Seetal Festival is back, and you are invited.', why: 'A leaflet has to grab a reader holding it for two seconds at a bus stop. The weak version describes itself like a report and gives no reason to care. The strong version leads with the benefits and speaks straight to the reader, which is exactly what a persuasive leaflet does.' },
-};
-const SECOND_MODELS = {
-  essay: { title:'Should smartphones be banned in schools?', meta:'~400 words · formal', tip:'This second example has no colour labels on purpose. Try to spot the thesis in the introduction, the topic sentence of each body paragraph, the counter-argument and the forward-looking conclusion yourself.', paras:[{ t:'Few objects divide a school as quickly as the smartphone. Some teachers would happily collect every device at the school gate; others hand out tablets and expect us to look things up in seconds. My own view sits between the two. A blanket ban is a mistake: phones cause genuine problems in class, but pretending they do not exist solves nothing, and the realistic option is to control when and how they are used.', mono:false },{ t:'The case for banning phones is easy to understand. A single buzzing notification can pull a whole row of students out of a lesson, and anyone who has sat in a class where half the room is watching TikTok under the desk knows how quickly attention drains away. Cheating has become simpler, too: an answer is only a quick search away. Several schools that locked phones in pouches during the day have reported calmer corridors and livelier conversations at break. These are not small gains, and they deserve to be taken seriously.', mono:false },{ t:'Even so, the device that causes the trouble is also a genuinely useful tool. In our biology lessons we photograph experiments, scan a code to open a quiz, and check unfamiliar words in seconds. A student who has forgotten a deadline can look it up; one who finds reading hard can have a text read aloud. Banning the phone outright throws all of this away, and it teaches nothing about self-control. Teenagers who never manage their phones at school simply postpone that struggle until later.', mono:false },{ t:'Supporters of a full ban often reply that teenagers cannot be trusted to regulate themselves, and there is some truth in that. Willpower rarely wins against a well-designed app. The better answer, though, is to build in structure. Phones can stay switched off and out of sight by default, and come out only for a clear purpose when a teacher asks for them. Rules that we help to write are far harder to resent than ones simply imposed from above.', mono:false },{ t:'On balance, I remain convinced that banning smartphones treats a symptom while ignoring the cause. My generation will carry these devices into every job and every waiting room for the rest of our lives. A school that shows us how to switch off, focus, and then use the tool on purpose gives us something a locked pouch never can.', mono:false }] },
-  article: { title:'Why learning a language is worth the struggle', meta:'~250 words · semi-formal', tip:'This second example has no colour labels. Try to spot the catchy opening question, the personal voice, and the way each paragraph develops one clear idea yourself.', paras:[{ t:'Have you ever given up on a language because the grammar felt impossible? You are not alone. But after spending a summer working in Italy with barely any Italian, I am convinced that pushing through the hard part is one of the most rewarding things a teenager can do.', mono:false },{ t:'The obvious benefit is communication. Once I could order food, ask for directions and joke with my colleagues, a whole country opened up to me. Suddenly I was not just a tourist staring helplessly at a menu. Now I could actually take part. I will never forget the afternoon an elderly shopkeeper, delighted that a foreigner was even trying, spent twenty minutes teaching me the local word for delicious. That single afternoon taught me more than a month of vocabulary lists ever could.', mono:false },{ t:'What surprised me more, though, was what it did to my confidence. Every small conversation I survived made the next one a little easier. I slowly realised that making mistakes was not really embarrassing. It was just part of the process. By the end of the summer, the language had stopped feeling like a school subject and started feeling like a tool I actually owned.', mono:false },{ t:'So if you are ever tempted to quit, my advice is simple: keep going, and look for chances to use the language in real life, even when it feels awkward. The struggle is temporary, but the doors a second language opens stay open for good.', mono:false }] },
-  report: { title:'Report on the use of the school library', meta:'~250 words · formal', tip:'This second example has no colour labels. Try to spot the header, the clear section headings, the precise data and the recommendations yourself.', paras:[{ t:'Date: 8 May 2026\nFrom: Tom Pichler, Student Council\nSubject: Survey on the Use of the School Library', mono:true },{ t:'Aim of the survey\nThis report presents the results of a survey on how students use the school library. A total of 110 students from years 5 to 8 took part. The aim is to find out why the library is so often empty and to suggest practical improvements.', mono:false },{ t:'How students use the library\nThe results were revealing. While 78% of respondents said they valued having a library, only 21% visited it more than once a month. The main reasons given were limited opening hours and a lack of quiet study space. Interestingly, students in the upper years were far more likely to use the library than younger ones, who tended to study at home. In addition, many were unaware that e-books could be borrowed free of charge. When asked what would bring them in more often, most pointed to comfortable seating and a wider choice of books.', mono:false },{ t:'Suggested improvements\nOn the basis of these findings, it would be advisable to extend the opening hours into the early afternoon and to create a separate silent study area. Furthermore, the e-book service should be promoted more actively, for example through posters and a short presentation in each class. It would also be worth repeating the survey after one term to measure the effect.', mono:false },{ t:'Conclusion\nIn summary, students clearly value the library but rarely use it. With longer hours, a dedicated quiet zone and better promotion, it could once again become a valuable part of school life.', mono:false }] },
-  blog: { title:'What three months without takeaway taught me', meta:'~250 words · informal', tip:'This second example has no colour labels. Try to spot the username line, the chatty personal voice, the short punchy sentences and the call to comment yourself.', paras:[{ t:'by leo_cooks · 14 April 2026, 18:20\n\nWhat Three Months Without Takeaway Taught Me', mono:true },{ t:'Confession time: until March, I ordered food about four times a week. Pizza, sushi, burgers, you name it. Then my mum challenged me to cook every single meal myself for three months, and I said yes mostly to prove her wrong. My friends laughed. My brother even started a betting pool on how long I would last, and the longest guess was nine days. Spoiler: I did not starve, and he lost ten euros.', mono:false },{ t:'Week one was a disaster. I burnt rice, undercooked chicken and somehow set off the smoke alarm twice. But here is the thing nobody tells you: cooking gets easier scarily fast. By week three I could throw together a curry without even checking the recipe, and it actually tasted good. Somewhere around week six, I even started to enjoy it. There is something weirdly satisfying about eating a meal you made with your own two hands, even if half of it is slightly burnt.', mono:false },{ t:'The biggest surprise, though, was not the food. It was the money. I worked out that I had saved almost 200 euros, just by not tapping that little delivery button. Will I order takeaway again? Sure, and I did, last Friday. But now it feels like a treat instead of a lazy default. Have you ever tried a challenge like this? Tell me how it went in the comments!', mono:false }] },
-  email: { title:'Complaint about a faulty online order', meta:'~250 words · formal', tip:'This second example has no colour labels. Try to spot the four-part header, the formal greeting, the specific complaint, the clear request and the matching sign-off yourself.', paras:[{ t:'To: support@techstore.example\nFrom: julia.berger@email.example\nDate: 22 April 2026\nSubject: Faulty Wireless Headphones (Order #48217)', mono:true },{ t:'Dear Sir or Madam,\n\nI am writing to complain about a pair of wireless headphones I ordered from your website on 5 April. Although the product was advertised as new and fully functional, it developed a serious fault within only three days of use. As I had been looking forward to using them for my daily commute, the disappointment was considerable.', mono:false },{ t:'To be specific, the right earpiece stopped working completely, and the battery now lasts barely an hour despite a full charge. I have carefully followed the troubleshooting steps on your website, but unfortunately none of them solved the problem. I should add that this is the second item from your shop to develop a fault within a month, which has understandably shaken my confidence in the products you sell. Naturally, I expected an item advertised as new to last considerably longer than a few days of normal use.', mono:false },{ t:'Before contacting you in writing, I had already telephoned your customer service line twice, on 9 and 14 April, but on both occasions I was merely promised a callback that never arrived. As the headphones are clearly defective, I would therefore like to request either a full refund or a replacement of the same model. Given that the order is still well within its warranty period, I trust this can be resolved quickly. I have attached a copy of my order confirmation and look forward to your reply within 14 days.\n\nYours faithfully,\nJulia Berger', mono:false }] },
-  leaflet: { title:'Recycle Right – The New Kerbside Scheme for Seetal', meta:'~250 words · persuasive', tip:'This second example has no colour labels on purpose. Try to spot the catchy title, the benefit-led subheadings, the direct address, the call to action and the block of practical details yourself.', paras:[{ t:'Recycle Right – The New Kerbside Scheme for Seetal', mono:false },{ t:'Good news for the planet and for your Saturday mornings: from Monday, 7 September, Seetal collects your recycling straight from your doorstep. No more trips to the bottle bank in the rain, no more overflowing cupboards under the sink. Here is everything you need to know.', mono:false },{ t:'Three Bins, One Simple System\nYou will receive three colour-coded bins: blue for paper, yellow for plastic and metal, and green for glass. Just sort as you go and wheel them out on collection day; the lorry comes every second Monday, and a fridge magnet with all the dates is included. Every correctly sorted bin helps keep our lakes and forests clean.', mono:false },{ t:'What Goes Where?\nNot sure if that yoghurt pot counts? Every bin comes with a clear sticker showing what belongs inside, and our website has a quick search tool for the tricky items. When in doubt, look it up rather than guessing – one wrong item can spoil a whole load.', mono:false },{ t:'Start Today – It Costs You Nothing\nThe scheme is completely free for every household in Seetal. Sign up online in two minutes and your bins arrive within a week. Anyone without internet access can simply call the town office, and we will register you over the phone. Do it before the September rush and help us make Seetal the greenest town in the valley.', mono:false },{ t:'Collection starts: Monday, 7 September\nSign up: www.seetal-recycelt.example\nQuestions: call the town office on 01 234 5678', mono:true }] },
-};
+const TYPE_EXAMPLES = SRDP.typeExamples;
+const SECOND_MODELS = SRDP.secondModels;
 function secondModelBox(m) {
   return '<div class="gap-s"></div>' +
     '<div class="acc"><div class="acc-item"><button class="acc-head" data-action="acc" aria-expanded="false"><span class="pm">+</span><span>A second model text (a different topic)</span></button>' +
     '<div class="acc-body">' +
-      '<div style="font-weight:600;font-size:.95rem;margin:12px 0 3px">' + esc(m.title) + '</div>' +
-      '<div style="font-size:.75rem;color:var(--text-muted);margin-bottom:14px;letter-spacing:.32px">' + esc(m.meta) + '</div>' +
-      '<div style="font-size:.95rem;line-height:1.65;color:var(--text)">' + m.paras.map(function(p){ return '<p style="margin-bottom:12px' + (p.mono ? ';font-family:var(--font-mono);font-size:.8125rem;line-height:1.8' : '') + '">' + esc(p.t).replace(/\n/g, '<br>') + '</p>'; }).join('') + '</div>' +
-      '<div class="tip" style="margin-top:14px">' + esc(m.tip) + '</div>' +
+      '<h3 class="sm-title">' + esc(m.title) + '</h3>' +
+      '<div class="sm-meta">' + esc(m.meta) + '</div>' +
+      '<div class="sm-text">' + m.paras.map(function(p){ return '<p' + (p.mono ? ' class="mono-line"' : '') + '>' + esc(p.t).replace(/\n/g, '<br>') + '</p>'; }).join('') + '</div>' +
+      '<div class="tip mt-4">' + esc(m.tip) + '</div>' +
     '</div></div></div>';
+}
+
+/* "Practise this text type": drei passende Aufgaben + Wege zu Task bank, Self-check, Mock exam */
+function practiseBlock(t) {
+  const list = (M.tbPrompts ? M.tbPrompts() : []).filter(x => x.p.type === t.id);
+  if (!list.length) return '';
+  const pick = list.slice(0, 3);
+  return '<div class="gap-s"></div>' +
+    '<section class="practise-box no-print" id="sec-practise" data-toc-anchor="Practise" aria-labelledby="practiseH">' +
+      '<h2 class="section-label" id="practiseH">Practise this text type</h2>' +
+      '<p class="lead-sm mb-4">Pick a task, write it, then let the self-check look at your draft. ' + (list.length > 3 ? 'The task bank has ' + list.length + ' ' + esc(t.name.toLowerCase()) + ' tasks.' : '') + '</p>' +
+      '<div class="acc">' + pick.map(x =>
+        '<div class="acc-item"><button class="acc-head" data-action="acc" aria-expanded="false"><span class="pm">+</span><span>' + esc(x.p.topic) + '</span><span class="sub">~' + x.p.length + ' words</span></button>' +
+        '<div class="acc-body">' + (M.taskCard ? M.taskCard(x.p, x.i, { inAcc: true }) : '') + '</div></div>').join('') +
+      '</div>' +
+      '<div class="row-wrap mt-4">' +
+        '<button class="btn btn-ghost" data-action="tb-show-type" data-type="' + t.id + '">All ' + esc(t.name.toLowerCase()) + ' tasks <span aria-hidden="true">&rarr;</span></button>' +
+        '<a class="btn btn-ghost" href="#timer">Mock exam <span aria-hidden="true">&rarr;</span></a>' +
+      '</div>' +
+    '</section>';
 }
 
 function typePage(typeId) {
@@ -260,20 +323,20 @@ function typePage(typeId) {
       sectionLabel('Do&rsquo;s and don&rsquo;ts', { id: 'dos', label: 'Do\u2019s and don\u2019ts' }) + ddCols(t.dos, t.donts) +
       (TYPE_EXAMPLES[typeId] ?
         '<div class="gap-s"></div>' +
-        '<div class="acc" id="sec-example" data-toc-anchor="Weaker vs. stronger"><div class="acc-item"><button class="acc-head" data-action="acc" aria-expanded="false"><span class="pm">+</span><span>See it in action: weaker vs. stronger</span></button>' +
+        '<div class="acc" id="sec-example" data-toc-anchor="Example"><div class="acc-item"><button class="acc-head" data-action="acc" aria-expanded="false"><span class="pm">+</span><span>Weaker and stronger: an example</span></button>' +
         '<div class="acc-body">' +
           '<div class="grid g-2" style="margin-top:12px">' +
             '<div class="dd-col dont"><h3>Weaker</h3><p style="font-size:.9rem;line-height:1.55;color:var(--text-secondary);font-style:italic">&ldquo;' + esc(TYPE_EXAMPLES[typeId].weak) + '&rdquo;</p></div>' +
             '<div class="dd-col do"><h3>Stronger</h3><p style="font-size:.9rem;line-height:1.55;color:var(--text-secondary);font-style:italic">&ldquo;' + esc(TYPE_EXAMPLES[typeId].strong) + '&rdquo;</p></div>' +
           '</div>' +
-          '<p style="font-size:.875rem;color:var(--text-muted);line-height:1.6;margin-top:14px"><strong style="color:var(--text)">Why it matters: </strong>' + esc(TYPE_EXAMPLES[typeId].why) + '</p>' +
+          '<p class="text-base muted mt-4"><strong class="text-strong">Why it matters: </strong>' + esc(TYPE_EXAMPLES[typeId].why) + '</p>' +
         '</div></div></div>'
       : '') +
       '<div class="gap-s"></div>' +
       '<div class="tip" id="sec-tip" data-toc-anchor="Key tip" style="border-left-color:' + col + '"><strong>Key tip · </strong>' + esc(t.tip) + '</div>' +
       (t.noPdf ? '' :
         '<div class="gap-s"></div>' +
-        '<div class="no-print" id="sec-pdf" data-toc-anchor="PDF" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">' +'<a class="btn btn-primary" href="/pdf/' + typeId + '.pdf" target="_blank" rel="noopener">Download this guide as a PDF <span>&darr;</span></a>' +'<span style="font-size:.8125rem;color:var(--text-muted)">A clean, printable PDF of this whole guide, ready to revise from on paper.</span>' +'</div>');
+        '<div class="no-print" id="sec-pdf" data-toc-anchor="PDF" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">' +'<a class="btn btn-primary" href="/pdf/' + typeId + '.pdf" target="_blank" rel="noopener">Download this guide as a PDF <span>&darr;</span></a>' +'<span class="text-sm muted">The whole guide as a PDF, for revising on paper.</span>' +'</div>');
   } else if (tab === 'model') {
     body = (typeId === 'blog' ? '<div class="tip" style="margin-bottom:16px">This model is a blog <strong>post</strong>. A blog <strong>comment</strong> works differently: no title, and the first sentence refers to the post it responds to (see the Key tip on the Guide tab).</div>' : '') + '<div style="margin-bottom:14px;font-size:1rem;color:var(--text)"><strong>' + esc(t.modelText.title) + '</strong></div>' + modelBox(t.modelText) + (SECOND_MODELS[typeId] ? secondModelBox(SECOND_MODELS[typeId]) : '') + (M.honestModel ? M.honestModel(typeId) : '');
   } else if (tab === 'phrases') {
@@ -318,12 +381,13 @@ function typePage(typeId) {
         t.quickFacts.map(f => '<div class="card" style="padding:15px 16px"><div style="font-size:.75rem;color:var(--text-muted);margin-bottom:6px;letter-spacing:.32px">' + esc(f.label) + '</div><div style="font-size:.9375rem;font-weight:600">' + esc(f.label === 'Word count' ? qfWordCount(t) : f.value) + '</div></div>').join('') +
       '</div>' +
       body +
+      ((tab === 'guide' || tab === 'model') ? practiseBlock(t) : '') +
       '<div class="gap-s"></div>' +
-      '<div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;border-top:1px solid var(--border);padding-top:20px">' +
-        '<a class="btn btn-ghost" href="#overview"><span>&larr;</span> Back to overview</a>' +
+      '<div class="row-wrap type-foot">' +
+        '<a class="btn btn-ghost" href="#overview"><span aria-hidden="true">&larr;</span> Overview</a>' +
         (nextType ? '<a class="btn btn-ghost" href="#' + nextType.id + '">Next: ' + esc(nextType.name) + ' <span>&rarr;</span></a>' : '') +
       '</div>' +
-      '<div style="height:72px"></div>' +
+      '<div class="page-end"></div>' +
     '</div>' +
   '</div>';
 }
@@ -333,6 +397,7 @@ SRDP.textTypes.forEach(t => {
     render() { return typePage(t.id); },
     wire() {
       const tab = typeTabs[t.id] || 'guide';
+      if (tab === 'model') { const pr = M.progress(); pr[t.id] = Object.assign({}, pr[t.id], { visited: true, model: true }); M.store('mwg_progress', pr); }
       if (tab === 'quiz') {
         const qz = (SRDP.quizzes[t.id] || []).filter(q => !q.schools || q.schools.indexOf(M.school()) >= 0);
         if (qz.length) {

@@ -21,9 +21,9 @@ PAGES.grammar = {
   render() {
     const d = SRDP;
     return '<div class="page">' +
-      pageHead('Reference', 'Grammar kit', d.grammar.length + ' places where German sneaks into your English. Each one with typical errors, corrections and a rule you can remember.') +
+      pageHead('Reference', 'Grammar kit', d.grammar.length + ' places where German gets into your English. Each one has typical errors, corrections and a rule to remember.') +
       '<div class="wrap"><div class="gap-s"></div>' +
-        sectionLabel('Common mistakes – click to open') +
+        sectionLabel('Common mistakes') +
         '<div class="acc">' + d.grammar.map(g =>
           '<div class="acc-item"><button class="acc-head" data-action="acc" aria-expanded="false"><span class="pm">+</span><span>' + esc(g.title) + '</span><span class="sub">' + (g.pairs ? g.pairs.length + ' examples' : g.table.length + ' items') + '</span></button>' +
           '<div class="acc-body"><p style="font-size:.9rem;color:var(--text-secondary);line-height:1.6;padding:10px 0 16px">' + esc(g.intro) + '</p>' +
@@ -40,7 +40,7 @@ PAGES.grammar = {
           '</div></div>').join('') +
         '</div>' +
         '<div class="gap"></div>' +
-        sectionLabel('B2 linking words – upgrade your connectors') +
+        sectionLabel('B2 linking words: learn new ones') +
         '<div class="tbl-wrap" tabindex="0" role="group" aria-label="Table (scroll sideways on small screens)"><table class="tbl"><thead><tr><th>Function</th><th>B1 (don&rsquo;t rely on these)</th><th>B2 (use these)</th></tr></thead><tbody>' +
           SRDP.linkingWords.map(r => '<tr><td>' + esc(r.fn) + '</td><td class="cell-no">' + esc(r.basic) + '</td><td style="color:var(--text)">' + esc(r.b2) + '</td></tr>').join('') +
         '</tbody></table></div>' +
@@ -48,11 +48,11 @@ PAGES.grammar = {
         sectionLabel('Which text type does what?') +
         comparisonTable() +
         '<div class="gap"></div>' +
-        sectionLabel('Task operators – what the verbs in the task demand') +
+        sectionLabel('Task operators: what the verbs in a task ask for') +
         '<div class="acc">' + SRDP.operators.map(o =>
           '<div class="day-row" style="grid-template-columns:170px 1fr"><div class="d">' + esc(o.op) + '</div><div class="c">' + esc(o.what) + '<div style="font-family:var(--font-mono);font-size:.78rem;color:var(--text-muted);margin-top:6px">&ldquo;' + esc(o.ex) + '&rdquo;</div></div></div>').join('') +
         '</div>' +
-        '<div style="height:72px"></div>' +
+        '<div class="page-end"></div>' +
       '</div></div>';
   },
 };
@@ -74,7 +74,7 @@ function paragraphsBody() {
       '<div class="grid g-auto-220" style="background:transparent;border:none;gap:10px;display:grid">' +
         P.layers.map(l => '<div class="peel-card" style="--pc:' + PEEL[l.key] + '"><span class="pn">' + l.num + '</span><span class="pl">' + l.label + '</span><div class="pd">' + esc(l.desc) + '</div></div>').join('') +
       '</div><div class="gap-s"></div>' +
-      sectionLabel('See it in action – annotated example') +
+      sectionLabel('An annotated example') +
       '<div class="model-box"><div class="model-head"><div class="legend">' +
         P.layers.map(l => '<span><i style="background:' + PEEL[l.key] + ';opacity:.55"></i>' + l.label + '</span>').join('') +
       '</div></div>' +
@@ -86,10 +86,10 @@ function paragraphsBody() {
       '</div>';
   }
   if (tab === 'formulas') {
-    return sectionLabel('Three topic-sentence formulas that always work') +
+    return sectionLabel('Three topic-sentence patterns') +
       P.formulas.map(f =>
         '<div style="display:grid;grid-template-columns:96px 1fr;border:1px solid var(--border);background:var(--surface);margin-bottom:8px">' +
-          '<div style="padding:14px;border-right:1px solid var(--border);display:flex;align-items:center;justify-content:center;background:var(--surface-1)"><span style="font-size:.7rem;letter-spacing:.08em;color:var(--blue);font-weight:600">' + f.label + '</span></div>' +
+          '<div style="padding:14px;border-right:1px solid var(--border);display:flex;align-items:center;justify-content:center;background:var(--surface-1)"><span class="tag-label" style="--pc:var(--blue)">' + f.label + '</span></div>' +
           '<div style="padding:13px 17px"><div style="font-family:var(--font-mono);font-size:.78rem;color:var(--text-muted);margin-bottom:7px">' + esc(f.formula) + '</div><div style="font-size:.86rem;color:var(--text-secondary);font-style:italic;line-height:1.6">' + esc(f.example) + '</div></div>' +
         '</div>').join('') +
       '<div class="gap-s"></div>' +
@@ -99,17 +99,17 @@ function paragraphsBody() {
       '<div class="gap-s"></div>' +
       sectionLabel('Three ways to support your point') +
       '<div class="grid g-auto-240">' +
-        P.supports.map(s => '<div class="card"><div style="font-size:.7rem;letter-spacing:.09em;color:var(--blue);font-weight:600;margin-bottom:4px">' + s.label + '</div><div style="font-size:.75rem;color:var(--text-muted);margin-bottom:10px">' + esc(s.sub) + '</div><div style="font-size:.84rem;color:var(--text-secondary);font-style:italic;line-height:1.65">' + esc(s.ex) + '</div></div>').join('') +
+        P.supports.map(s => '<div class="card"><div class="tag-label mb-1" style="--pc:var(--blue)">' + s.label + '</div><div style="font-size:.75rem;color:var(--text-muted);margin-bottom:10px">' + esc(s.sub) + '</div><div style="font-size:.84rem;color:var(--text-secondary);font-style:italic;line-height:1.65">' + esc(s.ex) + '</div></div>').join('') +
       '</div>';
   }
   if (tab === 'warmups') {
     const wu = P.warmups[warmupState.i];
     const typeColor = { CLAIM: 'var(--blue)', CONTRAST: 'var(--purple)', CAUSE: 'var(--orange)' };
     return sectionLabel('Warm-up ' + (warmupState.i + 1) + ' of ' + P.warmups.length + ' – find the topic sentence') +
-      '<p style="font-size:.875rem;color:var(--text-secondary);line-height:1.7;margin-bottom:18px">The topic sentence is missing. Read the paragraph and write one that fits. Remember: a good topic sentence makes a clear, specific claim.</p>' +
-      '<div class="tip" style="margin-bottom:18px">Stuck for something to say? Try one of three moves: argue the other side and then answer it, follow a cause through to its effect, or reach for a concrete example – even an invented one. A plausible made-up survey or a personal story is completely allowed (this is a language exam, not a fact check), so the real trick is simply to keep the pen moving.</div>' +
+      '<p class="lead-sm mb-4">The topic sentence is missing. Read the paragraph and write one that fits. A good topic sentence makes a clear, specific claim.</p>' +
+      '<div class="tip mb-4">If you do not know what to say, try one of these: argue the other side and then answer it, follow a cause to its effect, or give a concrete example. The example may be invented. A realistic made-up survey or a personal story is allowed, because this is a language exam.</div>' +
       '<div style="border:1px solid var(--border);background:var(--surface);margin-bottom:18px">' +
-        '<div style="padding:11px 19px;border-bottom:1px solid var(--border);font-size:.7rem;letter-spacing:.08em;color:var(--text-muted)">' + esc(wu.title.toUpperCase()) + '</div>' +
+        '<div class="box-head">' + esc(wu.title) + '</div>' +
         '<div style="padding:14px 19px;border-bottom:1px solid var(--border);display:flex;gap:12px;background:color-mix(in srgb,' + PEEL.point + ' 6%,transparent);border-left:2px solid ' + PEEL.point + '">' +
           '<span style="color:' + PEEL.point + ';flex-shrink:0;margin-top:2px">①</span>' +
           '<textarea id="wuInput" rows="2" placeholder="Write your topic sentence here…" style="flex:1;background:transparent;border:none;color:var(--text);font-size:.88rem;font-family:var(--font-sans);line-height:1.6;resize:none">' + esc(warmupState.drafts[warmupState.i] || '') + '</textarea>' +
@@ -117,20 +117,20 @@ function paragraphsBody() {
         [['explain', '②', 'SUPPORTING', wu.supporting], ['evidence', '③', 'EVIDENCE', wu.evidence], ['closing', '④', 'CLOSING', wu.closing]].map((r, i) =>
           '<div style="padding:13px 19px;' + (i < 2 ? 'border-bottom:1px solid var(--border);' : '') + 'display:flex;gap:12px">' +
             '<span style="color:' + PEEL[r[0]] + ';flex-shrink:0;margin-top:2px">' + r[1] + '</span>' +
-            '<div><div style="font-size:.62rem;letter-spacing:.08em;color:' + PEEL[r[0]] + ';font-weight:600;margin-bottom:4px">' + r[2] + '</div>' +
+            '<div><div class="tag-label mb-1" style="--pc:' + PEEL[r[0]] + '">' + r[2] + '</div>' +
             '<div style="font-size:.86rem;color:var(--text-secondary);line-height:1.7">' + esc(r[3]) + '</div></div></div>').join('') +
       '</div>' +
       '<div style="display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap">' +
-        '<button class="btn btn-ghost btn-sm" data-action="wu-toggle">' + (warmupState.show ? 'Hide model sentences' : 'Reveal model sentences') + '</button>' +
-        '<button class="btn btn-ghost btn-sm" data-action="wu-prev">← Prev</button>' +
-        '<button class="btn btn-ghost btn-sm" data-action="wu-next">Next →</button>' +
+        '<button class="btn btn-ghost btn-sm" data-action="wu-toggle">' + (warmupState.show ? 'Hide model sentences' : 'Show model sentences') + '</button>' +
+        '<button class="btn btn-ghost btn-sm" data-action="wu-prev"><span aria-hidden="true">&larr;</span> Previous</button>' +
+        '<button class="btn btn-ghost btn-sm" data-action="wu-next">Next <span aria-hidden="true">&rarr;</span></button>' +
       '</div>' +
       (warmupState.show ?
         '<div style="border:1px solid var(--border);background:var(--surface)">' +
-          '<div style="padding:10px 19px;border-bottom:1px solid var(--border);font-size:.65rem;letter-spacing:.1em;color:var(--text-muted)">MODEL TOPIC SENTENCES</div>' +
+          '<div class="box-head">Model topic sentences</div>' +
           wu.modelSentences.map((s, i) =>
             '<div style="display:grid;grid-template-columns:88px 1fr;' + (i < wu.modelSentences.length - 1 ? 'border-bottom:1px solid var(--border)' : '') + '">' +
-              '<div style="padding:11px 13px;border-right:1px solid var(--border);display:flex;align-items:center;justify-content:center;background:var(--surface-1)"><span style="font-size:.62rem;letter-spacing:.06em;color:' + (typeColor[s.type] || 'var(--blue)') + ';font-weight:600">' + s.type + '</span></div>' +
+              '<div style="padding:11px 13px;border-right:1px solid var(--border);display:flex;align-items:center;justify-content:center;background:var(--surface-1)"><span class="tag-label" style="--pc:' + (typeColor[s.type] || 'var(--blue)') + '">' + s.type + '</span></div>' +
               '<div style="padding:11px 15px;font-size:.85rem;color:var(--text-secondary);font-style:italic;line-height:1.6">' + esc(s.text) + '</div>' +
             '</div>').join('') +
         '</div>' : '');
@@ -141,7 +141,7 @@ function paragraphsBody() {
         P.tasks.map((t, i) => '<button class="btn ' + (taskState.i === i ? 'btn-primary' : 'btn-ghost') + ' btn-sm" data-action="pt-task" data-i="' + i + '">Task ' + (i + 1) + '</button>').join('') +
       '</div>' +
       sectionLabel(esc(task.title)) +
-      '<div class="tip" style="border-left-color:var(--blue);margin-bottom:18px"><div style="font-size:.65rem;letter-spacing:.1em;color:var(--text-muted);margin-bottom:7px">ESSAY PROMPT</div><em>' + esc(task.prompt) + '</em><div style="font-size:.78rem;color:var(--text-muted);margin-top:7px">' + esc(task.instruction) + '</div></div>' +
+      '<div class="tip mb-4" style="border-left-color:var(--blue)"><div class="sub-label">Task</div><em>' + esc(task.prompt) + '</em><div style="font-size:.78rem;color:var(--text-muted);margin-top:7px">' + esc(task.instruction) + '</div></div>' +
       '<div style="display:flex;flex-direction:column;gap:6px;margin-bottom:14px">' +
         P.layers.map(l =>
           '<div class="wa-row" style="--pc:' + PEEL[l.key] + '">' +
@@ -151,38 +151,38 @@ function paragraphsBody() {
           '</div>').join('') +
       '</div>' +
       '<div style="display:flex;gap:8px;align-items:center;margin-bottom:18px;flex-wrap:wrap">' +
-        '<span id="ptCount" style="font-size:.72rem;letter-spacing:.08em;color:var(--text-muted)">0 WORDS</span>' +
+        '<span id="ptCount" class="text-xs muted" aria-live="off">0 words</span>' +
         '<button class="btn btn-ghost btn-sm" data-action="pt-model">' + (taskState.show ? 'Hide model' : 'Show model paragraph') + '</button>' +
         (taskState.show ? '<button class="btn btn-ghost btn-sm" data-action="pt-analysis">' + (taskState.analysis ? 'Hide analysis' : 'Why does it work?') + '</button>' : '') +
       '</div>' +
       (taskState.show ?
-        '<div class="model-box" style="margin-bottom:12px"><div style="padding:10px 19px;border-bottom:1px solid var(--border);font-size:.65rem;letter-spacing:.1em;color:var(--text-muted)">MODEL PARAGRAPH</div>' +
+        '<div class="model-box mb-3"><div class="box-head">Model paragraph</div>' +
         '<div class="model-body" style="line-height:2.2">' + Object.keys(task.model).map(k => peelMark(k, task.model[k])).join(' ') + '</div></div>' : '') +
       (taskState.show && taskState.analysis ?
         '<div style="border:1px solid var(--border);background:var(--surface)">' +
-          '<div style="padding:10px 19px;border-bottom:1px solid var(--border);font-size:.65rem;letter-spacing:.1em;color:var(--text-muted)">WHY DOES THIS PARAGRAPH WORK?</div>' +
+          '<div class="box-head">Why does this paragraph work?</div>' +
           task.analysis.map((a, i) =>
             '<div style="display:grid;grid-template-columns:140px 1fr;' + (i < task.analysis.length - 1 ? 'border-bottom:1px solid var(--border)' : '') + '">' +
-              '<div style="padding:11px 13px;border-right:1px solid var(--border);display:flex;align-items:center;background:var(--surface-1)"><span style="font-size:.62rem;letter-spacing:.07em;font-weight:600;color:' + PEEL[Object.keys(PEEL)[i]] + '">' + esc(a.part.toUpperCase()) + '</span></div>' +
+              '<div style="padding:11px 13px;border-right:1px solid var(--border);display:flex;align-items:center;background:var(--surface-1)"><span class="tag-label" style="--pc:' + PEEL[Object.keys(PEEL)[i]] + '">' + esc(a.part) + '</span></div>' +
               '<div style="padding:11px 15px;font-size:.84rem;color:var(--text-secondary);line-height:1.65">' + esc(a.why) + '</div>' +
             '</div>').join('') +
         '</div>' : '');
   }
   if (tab === 'phrases') {
-    return sectionLabel('Paragraph phrase bank – click to copy') +
+    return sectionLabel('Paragraph phrases (tap to copy)') +
       SRDP.paragraphs.phraseGroups.map(g => '<div style="margin-bottom:26px"><h2 class="section-label">' + esc(g.label) + '</h2>' + M.chips(g.phrases) + '</div>').join('');
   }
   if (tab === 'recipe') {
     const P2 = SRDP.paragraphs;
     const accents = [PEEL.point, PEEL.explain, PEEL.evidence, PEEL.closing];
-    return sectionLabel('The recipe – four steps to a perfect paragraph') +
+    return sectionLabel('Four steps to a good paragraph') +
       P2.recipe.map((s, i) =>
         '<div style="display:grid;grid-template-columns:58px 1fr;border:1px solid var(--border);background:var(--surface);margin-bottom:6px">' +
           '<div style="padding:16px;background:var(--surface-1);border-right:1px solid var(--border);display:flex;align-items:center;justify-content:center"><span style="font-size:1.35rem;font-weight:300;color:' + accents[i] + '">' + s.num + '</span></div>' +
           '<div style="padding:15px 19px"><div style="font-size:.78rem;letter-spacing:.05em;font-weight:600;color:' + accents[i] + ';margin-bottom:5px">' + esc(s.title) + '</div><div style="font-size:.86rem;color:var(--text-secondary);line-height:1.6">' + esc(s.desc) + '</div></div>' +
         '</div>').join('') +
       '<div class="gap-s"></div>' +
-      sectionLabel('Good paragraph vs. weak paragraph – same topic') +
+      sectionLabel('A strong and a weak paragraph on the same topic') +
       '<div class="grid g-2">' +
         '<div class="dd-col do"><h3>✓ Strong</h3><div style="font-size:.84rem;color:var(--text-secondary);line-height:1.8;font-style:italic">' + esc(P2.goodVsWeak.strong) + '</div></div>' +
         '<div class="dd-col dont"><h3>✗ Weak</h3><div style="font-size:.84rem;color:var(--text-secondary);line-height:1.8;font-style:italic">' + esc(P2.goodVsWeak.weak) + '</div></div>' +
@@ -195,9 +195,9 @@ function paragraphsBody() {
 PAGES.paragraphs = {
   title: 'Paragraph writing', track: 'paragraphs',
   render() {
-    const tabs = [['anatomy', 'Anatomy'], ['formulas', 'Topic sentences'], ['warmups', 'Warm-ups'], ['tasks', 'Full paragraphs'], ['phrases', 'Phrase bank'], ['recipe', 'The recipe']];
+    const tabs = [['anatomy', 'The four layers'], ['formulas', 'Topic sentences'], ['warmups', 'Warm-ups'], ['tasks', 'Full paragraphs'], ['phrases', 'Phrases'], ['recipe', 'Four steps']];
     return '<div class="page">' +
-      pageHead('Practise', 'Building a paragraph', 'Every good body paragraph does four jobs, in order. Learn them once and the blank page stops being a problem.',
+      pageHead('Practise', 'Paragraph writing', 'A good body paragraph does four jobs, in this order. Once you know them, starting a paragraph gets much easier.',
         '<div class="tabs">' + tabs.map(t => '<button class="tab' + (paraTabs.current === t[0] ? ' active' : '') + '" data-action="para-tab" data-tab="' + t[0] + '">' + t[1] + '</button>').join('') + '</div>') +
       '<div class="wrap"><div class="gap-s"></div><div id="paraBody">' + paragraphsBody() + '</div><div style="height:72px"></div></div>' +
     '</div>';
@@ -217,7 +217,7 @@ function wireParaInputs() {
     const counter = M.$('#ptCount');
     const updateCount = () => {
       if (!counter) return;
-      counter.textContent = inputs.map(x => x.value).join(' ').trim().split(/\s+/).filter(Boolean).length + ' WORDS';
+      counter.textContent = inputs.map(x => x.value).join(' ').trim().split(/\s+/).filter(Boolean).length + ' words';
     };
     inputs.forEach(t => {
       const key = t.getAttribute('data-key');
@@ -240,14 +240,14 @@ function finalQuizForSchool() {
 }
 function practiceBody() {
   if (przState.tab === 'spot') {
-    return sectionLabel('Spot the mistakes – conventions, not grammar') +
-      '<p style="font-size:.9375rem;color:var(--text-secondary);margin-bottom:20px;line-height:1.55">Each text below contains deliberate errors in text-type conventions. Find them yourself, then reveal the answers.</p>' +
+    return sectionLabel('Spot the mistakes in the text-type rules') +
+      '<p class="lead-sm mb-5">Each text below breaks some rules of its text type on purpose. The grammar is fine. Find the mistakes yourself, then show the answers.</p>' +
       '<div style="border:1px solid var(--border)">' + SRDP.spotTexts.filter(ex => !ex.schools || ex.schools.indexOf(M.school()) >= 0).map((ex, i) =>
         '<div style="' + (i > 0 ? 'border-top:1px solid var(--border)' : '') + '">' +
           '<div style="padding:14px 22px;background:var(--surface-1);font-size:.875rem;font-weight:600">' + esc(ex.title) + '</div>' +
           '<div class="mono-text" style="border-top:1px solid var(--border);background:var(--surface)">' + esc(ex.text) + '</div>' +
           '<div style="padding:15px 22px;border-top:1px solid var(--border);background:var(--surface)">' +
-            '<button class="btn btn-ghost btn-sm" data-action="spot-toggle" data-id="' + ex.id + '">' + (przState.revealed[ex.id] ? 'Hide errors −' : 'Reveal ' + ex.errors.length + ' errors +') + '</button>' +
+            '<button class="btn btn-ghost btn-sm" data-action="spot-toggle" data-id="' + ex.id + '">' + (przState.revealed[ex.id] ? 'Hide the mistakes' : 'Show the ' + ex.errors.length + ' mistakes') + '</button>' +
             (przState.revealed[ex.id] ?
               '<div style="margin-top:14px">' + ex.errors.map((e, j) =>
                 '<div class="err-row"><span class="n">' + (j + 1) + '</span><span><span class="m">' + esc(e.mark) + '</span> <span class="f">→ ' + esc(e.fix) + '</span></span></div>').join('') +
@@ -257,22 +257,22 @@ function practiceBody() {
       '</div>';
   }
   if (przState.tab === 'register') {
-    return sectionLabel('Register gym – same idea, two voices') +
-      '<p style="font-size:.9375rem;color:var(--text-secondary);margin-bottom:20px;line-height:1.55">Read the informal sentence and write (or say) the formal version yourself, then reveal a model. Switching register on demand is worth points in every formal text type.</p>' +
+    return sectionLabel('Register gym: one idea, two registers') +
+      '<p class="lead-sm mb-5">Read the informal sentence and write (or say) a formal version. Then show our version. Every formal text type rewards this skill.</p>' +
       '<div style="border:1px solid var(--border)">' + SRDP.registerGym.map((r, i) =>
         '<div style="' + (i > 0 ? 'border-top:1px solid var(--border);' : '') + 'background:var(--surface);padding:16px 22px">' +
           '<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:8px"><span class="badge">' + esc(r.hint) + '</span></div>' +
           '<div style="font-size:.75rem;letter-spacing:.32px;color:var(--text-muted);margin-bottom:4px">Informal</div><div style="font-size:.9rem;color:var(--text);margin-bottom:10px;line-height:1.6">&ldquo;' + esc(r.informal) + '&rdquo;</div>' +
           (przState.regRevealed[i]
             ? '<div class="tip good" style="font-size:.875rem"><strong>Formal · </strong>' + esc(r.formal) + '</div>'
-            : '<button class="btn btn-ghost btn-sm" data-action="reg-reveal" data-i="' + i + '">Reveal formal version</button>') +
+            : '<button class="btn btn-ghost btn-sm" data-action="reg-reveal" data-i="' + i + '">Show the formal version</button>') +
         '</div>').join('') +
       '</div>';
   }
   if (przState.tab === 'final') {
     const fq = finalQuizForSchool();
-    return sectionLabel('The final quiz – ' + fq.length + ' questions across all text types') +
-      '<p style="font-size:.9375rem;color:var(--text-secondary);margin-bottom:24px;line-height:1.55">' + fq.length + ' questions across everything on this site. If you can pass this, you are ready. Aim for 10 or better.</p>' +
+    return sectionLabel('The final quiz: ' + fq.length + ' questions on all text types') +
+      '<p class="lead-sm mb-5">' + fq.length + ' questions on everything on this site. Aim for at least ' + Math.ceil(fq.length * 0.7) + ' correct answers.</p>' +
       '<div data-quiz-host="final"></div>';
   }
   return '';
@@ -282,7 +282,7 @@ PAGES.practice = {
   render() {
     const tabs = [['spot', 'Spot the mistakes'], ['register', 'Register gym'], ['final', 'Final quiz']];
     return '<div class="page">' +
-      pageHead('Practise', 'Practice zone', 'Five student texts with planted mistakes, a register workout, and the final quiz for the week before the exam.',
+      pageHead('Practise', 'Practice zone', 'Student texts with planted mistakes, register practice, and a final quiz for the week before the exam.',
         '<div class="tabs">' + tabs.map(t => '<button class="tab' + (przState.tab === t[0] ? ' active' : '') + '" data-action="prz-tab" data-tab="' + t[0] + '">' + t[1] + '</button>').join('') + '</div>') +
       '<div class="wrap"><div class="gap-s"></div><div id="przBody">' + practiceBody() + '</div><div style="height:72px"></div></div>' +
     '</div>';

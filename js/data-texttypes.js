@@ -17,28 +17,28 @@ SRDP.textTypes = [
     layout: [
       { part: 'Title', note: 'clear and relevant – not necessarily catchy' },
       { part: 'Introduction', note: '~80 words – hook + state your opinion clearly' },
-      { part: 'Body paragraph 1', note: '~80 words – bullet point 1' },
-      { part: 'Body paragraph 2', note: '~80 words – bullet point 2' },
-      { part: 'Body paragraph 3', note: '~80 words – bullet point 3' },
+      { part: 'Body paragraph 1', note: '~80 words – content point 1' },
+      { part: 'Body paragraph 2', note: '~80 words – content point 2' },
+      { part: 'Body paragraph 3', note: '~80 words – content point 3' },
       { part: 'Conclusion', note: '~80 words – summarise + restate opinion in different words' },
     ],
     dos: [
       'Write in a formal style throughout',
       'Make your opinion clear from the introduction',
       'Start each paragraph with a topic sentence',
-      'Use generalisations, not personal anecdotes',
+      'Argue mainly with general and hypothetical examples. A short personal example is fine, but not as your main evidence.',
       'Use formal linking words: However, Nevertheless, Moreover, Furthermore',
       'Vary sentence length – mix short and long',
       'Use complex grammar: passive voice, conditionals, relative clauses',
-      'You may mention a counter-argument – but then refute it',
+      'You may mention a counter-argument, but then show why it is weaker',
     ],
     donts: [
       "No contractions (don't, can't, it's)",
       'No colloquial or slang expressions',
       'No overly emotional language',
-      'No personal anecdotes as your main evidence ("When I was 12…") – argue with general or hypothetical examples; a brief personal example is fine',
+      'No personal story as your main evidence ("When I was 12…")',
       'No over-generalisation ("All politicians are liars.")',
-      'No simple linking words as your only connectors (and, but, because)',
+      'No text that uses only simple linking words (and, but, because)',
       'No very short sentences one after another',
       'No statistics without context',
     ],
@@ -54,7 +54,7 @@ SRDP.textTypes = [
       { category: 'Conclusions',
         items: ['Taking these points into consideration,…', 'All of this points to the conclusion that…', 'On balance, we can safely say that…', 'The arguments presented prove that…'] },
     ],
-    tip: 'An essay should make the reader think. It is fact-based and formal. An article should make the reader feel. An essay uses generalisations; a blog uses personal anecdotes.',
+    tip: 'An essay wants the reader to think: it is formal and argues with facts and general examples. An article can be personal and speaks to the reader directly.',
     modelText: {
       title: 'The Hidden Cost of Fast Fashion', wordCount: '~400', register: 'Formal',
       paragraphs: [
@@ -66,7 +66,7 @@ SRDP.textTypes = [
           ]
         },
         {
-          text: 'To begin with, the environmental impact of fast fashion is severe. The production of cheap garments requires enormous amounts of water and energy, and releases toxic chemicals into rivers and soil. According to the United Nations Environment Programme, the fashion industry is responsible for an estimated 2 to 8 per cent of global greenhouse gas emissions, alongside a significant share of industrial water pollution. Furthermore, a large share of these garments is worn only a handful of times before ending up in landfill. In addition, synthetic fabrics such as polyester are made from fossil fuels and shed tiny microplastics with every single wash. These particles flow into rivers and oceans, and have even been detected in human blood.',
+          text: 'To begin with, the environmental impact of fast fashion is severe. The production of cheap garments requires enormous amounts of water and energy, and releases toxic chemicals into rivers and soil. According to the United Nations Environment Programme, the fashion industry is responsible for an estimated 2 to 8 per cent of global greenhouse gas emissions, alongside a considerable share of industrial water pollution. Furthermore, a large share of these garments is worn only a handful of times before ending up in landfill. In addition, synthetic fabrics such as polyester are made from fossil fuels and shed tiny microplastics with every single wash. These particles flow into rivers and oceans, and have even been detected in human blood.',
           annotations: [
             { span: 'To begin with, the environmental impact of fast fashion is severe.', type: 'content', label: 'Topic sentence (Point)' },
             { span: 'According to the United Nations Environment Programme', type: 'language', label: 'Evidence introducer' },
@@ -75,10 +75,10 @@ SRDP.textTypes = [
           ]
         },
         {
-          text: 'Equally alarming are the working conditions in the factories that produce these clothes. Workers in countries such as Bangladesh and Cambodia are often forced to work twelve-hour shifts for wages that barely cover basic living costs. The Rana Plaza factory collapse in 2013, which killed over 1,100 garment workers, exposed the dangerous reality behind bargain-priced T-shirts. Despite promises of reform, investigations continue to reveal unsafe conditions. Independent researchers have also uncovered widespread child labour and the violent suppression of trade unions. While shoppers in Europe enjoy an endless supply of cheap outfits, the people who actually make them are denied safety, a living wage and basic security.',
+          text: 'Equally alarming are the working conditions in the factories that produce these clothes. Workers in countries such as Bangladesh and Cambodia are often forced to work twelve-hour shifts for wages that barely cover basic living costs. The Rana Plaza factory collapse in 2013, which killed over 1,100 garment workers, exposed the dangerous reality behind bargain-priced T-shirts. Despite promises of reform, investigations continue to reveal unsafe conditions. Independent researchers have also uncovered widespread child labour and the violent suppression of trade unions. While shoppers in Europe enjoy an endless supply of cheap outfits, the people who actually make them are denied a safe workplace and a living wage.',
           annotations: [
             { span: 'which killed over 1,100 garment workers,', type: 'language', label: 'Relative clause – adds detail elegantly' },
-            { span: 'Despite', type: 'language', label: 'B2 contrasting linker' },
+            { span: 'Despite', type: 'language', label: 'Linking word (contrast)' },
             { span: 'While shoppers in Europe enjoy an endless supply of cheap outfits', type: 'language', label: 'Contrast carries the argument' },
           ]
         },
@@ -90,9 +90,9 @@ SRDP.textTypes = [
           ]
         },
         {
-          text: 'Taking these points into consideration, it is clear that the true cost of fast fashion is paid not by consumers, but by workers and the planet. If we genuinely want to address the climate crisis, we must start by rethinking our relationship with the clothes we wear. Consumers can make a genuine difference by buying less and repairing what they already own.',
+          text: 'Taking these points into consideration, it is clear that the true cost of fast fashion is paid by the workers and by the planet. If we genuinely want to address the climate crisis, we must start by rethinking our relationship with the clothes we wear. Consumers can make a real difference by buying less and repairing what they already own.',
           annotations: [
-            { span: 'Taking these points into consideration,', type: 'language', label: 'Conclusion linker' },
+            { span: 'Taking these points into consideration,', type: 'language', label: 'Linking word for the conclusion' },
             { span: 'If we genuinely want to address the climate crisis,', type: 'language', label: 'Conditional – complex structure' },
             { span: 'buying less and repairing what they already own', type: 'content', label: 'Concrete call to action' },
           ]
@@ -114,9 +114,9 @@ SRDP.textTypes = [
     layout: [
       { part: 'Catchy title', note: 'rhetorical question, alliteration, bold statement' },
       { part: 'Introduction', note: "~50 words – grab the reader's attention immediately" },
-      { part: 'Body paragraph 1', note: '~50–80 words – bullet point 1' },
-      { part: 'Body paragraph 2', note: '~50–80 words – bullet point 2' },
-      { part: 'Body paragraph 3', note: '~50–80 words – bullet point 3' },
+      { part: 'Body paragraph 1', note: '~50–80 words – content point 1' },
+      { part: 'Body paragraph 2', note: '~50–80 words – content point 2' },
+      { part: 'Body paragraph 3', note: '~50–80 words – content point 3' },
       { part: 'Conclusion', note: '~50 words – leave the reader thinking' },
     ],
     dos: [
@@ -126,7 +126,7 @@ SRDP.textTypes = [
       'Talk about personal experiences and emotions',
       'Use a topic sentence for each paragraph',
       'Write a conclusion that leaves something to think about',
-      'Make the opening paragraph irresistible',
+      'Write an opening that makes people want to read on',
       'Use exclamation marks and direct speech if the register allows it',
     ],
     donts: [
@@ -144,7 +144,7 @@ SRDP.textTypes = [
       { category: 'Conclusions',
         items: ['So next time you…', 'The question is not whether… but when.', "Perhaps it's time we all…", "Food for thought, isn't it?"] },
     ],
-    tip: 'Report vs. article: a report informs and recommends, neutrally. An article makes the reader feel; it is personal, emotional and engaging. Always check WHERE the article will appear – a school magazine needs a different voice from a serious newspaper.',
+    tip: 'Report vs. article: a report informs and recommends in a neutral tone. An article tries to make the reader feel something, so it can be personal and emotional. Always check where the article will appear: a school magazine needs a different voice from a serious newspaper.',
     modelText: {
       title: 'Screens Off, Life On?', wordCount: '~250', register: 'Semi-formal (school magazine)',
       paragraphs: [
@@ -158,7 +158,7 @@ SRDP.textTypes = [
         {
           text: 'When the experiment started, most participants felt anxious and disconnected. Several students admitted they instinctively reached into their pockets dozens of times a day. "I didn\'t even realise how addicted I was," one participant told me. However, by day three something began to shift: a handful of students started talking during breaks instead of reaching for their phones. By the middle of the week, the mood had completely changed. Students who normally sat in silence were suddenly chatting, laughing and swapping stories at every break.',
           annotations: [
-            { span: '"I didn\'t even realise how addicted I was,"', type: 'special', label: 'Direct speech – suits articles, NOT reports' },
+            { span: '"I didn\'t even realise how addicted I was,"', type: 'special', label: 'Direct speech – fine in articles, not in reports' },
             { span: 'However,', type: 'language', label: 'B2 linking word' },
             { span: 'the mood had completely changed', type: 'special', label: 'Turning point in the story' },
           ]
@@ -166,11 +166,11 @@ SRDP.textTypes = [
         {
           text: 'The most striking change was in the social atmosphere. Without screens to hide behind, students had to look at each other and hold real conversations. I know this sounds old-fashioned, but it genuinely felt different – warmer, somehow. Teachers noticed the difference too, reporting fewer disruptions and more engagement. One classmate of mine, usually glued to her screen, ended up organising a lunchtime card tournament that half the year joined.',
           annotations: [
-            { span: 'I know this sounds old-fashioned, but it genuinely felt different – warmer, somehow.', type: 'special', label: 'Personal voice – suits articles, NOT reports' },
+            { span: 'I know this sounds old-fashioned, but it genuinely felt different – warmer, somehow.', type: 'special', label: 'Personal voice – fine in articles, not in reports' },
           ]
         },
         {
-          text: 'So, would I recommend a phone detox? Absolutely, even if only for a few days. You might be surprised by what you notice when you finally look up from that little screen. Honestly, the hardest part was not giving up the phone. It was admitting just how much I had been missing.',
+          text: 'So, would I recommend a phone detox? Absolutely, even if only for a few days. You might be surprised by what you notice when you finally look up from that little screen. Honestly, the hardest part was admitting how much I had been missing all this time.',
           annotations: [
             { span: 'So, would I recommend a phone detox?', type: 'language', label: 'Rhetorical question to conclude' },
             { span: 'You might be surprised by what you notice', type: 'special', label: 'Conclusion – leaves reader thinking' },
@@ -186,7 +186,7 @@ SRDP.textTypes = [
     color: 'orange', badge: 'Long or short task', schools: ['ahs', 'bhs'],
     quickFacts: [
       { label: 'Word count', value: '~250 or ~400 words' },
-      { label: 'Register', value: 'Formal, objective, neutral' },
+      { label: 'Register', value: 'Formal and neutral' },
       { label: 'Title', value: 'Subject line + section headings' },
       { label: 'Structure', value: 'Header + sections' },
     ],
@@ -200,13 +200,13 @@ SRDP.textTypes = [
       { part: 'Conclusion / Recommendations', note: '~50–80 words – summarise + suggest action' },
     ],
     dos: [
-      'Present and analyse facts, not personal opinions',
-      'Be neutral, concise, and to the point',
+      'Present and analyse facts; save your own view for the recommendations',
+      'Be neutral and keep to the point',
       'Use the passive voice where appropriate',
       'Include specific data when referencing surveys/statistics – you may invent realistic figures',
       'End with clear recommendations or suggestions',
-      'Make it the most visually organised text on your paper',
-      'Use linking words to show language proficiency',
+      'Make the layout clear: headings and short sections',
+      'Use a range of linking words',
     ],
     donts: [
       "Don't give personal opinions in the main body",
@@ -224,7 +224,7 @@ SRDP.textTypes = [
       { category: 'Conclusion / Recommendations',
         items: ['On the basis of these findings,…', 'I would therefore recommend/suggest that…', 'It would seem that… is the best option.', 'In view of this, one can recommend…', 'It would also be advisable to…'] },
     ],
-    tip: 'The report is the most visually distinctive text type. Examiners notice the headings immediately. Every section needs one, no exceptions.',
+    tip: 'You can recognise a report at a glance because of its headings. Give every section a meaningful heading (for example "Key findings"). You do not need to number them.',
     modelText: {
       title: 'Survey Results – Student Stress Levels', wordCount: '~250', register: 'Formal',
       paragraphs: [
@@ -256,7 +256,7 @@ SRDP.textTypes = [
           text: 'Recommendations\nOn the basis of these findings, I would recommend introducing a weekly "no-homework day" and promoting the counselling service through posters and assemblies. It would also be advisable to schedule exams more evenly across the term to reduce pressure peaks. Finally, teachers could be encouraged to coordinate test dates through a shared online calendar so that deadlines do not pile up in the same week.',
           annotations: [
             { span: 'Recommendations', type: 'structure', label: 'Every section gets its own heading' },
-            { span: 'On the basis of these findings,', type: 'language', label: 'Conclusion linker for reports' },
+            { span: 'On the basis of these findings,', type: 'language', label: 'Linking word for report conclusions' },
             { span: 'I would recommend', type: 'special', label: 'Recommendation – required in every report' },
             { span: 'It would also be advisable to', type: 'language', label: 'Formal suggestion phrase' },
           ]
@@ -287,7 +287,7 @@ SRDP.textTypes = [
       { part: 'Date / time', note: '' },
       { part: 'Title', note: 'post only – attention-grabbing' },
       { part: 'Introduction', note: '~50 words – hook the reader, introduce topic' },
-      { part: 'Body paragraphs 1–3', note: '~50–80 words each – one bullet point per paragraph' },
+      { part: 'Body paragraphs 1–3', note: '~50–80 words each – one content point per paragraph' },
       { part: 'Conclusion', note: '~50 words – wrap up + invite readers to comment' },
     ],
     dos: [
@@ -315,7 +315,7 @@ SRDP.textTypes = [
       { category: 'Engaging the reader',
         items: ['What do you think?', "I'd love to hear your thoughts on this.", 'Let me know in the comments!', 'Has anyone else experienced this?', 'Am I the only one who…?'] },
     ],
-    tip: 'For a blog COMMENT, your very first sentence should refer to the original post, ideally by name: "Hi Jeff, I stumbled across your blog on overtourism and it really made me think…"',
+    tip: 'For a blog comment, your very first sentence should refer to the original post, ideally by name: "Hi Jeff, I stumbled across your blog on overtourism and it really made me think…"',
     modelText: {
       title: 'Why I Quit Instagram for a Month (And What Happened Next)', wordCount: '~250', register: 'Informal',
       paragraphs: [
@@ -344,7 +344,7 @@ SRDP.textTypes = [
         {
           text: 'So, am I back on Instagram now? Yeah, I am. But I use it differently: maybe 20 minutes a day, max. The month off taught me it\'s just a tool, and I\'d been treating it like a lifestyle. Have any of you tried something like this? I\'d love to hear your stories in the comments! If you have ever felt like your phone owns you instead of the other way round, maybe give it a try. Worst case, you waste a weekend. Best case, you get a little piece of your life back.',
           annotations: [
-            { span: 'Have any of you tried something like this? I\'d love to hear your stories in the comments!', type: 'special', label: 'Call to comment – REQUIRED for blog posts' },
+            { span: 'Have any of you tried something like this? I\'d love to hear your stories in the comments!', type: 'special', label: 'Call to comment – required in blog posts' },
           ]
         },
       ]
@@ -368,7 +368,7 @@ SRDP.textTypes = [
       { part: 'Subject:', note: '[clear and descriptive]' },
       { part: 'Dear Sir or Madam, / Dear Mr/Ms [Name],', note: '' },
       { part: 'Introduction', note: 'state why you are writing in the first sentence' },
-      { part: 'Body paragraphs 1–3', note: 'one bullet point per paragraph' },
+      { part: 'Body paragraphs 1–3', note: 'one content point per paragraph' },
       { part: 'Conclusion', note: 'restate purpose, expected response' },
       { part: 'Yours faithfully, / Yours sincerely,', note: 'faithfully = name unknown; sincerely = name known' },
     ],
@@ -399,7 +399,7 @@ SRDP.textTypes = [
       { category: 'Closings (all sub-types)',
         items: ['I look forward to hearing from you at your earliest convenience.', 'I look forward to receiving the information requested.', 'I am available for an interview at your convenience.', 'Thank you for your cooperation in correcting this matter.'] },
     ],
-    tip: 'Faithfully vs. sincerely: "Dear Sir/Madam" (name unknown) → Yours faithfully. "Dear Mr/Ms Brown" (name known) → Yours sincerely. Getting this wrong is an instant flag for examiners. And if the task is an informal e-mail (to a friend, a host family, an exchange partner), the same rules apply the other way round: "Hi Anna," / "Dear Tom,", contractions are fine, and you close with "Best wishes" or "Take care". Read the task: the recipient decides the register.',
+    tip: 'Faithfully vs. sincerely: "Dear Sir/Madam" (name unknown) → Yours faithfully. "Dear Mr/Ms Brown" (name known) → Yours sincerely. This mistake is easy to spot. If the task is an informal e-mail (to a friend, a host family, an exchange partner), the same rules apply the other way round: "Hi Anna," / "Dear Tom,", contractions are fine, and you close with "Best wishes" or "Take care". Read the task: the recipient decides the register.',
     modelText: {
       title: 'Complaint regarding Summer Language Course in Brighton', wordCount: '~250', register: 'Formal',
       paragraphs: [
@@ -423,7 +423,7 @@ SRDP.textTypes = [
           text: 'To begin with, the classes had up to 22 students, which made individual attention impossible. Furthermore, our teacher changed three times during the course, and the final replacement had no formal teaching qualification. As a result, several students felt they had not improved at all. On top of this, the afternoon activities advertised in the brochure were cancelled twice without notice. When I raised these problems with the reception staff, I was simply told that nothing could be done, and none of the staff seemed willing to take responsibility. To make matters worse, the written complaint I handed in during the course was never answered.',
           annotations: [
             { span: 'Furthermore,', type: 'language', label: 'B2 linking word' },
-            { span: 'As a result,', type: 'language', label: 'Cause-effect linker' },
+            { span: 'As a result,', type: 'language', label: 'Linking word (cause and effect)' },
             { span: 'On top of this', type: 'language', label: 'Adds a further complaint' },
           ]
         },
@@ -450,10 +450,10 @@ SRDP.textTypes = [
       { label: 'Key feature', value: 'Headed sections + call to action' },
     ],
     layout: [
-      { part: 'Main title', note: 'names the offer or event clearly – and makes people want to read on' },
+      { part: 'Main title', note: 'names the offer or event clearly and makes people want to read on' },
       { part: 'Short intro / hook', note: '~30–40 words – say what this is and why it matters to the reader' },
       { part: 'Subheading + section 1', note: 'one benefit or block of information under its own heading' },
-      { part: 'Subheading + section 2', note: 'the next point – short, scannable, one idea per section' },
+      { part: 'Subheading + section 2', note: 'the next point: short, easy to scan, one idea per section' },
       { part: 'Subheading + section 3 (optional)', note: 'a further point if the word count allows' },
       { part: 'Call to action', note: 'tell the reader the one thing to do next (come, sign up, get in touch)' },
       { part: 'Practical details', note: 'date, time, place, price, website, phone – the facts people need' },
@@ -461,20 +461,20 @@ SRDP.textTypes = [
     dos: [
       'Give it a clear title and break the text into short, headed sections',
       'Know exactly who the leaflet is for and write straight to them',
-      'Sell the benefits, not just the facts – why should the reader care?',
-      'Keep sections short and scannable – a leaflet is read standing up, not studied',
+      'Tell readers what they gain from the offer, then give the facts',
+      'Keep sections short and easy to scan: people read a leaflet quickly, often standing up',
       'Address the reader directly ("you") and use imperatives: come along, find out more',
       'End with a clear call to action – the one thing you want the reader to do',
       'Add the practical details: date, time, place, price, how to get in touch',
-      'Match the register to the audience, but keep it accessible – not slang, not bureaucratic',
+      'Match the register to the audience and keep it easy to read: no slang, no official-sounding language',
     ],
     donts: [
-      "Don't write it as one long, unbroken block of text – a leaflet is broken into short, headed sections",
-      "Don't drop the subheadings – they are what make it a leaflet at a glance",
-      "Don't tell a personal story from your own life – a leaflet informs, it does not confess (that is a blog)",
-      "Don't weigh arguments for and against – a leaflet promotes one thing, it does not debate it",
-      "Don't slip into slang or txt-speak – persuasive is fine, sloppy is not",
-      "Don't forget the call to action and the contact details – a leaflet with no next step is just decoration",
+      "Don't write one long block of text; break it into short sections with headings",
+      "Don't leave out the subheadings: they show at once that this is a leaflet",
+      "Don't tell a personal story from your own life (that belongs in a blog)",
+      "Don't weigh arguments for and against: a leaflet promotes one thing",
+      "Don't use slang or text-message spelling",
+      "Don't forget the call to action and the contact details: readers need to know what to do next",
     ],
     phrases: [
       { category: 'Attention-grabbing openers',
@@ -486,7 +486,7 @@ SRDP.textTypes = [
       { category: 'Practical information & closings',
         items: ['When: Saturday, 14 June, from 10 a.m.', 'Where: the main hall, Hauptstraße 1.', 'Entry is free. / Tickets: €5.', 'For more information, visit www.…', 'Questions? Call us on… or drop by any weekday.'] },
     ],
-    tip: 'A leaflet (the German curriculum documents call it a „Broschüre“) is not one long block of prose. It informs AND persuades a target audience, and the layout does half the work: a clear title, short headed sections, direct address and a call to action. Picture the reader holding it at a bus stop – everything has to land in seconds. Keep the register persuasive but clean: warmer than a report, cleaner than a blog. You write the text only – a title, headed sections and a call to action, never drawings or layout.',
+    tip: 'A leaflet (in German often „Broschüre“) informs and persuades a target audience. The layout does half the work: a clear title, short sections with headings, direct address and a call to action. Imagine someone reading it quickly at a bus stop: they should get the message in a few seconds. Keep the register persuasive but careful: warmer than a report, more careful than a blog. You write only the text (title, headed sections, call to action), with no drawings or layout design.',
     modelText: {
       title: 'Open Day at Schulzentrum Seetal – See Your Future in Action',
       wordCount: '~250', register: 'Persuasive',
@@ -502,7 +502,7 @@ SRDP.textTypes = [
           text: 'Not sure what to do after lower secondary school? Spend a morning with us and find out. On Saturday, 7 November, our whole school opens its doors: workshops, real projects and students who are happy to show you around. Come and see what studying here is actually like, with no pressure and no entrance test.',
           annotations: [
             { span: 'Not sure what to do after lower secondary school?', type: 'special', label: 'Question aimed straight at the reader' },
-            { span: 'workshops, real projects and students who are happy to show you around', type: 'content', label: 'Sells the benefit, not just the facts' },
+            { span: 'workshops, real projects and students who are happy to show you around', type: 'content', label: 'Tells the reader what they gain' },
           ]
         },
         {
@@ -515,12 +515,12 @@ SRDP.textTypes = [
         {
           text: 'Meet the People, Not Just the Building\nWant to know what life here is really like? Ask the people who live it. Current students will show you the labs and workshops and answer your questions about lessons, homework and life after graduation.',
           annotations: [
-            { span: 'Meet the People, Not Just the Building', type: 'structure', label: 'Second subheading – parallel and benefit-led' },
+            { span: 'Meet the People, Not Just the Building', type: 'structure', label: 'Second subheading – tells the reader what they gain' },
             { span: 'Ask the people who live it.', type: 'language', label: 'Direct address keeps the reader involved' },
           ]
         },
         {
-          text: 'Something for Every Interest\nWhether you are drawn to technology, business or hospitality, there is a taster session waiting for you. Try your hand at coding, run a mini pop-up shop, or cook a small dish in our training kitchen. You will leave knowing which path actually suits you, not just which one sounds good in a brochure.',
+          text: 'Something for Every Interest\nWhether you are drawn to technology, business or hospitality, there is a taster session waiting for you. Try your hand at coding, run a mini pop-up shop, or cook a small dish in our training kitchen. You will leave knowing which path actually suits you and what the next steps are.',
           annotations: [
             { span: 'Whether you are drawn to technology, business or hospitality', type: 'content', label: 'Speaks to HTL, HAK and HLW readers alike' },
             { span: 'Try your hand at coding, run a mini pop-up shop, or cook a small dish', type: 'special', label: 'Concrete, varied activities keep it persuasive' },
@@ -554,10 +554,10 @@ SRDP.schools = {
     tasksWord: 'two', taskCount: 2,
     timeStat: '120 min', timeStatSub: 'total writing time',
     tasksStat: '2 tasks', tasksStatSub: '~400 + ~250 words',
-    overviewIntro: 'You have <strong style="color:var(--text)">120 minutes</strong> for <strong style="color:var(--text)">two tasks</strong>: one longer (~400 words, at B2 usually the essay) and one shorter (~250 words). Writing is one of four equally weighted sections of the written exam, alongside Reading, Listening and Language in Use.',
-    timeSplitTip: 'Time split that works: ~65 min for the 400-word task (incl. 5–10 min planning) · ~40 min for the 250-word task · the rest for proofreading both. Write your finishing times on the task sheet before you start.',
-    wordCountTip: 'Word count tolerance: ±10%. That is 360–440 words for 400-word tasks and 225–275 for 250-word tasks. If you are further off than that, Task Achievement is reduced by one band.',
-    dictionary: 'At AHS, dictionaries and reference works – electronic ones included – are not allowed anywhere in the standardised exam. That is less scary than it sounds: the tasks are built so that B2 vocabulary is enough, and when a word will not come, paraphrase it – the grid rewards that.',
+    overviewIntro: 'You have <strong style="color:var(--text)">120 minutes</strong> for <strong style="color:var(--text)">two tasks</strong>: one longer (~400 words, often an essay, but it can be another text type) and one shorter (~250 words). Writing is one of four equally weighted sections of the written exam, alongside Reading, Listening and Language in Use.',
+    timeSplitTip: 'A time split that works: ~65 min for the 400-word task (incl. 5–10 min planning) · ~40 min for the 250-word task · ~15 min to proofread both. Write your finishing times on the task sheet before you start.',
+    wordCountTip: 'Word count tolerance: ±10%. That is 360–440 words for 400-word tasks and 225–275 for 250-word tasks. If your text is more than 10% too long or too short, Task Achievement drops by one band.',
+    dictionary: 'At AHS, dictionaries and reference works – electronic ones included – are not allowed anywhere in the standardised exam. The tasks are written so that B2 vocabulary is enough. When you cannot think of a word, explain it in other words.',
     provisional: false,
   },
   bhs: {
@@ -567,10 +567,10 @@ SRDP.schools = {
     tasksWord: 'three', taskCount: 3,
     timeStat: '195 min', timeStatSub: 'total writing time',
     tasksStat: '3 tasks', tasksStatSub: '~250 words each',
-    overviewIntro: 'The BHS Writing section has <strong style="color:var(--text)">three tasks</strong>, usually around 250 words each (each task states its own target, ±10%), and you get <strong style="color:var(--text)">195 minutes</strong>. Writing is one of three sections of the written exam, alongside Reading and Listening – there is no separate Language in Use section. One BHS perk: (electronic) dictionaries are allowed, but only during the Writing section. The text types are article, report, blog, e-mail and leaflet – no essay.',
-    timeSplitTip: 'Time split that works: three tasks in 195 minutes is roughly 55–60 minutes each, planning included. Read every prompt twice, note your finishing times on the task sheet, and keep about 15 minutes at the end to proofread all three.',
-    wordCountTip: 'Word count tolerance: ±10%. Each task states its own target (usually around 250 words, so 225–275). If you are further off than that, Task Achievement is reduced by one band.',
-    dictionary: 'At BHS, (electronic) dictionaries are allowed – but only during the Writing section, not in Reading or Listening. Even so, the tasks are built so that B2 vocabulary is enough; when a word will not come, paraphrase it.',
+    overviewIntro: 'The BHS Writing section has <strong style="color:var(--text)">three tasks</strong>, usually around 250 words each (each task states its own target, ±10%), and you get <strong style="color:var(--text)">195 minutes</strong>. Writing counts for <strong style="color:var(--text)">half of your grade</strong>: the receptive part (Reading and Listening) and the productive part (Writing) are weighted 50:50. There is no separate Language in Use section. The writing papers differ by school type (HAK, HTL, HUM …), so practise with tasks for your own school type. Dictionaries (electronic ones too) are allowed, but only in the Writing section. The text types are article, report, blog, e-mail and leaflet; there is no essay.',
+    timeSplitTip: 'A time split that works: about 60 minutes per task, planning included (3 × 60 = 180 min), plus about 15 minutes at the end to proofread all three. Read every task twice and note your finishing times on the task sheet.',
+    wordCountTip: 'Word count tolerance: ±10%. Each task states its own target (usually around 250 words, so 225–275). If your text is more than 10% too long or too short, Task Achievement drops by one band.',
+    dictionary: 'At BHS, dictionaries (electronic ones too) are allowed, but only in the Writing section, not in Reading or Listening. The tasks are written so that B2 vocabulary is enough. When you cannot think of a word, explain it in other words.',
     provisional: false,
   },
 };
@@ -585,7 +585,7 @@ SRDP.emailSubTypes = [
       'State clearly what went wrong and when',
       'Include specific details (dates, names, amounts)',
       'Make a clear, reasonable demand in the conclusion',
-      'Use formal, measured language – firm but not rude',
+      'Use formal, calm language: firm but polite',
       'Set a deadline for a response if appropriate',
     ],
     donts: [
@@ -600,7 +600,7 @@ SRDP.emailSubTypes = [
       { category: 'Making demands', items: ['I would like you to refund my money.', 'I expect a full explanation for this situation.', 'Unless I receive a satisfactory reply within 14 days, I will be forced to…', 'I would be grateful if you could rectify this matter immediately.', 'I am requesting a partial refund of…'] },
       { category: 'Closing', items: ['I look forward to hearing from you at your earliest convenience.', 'I trust this matter will be dealt with promptly.', 'Thank you for your cooperation in correcting this matter.'] },
     ],
-    tip: 'The complaint letter tests your ability to be assertive without being rude. "I am writing to express my dissatisfaction" is far more effective than "Your service was awful." Examiners reward measured, professional tone.',
+    tip: 'A complaint shows whether you can be firm without being rude. "I am writing to express my dissatisfaction" works much better than "Your service was awful." Examiners look for a calm, professional tone.',
     modelNote: 'The full model text on the "Model text" tab of the e-mail guide is a complaint – study it there.',
   },
   {
@@ -611,7 +611,7 @@ SRDP.emailSubTypes = [
       "State exactly what position you're applying for in the first sentence",
       'Mention where you saw the advertisement',
       'Be specific about your qualifications and experience',
-      'Explain why YOU are suitable (not just what you want)',
+      'Explain why you are the right person for the job',
       'Express enthusiasm without being over-the-top',
       'Offer to provide further information or attend an interview',
     ],
@@ -667,7 +667,7 @@ SRDP.emailSubTypes = [
   {
     id: 'editor', name: 'Letter to the Editor',
     purpose: 'You respond to an article or comment published in a newspaper or magazine. You must reference the original publication, then agree or disagree with the arguments made. It is a classic exam task.',
-    layoutNotes: 'Standard e-mail header (To: editor@publication.example). Greeting: "Dear Sir or Madam," or "Dear Editor,". FIRST SENTENCE must name the article, publication, and date. Sign off with Yours faithfully + full name + town/city.',
+    layoutNotes: 'Standard e-mail header (To: editor@publication.example). Greeting: "Dear Sir or Madam," or "Dear Editor,". The first sentence must name the article, the publication and the date. Sign off with Yours faithfully + full name + town/city.',
     dos: [
       'Name the article, publication, and date in your first sentence',
       'Take a clear position (agree, disagree, or partially agree)',
@@ -677,7 +677,7 @@ SRDP.emailSubTypes = [
       'Include your town/city after your name',
     ],
     donts: [
-      "Don't forget to reference the original article – this is essential",
+      "Don't forget to name the original article",
       'Don\'t use a name-based greeting ("Dear Mr Johnson") – you don\'t know the editor',
       "Don't write without a clear position",
       "Don't use contractions or informal language",
@@ -689,7 +689,7 @@ SRDP.emailSubTypes = [
       { category: 'Disagreeing', items: ['I am afraid I must respectfully disagree with the position expressed.', 'While I understand the argument, I cannot agree that…', 'The author fails to consider…', 'It is simply not true that…', 'While I completely agree that…, I cannot accept…'] },
       { category: 'Conclusion / Call to action', items: ['I sincerely hope that… will reconsider this position.', "May I draw your readers' attention to…", 'What we must do is ensure that…', 'I urge your readers to…', 'I hope this letter will contribute to a wider debate on this issue.'] },
     ],
-    tip: 'Make it personal and local: explain WHY you care about this issue and how it affects your community. Examiners notice when a writer actually cares about the topic.',
+    tip: 'Make it personal and local: explain why you care about this issue and how it affects your community.',
     modelText: {
       title: 'Re: "Why Teenagers Should Not Have Part-Time Jobs"', wordCount: '~250', register: 'Formal',
       paragraphs: [
@@ -703,7 +703,7 @@ SRDP.emailSubTypes = [
         {
           text: 'Dear Sir or Madam,\n\nI am writing in response to the article entitled "Why Teenagers Should Not Have Part-Time Jobs", which appeared in the Vienna Herald on 8 February. While the author raises some valid concerns, I cannot accept the conclusion that part-time work harms young people. As a sixteen-year-old who works part-time myself, I feel the article overlooks the very people it claims to protect.',
           annotations: [
-            { span: 'I am writing in response to the article entitled "Why Teenagers Should Not Have Part-Time Jobs", which appeared in the Vienna Herald on 8 February.', type: 'special', label: 'REQUIRED: article + publication + date in sentence one' },
+            { span: 'I am writing in response to the article entitled "Why Teenagers Should Not Have Part-Time Jobs", which appeared in the Vienna Herald on 8 February.', type: 'special', label: 'Required: article + publication + date in sentence one' },
             { span: 'While the author raises some valid concerns, I cannot accept', type: 'content', label: 'Clear position – partial disagreement' },
             { span: 'I feel the article overlooks the very people it claims to protect', type: 'special', label: 'Personal stake stated early' },
           ]
@@ -748,7 +748,7 @@ SRDP.emailSubTypes = [
       { category: 'Asking questions (indirect form)', items: ['I would like to know whether…', 'Could you please tell me…?', 'I would be grateful if you could inform me of…', 'I would appreciate it if you could clarify…', 'I was wondering whether it might be possible to…'] },
       { category: 'Closing', items: ['I look forward to receiving the information requested.', 'I would appreciate a prompt reply, as I need to make arrangements by…', 'Please do not hesitate to contact me if you require any further information.', 'I look forward to hearing from you.'] },
     ],
-    tip: 'Indirect questions ("I would like to know whether…") are more formal than direct questions ("Is there…?"). Use them throughout and the examiner sees solid B2 control of register and grammar.',
+    tip: 'Indirect questions ("I would like to know whether…") are more formal than direct questions ("Is there…?"). Using them throughout shows good control of formal register and grammar.',
     modelText: {
       title: 'Enquiry about Volunteer Programme in Scotland', wordCount: '~250', register: 'Formal',
       paragraphs: [

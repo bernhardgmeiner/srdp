@@ -15,7 +15,7 @@ To sum up, phone bans are dumb. Schools should trust students more!!!`,
     errors: [
       { mark: '"Hey guys!"', fix: 'Colloquial greeting. Essays are formal. No direct address.' },
       { mark: "Contractions (there's, here's, it's, couldn't)", fix: 'Not allowed in formal essays.' },
-      { mark: 'Personal anecdote ("When my school tried…")', fix: 'Essays use general/hypothetical examples, not personal stories.' },
+      { mark: 'Personal anecdote ("When my school tried…")', fix: 'Essays argue mainly with general and hypothetical examples. A personal story should not be the main evidence.' },
       { mark: '"loads of apps"', fix: 'Colloquial. Use: "a large number of applications".' },
       { mark: '"phone bans are dumb"', fix: 'Slang/emotive. Use: "banning phones is unlikely to be effective".' },
       { mark: '"!!!"', fix: 'Exclamation marks are inappropriate in formal essays.' },
@@ -60,7 +60,7 @@ Mike`,
       { mark: "Contractions (you're, that's)", fix: 'Not appropriate in formal letters to the editor.' },
       { mark: 'No article reference', fix: 'Must state the article title, publication, and date.' },
       { mark: '"totally wrong"', fix: 'Too blunt. Use: "I am afraid I must respectfully disagree."' },
-      { mark: 'Only one argument', fix: 'The task gives 3 bullet points; each needs a full paragraph.' },
+      { mark: 'Only one argument', fix: 'The task gives three content points; each needs a full paragraph.' },
       { mark: '"Cheers,"', fix: 'Informal sign-off. Must be: "Yours faithfully,".' },
       { mark: 'First name only ("Mike")', fix: 'Must give full name and town/city.' },
     ],
@@ -78,13 +78,13 @@ Yours faithfully,
 Thomas Maier`,
     errors: [
       { mark: 'A title ("The Question of Remote Learning")', fix: "Blog comments have no title – that's for blog posts." },
-      { mark: 'No reference to the original post', fix: 'A comment MUST open by referencing the post: "Hi Sarah, I just read your post on remote learning…"' },
+      { mark: 'No reference to the original post', fix: 'A comment must open by referring to the post: "Hi Sarah, I just read your post on remote learning…"' },
       { mark: '"It is widely acknowledged that…", "empirical studies have demonstrated"', fix: 'Academic essay language. Comments are personal and conversational.' },
       { mark: '"This comment will examine…"', fix: 'Announcing your structure is essay style – and even there it is weak.' },
-      { mark: 'No personal experience or voice', fix: 'Blogs live on personality: "When my school went remote, I…"' },
+      { mark: 'No personal experience or voice', fix: 'Blogs need a personal voice: "When my school went remote, I…"' },
       { mark: '"Yours faithfully," + full name', fix: "Comments don't have a formal sign-off. A username is enough." },
     ],
-    verdict: 'A five-paragraph essay in disguise. Wrong genre from the first line.' },
+    verdict: 'This is a formal essay dressed up as a comment. The text type is wrong from the first line.' },
   { id: 'textE', title: 'Text E – "E-mail of application" by a student',
     text: `To: jobs@sportcamp.example
 From: partyking2008@email.example
@@ -108,7 +108,7 @@ Felix`,
       { mark: 'Contractions + "btw" + "See ya,"', fix: 'No contractions, no chat abbreviations. Sign off: "Yours faithfully, Felix [surname]".' },
       { mark: 'No qualifications, no availability for interview', fix: 'Applications need concrete skills/experience and a closing offer ("I am available for an interview…").' },
     ],
-    verdict: 'Friendly chat message, not an application. The register alone would sink it.' },
+    verdict: 'This reads like a chat message to a friend. The register alone would cost a lot of marks.' },
   { id: 'textF', schools: ['bhs'], title: 'Text F – "Leaflet" by a student',
     text: `Information About Our School Garden Club
 
@@ -123,19 +123,19 @@ Thank you for reading this leaflet.`,
       { mark: 'Title "Information About Our School Garden Club"', fix: 'Flat, notice-style title. A leaflet needs a title that pulls the reader in, e.g. "Get Growing – Join the School Garden Club!"' },
       { mark: '"The purpose of this leaflet is to inform the reader"', fix: 'Report-style opener. A leaflet opens with a hook aimed at the reader: "Ever fancied growing your own vegetables at school?"' },
       { mark: 'One long block – no subheadings', fix: 'A leaflet is broken into short, headed sections. Add subheadings such as "What We Do" and "Why Join".' },
-      { mark: '"several advantages, but also a few disadvantages … On the one hand … On the other hand"', fix: 'Weighing pros and cons does not belong in a leaflet. A leaflet promotes one thing – sell the benefits, do not argue against yourself.' },
-      { mark: '"I joined last year and it completely changed my life"', fix: 'Personal story = blog register. A leaflet informs and persuades the reader; it is not about your own life.' },
+      { mark: '"several advantages, but also a few disadvantages … On the one hand … On the other hand"', fix: 'Weighing pros and cons does not belong in a leaflet. A leaflet promotes one thing, so show the benefits instead of arguing against yourself.' },
+      { mark: '"I joined last year and it completely changed my life"', fix: 'A personal story like this belongs in a blog. A leaflet informs and persuades the reader.' },
       { mark: 'No direct address and no call to action', fix: 'The reader is never addressed as "you" and never told what to do. End with a call to action: "Come along to our next meeting and see for yourself."' },
       { mark: 'No practical details', fix: 'The facts the reader needs are missing: when and where the club meets, and how to sign up.' },
     ],
-    verdict: 'This reads like a neutral report with a diary entry dropped into the middle. It informs, but it never grabs the reader, never persuades and never says what to do next – the three jobs a leaflet exists to do.' },
+    verdict: 'This reads like a neutral report with a diary entry in the middle. It gives information, but it does not persuade the reader or say what to do next.' },
 ];
 
 /* ─── REGISTER GYM ─────────────────────────────────────────── */
 SRDP.registerGym = [
   { informal: "So, I just heard about these new changes and honestly? I'm not happy.", formal: 'I am writing to express my concern about the proposed changes.', hint: 'Complaint / e-mail opener' },
   { informal: 'We all know that social media can mess with your head.', formal: 'It is widely acknowledged that social media can have a negative impact on mental health.', hint: 'Formal opinion writing' },
-  { informal: "Plus, loads of people in the survey said they weren't happy either.", formal: 'Furthermore, the data suggests that a significant proportion of respondents were dissatisfied.', hint: 'Report language' },
+  { informal: "Plus, loads of people in the survey said they weren't happy either.", formal: 'Furthermore, the data suggests that a large proportion of respondents were dissatisfied.', hint: 'Report language' },
   { informal: 'Honestly, the school should just change this. What do you guys think?', formal: 'I would therefore recommend that the school administration reconsider this policy.', hint: 'Recommendation' },
   { informal: 'Anyway, just get back to me as soon as you can, OK?', formal: 'I look forward to hearing from you at your earliest convenience.', hint: 'Closing formula (e-mail / letter)' },
   { informal: "The hotel room was gross and the staff couldn't care less.", formal: 'The room was not up to the standard advertised, and the staff appeared unwilling to address our concerns.', hint: 'Complaint body' },
@@ -147,7 +147,7 @@ SRDP.registerGym = [
 SRDP.dndSets = {
   essay: [
     { text: 'There is no doubt that climate change poses one of the greatest challenges of our time.', role: 'Introduction / thesis' },
-    { text: 'To begin with, the environmental consequences of rising temperatures are already visible.', role: 'Topic sentence (paragraph 1)' },
+    { text: 'To begin with, the environmental effects of rising temperatures are already visible.', role: 'Topic sentence (paragraph 1)' },
     { text: 'A recent study by NASA confirms that global temperatures have risen by more than 1.2°C since 1880.', role: 'Evidence / example' },
     { text: 'Furthermore, the economic cost of inaction far outweighs the cost of prevention.', role: 'Second argument' },
     { text: 'Taking these points into consideration, it is clear that we must act now.', role: 'Conclusion' },
@@ -201,11 +201,11 @@ ${text}
 """
 
 STEP 1: Expectation horizon (do this before you judge anything).
-In 3–4 sentences, describe what a solid B2 answer to THIS task should contain: its purpose and reader, the content points that must be covered, the conventions of a ${typeName}, and the register you would expect. This is your yardstick for Step 2.
+In 3–4 sentences, describe what a solid B2 answer to THIS task should contain: its purpose and reader, the content points that must be covered, the conventions of a ${typeName}, and the register you would expect. Use it as your standard for Step 2.
 
-STEP 2: Rate the four official criteria, each on the 0–10 scale (level 6 = B2 minimum met). Judge each criterion independently, in its own pass, and quote evidence from the text.
+STEP 2: Rate the four official criteria, each on the 0–10 scale (band 6 = B2 minimum). Judge each criterion independently, in its own pass, and quote evidence from the text.
 1. Task Achievement: purpose and text-type requirements; are all content points developed (not merely mentioned) with relevant details/examples; title / subject line / greeting / sign-off / headings where the text type needs them. WORD COUNT (already counted for you – apply it, do not recount): ${(function(){ var w=(String(text).split('\n').filter(function(l){ return !/^\s*(to|from|subject|date)\s*:/i.test(l); }).join('\n').trim().match(/\S+/g)||[]).length; var lo=Math.round(length*0.9), hi=Math.round(length*1.1); return w<lo? 'the text has '+w+' words, under the '+lo+'–'+hi+' range, so drop this criterion by one band.' : w>hi? 'the text has '+w+' words, over the '+lo+'–'+hi+' range, so drop this criterion by one band.' : 'the text has '+w+' words, inside the '+lo+'–'+hi+' range, so no length penalty applies here.'; })()}
-2. Coherence and Cohesion: the overall line of thought; logical paragraphs with topic sentences; the range and fit of linking devices (here you judge whether they fit, not whether they are correct English).
+2. Coherence and Cohesion: the overall line of thought; logical paragraphs with topic sentences; the range and fit of linking words (here you judge whether they fit, not whether they are correct English).
 3. Lexical and Structural Range: breadth of topic vocabulary and of structures, including some complex forms; any lifting of whole phrases from the task; appropriate register.
 4. Lexical and Structural Accuracy: grammar, word choice, spelling, punctuation. Note: a linking word can be appropriate (credited under criterion 2) and still be wrong in form (penalised here).
 Within each criterion the first descriptors weigh more than a title or the register, and the final band is a qualitative judgement, not the average of the descriptors.
