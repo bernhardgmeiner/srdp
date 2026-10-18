@@ -52,6 +52,10 @@ PAGES.teachers = {
           ].map(c => '<div class="card"><div class="card-title">' + c[0] + '</div><div class="card-desc">' + c[1] + '</div></div>').join('') +
         '</div>' +
         '<div class="gap-s"></div>' +
+        sectionLabel('Writing together in class: Writing Room') +
+        '<p class="lead-sm mb-3"><a href="https://writing.bernhardgmeiner.com" target="_blank" rel="noopener">Writing Room</a> is a free projector tool from the same author, for the 1st to the 8th class (Schulstufe 5 to 12, A1 to B2). The class builds a model text together, one decision at a time. Students vote with A&ndash;D cards, and when they pick a trap, the &ldquo;editor&rdquo; rejects it and explains why. From the 5th class on, the reason names the SRDP criterion. Layout, paragraphs and phrases follow this guide.</p>' +
+        '<p class="lead-sm">Every pack for the 5th to 8th class ends with a link and a QR code to the matching page here, so students can carry on at home: for most packs the guide, the model texts and the quiz for that text type, for stories and reviews the paragraph exercises. No account, nothing to install.</p>' +
+        '<div class="gap-s"></div>' +
         sectionLabel('Found a mistake?') +
         '<p class="lead-sm">Corrections from colleagues help a lot. If a fact, a model text or a quiz answer looks wrong, <a href="mailto:bernhard.gmeiner@gmail.com?subject=Matura%20Guide%20Feedback">send a short e-mail</a> and name the section. More about me at <a href="https://www.bernhardgmeiner.com" target="_blank" rel="noopener">bernhardgmeiner.com</a>.</p>' +
         '<div class="gap-s"></div>' +
