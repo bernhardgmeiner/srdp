@@ -268,6 +268,13 @@ PAGES.overview = {
 const typeTabs = {};
 const TYPE_EXAMPLES = SRDP.typeExamples;
 const SECOND_MODELS = SRDP.secondModels;
+/* erste Zeile eines Abschnitts (Report-/Leaflet-Zwischenueberschrift) fett, sonst normaler Text */
+function subHead(t, mono) {
+  const lines = String(t).split('\n');
+  const isHead = !mono && lines.length > 1 && lines[0].split(/\s+/).length <= 8 && !/[.!?,:;]$/.test(lines[0].trim());
+  return isHead ? '<strong class="sm-sub">' + esc(lines[0]) + '</strong><br>' + esc(lines.slice(1).join('\n')).replace(/\n/g, '<br>') : esc(t).replace(/\n/g, '<br>');
+}
+M.subHead = subHead;
 function secondModelBox(m) {
   return '<div class="gap-s"></div>' +
     '<div class="acc"><div class="acc-item"><button class="acc-head" data-action="acc" aria-expanded="false"><span class="pm">+</span><span>A second model text (a different topic)</span></button>' +
@@ -275,7 +282,7 @@ function secondModelBox(m) {
       '<h3 class="sm-title">' + esc(m.title) + '</h3>' +
       '<div class="sm-meta">' + esc(m.meta) + '</div>' +
       M.taskBox(m.task) +
-      '<div class="sm-text">' + m.paras.map(function(p, i){ return '<p' + (p.mono ? ' class="mono-line"' : (i === 0 && p.t === m.title ? ' class="sm-head"' : '')) + '>' + esc(p.t).replace(/\n/g, '<br>') + '</p>'; }).join('') + '</div>' +
+      '<div class="sm-text">' + m.paras.map(function(p, i){ return '<p' + (p.mono ? ' class="mono-line"' : (i === 0 && p.t === m.title ? ' class="sm-head"' : '')) + '>' + subHead(p.t, p.mono) + '</p>'; }).join('') + '</div>' +
       '<div class="tip mt-4">' + esc(m.tip) + '</div>' +
     '</div></div></div>';
 }

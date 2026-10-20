@@ -737,6 +737,7 @@ body.tour-on{overflow:hidden}
 .ex-task-h{font-size:.75rem;letter-spacing:.4px;text-transform:uppercase;color:var(--text-muted);margin-bottom:5px}
 .ex-task p{margin:0;font-size:.9375rem;line-height:1.55;color:var(--text)}
 .sm-text p.sm-head,.hm-text p.sm-head{font-weight:600;font-size:1.0625rem;color:var(--text)}
+.sm-text .sm-sub,.hm-text .sm-sub{font-weight:600;color:var(--text)}
 .model-task .task-lead{margin-top:8px}
 .model-task .task-points{margin:4px 0 0;padding-left:22px;font-size:.9375rem;line-height:1.55;color:var(--text)}
 .model-task .task-points li{margin:2px 0}

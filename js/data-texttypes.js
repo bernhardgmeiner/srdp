@@ -451,7 +451,7 @@ SRDP.textTypes = [
           ]
         },
         {
-          text: "To begin with, the classes did not match your description: groups of up to 22 students made individual attention impossible. Furthermore, our teacher changed three times during the course, and the final replacement had no formal teaching qualification. As a result, several students felt they had not improved at all.",
+          text: "To begin with, the classes themselves were a serious problem: with up to 22 students in a group, individual attention was impossible. Furthermore, our teacher changed three times during the course, and the final replacement had no formal teaching qualification. As a result, several students felt they had not improved at all.",
           annotations: [
             { span: "Furthermore,", type: "language", label: "B2 linking word" },
             { span: "As a result,", type: "language", label: "Linking word (cause and effect)" },
@@ -564,7 +564,7 @@ SRDP.textTypes = [
           ]
         },
         {
-          text: 'Something for Every Interest\nWhether you are drawn to technology, business or hospitality, we have a branch that fits. Each one leads to the Matura and a recognised qualification, and you can add extras such as a second foreign language, a robotics team or a work placement abroad. Our advisers will help you work out which path actually suits you.',
+          text: 'Something for Every Interest\nWhether you are drawn to technology, business or hospitality, one of our three schools is right for you. Each one leads to the Matura and a recognised qualification, and you can add extras such as a second foreign language, a robotics team or a work placement abroad. Our advisers will help you work out which path actually suits you.',
           annotations: [
             { span: 'Whether you are drawn to technology, business or hospitality', type: 'content', label: 'Speaks to HTL, HAK and HLW readers alike' },
             { span: 'you can add extras such as a second foreign language, a robotics team or a work placement abroad', type: 'special', label: 'Concrete extras keep it persuasive' },
@@ -764,10 +764,10 @@ SRDP.emailSubTypes = [
           ]
         },
         {
-          text: "While it is certainly true that schoolwork must come first, the article fails to consider what a few hours of work each week actually teach you about responsibility, time management and handling your own money. Many of my classmates juggle a weekend job with school and sport without any drop in their marks.",
+          text: "Although it is certainly true that schoolwork must come first, the article fails to consider what a few hours of work each week actually teach you about responsibility, time management and handling your own money. Many of my classmates juggle a weekend job with school and sport without any drop in their marks.",
           annotations: [
             { span: "the article fails to consider", type: "language", label: "Formal disagreement phrase" },
-            { span: "While it is certainly true that schoolwork must come first,", type: "structure", label: "Content point 1 – reacting to the main argument (concede, then disagree)" },
+            { span: "Although it is certainly true that schoolwork must come first,", type: "structure", label: "Content point 1 – reacting to the main argument (concede, then disagree)" },
           ]
         },
         {

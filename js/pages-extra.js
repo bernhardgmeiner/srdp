@@ -155,7 +155,11 @@ function honestModel(typeId) {
     const mono = p.indexOf('To:') === 0 || p.indexOf('by ') === 0;
     const plain = p.replace(/\{\{\d+\}\}/g, '');
     const head = !mono && i === 0 && plain.indexOf('\n') < 0 && plain.split(/\s+/).length <= 12 && !/[.!?:,]$/.test(plain.trim());
-    return '<p' + (mono ? ' class="mono-line"' : (head ? ' class="sm-head"' : '')) + '>' + html.replace(/\n/g, '<br>') + '</p>';
+    const pl = plain.split('\n');
+    const sub = !mono && pl.length > 1 && pl[0].split(/\s+/).length <= 8 && !/[.!?,:;]$/.test(pl[0].trim());
+    const hl = html.split('\n');
+    const body = sub ? '<strong class="sm-sub">' + hl[0] + '</strong><br>' + hl.slice(1).join('<br>') : html.replace(/\n/g, '<br>');
+    return '<p' + (mono ? ' class="mono-line"' : (head ? ' class="sm-head"' : '')) + '>' + body + '</p>';
   }).join('');
   return '<div class="gap-s"></div>' +
     '<div class="acc"><div class="acc-item"><button class="acc-head" data-action="acc" aria-expanded="false"><span class="pm">+</span><span>The honest model: a realistic text and what it costs</span></button>' +
