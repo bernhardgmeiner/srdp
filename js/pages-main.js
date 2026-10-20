@@ -274,7 +274,8 @@ function secondModelBox(m) {
     '<div class="acc-body">' +
       '<h3 class="sm-title">' + esc(m.title) + '</h3>' +
       '<div class="sm-meta">' + esc(m.meta) + '</div>' +
-      '<div class="sm-text">' + m.paras.map(function(p){ return '<p' + (p.mono ? ' class="mono-line"' : '') + '>' + esc(p.t).replace(/\n/g, '<br>') + '</p>'; }).join('') + '</div>' +
+      M.taskBox(m.task) +
+      '<div class="sm-text">' + m.paras.map(function(p, i){ return '<p' + (p.mono ? ' class="mono-line"' : (i === 0 && p.t === m.title ? ' class="sm-head"' : '')) + '>' + esc(p.t).replace(/\n/g, '<br>') + '</p>'; }).join('') + '</div>' +
       '<div class="tip mt-4">' + esc(m.tip) + '</div>' +
     '</div></div></div>';
 }
@@ -338,7 +339,7 @@ function typePage(typeId) {
         '<div class="gap-s"></div>' +
         '<div class="no-print" id="sec-pdf" data-toc-anchor="PDF" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">' +'<a class="btn btn-primary" href="/pdf/' + typeId + '.pdf" target="_blank" rel="noopener">Download this guide as a PDF <span>&darr;</span></a>' +'<span class="text-sm muted">The whole guide as a PDF, for revising on paper.</span>' +'</div>');
   } else if (tab === 'model') {
-    body = (typeId === 'blog' ? '<div class="tip" style="margin-bottom:16px">This model is a blog <strong>post</strong>. A blog <strong>comment</strong> works differently: no title, and the first sentence refers to the post it responds to (see the Key tip on the Guide tab).</div>' : '') + '<div style="margin-bottom:14px;font-size:1rem;color:var(--text)"><strong>' + esc(t.modelText.title) + '</strong></div>' + modelBox(t.modelText) + (SECOND_MODELS[typeId] ? secondModelBox(SECOND_MODELS[typeId]) : '') + (M.honestModel ? M.honestModel(typeId) : '');
+    body = (typeId === 'blog' ? '<div class="tip" style="margin-bottom:16px">This model is a blog <strong>post</strong>. A blog <strong>comment</strong> works differently: no title, and the first sentence refers to the post it responds to (see the Key tip on the Guide tab).</div>' : '') + M.taskBox(t.modelText.task) + '<div style="margin-bottom:14px;font-size:1rem;color:var(--text)"><strong>' + esc(t.modelText.title) + '</strong></div>' + modelBox(t.modelText) + (SECOND_MODELS[typeId] ? secondModelBox(SECOND_MODELS[typeId]) : '') + (M.honestModel ? M.honestModel(typeId) : '');
   } else if (tab === 'phrases') {
     body = phraseGroups(t.phrases) +
       '<div style="font-size:.75rem;color:var(--text-muted);border-top:1px solid var(--border);padding-top:14px;letter-spacing:.32px">Click any phrase to copy it. The full searchable collection lives in the <a href="#phrasebank">phrase bank</a>.</div>';
@@ -353,7 +354,7 @@ function typePage(typeId) {
           st.phrases.map(g => '<div style="margin-bottom:16px"><div style="font-size:.75rem;color:var(--text-muted);margin-bottom:9px;letter-spacing:.32px">' + esc(g.category) + '</div>' + chips(g.items) + '</div>').join('') +
           '<div class="tip" style="border-left-color:' + col + ';margin-top:10px"><strong>Key tip · </strong>' + esc(st.tip) + '</div>' +
           (st.modelText
-            ? '<div style="height:22px"></div><div style="font-size:.875rem;font-weight:600;margin-bottom:10px">Model text: ' + esc(st.modelText.title) + '</div>' + modelBox(st.modelText)
+            ? '<div style="height:22px"></div>' + M.taskBox(st.modelText.task) + '<div style="font-size:.875rem;font-weight:600;margin-bottom:10px">Model text: ' + esc(st.modelText.title) + '</div>' + modelBox(st.modelText)
             : '<div style="margin-top:14px;font-size:.8125rem;color:var(--text-muted)">' + esc(st.modelNote || '') + '</div>') +
         '</div></div>').join('') +
       '</div>' +

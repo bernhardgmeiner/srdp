@@ -12,7 +12,7 @@ SRDP.textTypes = [
       { label: 'Word count', value: '~400 words (360–440)' },
       { label: 'Register', value: 'Formal' },
       { label: 'Title', value: 'Required' },
-      { label: 'Structure', value: '~5 paragraphs' },
+      { label: 'Structure', value: '5 paragraphs' },
     ],
     layout: [
       { part: 'Title', note: 'clear and relevant – not necessarily catchy' },
@@ -57,6 +57,7 @@ SRDP.textTypes = [
     tip: 'An essay wants the reader to think: it is formal and argues with facts and general examples. An article can be personal and speaks to the reader directly.',
     modelText: {
       title: 'The Hidden Cost of Fast Fashion', wordCount: '~400', register: 'Formal',
+      task: { text: "Your class has been discussing fast fashion. Your teacher has asked you to write an essay on the topic.", lead: "In your essay you should:", points: ["describe the impact of fast fashion on the environment", "discuss the working conditions in clothing factories", "evaluate the argument that cheap clothes help people with little money"], words: 400 },
       paragraphs: [
         {
           text: 'Have you ever stopped to think about where your clothes actually come from? The fashion industry has grown dramatically over the past two decades, and by the mid-2010s the average shopper was already buying around 60% more clothing than in 2000. In my opinion, the environmental and social damage caused by fast fashion far outweighs the benefit of cheap clothing.',
@@ -83,7 +84,7 @@ SRDP.textTypes = [
           ]
         },
         {
-          text: 'Admittedly, some argue that fast fashion makes trendy clothing accessible to people who cannot afford designer brands. While this may be true to some extent, it does not justify an industry built on exploitation and pollution. Affordable clothing can exist without disposable clothing. A number of clothing brands have shown that durable, fairly produced garments do not have to be expensive.',
+          text: 'Admittedly, some argue that fast fashion helps people with little money to dress well. While this may be true to some extent, it does not justify an industry built on exploitation and pollution. Affordable clothing can exist without disposable clothing. A number of clothing brands have shown that durable, fairly produced garments do not have to be expensive.',
           annotations: [
             { span: 'Admittedly,', type: 'special', label: 'Counter-argument acknowledged' },
             { span: 'While this may be true to some extent,', type: 'special', label: 'Counter-argument refuted' },
@@ -109,7 +110,7 @@ SRDP.textTypes = [
       { label: 'Word count', value: '~250 or ~400 words' },
       { label: 'Register', value: 'Depends on the audience' },
       { label: 'Title', value: 'Required – catchy!' },
-      { label: 'Structure', value: '~5 paragraphs' },
+      { label: 'Structure', value: '5 paragraphs' },
     ],
     layout: [
       { part: 'Catchy title', note: 'rhetorical question, alliteration, bold statement' },
@@ -147,33 +148,42 @@ SRDP.textTypes = [
     tip: 'Report vs. article: a report informs and recommends in a neutral tone. An article tries to make the reader feel something, so it can be personal and emotional. Always check where the article will appear: a school magazine needs a different voice from a serious newspaper.',
     modelText: {
       title: 'Screens Off, Life On?', wordCount: '~250', register: 'Semi-formal (school magazine)',
+      task: { text: "Last month your school challenged students to give up their phones for a whole week. Write an article about the experiment for your school magazine.", lead: "In your article you should:", points: ["describe how participants felt at the beginning", "explain how everyday school life changed during the week", "say what you personally learned from the experiment"], words: 250 },
       paragraphs: [
         {
-          text: 'Are you one of those people who check their phones within five minutes of waking up? If so, you are definitely not alone. A recent experiment at our school challenged students to give up their phones for an entire week. The results were surprising.',
+          text: "Are you one of those people who check their phones within five minutes of waking up? If so, you are definitely not alone. A recent experiment at our school challenged students to give up their phones for an entire week. The results were surprising.",
           annotations: [
-            { span: 'Are you one of those people who check their phones within five minutes of waking up?', type: 'special', label: 'Rhetorical question – grabs reader immediately' },
-            { span: 'The results were surprising.', type: 'special', label: 'Hook – reader wants to know more' },
+            { span: "Are you one of those people who check their phones within five minutes of waking up?", type: "special", label: "Rhetorical question – grabs reader immediately" },
+            { span: "The results were surprising.", type: "special", label: "Hook – reader wants to know more" },
           ]
         },
         {
-          text: 'When the experiment started, most participants felt anxious and disconnected. Several students admitted they instinctively reached into their pockets dozens of times a day. "I didn\'t even realise how addicted I was," one participant told me. However, by day three something began to shift: a handful of students started talking during breaks instead of reaching for their phones. By the middle of the week, the mood had completely changed. Students who normally sat in silence were suddenly chatting, laughing and swapping stories at every break.',
+          text: "When the experiment started, most participants felt anxious and disconnected. Several students admitted they instinctively reached into their pockets dozens of times a day. \"I didn't even realise how addicted I was,\" one participant told me. The first two days felt long, and the breaks were strangely quiet.",
           annotations: [
-            { span: '"I didn\'t even realise how addicted I was,"', type: 'special', label: 'Direct speech – fine in articles, not in reports' },
-            { span: 'However,', type: 'language', label: 'B2 linking word' },
-            { span: 'the mood had completely changed', type: 'special', label: 'Turning point in the story' },
+            { span: "\"I didn't even realise how addicted I was,\"", type: "special", label: "Direct speech – fine in articles, not in reports" },
+            { span: "When the experiment started, most participants felt anxious and disconnected.", type: "structure", label: "Content point 1 – how participants felt at first" },
           ]
         },
         {
-          text: 'The most striking change was in the social atmosphere. Without screens to hide behind, students had to look at each other and hold real conversations. I know this sounds old-fashioned, but it genuinely felt different – warmer, somehow. Teachers noticed the difference too, reporting fewer disruptions and more engagement. One classmate of mine, usually glued to her screen, ended up organising a lunchtime card tournament that half the year joined.',
+          text: "However, by day three something began to shift: a handful of students started talking during breaks instead of reaching for their phones. By the middle of the week, the mood had completely changed. Students who normally sat in silence were chatting and laughing at every break. Teachers noticed the difference too, reporting fewer disruptions and more engagement in class.",
           annotations: [
-            { span: 'I know this sounds old-fashioned, but it genuinely felt different – warmer, somehow.', type: 'special', label: 'Personal voice – fine in articles, not in reports' },
+            { span: "However,", type: "language", label: "B2 linking word" },
+            { span: "the mood had completely changed", type: "special", label: "Turning point in the story" },
+            { span: "by day three something began to shift", type: "structure", label: "Content point 2 – what changed during the week" },
           ]
         },
         {
-          text: 'So, would I recommend a phone detox? Absolutely, even if only for a few days. You might be surprised by what you notice when you finally look up from that little screen. Honestly, the hardest part was admitting how much I had been missing all this time.',
+          text: "For me personally, the week was a lesson about habits. I realised that I usually pick up my phone out of boredom and rarely because I need it. Without a screen to hide behind, I had to look at people and hold real conversations. I know this sounds old-fashioned, but it genuinely felt different – warmer, somehow.",
           annotations: [
-            { span: 'So, would I recommend a phone detox?', type: 'language', label: 'Rhetorical question to conclude' },
-            { span: 'You might be surprised by what you notice', type: 'special', label: 'Conclusion – leaves reader thinking' },
+            { span: "I know this sounds old-fashioned, but it genuinely felt different – warmer, somehow.", type: "special", label: "Personal voice – fine in articles, not in reports" },
+            { span: "For me personally, the week was a lesson about habits.", type: "structure", label: "Content point 3 – what you learned" },
+          ]
+        },
+        {
+          text: "So, would I recommend a phone detox? Absolutely, even if only for a few days. You might be surprised by what you notice when you finally look up from that little screen. Honestly, the hardest part was admitting how much I had been missing all this time.",
+          annotations: [
+            { span: "So, would I recommend a phone detox?", type: "language", label: "Rhetorical question to conclude" },
+            { span: "You might be surprised by what you notice", type: "special", label: "Conclusion – leaves reader thinking" },
           ]
         },
       ]
@@ -188,16 +198,17 @@ SRDP.textTypes = [
       { label: 'Word count', value: '~250 or ~400 words' },
       { label: 'Register', value: 'Formal and neutral' },
       { label: 'Title', value: 'Subject line + section headings' },
-      { label: 'Structure', value: 'Header + sections' },
+      { label: 'Structure', value: 'Header + 5 sections' },
     ],
     layout: [
       { part: 'Date:', note: '[date]' },
       { part: 'From:', note: '[your name / role]' },
       { part: 'Subject:', note: '[clear, descriptive title]' },
       { part: 'Introduction', note: '~50–80 words – state purpose and data source' },
-      { part: 'Section + heading', note: '~50–80 words – main point 1, under its own heading' },
-      { part: 'Section + heading', note: '~50–80 words – main point 2, under its own heading' },
-      { part: 'Conclusion / Recommendations', note: '~50–80 words – summarise + suggest action' },
+      { part: 'Section + heading', note: '~40–60 words – content point 1, under its own heading' },
+      { part: 'Section + heading', note: '~40–60 words – content point 2, under its own heading' },
+      { part: 'Section + heading', note: '~40–60 words – content point 3, often the recommendations' },
+      { part: 'Conclusion', note: '~30–40 words – short summary, no new facts' },
     ],
     dos: [
       'Present and analyse facts; save your own view for the recommendations',
@@ -227,45 +238,52 @@ SRDP.textTypes = [
     tip: 'You can recognise a report at a glance because of its headings. Give every section a meaningful heading (for example "Key findings"). You do not need to number them.',
     modelText: {
       title: 'Survey Results – Student Stress Levels', wordCount: '~250', register: 'Formal',
+      task: { text: "The student council has carried out a survey on stress among students in years 5 and 6. Write a report for the head teacher.", lead: "In your report you should:", points: ["present how stressed students feel", "explain the main causes of stress", "recommend measures the school could take"], words: 250 },
       paragraphs: [
         {
-          text: 'Date: 15 March 2026\nFrom: Anna Gruber, Student Council\nSubject: Survey Results – Student Stress Levels',
-          isHeader: true,
+          text: "Date: 15 March 2026\nFrom: Anna Gruber, Student Council\nSubject: Survey Results – Student Stress Levels", isHeader: true,
           annotations: [
-            { span: 'Date: 15 March 2026\nFrom: Anna Gruber, Student Council\nSubject: Survey Results – Student Stress Levels', type: 'structure', label: 'Header – Date, From, Subject all required' },
+            { span: "Date: 15 March 2026\nFrom: Anna Gruber, Student Council\nSubject: Survey Results – Student Stress Levels", type: "structure", label: "Header – Date, From, Subject all required" },
           ]
         },
         {
-          text: 'Introduction\nThis report presents the findings of a survey on stress levels conducted among 85 students in years 5 and 6. The aim is to identify the main causes of stress and suggest possible measures. The survey was carried out anonymously over a two-week period in February and consisted of ten questions on workload, sleep and support services.',
+          text: "Introduction\nThis report presents the findings of a survey on stress levels conducted among 85 students in years 5 and 6. The aim is to identify the main causes of stress and suggest possible measures. The survey was carried out anonymously over a two-week period in February and consisted of ten questions on workload, sleep and support services.",
           annotations: [
-            { span: 'Introduction', type: 'structure', label: 'Section heading' },
-            { span: 'The aim is to identify the main causes of stress and suggest possible measures.', type: 'content', label: 'States purpose of report' },
-            { span: 'carried out anonymously', type: 'language', label: 'Passive – objective method' },
+            { span: "Introduction", type: "structure", label: "Section heading" },
+            { span: "The aim is to identify the main causes of stress and suggest possible measures.", type: "content", label: "States purpose of report" },
+            { span: "carried out anonymously", type: "language", label: "Passive – objective method" },
           ]
         },
         {
-          text: 'Key Findings\nThe majority of respondents (72%) reported feeling stressed on a regular basis. Exams and homework deadlines were identified as the primary sources of pressure. In addition, 45% mentioned sleep problems connected to school-related anxiety. Only 18% were aware of the school\'s existing counselling services. When asked about the timing of stress, students pointed clearly to the weeks before exams. Notably, girls reported higher stress levels than boys, although both groups named similar causes.',
+          text: "Levels of stress\nThe majority of respondents (72%) reported feeling stressed on a regular basis. When asked about the timing of stress, students pointed clearly to the weeks before exams. Notably, girls reported higher stress levels than boys, although both groups named similar causes.",
           annotations: [
-            { span: 'The majority of respondents (72%)', type: 'language', label: 'Report language – cite data precisely' },
-            { span: 'were identified as', type: 'language', label: 'Passive voice – objective tone' },
-            { span: 'In addition,', type: 'language', label: 'B2 linking word' },
-            { span: 'Notably, girls reported higher stress levels than boys', type: 'language', label: 'Precise reporting of data' },
+            { span: "The majority of respondents (72%)", type: "language", label: "Report language – cite data precisely" },
+            { span: "Notably, girls reported higher stress levels than boys", type: "language", label: "Precise reporting of data" },
+            { span: "Levels of stress", type: "structure", label: "Heading for content point 1 – meaningful, not numbered" },
           ]
         },
         {
-          text: 'Recommendations\nOn the basis of these findings, I would recommend introducing a weekly "no-homework day" and promoting the counselling service through posters and assemblies. It would also be advisable to schedule exams more evenly across the term to reduce pressure peaks. Finally, teachers could be encouraged to coordinate test dates through a shared online calendar so that deadlines do not pile up in the same week.',
+          text: "Main causes\nExams and homework deadlines were identified as the primary sources of pressure. In addition, 45% mentioned sleep problems connected to school-related anxiety. Only 18% were aware of the school's existing counselling services, which means that many students deal with stress on their own.",
           annotations: [
-            { span: 'Recommendations', type: 'structure', label: 'Every section gets its own heading' },
-            { span: 'On the basis of these findings,', type: 'language', label: 'Linking word for report conclusions' },
-            { span: 'I would recommend', type: 'special', label: 'Recommendation – required in every report' },
-            { span: 'It would also be advisable to', type: 'language', label: 'Formal suggestion phrase' },
+            { span: "were identified as", type: "language", label: "Passive voice – objective tone" },
+            { span: "In addition,", type: "language", label: "B2 linking word" },
+            { span: "Main causes", type: "structure", label: "Heading for content point 2" },
           ]
         },
         {
-          text: 'Conclusion\nIn summary, stress is widespread among younger students and is closely linked to exams and homework. If these recommendations are put into practice, the school could noticeably improve both student wellbeing and academic results.',
+          text: "Recommendations\nOn the basis of these findings, I would recommend introducing a weekly \"no-homework day\" and promoting the counselling service through posters and assemblies. It would also be advisable to schedule exams more evenly across the term to reduce pressure peaks. Finally, teachers could coordinate test dates through a shared online calendar so that deadlines do not pile up in the same week.",
           annotations: [
-            { span: 'Conclusion', type: 'structure', label: 'Optional final section' },
-            { span: 'If these recommendations are put into practice', type: 'language', label: 'Conditional – formal close' },
+            { span: "Recommendations", type: "structure", label: "Every section gets its own heading" },
+            { span: "On the basis of these findings,", type: "language", label: "Linking word for report conclusions" },
+            { span: "I would recommend", type: "special", label: "Recommendation – required in every report" },
+            { span: "It would also be advisable to", type: "language", label: "Formal suggestion phrase" },
+          ]
+        },
+        {
+          text: "Conclusion\nIn summary, stress is widespread among younger students and is closely linked to exams and homework. If these recommendations are put into practice, the school could noticeably improve both student wellbeing and academic results.",
+          annotations: [
+            { span: "Conclusion", type: "structure", label: "Conclusion – a short summary, no new facts" },
+            { span: "If these recommendations are put into practice", type: "language", label: "Conditional – formal close" },
           ]
         },
       ]
@@ -318,33 +336,46 @@ SRDP.textTypes = [
     tip: 'For a blog comment, your very first sentence should refer to the original post, ideally by name: "Hi Jeff, I stumbled across your blog on overtourism and it really made me think…"',
     modelText: {
       title: 'Why I Quit Instagram for a Month (And What Happened Next)', wordCount: '~250', register: 'Informal',
+      task: { text: "Write a post for your personal blog about a time you took a break from social media.", lead: "In your post you should:", points: ["explain why you decided to quit", "describe how the first weeks went", "say how you use social media now"], words: 250 },
       paragraphs: [
         {
-          text: 'by max_adventures · 22 March 2026, 19:34\n\nWhy I Quit Instagram for a Month (And What Happened Next)',
-          isHeader: true,
+          text: "by max_adventures · 22 March 2026, 19:34\n\nWhy I Quit Instagram for a Month (And What Happened Next)", isHeader: true,
           annotations: [
-            { span: 'by max_adventures · 22 March 2026, 19:34', type: 'structure', label: 'Username + date/time – required for blog' },
+            { span: "by max_adventures · 22 March 2026, 19:34", type: "structure", label: "Username + date/time – required for blog" },
           ]
         },
         {
-          text: 'OK so hear me out – I know everyone talks about digital detoxes these days, but I actually went through with it. Last month I deleted Instagram from my phone. Cold turkey. No "screen time limits", no "I\'ll just check once a day" – gone. And honestly? It was weird. My friends genuinely thought I had lost my mind. One of them actually asked if I was okay, as if deleting an app were some kind of cry for help.',
+          text: "OK so hear me out – I know everyone talks about digital detoxes these days, but I actually went through with it. Last month I deleted Instagram from my phone. Cold turkey. And honestly? It was weird.",
           annotations: [
-            { span: 'OK so hear me out –', type: 'special', label: 'Informal, personal tone – contractions OK' },
-            { span: 'And honestly? It was weird.', type: 'special', label: 'Short sentence for effect – works in blogs' },
+            { span: "OK so hear me out –", type: "special", label: "Informal, personal tone – contractions OK" },
+            { span: "And honestly? It was weird.", type: "special", label: "Short sentence for effect – works in blogs" },
           ]
         },
         {
-          text: 'The first few days were rough. I kept unlocking my phone and staring at the empty space where the app used to be. I realised I\'d been scrolling for about two hours every single day. That\'s basically the same as watching a movie. Every. Day. But after about a week, something clicked. I started reading before bed again. By the end of the second week, I had finished an entire book, the first one in months, and somehow my brain felt quieter and less twitchy.',
+          text: "So why did I do it? I realised I'd been scrolling for about two hours every single day. That's basically the same as watching a movie. Every. Day. No \"screen time limits\", no \"I'll just check once a day\" – I wanted it gone. My friends genuinely thought I had lost my mind. One of them actually asked if I was okay.",
           annotations: [
-            { span: 'basically', type: 'language', label: 'Informal register – fine for blogs' },
-            { span: 'Every. Day.', type: 'special', label: 'Stylistic fragmentation – very blog-appropriate' },
-            { span: 'my brain felt quieter and less twitchy', type: 'special', label: 'Vivid personal detail' },
+            { span: "basically", type: "language", label: "Informal register – fine for blogs" },
+            { span: "Every. Day.", type: "special", label: "Stylistic fragmentation – very blog-appropriate" },
+            { span: "So why did I do it?", type: "structure", label: "Content point 1 – why you quit" },
           ]
         },
         {
-          text: 'So, am I back on Instagram now? Yeah, I am. But I use it differently: maybe 20 minutes a day, max. The month off taught me it\'s just a tool, and I\'d been treating it like a lifestyle. Have any of you tried something like this? I\'d love to hear your stories in the comments! If you have ever felt like your phone owns you instead of the other way round, maybe give it a try. Worst case, you waste a weekend. Best case, you get a little piece of your life back.',
+          text: "The first few days were rough. I kept unlocking my phone and staring at the empty space where the app used to be. But after about a week, something clicked. I started reading before bed again. By the end of the second week, I had finished an entire book, the first one in months, and somehow my brain felt quieter and less twitchy.",
           annotations: [
-            { span: 'Have any of you tried something like this? I\'d love to hear your stories in the comments!', type: 'special', label: 'Call to comment – required in blog posts' },
+            { span: "my brain felt quieter and less twitchy", type: "special", label: "Vivid personal detail" },
+            { span: "The first few days were rough.", type: "structure", label: "Content point 2 – how it went" },
+          ]
+        },
+        {
+          text: "So, am I back on Instagram now? Yeah, I am. But I use it differently: maybe 20 minutes a day, max. The month off taught me it's just a tool, and I'd been treating it like a lifestyle.",
+          annotations: [
+            { span: "So, am I back on Instagram now?", type: "structure", label: "Content point 3 – how you use it now" },
+          ]
+        },
+        {
+          text: "If you have ever felt like your phone owns you instead of the other way round, maybe give it a try. Worst case, you waste a weekend. Best case, you get a little piece of your life back. Have any of you tried something like this? I'd love to hear your stories in the comments!",
+          annotations: [
+            { span: "Have any of you tried something like this? I'd love to hear your stories in the comments!", type: "special", label: "Call to comment – required in blog posts" },
           ]
         },
       ]
@@ -402,38 +433,50 @@ SRDP.textTypes = [
     tip: 'Faithfully vs. sincerely: "Dear Sir/Madam" (name unknown) → Yours faithfully. "Dear Mr/Ms Brown" (name known) → Yours sincerely. This mistake is easy to spot. If the task is an informal e-mail (to a friend, a host family, an exchange partner), the same rules apply the other way round: "Hi Anna," / "Dear Tom,", contractions are fine, and you close with "Best wishes" or "Take care". Read the task: the recipient decides the register.',
     modelText: {
       title: 'Complaint regarding Summer Language Course in Brighton', wordCount: '~250', register: 'Formal',
+      task: { text: "You recently attended a two-week summer language course in Brighton that did not match the advertisement. Write an e-mail of complaint to the language school.", lead: "In your e-mail you should:", points: ["describe the problems with the classes", "complain about the afternoon programme", "explain how the staff reacted when you raised the problems"], words: 250 },
       paragraphs: [
         {
-          text: 'To: info@globalenglish.example\nFrom: sarah.berger@email.example\nDate: 10 April 2026\nSubject: Complaint regarding Summer Language Course in Brighton',
-          isHeader: true,
+          text: "To: info@globalenglish.example\nFrom: sarah.berger@email.example\nDate: 10 April 2026\nSubject: Complaint regarding Summer Language Course in Brighton", isHeader: true,
           annotations: [
-            { span: 'To: info@globalenglish.example\nFrom: sarah.berger@email.example\nDate: 10 April 2026\nSubject: Complaint regarding Summer Language Course in Brighton', type: 'structure', label: 'Header – all 4 elements required' },
+            { span: "To: info@globalenglish.example\nFrom: sarah.berger@email.example\nDate: 10 April 2026\nSubject: Complaint regarding Summer Language Course in Brighton", type: "structure", label: "Header – all 4 elements required" },
           ]
         },
         {
-          text: 'Dear Sir or Madam,\n\nI am writing to express my dissatisfaction with the two-week language course I attended at your Brighton school from 16 to 27 March 2026. Although your website promised small class sizes and experienced teachers, my experience was far from what had been advertised. I had specifically chosen your school because of these promises, so the reality on arrival was a serious disappointment.',
+          text: "Dear Sir or Madam,\n\nI am writing to express my dissatisfaction with the two-week language course I attended at your Brighton school from 16 to 27 March 2026. Although your website promised small class sizes and experienced teachers, my experience was far from what had been advertised.",
           annotations: [
-            { span: 'Dear Sir or Madam,', type: 'structure', label: 'Formal greeting (name unknown)' },
-            { span: 'I am writing to express my dissatisfaction with', type: 'language', label: 'Set phrase – complaint opener' },
-            { span: 'Although', type: 'language', label: 'Concession – B2 linking' },
-            { span: 'far from what had been advertised', type: 'language', label: 'Formal understatement – effective in complaints' },
+            { span: "Dear Sir or Madam,", type: "structure", label: "Formal greeting (name unknown)" },
+            { span: "I am writing to express my dissatisfaction with", type: "language", label: "Set phrase – complaint opener" },
+            { span: "Although", type: "language", label: "Concession – B2 linking" },
+            { span: "far from what had been advertised", type: "language", label: "Formal understatement – effective in complaints" },
           ]
         },
         {
-          text: 'To begin with, the classes had up to 22 students, which made individual attention impossible. Furthermore, our teacher changed three times during the course, and the final replacement had no formal teaching qualification. As a result, several students felt they had not improved at all. On top of this, the afternoon activities advertised in the brochure were cancelled twice without notice. When I raised these problems with the reception staff, I was simply told that nothing could be done, and none of the staff seemed willing to take responsibility. To make matters worse, the written complaint I handed in during the course was never answered.',
+          text: "To begin with, the classes did not match your description: groups of up to 22 students made individual attention impossible. Furthermore, our teacher changed three times during the course, and the final replacement had no formal teaching qualification. As a result, several students felt they had not improved at all.",
           annotations: [
-            { span: 'Furthermore,', type: 'language', label: 'B2 linking word' },
-            { span: 'As a result,', type: 'language', label: 'Linking word (cause and effect)' },
-            { span: 'On top of this', type: 'language', label: 'Adds a further complaint' },
+            { span: "Furthermore,", type: "language", label: "B2 linking word" },
+            { span: "As a result,", type: "language", label: "Linking word (cause and effect)" },
+            { span: "To begin with,", type: "structure", label: "Content point 1 – problems with the classes" },
           ]
         },
         {
-          text: 'I would therefore like to request a partial refund of the course fees, as the services provided did not match the description on your website. I look forward to hearing from you within 14 days. Should I not receive a satisfactory response, I will have no choice but to share my experience on public review platforms.\n\nYours faithfully,\nSarah Berger',
+          text: "On top of this, the afternoon programme was very disappointing. The brochure promised daily excursions and sports activities, but two of the trips were cancelled without notice, and on several afternoons we were simply left in an empty classroom with a film.",
           annotations: [
-            { span: 'I would therefore like to request', type: 'special', label: 'Clear, specific demand' },
-            { span: 'I look forward to hearing from you within 14 days.', type: 'language', label: 'Sets a deadline – professional and firm' },
-            { span: 'Yours faithfully,', type: 'structure', label: 'Correct sign-off (Dear Sir → faithfully)' },
-            { span: 'Should I not receive a satisfactory response', type: 'language', label: 'Formal conditional – firm but polite' },
+            { span: "On top of this, the afternoon programme was very disappointing.", type: "language", label: "Content point 2 – a new complaint, a new paragraph" },
+          ]
+        },
+        {
+          text: "When I raised these problems with the reception staff, I was simply told that nothing could be done, and none of the staff seemed willing to take responsibility. To make matters worse, the written complaint I handed in during the course was never answered.",
+          annotations: [
+            { span: "When I raised these problems with the reception staff,", type: "structure", label: "Content point 3 – how the staff reacted" },
+          ]
+        },
+        {
+          text: "I would therefore like to request a partial refund of the course fees, as the services provided did not match the description on your website. I look forward to hearing from you within 14 days. Should I not receive a satisfactory response, I will have no choice but to share my experience on public review platforms.\n\nYours faithfully,\nSarah Berger",
+          annotations: [
+            { span: "I would therefore like to request", type: "special", label: "Clear, specific demand" },
+            { span: "I look forward to hearing from you within 14 days.", type: "language", label: "Sets a deadline – professional and firm" },
+            { span: "Yours faithfully,", type: "structure", label: "Correct sign-off (Dear Sir → faithfully)" },
+            { span: "Should I not receive a satisfactory response", type: "language", label: "Formal conditional – firm but polite" },
           ]
         },
       ]
@@ -454,7 +497,7 @@ SRDP.textTypes = [
       { part: 'Short intro / hook', note: '~30–40 words – say what this is and why it matters to the reader' },
       { part: 'Subheading + section 1', note: 'one benefit or block of information under its own heading' },
       { part: 'Subheading + section 2', note: 'the next point: short, easy to scan, one idea per section' },
-      { part: 'Subheading + section 3 (optional)', note: 'a further point if the word count allows' },
+      { part: 'Subheading + section 3', note: 'the third content point under its own heading' },
       { part: 'Call to action', note: 'tell the reader the one thing to do next (come, sign up, get in touch)' },
       { part: 'Practical details', note: 'date, time, place, price, website, phone – the facts people need' },
     ],
@@ -490,6 +533,7 @@ SRDP.textTypes = [
     modelText: {
       title: 'Open Day at Schulzentrum Seetal – See Your Future in Action',
       wordCount: '~250', register: 'Persuasive',
+      task: { text: "Your school is holding an open day for students who are about to finish lower secondary school. Write a leaflet for the event.", lead: "In your leaflet you should:", points: ["describe the workshops visitors can take part in", "explain how visitors can find out what everyday school life is like", "point out what the school offers for different interests"], words: 250 },
       paragraphs: [
         {
           text: 'Open Day at Schulzentrum Seetal – See Your Future in Action',
@@ -520,10 +564,10 @@ SRDP.textTypes = [
           ]
         },
         {
-          text: 'Something for Every Interest\nWhether you are drawn to technology, business or hospitality, there is a taster session waiting for you. Try your hand at coding, run a mini pop-up shop, or cook a small dish in our training kitchen. You will leave knowing which path actually suits you and what the next steps are.',
+          text: 'Something for Every Interest\nWhether you are drawn to technology, business or hospitality, we have a branch that fits. Each one leads to the Matura and a recognised qualification, and you can add extras such as a second foreign language, a robotics team or a work placement abroad. Our advisers will help you work out which path actually suits you.',
           annotations: [
             { span: 'Whether you are drawn to technology, business or hospitality', type: 'content', label: 'Speaks to HTL, HAK and HLW readers alike' },
-            { span: 'Try your hand at coding, run a mini pop-up shop, or cook a small dish', type: 'special', label: 'Concrete, varied activities keep it persuasive' },
+            { span: 'you can add extras such as a second foreign language, a robotics team or a work placement abroad', type: 'special', label: 'Concrete extras keep it persuasive' },
           ]
         },
         {
@@ -631,34 +675,45 @@ SRDP.emailSubTypes = [
     tip: 'Tense tip: use present simple for current skills ("I am a reliable person"), past simple for past experience ("I worked for…"), present perfect continuous for ongoing activities ("I have been studying…"). Mixing these correctly shows B2 grammar range.',
     modelText: {
       title: 'Application for Summer Camp Counsellor', wordCount: '~250', register: 'Formal',
+      task: { text: "You have seen an advertisement for summer camp counsellors at Lakeside Camps. Write an e-mail of application.", lead: "In your e-mail you should:", points: ["describe your experience of working with children", "explain which skills you could bring to the camp", "say why you would like this job"], words: 250 },
       paragraphs: [
         {
-          text: 'To: recruitment@lakesidecamps.example\nFrom: lukas.steiner@email.example\nDate: 3 May 2026\nSubject: Application for Summer Camp Counsellor',
-          isHeader: true,
+          text: "To: recruitment@lakesidecamps.example\nFrom: lukas.steiner@email.example\nDate: 3 May 2026\nSubject: Application for Summer Camp Counsellor", isHeader: true,
           annotations: [
-            { span: 'Subject: Application for Summer Camp Counsellor', type: 'structure', label: 'Subject names the exact position' },
+            { span: "Subject: Application for Summer Camp Counsellor", type: "structure", label: "Subject names the exact position" },
           ]
         },
         {
-          text: 'Dear Ms Carter,\n\nI am writing to apply for the position of summer camp counsellor at Lakeside Camps, as advertised on your website on 28 April. As an 18-year-old secondary school student with experience in youth work, I believe I would be a valuable addition to your team. Working with children has been part of my life for years, and a summer at Lakeside Camps would be the perfect next step.',
+          text: "Dear Ms Carter,\n\nI am writing to apply for the position of summer camp counsellor at Lakeside Camps, as advertised on your website on 28 April. As an 18-year-old secondary school student with experience in youth work, I believe I would be a valuable addition to your team.",
           annotations: [
-            { span: 'Dear Ms Carter,', type: 'structure', label: 'Name known → will close with "Yours sincerely"' },
-            { span: 'I am writing to apply for the position of summer camp counsellor at Lakeside Camps, as advertised on your website on 28 April.', type: 'language', label: 'Position + where you saw the ad – first sentence' },
+            { span: "Dear Ms Carter,", type: "structure", label: "Name known → will close with \"Yours sincerely\"" },
+            { span: "I am writing to apply for the position of summer camp counsellor at Lakeside Camps, as advertised on your website on 28 April.", type: "language", label: "Position + where you saw the ad – first sentence" },
           ]
         },
         {
-          text: 'For the past two years, I have been a volunteer leader in a local scout group, where I plan weekly activities for children aged eight to twelve. This has taught me how to organise games, resolve conflicts calmly and take responsibility for the safety of a group. In addition, I have completed a first-aid course and speak fluent German and English. Last summer I also helped run a two-week day camp for forty children, where I was responsible for planning the daily schedule and supervising swimming sessions, often for groups of twenty or more.',
+          text: "For the past two years, I have been a volunteer leader in a local scout group, where I plan weekly activities for children aged eight to twelve. Last summer I also helped run a two-week day camp for forty children, where I was responsible for planning the daily schedule and supervising swimming sessions, often for groups of twenty or more.",
           annotations: [
-            { span: 'For the past two years, I have been', type: 'language', label: 'Present perfect – ongoing experience' },
-            { span: 'This has taught me how to organise games, resolve conflicts calmly and take responsibility', type: 'content', label: 'Skills linked to the job – not just listed' },
-            { span: 'responsible for planning the daily schedule', type: 'content', label: 'Concrete, relevant responsibility' },
+            { span: "For the past two years, I have been", type: "language", label: "Present perfect – ongoing experience" },
+            { span: "responsible for planning the daily schedule", type: "content", label: "Concrete, relevant responsibility" },
           ]
         },
         {
-          text: 'I love being outdoors, and I would like to help children enjoy the kind of great summer I had at camp myself. I would therefore welcome the opportunity to bring my energy and experience to Lakeside Camps this summer. I am available for an online interview at your convenience and would be happy to provide references. Please find my CV attached.\n\nYours sincerely,\nLukas Steiner',
+          text: "Working with the scouts has taught me how to organise games, resolve conflicts calmly and take responsibility for the safety of a group. In addition, I have completed a first-aid course. I speak fluent German and English, so I could also help campers from other countries feel at home.",
           annotations: [
-            { span: 'I am available for an online interview at your convenience', type: 'language', label: 'Standard closing move for applications' },
-            { span: 'Yours sincerely,', type: 'structure', label: 'Correct: name known → sincerely' },
+            { span: "taught me how to organise games, resolve conflicts calmly and take responsibility", type: "content", label: "Skills linked to the job – not just listed" },
+          ]
+        },
+        {
+          text: "This job appeals to me because I love being outdoors and would like to help children enjoy the kind of summer I had at camp myself. A summer at Lakeside would also be valuable for my future, as I am planning to study primary education.",
+          annotations: [
+            { span: "This job appeals to me because I love being outdoors and would like to help children enjoy the kind of summer I had at camp myself.", type: "content", label: "Content point 3 – why you want the job" },
+          ]
+        },
+        {
+          text: "I would therefore welcome the opportunity to bring my energy and experience to Lakeside Camps this summer. I am available for an online interview at your convenience and would be happy to provide references. Please find my CV attached.\n\nYours sincerely,\nLukas Steiner",
+          annotations: [
+            { span: "I am available for an online interview at your convenience", type: "language", label: "Standard closing move for applications" },
+            { span: "Yours sincerely,", type: "structure", label: "Correct: name known → sincerely" },
           ]
         },
       ]
@@ -692,35 +747,47 @@ SRDP.emailSubTypes = [
     tip: 'Make it personal and local: explain why you care about this issue and how it affects your community.',
     modelText: {
       title: 'Re: "Why Teenagers Should Not Have Part-Time Jobs"', wordCount: '~250', register: 'Formal',
+      task: { text: "You have read an article in the Vienna Herald with the title \"Why Teenagers Should Not Have Part-Time Jobs\". Write a letter to the editor.", lead: "In your letter you should:", points: ["react to the main argument of the article", "describe your own experience of part-time work", "suggest how part-time jobs could be made fairer for students"], words: 250 },
       paragraphs: [
         {
-          text: 'To: editor@viennaherald.example\nFrom: julia.brunner@email.example\nDate: 12 February 2026\nSubject: Re: "Why Teenagers Should Not Have Part-Time Jobs"',
-          isHeader: true,
+          text: "To: editor@viennaherald.example\nFrom: julia.brunner@email.example\nDate: 12 February 2026\nSubject: Re: \"Why Teenagers Should Not Have Part-Time Jobs\"", isHeader: true,
           annotations: [
-            { span: 'To: editor@viennaherald.example', type: 'structure', label: 'Addressed to the editor' },
+            { span: "To: editor@viennaherald.example", type: "structure", label: "Addressed to the editor" },
           ]
         },
         {
-          text: 'Dear Sir or Madam,\n\nI am writing in response to the article entitled "Why Teenagers Should Not Have Part-Time Jobs", which appeared in the Vienna Herald on 8 February. While the author raises some valid concerns, I cannot accept the conclusion that part-time work harms young people. As a sixteen-year-old who works part-time myself, I feel the article overlooks the very people it claims to protect.',
+          text: "Dear Sir or Madam,\n\nI am writing in response to the article entitled \"Why Teenagers Should Not Have Part-Time Jobs\", which appeared in the Vienna Herald on 8 February. While the author raises some valid concerns, I cannot accept the conclusion that part-time work harms young people. As a sixteen-year-old who works part-time myself, I feel the article overlooks the very people it claims to protect.",
           annotations: [
-            { span: 'I am writing in response to the article entitled "Why Teenagers Should Not Have Part-Time Jobs", which appeared in the Vienna Herald on 8 February.', type: 'special', label: 'Required: article + publication + date in sentence one' },
-            { span: 'While the author raises some valid concerns, I cannot accept', type: 'content', label: 'Clear position – partial disagreement' },
-            { span: 'I feel the article overlooks the very people it claims to protect', type: 'special', label: 'Personal stake stated early' },
+            { span: "I am writing in response to the article entitled \"Why Teenagers Should Not Have Part-Time Jobs\", which appeared in the Vienna Herald on 8 February.", type: "special", label: "Required: article + publication + date in sentence one" },
+            { span: "While the author raises some valid concerns, I cannot accept", type: "content", label: "Clear position – partial disagreement" },
+            { span: "I feel the article overlooks the very people it claims to protect", type: "special", label: "Personal stake stated early" },
           ]
         },
         {
-          text: 'It is certainly true that schoolwork must come first. However, the article fails to consider what a few hours of work each week actually teach you about responsibility, time management and handling your own money. Speaking from my own experience as a student who works four hours every Saturday, I can honestly say that my grades have not suffered – if anything, I have learned to organise my week far more effectively. Many of my classmates juggle a weekend job with school and sport without any drop in their marks. What they gain instead is confidence and a sense of independence that no classroom can teach, along with a first, valuable taste of real working life.',
+          text: "While it is certainly true that schoolwork must come first, the article fails to consider what a few hours of work each week actually teach you about responsibility, time management and handling your own money. Many of my classmates juggle a weekend job with school and sport without any drop in their marks.",
           annotations: [
-            { span: 'However, the article fails to consider', type: 'language', label: 'Formal disagreement phrase' },
-            { span: 'Speaking from my own experience as a student who works four hours every Saturday', type: 'special', label: 'Personal, local angle – strengthens the letter' },
-            { span: 'confidence and a sense of independence that no classroom can teach', type: 'content', label: 'Counter-argument developed' },
+            { span: "the article fails to consider", type: "language", label: "Formal disagreement phrase" },
+            { span: "While it is certainly true that schoolwork must come first,", type: "structure", label: "Content point 1 – reacting to the main argument (concede, then disagree)" },
           ]
         },
         {
-          text: 'Instead of warning parents about part-time jobs, we should be discussing how to make them fair and compatible with school. I urge your readers, especially employers, to offer young people flexible positions with reasonable hours. A balanced approach would serve teenagers far better than a blanket ban.\n\nYours faithfully,\nJulia Brunner, Vienna',
+          text: "Speaking from my own experience as a student who works four hours every Saturday, I can honestly say that my grades have not suffered – if anything, I have learned to organise my week far more effectively. What I gain is confidence and a sense of independence that no classroom can teach, along with a first, valuable taste of real working life.",
           annotations: [
-            { span: 'I urge your readers, especially employers, to', type: 'language', label: 'Call to action – strong ending' },
-            { span: 'Yours faithfully,\nJulia Brunner, Vienna', type: 'structure', label: 'Faithfully + full name + city' },
+            { span: "Speaking from my own experience as a student who works four hours every Saturday", type: "special", label: "Personal, local angle – strengthens the letter" },
+            { span: "confidence and a sense of independence that no classroom can teach", type: "content", label: "Counter-argument developed" },
+          ]
+        },
+        {
+          text: "Instead of warning parents about part-time jobs, we should be discussing how to make them fair and compatible with school. I urge your readers, especially employers, to offer young people flexible positions with reasonable hours. During exam periods, students should be able to take time off without losing their jobs.",
+          annotations: [
+            { span: "I urge your readers, especially employers, to", type: "language", label: "Call to action – strong ending" },
+            { span: "we should be discussing how to make them fair and compatible with school", type: "content", label: "Content point 3 – a concrete suggestion" },
+          ]
+        },
+        {
+          text: "A balanced approach would serve teenagers far better than a blanket ban. I hope your newspaper will also give young people a voice in this debate.\n\nYours faithfully,\nJulia Brunner, Vienna",
+          annotations: [
+            { span: "Yours faithfully,\nJulia Brunner, Vienna", type: "structure", label: "Faithfully + full name + city" },
           ]
         },
       ]
@@ -751,34 +818,46 @@ SRDP.emailSubTypes = [
     tip: 'Indirect questions ("I would like to know whether…") are more formal than direct questions ("Is there…?"). Using them throughout shows good control of formal register and grammar.',
     modelText: {
       title: 'Enquiry about Volunteer Programme in Scotland', wordCount: '~250', register: 'Formal',
+      task: { text: "You have found an advertisement for a four-week conservation volunteer programme in the Scottish Highlands. Write an e-mail to the organisers.", lead: "In your e-mail you should:", points: ["ask about the requirements for participants", "enquire about accommodation and costs", "ask about daily life on the programme"], words: 250 },
       paragraphs: [
         {
-          text: 'To: info@highlandvolunteers.example\nFrom: paul.wagner@email.example\nDate: 20 January 2026\nSubject: Enquiry about Volunteer Programme in Scotland',
-          isHeader: true,
+          text: "To: info@highlandvolunteers.example\nFrom: paul.wagner@email.example\nDate: 20 January 2026\nSubject: Enquiry about Volunteer Programme in Scotland", isHeader: true,
           annotations: [
-            { span: 'Subject: Enquiry about Volunteer Programme in Scotland', type: 'structure', label: 'Clear, descriptive subject line' },
+            { span: "Subject: Enquiry about Volunteer Programme in Scotland", type: "structure", label: "Clear, descriptive subject line" },
           ]
         },
         {
-          text: 'Dear Sir or Madam,\n\nI am writing to enquire about the four-week conservation volunteer programme in the Scottish Highlands, which I found on your website. I am an 18-year-old student from Austria and I am planning to spend part of my summer doing meaningful work abroad. I am particularly interested in projects involving woodland restoration and the protection of native wildlife, and the July dates would fit my summer holidays perfectly.',
+          text: "Dear Sir or Madam,\n\nI am writing to enquire about the four-week conservation volunteer programme in the Scottish Highlands, which I found on your website. I am an 18-year-old student from Austria and I am planning to spend part of my summer doing meaningful work abroad. I am particularly interested in projects involving woodland restoration, and the July dates would fit my summer holidays perfectly.",
           annotations: [
-            { span: 'I am writing to enquire about', type: 'language', label: 'Set phrase – enquiry opener' },
-            { span: 'I am an 18-year-old student from Austria', type: 'content', label: 'Says who you are – gives context' },
+            { span: "I am writing to enquire about", type: "language", label: "Set phrase – enquiry opener" },
+            { span: "I am an 18-year-old student from Austria", type: "content", label: "Says who you are – gives context" },
           ]
         },
         {
-          text: 'First of all, I would like to know whether the programme is open to participants without previous experience in conservation work. Furthermore, could you please tell me what kind of accommodation is provided and whether meals are included in the participation fee? Finally, I would be grateful if you could inform me of the total costs and the application deadline for July. I would also appreciate some information about the typical daily routine and whether volunteers are given any free time to explore the surrounding area. In addition, I would be grateful for the contact details of a former participant who might be willing to share their experience, as a first-hand account would help me decide whether the programme is the right fit for me.',
+          text: "First of all, I would like to know whether the programme is open to participants without previous experience in conservation work. As I am still at school, I would also like to ask whether there is a minimum age and whether volunteers need any special equipment, such as hiking boots or a sleeping bag.",
           annotations: [
-            { span: 'I would like to know whether', type: 'language', label: 'Indirect question – formal register' },
-            { span: 'could you please tell me what kind of accommodation is provided', type: 'language', label: 'Indirect question – note the word order' },
-            { span: 'I would be grateful if you could inform me of', type: 'language', label: 'Very formal request phrase' },
-            { span: 'whether volunteers are given any free time', type: 'language', label: 'Polite indirect question' },
+            { span: "I would like to know whether", type: "language", label: "Indirect question – formal register" },
+            { span: "whether there is a minimum age", type: "content", label: "Content point 1 – requirements, asked precisely" },
           ]
         },
         {
-          text: 'I would appreciate a prompt reply, as I need to make my travel arrangements by the end of February. Thank you very much in advance for your help, and I look forward to hearing from you.\n\nYours faithfully,\nPaul Wagner',
+          text: "Furthermore, could you please tell me what kind of accommodation is provided and whether meals are included in the participation fee? I would be grateful if you could inform me of the total costs and the application deadline for July.",
           annotations: [
-            { span: 'I would appreciate a prompt reply, as I need to make my travel arrangements by the end of February.', type: 'language', label: 'Polite urgency + reason' },
+            { span: "could you please tell me what kind of accommodation is provided", type: "language", label: "Indirect question – note the word order" },
+            { span: "I would be grateful if you could inform me of", type: "language", label: "Very formal request phrase" },
+          ]
+        },
+        {
+          text: "I would also appreciate some information about the typical daily routine and whether volunteers are given any free time to explore the surrounding area. If possible, could you put me in touch with a former participant? A first-hand account would help me decide whether the programme is the right fit for me.",
+          annotations: [
+            { span: "whether volunteers are given any free time", type: "language", label: "Polite indirect question" },
+            { span: "the typical daily routine", type: "content", label: "Content point 3 – daily life on the programme" },
+          ]
+        },
+        {
+          text: "I would appreciate a prompt reply, as I need to make my travel arrangements by the end of February. Thank you very much in advance for your help, and I look forward to hearing from you.\n\nYours faithfully,\nPaul Wagner",
+          annotations: [
+            { span: "I would appreciate a prompt reply, as I need to make my travel arrangements by the end of February.", type: "language", label: "Polite urgency + reason" },
           ]
         },
       ]

@@ -104,6 +104,16 @@ function modelBox(model, extraNote) {
     '</div>'
   );
 }
+/* Aufgabenstellung ueber einem Modelltext: Situation, drei content points, Laenge + Struktur */
+function taskBox(t, honest) {
+  if (!t) return '';
+  return '<div class="ex-task model-task"><div class="ex-task-h">The task</div>' +
+    '<p>' + esc(t.text) + '</p>' +
+    '<p class="task-lead">' + esc(t.lead) + '</p>' +
+    '<ul class="task-points">' + t.points.map(p => '<li>' + esc(p) + '</li>').join('') + '</ul>' +
+    '<p class="task-len">Write around ' + t.words + ' words. ' + (honest ? 'Compare the text with the five-paragraph plan: introduction, one paragraph for each content point, conclusion.' : 'The model follows the five-paragraph plan: introduction, one paragraph for each content point, conclusion.') + '</p>' +
+  '</div>';
+}
 /* Annotation bubbles: tap/click toggles one bubble (touch screens have no hover),
    Escape hides the bubble under the pointer until the pointer leaves the passage. */
 document.addEventListener('click', e => {
@@ -353,7 +363,7 @@ function setHTML(host, html) {
 
 /* expose to other script blocks */
 window.MWG = { $, $$, esc, TYPE_COLORS, ANN, PEEL, store, progress: () => progress, markVisited, markQuiz, toast, announce, copyText, flashCopied,
-  annotated, modelBox, sectionLabel, pageHead, ddCols, chips, phraseGroups, setHTML,
+  annotated, modelBox, taskBox, sectionLabel, pageHead, ddCols, chips, phraseGroups, setHTML,
   initQuiz, quizHTML, quizAction, quizStates, initDnd, dndHTML, repaintDnd, wireDnd, dndStates, shuffle, dndCheck };
 
 /* ─── SCHOOL TYPE (AHS / BHS) ─────────────────────────────── */

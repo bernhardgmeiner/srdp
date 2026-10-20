@@ -505,7 +505,7 @@ SRDP.paragraphs = {
   tsMistakes: [
     { w: '"There are many problems."', fix: 'Too vague – which problems? Name them.' },
     { w: '"Technology has changed the world."', fix: 'Too broad – narrow it to your specific argument.' },
-    { w: '"Is social media bad?"', fix: 'This is a question. A topic sentence needs a statement.' },
+    { w: '"Is social media bad?"', fix: 'In an essay or a report, a topic sentence needs a statement. (A blog, article or leaflet may open a paragraph with a question if the answer follows straight away.)' },
   ],
   supports: [
     { label: 'EXPLANATION', sub: 'Answer "why?"', ex: '"This is largely because teenagers compare themselves to carefully edited images, which creates unrealistic expectations."' },

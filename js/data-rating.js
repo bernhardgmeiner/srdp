@@ -90,7 +90,7 @@ SRDP.ratingExamples = [
         'The third content point (should the school do it again?) gets a clear, concrete idea: "a single phone-free lunch break" and "Why not try one a week".',
       ] },
       CC: { band: 6, points: [
-        'The order of ideas is clear and the paragraphs are well built, with a clear turning point ("But something changed after the second day").',
+        'The order of ideas is clear, with a clear turning point ("But something changed after the second day"). Only the paragraph on the third content point opens with a side remark ("Of course, nobody is saying ...") instead of its actual suggestion.',
         'In the paragraph about the first reactions, the sentences are mostly listed one after the other and hardly linked.',
         'There are only a few linking words ("Of course", "yet", "So"). They are used correctly, but there is little variety.',
       ] },
@@ -119,11 +119,12 @@ SRDP.ratingExamples = [
       'The recommendations must follow from the findings.',
     ],
     text: [
-      { t: 'Date: 5 May 2026\nTo: The Student Council\nFrom: Mara Toth, 7B\nSubject: Survey on the school’s after-school clubs', mono: true },
-      { t: 'Introduction\nThis report presents the findings of a survey on the school’s after-school clubs. A total of 96 students from the sixth and seventh years took part. Its aim is to establish how satisfied students are and to recommend improvements for next year.' },
-      { t: 'Findings\nThe response was mixed. On the positive side, 74% of those asked said they enjoyed the club they attended, and the sports clubs in particular were praised for being well organised. However, almost half of the students reported that the club they wanted was either full or not offered at all. A recurring complaint concerned timing: many clubs take place on the same two afternoons, which forces students to choose between them. Language and music clubs were the most frequently requested additions. A smaller group also asked for a debating club, although interest in it was mostly limited to the senior years.' },
-      { t: 'Recommendations\nIn the light of these findings, three steps would be advisable. First, the most popular clubs should be spread more evenly across the week. Second, the school should consider adding at least one language club and one music club. Finally, a short online sign-up at the start of term would make it easier to judge demand in advance.' },
-      { t: 'Conclusion\nTo conclude, students clearly value the club programme but are held back by limited choice and clashing times. A more balanced timetable and a few new options would allow far more of them to take part.' },
+      { t: "Date: 5 May 2026\nTo: The Student Council\nFrom: Mara Toth, 7B\nSubject: Survey on the school’s after-school clubs", mono: true },
+      { t: "Introduction\nThis report presents the findings of a survey on the school’s after-school clubs. A total of 96 students from the sixth and seventh years took part. Its aim is to establish how satisfied students are and to recommend improvements for next year." },
+      { t: "Satisfaction with the clubs\nThe response was mixed. On the positive side, 74% of those asked said they enjoyed the club they attended, and the sports clubs in particular were praised for being well organised. Many also valued the chance to meet students from other classes." },
+      { t: "Main problems\nHowever, almost half of the students reported that the club they wanted was either full or not offered at all. A recurring complaint concerned timing: many clubs take place on the same two afternoons, which forces students to choose between them. Language and music clubs were the most frequently requested additions. A smaller group also asked for a debating club, although interest in it was mostly limited to the senior years." },
+      { t: "Recommendations\nIn the light of these findings, three steps would be advisable. First, the most popular clubs should be spread more evenly across the week. Second, the school should consider adding at least one language club and one music club. Finally, a short online sign-up at the start of term would make it easier to judge demand in advance." },
+      { t: "Conclusion\nTo conclude, students clearly value the club programme but are held back by limited choice and clashing times. A more balanced timetable and a few new options would allow far more of them to take part." },
     ],
     ratings: {
       TA: { band: 8, points: [
@@ -161,22 +162,23 @@ SRDP.ratingExamples = [
       'Be careful: very good language and Task Achievement are rated separately. One can be high while the other is low.',
     ],
     text: [
-      { t: 'by mia_writes · 3 May 2026\n\nThirty Days Without the Scroll', mono: true },
-      { t: 'I still remember the exact moment I decided to quit. It was 2 a.m., my eyes hurt, and I had just watched a total stranger reorganise their fridge for the fourth time. Something in me snapped. That night I deleted every social media app from my phone and promised myself thirty days without the endless scroll.' },
-      { t: 'The first few days were honestly pathetic. My thumb kept opening the empty space where the apps used to be, like a dog nosing at a bowl that is not there any more. I felt weirdly out of the loop, convinced that something important was happening without me. Spoiler: it was not. The world carried on being exactly as boring and as wonderful as before, and somehow it managed without my likes.' },
-      { t: 'What nobody warns you about is the sheer amount of time you suddenly have. I read two whole books. I called my grandmother. I went for long, aimless walks and actually noticed things: the light, the traffic, other people’s ridiculous dogs. By the end of the month I felt calmer than I had in years, as though someone had finally turned the volume of my brain down to a bearable level.' },
-      { t: 'So, thirty days on, am I free forever? Not quite. I have put two apps back, but on my laptop only. Try it yourself. You might hate the first week, but stay with it.' },
+      { t: "by mia_writes · 3 May 2026\n\nThirty Days Without the Scroll", mono: true },
+      { t: "Thirty days. That was the deal I made with myself: no Instagram, no TikTok, no endless scroll. Here is how it went." },
+      { t: "I still remember the exact moment I decided to quit. It was 2 a.m., my eyes hurt, and I had just watched a total stranger reorganise their fridge for the fourth time. Something in me snapped. That night I deleted every social media app from my phone." },
+      { t: "The first few days were honestly pathetic. My thumb kept opening the empty space where the apps used to be, like a dog nosing at a bowl that is not there any more. I felt weirdly out of the loop, convinced that something important was happening without me. Spoiler: it was not. The world carried on being exactly as boring and as wonderful as before. What nobody warns you about, though, is the sheer amount of time you suddenly have. I read two whole books. I called my grandmother. I went for long, aimless walks. By the end of the month I felt calmer than I had in years, as though someone had finally turned the volume of my brain down to a bearable level." },
+      { t: "Would I recommend it? Try it yourself. You might hate the first week, but stay with it." },
+      { t: "So, thirty days on, am I free forever? Not quite. I have put two apps back, but on my laptop only." },
     ],
     ratings: {
       TA: { band: 6, points: [
         'This is clearly a blog post, and two of the three content points are very well done: why she stopped (the 2 a.m. moment) and how it went (the empty space where the apps used to be, the two books, feeling calmer).',
-        'The third content point (would you recommend it?) gets only two short sentences ("Try it yourself ... stay with it") and no real reasons. That is why the band is 6.',
+        'The third content point (would you recommend it?) has its own paragraph, but it is only two short sentences ("Try it yourself ... stay with it") with no real reasons. That is why the band is 6.',
         'This happens often: the writing is good, but one content point is not developed enough.',
       ] },
       CC: { band: 7, points: [
-        'The story is easy to follow from the decision to the end of the month. Each paragraph is one stage.',
+        'The story is easy to follow from the decision to the end of the month. Each paragraph is one stage, and each content point has its own paragraph.',
         'The text is held together mainly by the order of the story and by pronouns. It uses few linking words.',
-        'The change to the short last paragraph is a bit sudden. That keeps it out of the top bands.',
+        'The last two paragraphs are very short and arrive a bit suddenly after the long middle part. That keeps it out of the top bands.',
       ] },
       LR: { band: 9, points: [
         'A wide range, used with confidence: an idiom ("out of the loop"), a comparison ("like a dog nosing at a bowl") and many different structures.',
@@ -189,7 +191,7 @@ SRDP.ratingExamples = [
         'Clearly B2, and the accuracy fits the strong range.',
       ] },
     },
-    holistic: 'The best thing about this text is its voice: this writer can really write. But Task Achievement looks at the task, and the third content point (would you recommend it?) gets only two lines while the story gets most of the space. So Range can be 9 while Task Achievement is 6, and both bands are fair. Next time, use a few of those good sentences for the third content point.',
+    holistic: 'The best thing about this text is its voice: this writer can really write. But Task Achievement looks at the task, and the third content point (would you recommend it?) gets only a two-line paragraph while the story gets most of the space. So Range can be 9 while Task Achievement is 6, and both bands are fair. Next time, use a few of those good sentences for the third content point.',
   },
 
   /* 5 · EMAIL (all): does its job, held down by accuracy + register slips */
@@ -203,11 +205,12 @@ SRDP.ratingExamples = [
       'Each question should be specific and developed. A list of questions is not enough.',
     ],
     text: [
-      { t: 'To: info@brightoncollege.example\nFrom: felix.wagner@email.example\nDate: 12 May 2026\nSubject: Question about your summer course', mono: true },
-      { t: 'Dear Sir or Madam,\n\nI am writing because I saw your advertisement for a summer English course on your website, and I am very interested in taking part this July. I am a seventeen-year-old student from Austria and I would like to improve my English before my final year at school. Your summer programme was recommended to me by a classmate who took part last year and found it genuinely worthwhile.' },
-      { t: 'Before I apply, there are a few things I would like to know. First, I would be grateful if you could tell me whether the course includes accommodation with a host family, as I have never stayed abroad on my own before. Secondly, could you let me know how big the groups are? I learn much better in a small class where the teacher has time for everyone.' },
-      { t: 'I would also like to ask about the free-time programme. Your website mentions excursions, but it doesn’t say whether they cost extra, so any informations about prices would be really helpful. It would also be good to know whether the excursions take place at the weekend or during lesson time. Also, do the students get a certificate at the end.' },
-      { t: 'I would be very thankful for a quick answer, because the application deadline is soon and I still have to organise my flights. I look forward to hearing from you.\n\nYours faithfully,\nFelix Wagner' },
+      { t: "To: info@brightoncollege.example\nFrom: felix.wagner@email.example\nDate: 12 May 2026\nSubject: Question about your summer course", mono: true },
+      { t: "Dear Sir or Madam,\n\nI am writing because I saw your advertisement for a summer English course on your website, and I am very interested in taking part this July." },
+      { t: "I am a seventeen-year-old student from Austria and I would like to improve my English before my final year at school. Above all, I want to become more confident when I speak. Your summer programme was recommended to me by a classmate who took part last year and found it genuinely worthwhile." },
+      { t: "Before I apply, there are a few things I would like to know. First, I would be grateful if you could tell me whether the course includes accommodation with a host family, as I have never stayed abroad on my own before. Secondly, could you let me know how big the groups are? I learn much better in a small class where the teacher has time for everyone." },
+      { t: "I would also like to ask about the free-time programme. Your website mentions excursions, but it doesn’t say whether they cost extra, so any informations about prices would be really helpful. It would also be good to know whether the excursions take place at the weekend or during lesson time. Also, do the students get a certificate at the end." },
+      { t: "I would be very thankful for a quick answer, because the application deadline is soon and I still have to organise my flights. I look forward to hearing from you.\n\nYours faithfully,\nFelix Wagner" },
     ],
     ratings: {
       TA: { band: 7, points: [
@@ -238,19 +241,20 @@ SRDP.ratingExamples = [
   {
     id: 'leaflet', type: 'leaflet', target: 250, register: 'persuasive',
     taskLine: 'Leaflet · advertise and inform',
-    prompt: 'Your school is holding an open day for future students and their families. Write a leaflet about it. In your leaflet you should: make people want to come; explain what visitors can see and do; give the practical details.',
+    prompt: 'Your school is holding an open day for future students and their families. Write a leaflet about it. In your leaflet you should: describe what visitors can see on a tour of the school; explain what they can try out and ask about; tell families what else the day offers and how to take part.',
     horizon: [
       'A leaflet has to catch the reader\'s interest quickly: a catchy title, subheadings that say what the reader gets, direct address and a clear call to action.',
       'It informs as well as persuades, so readers expect a short block of practical details (when, where, how).',
       'The style should be lively and direct. A typical problem is a calm, general description that sounds like an article.',
     ],
     text: [
-      { t: 'Open Day at HAK Seestadt – Come and See for Yourself' },
-      { t: 'Choosing the right school is a big decision, and the best way to make it is to visit. On Saturday, 15 March, HAK Seestadt opens its doors to future students and their families. Whatever you want to know about us, this is the day to find out. Come along, take a look around, and picture yourself here.' },
-      { t: 'See Where You Would Learn\nTake a guided tour of our classrooms, computer labs and the brand-new library. Current students will show you around and answer your questions honestly – no sales talk, just real experience. You will also see our sports hall and the busy student common room, where school life really happens.' },
-      { t: 'Meet the Teachers and Try It Out\nSit in on short taster lessons in business, languages and IT. Our teachers will explain how our school prepare you for both further study and the world of work. There is also a stand where you can pick up information about scholarships. Bring your questions about subjects, timetables and exchange terms abroad, and someone will have the answer.' },
-      { t: 'Bring the Whole Family\nThere is something for everyone. While you explore, parents can enjoy coffee and cake in the school café, no registration is needed. Admission is free, so just turn up. Whether this is already your first choice or you are only starting to look, one morning here will tell you more than any brochure.' },
-      { t: 'When: Saturday, 15 March, 9 a.m. – 2 p.m.\nWhere: HAK Seestadt, Seepromenade 4\nMore: www.hak-seestadt.example', mono: true },
+      { t: "Open Day at HAK Seestadt – Come and See for Yourself" },
+      { t: "Choosing the right school is a big decision, and the best way to make it is to visit. On Saturday, 15 March, HAK Seestadt opens its doors to future students and their families. Whatever you want to know about us, this is the day to find out." },
+      { t: "See Where You Would Learn\nTake a guided tour of our classrooms, computer labs and the brand-new library. Current students will show you around and answer your questions honestly – no sales talk, just real experience. You will also see our sports hall and the busy student common room, where school life really happens." },
+      { t: "Meet the Teachers and Try It Out\nSit in on short taster lessons in business, languages and IT. Our teachers will explain how our school prepare you for both further study and the world of work. There is also a stand where you can pick up information about scholarships. Bring your questions about subjects, timetables and exchange terms abroad, and someone will have the answer." },
+      { t: "Bring the Whole Family\nThere is something for everyone. While you explore, parents can enjoy coffee and cake in the school café, no registration is needed. Admission is free, so just turn up." },
+      { t: "Whether this is already your first choice or you are only starting to look, one morning here will tell you more than any brochure. Come along, take a look around, and picture yourself here." },
+      { t: "When: Saturday, 15 March, 9 a.m. – 2 p.m.\nWhere: HAK Seestadt, Seepromenade 4\nMore: www.hak-seestadt.example", mono: true },
     ],
     ratings: {
       TA: { band: 7, points: [

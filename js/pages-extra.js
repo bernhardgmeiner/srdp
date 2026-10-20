@@ -149,11 +149,13 @@ function honestModel(typeId) {
   const h = HONEST[typeId];
   if (!h) return '';
   let n = 0;
-  const paras = h.paras.map(p => {
+  const paras = h.paras.map((p, i) => {
     const html = esc(p).replace(/\{\{(\d+)\}\}/g, (_, num) =>
       '<button class="hm-mark" data-action="hm-jump" data-type="' + typeId + '" data-n="' + num + '" aria-label="Annotation ' + num + '">' + num + '</button>');
     const mono = p.indexOf('To:') === 0 || p.indexOf('by ') === 0;
-    return '<p' + (mono ? ' class="mono-line"' : '') + '>' + html.replace(/\n/g, '<br>') + '</p>';
+    const plain = p.replace(/\{\{\d+\}\}/g, '');
+    const head = !mono && i === 0 && plain.indexOf('\n') < 0 && plain.split(/\s+/).length <= 12 && !/[.!?:,]$/.test(plain.trim());
+    return '<p' + (mono ? ' class="mono-line"' : (head ? ' class="sm-head"' : '')) + '>' + html.replace(/\n/g, '<br>') + '</p>';
   }).join('');
   return '<div class="gap-s"></div>' +
     '<div class="acc"><div class="acc-item"><button class="acc-head" data-action="acc" aria-expanded="false"><span class="pm">+</span><span>The honest model: a realistic text and what it costs</span></button>' +
@@ -161,6 +163,7 @@ function honestModel(typeId) {
       '<h3 class="sm-title">' + esc(h.title) + '</h3>' +
       '<div class="sm-meta">' + esc(h.meta) + '</div>' +
       '<p class="sm-intro">' + esc(h.intro) + '</p>' +
+      (M.taskBox ? M.taskBox(h.task, true) : '') +
       '<div class="hm-grid">' +
         '<div class="hm-text" id="hmText-' + typeId + '">' + paras + '</div>' +
         '<ol class="hm-notes" id="hmNotes-' + typeId + '">' + h.notes.map((x, i) =>
