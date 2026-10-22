@@ -162,7 +162,7 @@ SRDP.ratingExamples = [
       'Be careful: very good language and Task Achievement are rated separately. One can be high while the other is low.',
     ],
     text: [
-      { t: "by mia_writes · 3 May 2026\n\nThirty Days Without the Scroll", mono: true },
+      { t: "by mia_writes · 3 May 2026, 21:15\n\nThirty Days Without the Scroll", mono: true },
       { t: "Thirty days. That was the deal I made with myself: no Instagram, no TikTok, no endless scroll. Here is how it went." },
       { t: "I still remember the exact moment I decided to quit. It was 2 a.m., my eyes hurt, and I had just watched a total stranger reorganise their fridge for the fourth time. Something in me snapped. That night I deleted every social media app from my phone." },
       { t: "The first few days were honestly pathetic. My thumb kept opening the empty space where the apps used to be, like a dog nosing at a bowl that is not there any more. I felt weirdly out of the loop, convinced that something important was happening without me. Spoiler: it was not. The world carried on being exactly as boring and as wonderful as before. What nobody warns you about, though, is the sheer amount of time you suddenly have. I read two whole books. I called my grandmother. I went for long, aimless walks. By the end of the month I felt calmer than I had in years, as though someone had finally turned the volume of my brain down to a bearable level." },

@@ -251,7 +251,7 @@ function analyze(text, type, target, task) {
     if (looksTitle && type === 'essay' && /\?\s*$/.test(first)) add('warn', 'Your title is a question. That sounds like a magazine article. An essay title names the topic as a statement.');
   }
   if (type === 'blog') {
-    add('info', 'Blog post: username and date at the top, a catchy title, and an invitation to comment at the end. Blog comment: no title, and the first sentence refers to the post.');
+    add('info', 'Blog post: username, date and time at the top, a catchy title, and an invitation to comment at the end. Blog comment: no title, and the first sentence refers to the post.');
     if (!/\?/.test(text)) add('warn', 'Consider ending with a question to invite comments.');
   }
   if (type === 'essay') {
