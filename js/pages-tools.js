@@ -248,6 +248,7 @@ function analyze(text, type, target, task) {
     const first = lines[0] || '';
     const looksTitle = first.length > 0 && first.split(/\s+/).length <= 12 && !/[.:,]$/.test(first) && !/^(dear|to:|from:)/i.test(first);
     add(looksTitle ? 'ok' : 'warn', looksTitle ? 'First line looks like a title: <code>' + esc(first) + '</code>' : 'No title found. ' + (type === 'essay' ? 'An essay needs a clear title on the first line.' : 'An article needs a catchy title on the first line.'));
+    if (looksTitle && type === 'essay' && /\?\s*$/.test(first)) add('warn', 'Your title is a question. That sounds like a magazine article. An essay title names the topic as a statement.');
   }
   if (type === 'blog') {
     add('info', 'Blog post: username and date at the top, a catchy title, and an invitation to comment at the end. Blog comment: no title, and the first sentence refers to the post.');

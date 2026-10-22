@@ -15,7 +15,7 @@ SRDP.textTypes = [
       { label: 'Structure', value: '5 paragraphs' },
     ],
     layout: [
-      { part: 'Title', note: 'clear and relevant – not necessarily catchy' },
+      { part: 'Title', note: 'a factual statement that names the topic, not a question' },
       { part: 'Introduction', note: '~80 words – hook + state your opinion clearly' },
       { part: 'Body paragraph 1', note: '~80 words – content point 1' },
       { part: 'Body paragraph 2', note: '~80 words – content point 2' },
@@ -38,6 +38,7 @@ SRDP.textTypes = [
       'No overly emotional language',
       'No personal story as your main evidence ("When I was 12…")',
       'No over-generalisation ("All politicians are liars.")',
+      'No question as your title: it sounds like a magazine article. Name the topic as a statement instead.',
       'No text that uses only simple linking words (and, but, because)',
       'No very short sentences one after another',
       'No statistics without context',

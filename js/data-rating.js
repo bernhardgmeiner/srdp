@@ -42,7 +42,7 @@ SRDP.ratingExamples = [
       TA: { band: 6, points: [
         'The text persuades the reader and has a clear position ("a small job can teach a great deal, as long as it does not take over"). The position itself is fine. It just comes at the very end of the first paragraph. A short, clear statement of opinion earlier would be stronger.',
         'All three content points are covered, but not equally well. The first (what students gain) is well developed. The second (problems) is shorter, and the third (what would make it work) moves on to a new idea, the type of work.',
-        'The personal example ("A friend of mine ... in a bakery") is a little informal for an essay. It is fine here because general arguments come first. The title and the conclusion work well.',
+        'The personal example ("A friend of mine ... in a bakery") is a little informal for an essay. It is fine here because general arguments come first. The conclusion works well. The title is a question, which sounds more like a magazine article; a statement such as "Part-time jobs for teenagers: useful in small doses" suits an essay better.',
       ] },
       CC: { band: 7, points: [
         'The argument is easy to follow. Each paragraph has one idea and starts with a topic sentence.',

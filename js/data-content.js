@@ -136,6 +136,7 @@ SRDP.quizzes = {
     { q: 'Which of these works best as a formal essay conclusion?', options: ['"So yeah, that\'s basically it!"', '"To sum up, guys, this is a really big problem."', '"Taking these points into consideration, it is clear that…"', '"In conclusion, this is important."'], correct: 2, explanation: '"Taking these points into consideration" is a formal linking phrase for a conclusion. The others are too informal ("guys", "yeah") or say nothing ("this is important").' },
     { q: 'How long should your Matura essay be?', options: ['Around 250 words', 'Around 400 words – 360 to 440 is safe', 'As long as possible', 'There is no word count for essays'], correct: 1, explanation: 'The essay is the long task: ~400 words. With the ±10% tolerance, anything between 360 and 440 words is fine.' },
     { q: 'Which opening is best for a formal essay introduction?', options: ['"When I was twelve, my parents bought me a smartphone."', '"Have you ever wondered why we spend so much of our lives online?"', '"This essay will now discuss the topic of social media."', '"OMG, social media is everywhere these days!"'], correct: 1, explanation: 'A rhetorical question or striking fact makes a strong, formal hook. A personal story (A) is a weak essay opening, announcing your essay (C) is weak style, and (D) is far too informal.' },
+    { q: 'Which title suits a Matura essay best?', options: ['"Should teenagers have part-time jobs?"', '"Part-time jobs for teenagers: useful in small doses"', '"Money, money, money!"', '"My essay about jobs"'], correct: 1, explanation: 'An essay title is factual: it names the topic as a statement and can hint at your position. A question or a pun sounds like a magazine article, and "My essay about …" says nothing about the topic.' },
   ],
   article: [
     { q: 'What is the most important feature of an article title?', options: ['It must be exactly 5 words', 'It must summarise the whole text', "It must grab the reader's attention", 'It must include the topic keyword'], correct: 2, explanation: 'Article titles should be catchy: rhetorical questions, alliteration, bold statements, direct address. A boring title loses marks on Task Achievement.' },
@@ -443,7 +444,7 @@ SRDP.checklists = {
     { id: 'proofread', text: 'I proofread for my personal weak spots (articles, third-person -s, tenses).', weight: 2 },
   ]},
   essay: { label: 'Essay', items: [
-    { id: 'e_title', text: 'I wrote a clear, relevant title.', weight: 2 },
+    { id: 'e_title', text: 'I wrote a factual title that names the topic (a statement, not a question).', weight: 2 },
     { id: 'e_opinion', text: 'I stated my opinion clearly in the introduction.', weight: 2 },
     { id: 'e_formal', text: 'I kept a formal register throughout: no contractions, no slang.', weight: 2 },
     { id: 'e_no_personal', text: 'I argued mainly with general and hypothetical examples (a short personal example at most).', weight: 2 },
