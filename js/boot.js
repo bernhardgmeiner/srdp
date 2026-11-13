@@ -73,9 +73,11 @@ function route() {
   paintPlanChip();
   const _mt = document.querySelector('.mobile-bar .t1'); if (_mt) _mt.textContent = page.title;
   document.title = page.title + ' – Matura Writing Guide B2';
-  try { main.scrollTo({ top: 0 }); window.scrollTo({ top: 0 }); } catch (e) { main.scrollTop = 0; }
+  try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch (e) {}
+  /* instant, not smooth: the focus call below would cut a smooth scroll short and leave a new page scrolled down */
+  try { main.scrollTo({ top: 0, behavior: 'instant' }); window.scrollTo({ top: 0, behavior: 'instant' }); } catch (e) { main.scrollTop = 0; try { window.scrollTo(0, 0); } catch (e2) {} }
   if ($('#sidenav').classList.contains('open')) closeMobileNav(false);
-  if (id !== prev) { try { main.focus(); } catch (e) {} if (M.announce) M.announce(page.title); }
+  if (id !== prev) { try { main.focus({ preventScroll: true }); } catch (e) {} if (M.announce) M.announce(page.title); }
   else { const at = main.querySelector('.tabs .tab.active'); if (at) { try { at.focus(); } catch (e) {} } }
   M.paintNav();
   if (page.afterRoute) page.afterRoute();

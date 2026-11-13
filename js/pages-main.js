@@ -109,7 +109,7 @@ PAGES.home = {
     return '<div class="page home">' +
       '<div class="page-head home-head"><div class="inner home-inner">' +
         '<div class="eyebrow"><span lang="de">' + esc(sc.eyebrow || 'Schriftliche Reifeprüfung · English B2') + ' (<a href="https://www.bernhardgmeiner.com" target="_blank" rel="noopener">Bernhard Gmeiner</a>)</span></div>' +
-        '<h1 class="title home-title">Don&rsquo;t panic, it&rsquo;s just the Matura.</h1>' +
+        '<h1 class="title home-title"><span class="stick">Don&rsquo;t panic,</span> it&rsquo;s&nbsp;just the Matura.</h1>' +
         '<p class="lead">Guides, model texts and practice tasks for every text type of the written English exam. For homework, Schularbeiten and the Matura (' + esc(sc.label || 'AHS') + ', B2).</p>' +
         '<p class="home-de" lang="de">Diese Seite begleitet durch die Oberstufe: Textsorten lernen, Hausübungen schreiben, auf Schularbeiten und die Matura vorbereiten. Alle Lerninhalte sind auf Englisch. <a href="#parents">Für Eltern</a></p>' +
         planCard() +

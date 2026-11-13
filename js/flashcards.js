@@ -71,7 +71,9 @@ function startCards(scope) {
   fState.queue = buildQueue(scope);
   fState.i = 0; fState.flipped = false; fState.known = 0; fState.unknown = 0; fState.missed = [];
   M.route();
-  const card = document.querySelector('#fcHost .fcard'); if (card) { try { card.focus(); } catch (e) {} }
+  const card = document.querySelector('#fcHost .fcard'); if (card) { try { card.focus({ preventScroll: true }); } catch (e) {} }
+  /* phones: bring card and rating buttons above the bottom bar */
+  try { if (window.matchMedia && window.matchMedia('(max-width:840px)').matches) document.getElementById('fcHost').scrollIntoView({ block: 'start' }); } catch (e) {}
 }
 
 function repaint() {

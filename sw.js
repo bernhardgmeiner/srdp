@@ -1,6 +1,6 @@
 /* Service Worker — matura.bernhardgmeiner.com
    VERSION wird von _dev/bump-sw.mjs vor jedem Deploy auf einen Zeitstempel gesetzt. */
-const VERSION = '20261113102359';
+const VERSION = '20261113173233';
 const CACHE = 'mwg-' + VERSION;
 
 /* @assets:start (von bump-sw.mjs generiert) */
@@ -14,6 +14,7 @@ const ASSETS = [
   'icons/maskable-192.png',
   'icons/maskable-512.png',
   'js/boot.js',
+  'js/bottomnav.js',
   'js/core.js',
   'js/data-content.js',
   'js/data-pages.js',
@@ -32,6 +33,8 @@ const ASSETS = [
   'js/search.js',
   'js/selfrating.js',
   'js/studyplan.js',
+  'js/theme-early.js',
+  'js/theme-h.js',
   'js/toc.js',
   'fonts/ibm-plex-mono-latin-400-normal.woff2',
   'fonts/ibm-plex-mono-latin-500-normal.woff2',
@@ -40,6 +43,11 @@ const ASSETS = [
   'fonts/ibm-plex-sans-latin-400-normal.woff2',
   'fonts/ibm-plex-sans-latin-500-normal.woff2',
   'fonts/ibm-plex-sans-latin-600-normal.woff2',
+  'fonts/rubik-latin-400-italic.woff2',
+  'fonts/rubik-latin-400-normal.woff2',
+  'fonts/rubik-latin-500-normal.woff2',
+  'fonts/rubik-latin-700-normal.woff2',
+  'fonts/rubik-latin-800-normal.woff2',
   'article/',
   'blog/',
   'checklist/',
