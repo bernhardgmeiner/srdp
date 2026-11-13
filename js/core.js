@@ -461,6 +461,7 @@ function buildNav() {
         ).join('')
       ).join('') +
     '</div>' +
+    '<button class="nav-install no-print" data-action="install-app" data-install hidden><span>Install as app</span><span aria-hidden="true">&darr;</span></button>' +
     '<div style="padding:6px 22px 2px;font-size:.75rem;color:var(--text-muted);letter-spacing:.3px">&#10003; visited &middot; &#10003;&#10003; quiz passed</div>' +
     '<button class="theme-toggle" id="themeToggle" role="switch" aria-checked="' + (document.documentElement.getAttribute('data-theme') === 'dark') + '"><span class="lab" id="themeLabel">Dark mode</span><span class="toggle-track" aria-hidden="true"><span class="toggle-knob"></span></span></button>';
   $('#themeToggle').addEventListener('click', () => {

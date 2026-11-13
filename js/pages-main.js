@@ -116,6 +116,11 @@ PAGES.home = {
         waysBlock() +
       '</div></div>' +
       '<div class="wrap home-wrap">' +
+        '<div class="install-row no-print" data-install data-install-row hidden>' +
+          '<span class="ir-t"><strong>Use this guide like an app.</strong> It opens from your home screen and works offline.</span>' +
+          '<span class="ir-b"><button class="btn btn-primary btn-sm" data-action="install-app">Install</button>' +
+          '<button class="ir-x" data-action="install-hide" aria-label="Hide this hint">&#10005;</button></span>' +
+        '</div>' +
         (visited > 0
           ? '<div class="home-prog no-print"><span>Your progress: <strong>' + visited + ' of ' + ids.length + '</strong> sections visited · <strong>' + quizzes + ' of ' + quizIds.length + '</strong> quizzes passed</span>' +
             (!hasDate && nextId ? '<a href="#' + nextId + '">Next up: ' + esc(navLabel(nextId)) + ' <span aria-hidden="true">&rarr;</span></a>' : '') + '</div>'
