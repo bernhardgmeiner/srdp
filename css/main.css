@@ -1466,4 +1466,12 @@ h1.home-title{text-wrap:balance}
   table.tbl:has(th:nth-child(4)) td:first-child{display:block;font-size:var(--fs-base);font-weight:800;padding-bottom:6px}
   table.tbl:has(th:nth-child(4)) td:first-child::before{content:none}
 }
+
+/* Menu drawer on phones: the top bar already has the search button, so the head keeps only the tour button.
+   The subtitle may wrap, so nothing is pushed over the edge of the drawer. */
+@media screen and (max-width:840px){
+  .nav-brand .nav-help[data-action="open-search"]{display:none}
+  .nav-brand>div:first-child{min-width:0}
+  .nav-brand .t2{white-space:normal}
+}
 /* @theme-h:end */
