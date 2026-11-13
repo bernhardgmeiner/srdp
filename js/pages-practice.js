@@ -241,7 +241,7 @@ function finalQuizForSchool() {
 function practiceBody() {
   if (przState.tab === 'spot') {
     return sectionLabel('Spot the mistakes in the text-type rules') +
-      '<p class="lead-sm mb-5">Each text below breaks some rules of its text type on purpose. The grammar is fine. Find the mistakes yourself, then show the answers.</p>' +
+      '<p class="lead-sm mb-5">Each short extract below breaks some rules of its text type on purpose. The grammar is fine. They are extracts, not full texts: a full Matura text always has five paragraphs. Find the mistakes yourself, then show the answers.</p>' +
       '<div style="border:1px solid var(--border)">' + SRDP.spotTexts.filter(ex => !ex.schools || ex.schools.indexOf(M.school()) >= 0).map((ex, i) =>
         '<div style="' + (i > 0 ? 'border-top:1px solid var(--border)' : '') + '">' +
           '<div style="padding:14px 22px;background:var(--surface-1);font-size:.875rem;font-weight:600">' + esc(ex.title) + '</div>' +

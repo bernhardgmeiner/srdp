@@ -436,6 +436,7 @@ SRDP.checklists = {
     { id: 'bullet_1', text: 'I covered content point 1 in a fully developed paragraph.', weight: 3 },
     { id: 'bullet_2', text: 'I covered content point 2 in a fully developed paragraph.', weight: 3 },
     { id: 'bullet_3', text: 'I covered content point 3 in a fully developed paragraph.', weight: 3 },
+    { id: 'five_paras', text: 'My text has exactly five paragraphs: introduction, one for each content point, conclusion.', weight: 3 },
     { id: 'word_count', text: 'My word count is within ±10% of the number in the task (for a 250-word task, 225–275).', weight: 2 },
     { id: 'topic_sents', text: 'I started every body paragraph with a clear topic sentence.', weight: 2 },
     { id: 'linking', text: 'I used at least five different linking words (Furthermore, However, Consequently …).', weight: 2 },

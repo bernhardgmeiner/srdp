@@ -138,6 +138,31 @@ const INFORMAL = ['basically', 'stuff', 'guys', 'kids', 'loads of', 'lots of', '
 const LINKERS = ['furthermore', 'moreover', 'in addition', 'what is more', 'however', 'nevertheless', 'nonetheless', 'on the other hand', 'on the one hand', 'although', 'even though', 'despite', 'in spite of', 'therefore', 'consequently', 'as a result', 'thus', 'hence', 'owing to', 'due to', 'for instance', 'for example', 'admittedly', 'while', 'whereas', 'to sum up', 'on balance', 'in conclusion', 'taking everything into account', 'first of all', 'to begin with', 'in contrast', 'as a consequence', 'firstly', 'secondly', 'finally'];
 const FORMAL_TYPES = { essay: true, report: true, email: true, article: false, blog: false, leaflet: false };
 
+/* Body paragraphs of a pasted text. Not counted: e-mail/report header lines, blog byline, title,
+   section headings on their own line, greeting, sign-off, and the fact box of a leaflet (When: … / Where: …). */
+function bodyParagraphs(text) {
+  const src = String(text || '').replace(/\r/g, '');
+  let blocks = src.split(/\n\s*\n/);
+  if (blocks.filter(b => b.trim()).length <= 1) blocks = src.split('\n');   /* no empty lines at all: one line = one block */
+  const out = [];
+  blocks.forEach(function (raw) {
+    const lines = raw.split('\n').map(l => l.trim()).filter(Boolean);
+    if (!lines.length) return;
+    const words = lines.join(' ').split(/\s+/).length;
+    const first = lines[0];
+    const short = l => l.split(/\s+/).length <= 12;
+    if (lines.every(l => /^(to|from|date|subject|cc|bcc)\s*:/i.test(l))) return;                                  /* header */
+    if (/^by\s+\S+/i.test(first) && /\d/.test(first) && lines.every(l => short(l) && !/[.!?]$/.test(l) || l === first)) return; /* blog byline (+ title) */
+    if (lines.length === 1 && /^dear\b/i.test(first) && words <= 8) return;                                        /* greeting on its own */
+    if (/^(yours|best|kind|warm|many thanks|thanks|regards|love|cheers|sincerely|see you)\b/i.test(first) && lines.length <= 3 && words <= 12) return; /* sign-off */
+    if (lines.length === 1 && short(first) && !/[.!?]$/.test(first)) return;                                        /* title or heading */
+    if (!out.length && lines.length === 1 && short(first) && /\?$/.test(first)) return;                            /* title that is a question */
+    if (lines.length >= 2 && lines.every(l => /^[A-Za-z][A-Za-z ]{1,18}:\s+\S/.test(l) && short(l))) return;         /* fact box */
+    out.push(lines.join(' '));
+  });
+  return out;
+}
+
 function analyze(text, type, target, task) {
   const f = [];
   const add = (status, html) => f.push({ status, html });
@@ -165,10 +190,13 @@ function analyze(text, type, target, task) {
   else if (wc > hi) add('bad', '<b>' + wc + ' words</b>: above the safe range (' + lo + '–' + hi + '). Cut repetition and filler. Longer texts also have more chances for mistakes.');
   else add('ok', '<b>' + wc + ' words</b>: inside the safe range (' + lo + '–' + hi + '). ');
 
-  /* paragraphs */
-  const paras = text.split(/\n\s*\n/).filter(p => p.trim().length > 0);
-  if (paras.length < 4) add('warn', '<b>' + paras.length + ' paragraph' + (paras.length === 1 ? '' : 's') + ' detected.</b> A Matura text usually has 5–6 paragraphs (introduction, one per content point, conclusion). Leave an empty line between paragraphs.');
-  else add('ok', '<b>' + paras.length + ' paragraphs</b>. Your text has clear paragraphs.');
+  /* paragraphs: exactly five (introduction, one per content point, conclusion) */
+  const paras = bodyParagraphs(text);
+  const paraList = paras.length ? ' Counted: ' + paras.map((p, i) => (i + 1) + '&nbsp;<code>' + esc(p.replace(/\s+/g, ' ').split(' ').slice(0, 3).join(' ')) + '&nbsp;…</code>').join(' ') : '';
+  const paraNote = ' Title, header, greeting, sign-off and section headings do not count.';
+  if (paras.length === 5) add('ok', '<b>5 paragraphs</b>: introduction, one for each content point, conclusion.' + paraNote);
+  else if (paras.length < 5) add('bad', '<b>' + paras.length + ' paragraph' + (paras.length === 1 ? '' : 's') + ' found. A Matura text has exactly 5</b>: introduction, one paragraph for each of the three content points, conclusion. Give every content point its own paragraph and leave an empty line between paragraphs.' + paraNote + paraList);
+  else add('bad', '<b>' + paras.length + ' paragraphs found. A Matura text has exactly 5</b>: introduction, one paragraph for each of the three content points, conclusion. Join the paragraphs that belong to the same content point.' + paraNote + paraList);
 
   /* register */
   const contr = text.match(CONTRACTIONS) || [];
@@ -347,6 +375,7 @@ PAGES.selfcheck = {
   },
 };
 window.MWG.analyze = analyze;
+window.MWG.bodyParagraphs = bodyParagraphs;
 window.MWG.scState = scState;
 
 /* Aufgabe aus Task bank, Textsorten-Seite oder Mock exam in den Self-check übernehmen */

@@ -228,7 +228,7 @@ PAGES.overview = {
         '<div class="gap-s"></div>' +
         '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">' +
           '<div class="tip">' + (M.schoolConfig().wordCountTip || 'Word count tolerance: ±10%. If you are further off than that, Task Achievement is reduced by one band.') + '</div>' +
-          '<div class="tip">Almost every task lists three <strong>content points</strong> (the three bullet points in the task). Cover each one, usually in its own body paragraph.</div>' +
+          '<div class="tip">Almost every task lists three <strong>content points</strong> (the three bullet points in the task). Give each one its own body paragraph. With the introduction and the conclusion, every text has exactly five paragraphs.</div>' +
           '<div class="tip"><strong>Register</strong> means how formal or casual your language is. Compare a letter to a company with a message to a friend.</div>' +
         '</div>' +
         '<div class="tip mt-5">Practise with real exams too. The tasks on this site are written in the Matura style. The official past papers are in the BMB download area at <a href="https://www.matura.gv.at/downloads" target="_blank" rel="noopener">matura.gv.at/downloads</a>.</div>' +
