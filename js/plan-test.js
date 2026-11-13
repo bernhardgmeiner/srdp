@@ -44,7 +44,7 @@ function allTasks() {
     out.push({ key: t.id + ':phrases', min: 10, core: false, t: 'Pick ten ' + a + lower(t) + ' phrases</a> you will really use and write them into your notes.' });
   });
   types.forEach(t => {
-    out.push({ key: t.id + ':write', min: 45, core: true, t: 'Write a ' + lower(t) + ' from the <a href="#taskbank">task bank</a> in one go, with a time limit.' });
+    out.push({ key: t.id + ':write', min: 45, core: true, t: 'Write ' + (/^[aeiou]/i.test(lower(t)) ? 'an ' : 'a ') + lower(t) + ' from the <a href="#taskbank">task bank</a> in one go, with a time limit.' });
     out.push({ key: t.id + ':check', min: 20, core: true, t: 'Check your ' + lower(t) + ' in the <a href="#selfcheck">self-check</a> and fix what it finds.' });
   });
   if (types.length) {
