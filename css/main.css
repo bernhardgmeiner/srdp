@@ -1620,14 +1620,14 @@ div.sp-tap{cursor:default}
 .btn.sp-stop{background:var(--sp-ink);color:var(--bg);border-color:var(--sp-ink);font-weight:700;justify-content:center}
 
 /* ─── listening back ─── */
-.sp-player{display:flex;align-items:center;gap:10px;background:var(--surface);border:var(--sp-line);border-radius:var(--sp-r);padding:10px;margin:8px 0}
+.sp-player{display:flex;flex-wrap:wrap;align-items:center;gap:10px;background:var(--surface);border:var(--sp-line);border-radius:var(--sp-r);padding:10px;margin:8px 0}
 .sp-play{width:48px;height:48px;flex-shrink:0;border:var(--sp-line-sm);border-radius:50%;background:var(--sp-yel);color:#141414;font-size:1rem;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0}
-.sp-wave{position:relative;flex:1;min-width:0;height:44px;display:flex;align-items:center;gap:2px;cursor:pointer}
+.sp-wave{position:relative;flex:1 1 130px;min-width:0;height:44px;display:flex;align-items:center;gap:1px;cursor:pointer}
 .sp-wave i{flex:1;min-width:1px;background:var(--text);border-radius:1px;opacity:.8}
 .sp-wave i.pz{height:100%!important;opacity:1;border-radius:0;background:repeating-linear-gradient(0deg,var(--orange) 0 3px,transparent 3px 6px)}
 .sp-wave-flat{flex:1;height:4px;background:var(--border-strong);border-radius:2px}
 .sp-pos{position:absolute;top:0;bottom:0;left:0;width:3px;margin-left:-1px;background:var(--blue);border-radius:2px;pointer-events:none}
-.sp-ptime{font-family:var(--font-mono);font-size:var(--fs-sm);white-space:nowrap;font-variant-numeric:tabular-nums}
+.sp-ptime{font-family:var(--font-mono);font-size:var(--fs-sm);white-space:nowrap;font-variant-numeric:tabular-nums;margin-left:auto}
 .sp-player audio{display:none}
 .sp-norec{border:var(--sp-line-sm);border-radius:var(--sp-r-sm);background:var(--surface-1);padding:12px 14px;line-height:1.5;margin:8px 0}
 .sp-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));gap:8px;margin-top:8px}
