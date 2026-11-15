@@ -197,6 +197,8 @@ function afterJump(g) {
 
 /* globale Shortcuts */
 document.addEventListener('keydown', e => {
+  /* speaking practice is open (modal, maybe recording): no search on top of it */
+  if (document.documentElement.classList.contains('sp-open')) return;
   if ((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K')) {
     e.preventDefault();
     if (overlay && overlay.style.display === 'flex') closeSearch(); else openSearch();
