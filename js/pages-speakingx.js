@@ -27,7 +27,7 @@ function modelPaired(m) {
     '<div class="tip good mt-4"><strong>What to notice</strong><ul class="sp-notice">' + m.notice.map(n => '<li>' + esc(n) + '</li>').join('') + '</ul></div>';
 }
 PAGES.speakingguide = {
-  title: 'Speaking: how it works', hidden: true,
+  title: 'How the oral exam works', titleSuffix: ' – English Matura B2',
   render() {
     const d = D(), g = d.guide;
     const tl = steps => '<ol class="sp-tl">' + steps.map(s => '<li><span class="sp-tl-time">' + esc(s.time) + '</span><div><strong>' + esc(s.t) + '</strong><p>' + esc(s.d) + '</p></div></li>').join('') + '</ol>';
@@ -157,7 +157,7 @@ function allCards(topicId) {
 }
 
 PAGES.speakingclass = {
-  title: 'Speaking in class', hidden: true,
+  title: 'Speaking in class', titleSuffix: ' – English Matura B2',
   render() {
     if (!C.topic) { C.topic = D().topics[0].id; }
     C.phase = 0;

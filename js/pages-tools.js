@@ -26,13 +26,16 @@ function allPhrases() {
   const emailType = SRDP.textTypes.find(t => t.id === 'email');
   if (!emailType || vis(emailType)) SRDP.emailSubTypes.forEach(st => st.phrases.forEach(g => g.items.forEach(p => out.push({ phrase: p, category: st.name + ' – ' + g.category, typeId: 'email', typeName: 'E-Mail', color: 'red' }))));
   SRDP.paragraphs.phraseGroups.forEach(g => g.phrases.forEach(p => out.push({ phrase: p, category: 'Paragraphs – ' + g.label, typeId: 'all', typeName: 'Any text', color: null })));
+  /* Oral exam: the same phrases as on the speaking guide page (single source: data-speaking.js) */
+  const tk = SRDP.speaking && SRDP.speaking.toolkits;
+  if (tk) [['longturn', 'Long Turn'], ['paired', 'Paired Activity']].forEach(k => (tk[k[0]] || []).forEach(g => g.items.forEach(p => out.push({ phrase: p, category: 'Speaking, ' + k[1] + ' – ' + g.category, typeId: 'speaking', typeName: 'Speaking', color: null }))));
   _phraseCache[school] = out;
   return out;
 }
 const pbState = { search: '', filter: 'all' };
 function pbList() {
   let r = allPhrases();
-  if (pbState.filter !== 'all') r = r.filter(p => p.typeId === pbState.filter || p.typeId === 'all');
+  if (pbState.filter !== 'all') r = r.filter(p => p.typeId === pbState.filter || (p.typeId === 'all' && pbState.filter !== 'speaking'));
   if (pbState.search.trim()) {
     const q = pbState.search.toLowerCase();
     r = r.filter(p => p.phrase.toLowerCase().includes(q) || p.category.toLowerCase().includes(q) || p.typeName.toLowerCase().includes(q));
@@ -60,7 +63,7 @@ PAGES.phrasebank = {
         '<a class="btn btn-ghost no-print mb-5" href="/pdf/phrase-bank.pdf" target="_blank" rel="noopener">Download the phrase bank as a PDF <span aria-hidden="true">&darr;</span></a>' +
         '<div class="field mb-4" style="max-width:420px"><label for="pbSearch">Search the phrases</label><input type="search" id="pbSearch" placeholder="for example: opinion, contrast, conclusion" value="' + esc(pbState.search) + '"></div>' +
         '<div class="tabs filters mb-5" aria-label="Show phrases for">' +
-          [['all', 'All']].concat(M.typesForSchool().map(t => [t.id, t.name])).map(f =>
+          [['all', 'All']].concat(M.typesForSchool().map(t => [t.id, t.name])).concat(SRDP.speaking ? [['speaking', 'Speaking']] : []).map(f =>
             '<button class="tab' + (pbState.filter === f[0] ? ' active' : '') + '" data-action="pb-filter" data-f="' + f[0] + '">' + f[1] + '</button>').join('') +
         '</div>' +
         '<div id="pbResults">' + pbResults() + '</div>' +

@@ -162,6 +162,13 @@ PAGES.home = {
           ].map(l => '<li><a href="#' + l[0] + '"><span class="hl-t">' + l[1] + '</span><span class="hl-d">' + l[2] + '</span></a></li>').join('') +
         '</ul>' +
         '<div class="gap"></div>' +
+        '<section class="home-sp" aria-labelledby="homeSp">' +
+          '<div class="home-sp-k">New &middot; oral exam</div>' +
+          '<h2 class="home-sp-t" id="homeSp">Practise speaking, too.</h2>' +
+          '<p class="home-sp-d">A trainer for the oral English Matura: Individual Long Turn and Paired Activity with the exam clock. You record yourself, listen back and work on one thing at a time. No AI listens in or rates you, there is no score, and your recordings stay on your device.</p>' +
+          '<div class="home-sp-b"><a class="btn btn-primary" href="#speaking">Open the speaking trainer <span aria-hidden="true">&rarr;</span></a><a class="btn btn-ghost" href="#speakingguide">How the oral exam works</a></div>' +
+        '</section>' +
+        '<div class="gap"></div>' +
         sectionLabel('Six mistakes that cost the most marks') +
         '<p class="home-intro">All six are habits you can change. The <a href="#overview">overview</a> explains each one and lists two more.</p>' +
         '<div class="grid g-auto-280">' +

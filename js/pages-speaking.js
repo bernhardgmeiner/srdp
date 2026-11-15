@@ -6,8 +6,9 @@
      Mock exam for two two Long Turns, then a Paired Activity (paired form)
    The stage is a modal layer above the app. It is closed on every route
    change, and a running recording is stopped and thrown away.
-   hidden:true keeps the page out of the menu, the sitemap and search
-   engines until launch (see _dev/prerender-playwright.mjs).
+   Public since 16 November 2026. Setting hidden:true on a page takes it
+   out of the sitemap and adds noindex again (see _dev/prerender-playwright.mjs);
+   the menu block is defined in NAV (js/core.js).
    ════════════════════════════════════════════════════════════ */
 (function () {
 'use strict';
@@ -40,7 +41,7 @@ function paintKept() {
 }
 
 PAGES.speaking = {
-  title: 'Speaking', hidden: true,
+  title: 'Speaking trainer', titleSuffix: ' – English Matura B2',
   render() {
     const d = D();
     const prep = SP.prepMinutes();
@@ -48,7 +49,6 @@ PAGES.speaking = {
     return '<div class="page" id="spHub">' +
       pageHead('Oral exam &middot; B2', 'Practise speaking. <span class="stick">Out loud.</span>', 'Individual Long Turn and Paired Activity in the format of the oral Matura. You record yourself, listen back and work on one thing at a time. Your recordings stay on this device.') +
       '<div class="wrap">' +
-        (PAGES.speaking.hidden ? '<div class="tip mt-4"><strong>Test version.</strong> This part of the site is not in the menu yet. Please do not pass the link on.</div>' : '') +
         '<nav class="ways sp-ways" aria-label="Choose how to practise">' +
           way('lt', 'Long Turn &middot; alone', '<span data-preplabel>' + prep + '</span> min to prepare &middot; 5 min talk &middot; listen back &middot; work on one thing') +
           way('pa', 'Paired Activity &middot; two of you', 'One phone between you &middot; 10 min &middot; agree on two options') +

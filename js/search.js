@@ -25,6 +25,9 @@ function buildIndex() {
     items.push({ type: 'Phrases', label: p, sub: 'E-mail – ' + st.name, copy: p, go: { page: 'phrasebank', search: p } }))));
   SRDP.paragraphs.phraseGroups.forEach(g => g.phrases.forEach(p =>
     items.push({ type: 'Phrases', label: p, sub: 'Paragraphs – ' + g.label, copy: p, go: { page: 'phrasebank', search: p } })));
+  const _tk = SRDP.speaking && SRDP.speaking.toolkits;
+  if (_tk) [['longturn', 'Long Turn'], ['paired', 'Paired Activity']].forEach(k => (_tk[k[0]] || []).forEach(g => g.items.forEach(p =>
+    items.push({ type: 'Phrases', label: p, sub: 'Speaking, ' + k[1] + ' – ' + g.category, copy: p, go: { page: 'phrasebank', search: p } }))));
   (M.TOPIC_VOCAB || []).forEach((t, ti) => t.words.forEach(w => {
     const label = w.w || w;
     items.push({ type: 'Vocabulary', label, sub: t.topic, copy: label, go: { page: 'topicvocab', acc: ti, chip: label } });

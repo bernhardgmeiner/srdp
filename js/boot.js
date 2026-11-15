@@ -16,12 +16,12 @@ function siteFooter() {
     '<p class="ft-short">Free and independent. Not an official document of the BMB. No accounts and no tracking.</p>' +
     '<details class="ft-details"' + (wide ? ' open' : '') + '><summary>About this site, your data and Impressum</summary>' +
     '<div class="ft-cols">' +
-      '<div><h2 class="ft-h">About this site</h2><p>A free, independent site for the text types of the written English Matura (AHS and BHS, B2), from the 5th class to the Matura. Made by an English teacher. It is not an official document of the BMB or of any education authority.</p><p class="mt-3">For teachers: <a href="https://writing.bernhardgmeiner.com" target="_blank" rel="noopener">Writing Room</a>, a projector tool for writing model texts together in class.</p></div>' +
-      '<div><h2 class="ft-h">Your data</h2><p>Your progress is saved only in this browser on this device. If you clear your browser data or switch devices, it is gone. Nothing leaves your device unless you use the optional AI prompt yourself. Like any website, the host (GitHub Pages) logs your IP address.</p><p class="mt-3"><button class="btn btn-ghost btn-sm" data-action="reset-progress">Reset my progress on this device</button></p></div>' +
+      '<div><h2 class="ft-h">About this site</h2><p>A free, independent site for the text types of the written English Matura (AHS and BHS, B2), from the 5th class to the Matura, with a trainer for the oral exam. Made by an English teacher. It is not an official document of the BMB or of any education authority.</p><p class="mt-3">For teachers: <a href="https://writing.bernhardgmeiner.com" target="_blank" rel="noopener">Writing Room</a>, a projector tool for writing model texts together in class.</p></div>' +
+      '<div><h2 class="ft-h">Your data</h2><p>Your progress is saved only in this browser on this device. If you clear your browser data or switch devices, it is gone. Recordings you keep in the speaking trainer stay on this device too, and you can delete them on the speaking trainer page. Nothing leaves your device unless you use the optional AI prompt yourself. Like any website, the host (GitHub Pages) logs your IP address.</p><p class="mt-3"><button class="btn btn-ghost btn-sm" data-action="reset-progress">Reset my progress on this device</button></p></div>' +
       '<div><h2 class="ft-h" lang="de">Impressum / Kontakt</h2><p lang="de">Bernhard Gmeiner, Wien<br>E-Mail: bernhard.gmeiner@gmail.com<br><a href="https://www.bernhardgmeiner.com" target="_blank" rel="noopener">bernhardgmeiner.com</a><br>Privates, nichtkommerzielles Projekt.</p></div>' +
       '<div><h2 class="ft-h">Found a mistake? <span lang="de">/ Fehler gefunden?</span></h2><p>A typo, a wrong fact or a broken link? <a href="mailto:bernhard.gmeiner@gmail.com?subject=Matura%20Guide%20Feedback">Send a short e-mail</a> and say which section it is in. Thank you.</p></div>' +
     '</div></details>' +
-    '<div class="ft-base" lang="de">Diese Seite hilft bei der Vorbereitung auf die schriftliche Englisch-Matura (AHS und BHS, B2) und orientiert sich an der offiziellen SRDP-Beurteilungsskala. In der echten Matura bewerten die Lehrkräfte der Schule. · Stand: Schuljahr ' + schoolYear() + '</div>' +
+    '<div class="ft-base" lang="de">Diese Seite hilft bei der Vorbereitung auf die schriftliche Englisch-Matura (AHS und BHS, B2) und orientiert sich an der offiziellen SRDP-Beurteilungsskala. Dazu gibt es einen Trainer für die mündliche Prüfung. In der echten Matura bewerten die Lehrkräfte der Schule. · Stand: Schuljahr ' + schoolYear() + '</div>' +
   '</div></footer><div class="print-note" lang="de">Unabhängige Übungsseite von Bernhard Gmeiner, kein offizielles Dokument des BMB. Die Übungsaufgaben sind nachgebaut. Es zählt die Bewertung deiner Lehrkräfte.</div>';
 }
 
@@ -72,7 +72,7 @@ function route() {
   $$('#sidenav .nav-item').forEach(a => { const on = a.dataset.nav === navId; a.classList.toggle('active', on); if (on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
   paintPlanChip();
   const _mt = document.querySelector('.mobile-bar .t1'); if (_mt) _mt.textContent = page.title;
-  document.title = page.title + ' – Matura Writing Guide B2';
+  document.title = page.title + (page.titleSuffix || ' – Matura Writing Guide B2');
   try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch (e) {}
   /* instant, not smooth: the focus call below would cut a smooth scroll short and leave a new page scrolled down */
   try { main.scrollTo({ top: 0, behavior: 'instant' }); window.scrollTo({ top: 0, behavior: 'instant' }); } catch (e) { main.scrollTop = 0; try { window.scrollTo(0, 0); } catch (e2) {} }
@@ -133,7 +133,7 @@ M.decorateTabs = decorateTabs;
 
 /* ─── GUIDED TOUR ─────────────────────────────────────────── */
 const TOUR = [
-  { sel:null, title:'Welcome to the writing guide', text:'Everything here is about the writing tasks of the B2 Matura. This tour shows you where things are. It takes about a minute.' },
+  { sel:null, title:'Welcome to the writing guide', text:'Most of this site is about the writing tasks of the B2 Matura, and there is a trainer for the oral exam too. This tour shows you where things are. It takes about a minute.' },
   { sel:'[data-nav="overview"]', title:'Start with the overview', text:'How the Writing section works, how much time you get, how the four criteria are graded and how bands become your grade.' },
   { sel:'[data-nav="studyplan"]', title:'Your study plan', text:'A day-by-day plan for your next Schularbeit or for the Matura. Enter the date (and the text types for a Schularbeit), and the plan shows you what to do each day.' },
   { sel:'[data-nav="article"]', title:'The text types', text:'Each text type has a guide, model texts, phrases, a quiz and a sentence-order exercise. Open one and switch between the tabs at the top.' },
@@ -141,6 +141,7 @@ const TOUR = [
   { sel:'[data-nav="selfcheck"]', title:'Self-check and checklist', text:'Paste a draft and get quick notes on length, register and layout, plus a ready-made prompt for AI feedback. The final checklist is in the same place.' },
   { sel:'[data-nav="timer"]', title:'Mock exam', text:'The full exam under time: the site picks a set of tasks for your school type and runs the clock.' },
   { sel:'[data-nav="phrasebank"]', title:'Look things up', text:'Phrases, topic vocabulary with flashcards and the grammar kit. Open them while you write.' },
+  { sel:'[data-nav="speaking"]', title:'Speaking trainer', text:'For the oral exam: prepare, talk against the clock, record yourself and listen back. Alone, or with a partner on one phone.' },
   { sel:'#themeToggle', title:'Dark mode and progress', text:'Switch dark mode on or off here. Visited sections and quiz results are saved on this device, and the menu shows them with ticks.' },
   { sel:null, title:'You are ready', text:'Pick any section in the menu. You can start this tour again with the ? button at the top of the menu.' },
 ];

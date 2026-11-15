@@ -431,6 +431,12 @@ const NAV = [
     { id: 'studyplan', label: 'Study plan' },
     { id: 'timer', label: 'Mock exam' },
   ]},
+  /* Mündliche Matura: eigener, abgesetzter Block (box) unter dem Schreib-Teil, vor "About". */
+  { divider: 'Oral exam', box: true, tag: 'New', items: [
+    { id: 'speaking', label: 'Speaking trainer' },
+    { id: 'speakingguide', label: 'How the oral exam works' },
+    { id: 'speakingclass', label: 'Speaking in class' },
+  ]},
   { divider: 'About', items: [
     { id: 'notebooklm', label: 'Gemini Notebook' },
     { id: 'teachers', label: 'For teachers' },
@@ -452,13 +458,15 @@ function buildNav() {
     '<a class="nav-plan" id="navPlan" href="#studyplan" hidden></a>' +
     '<div class="nav-scroll">' +
       NAV.map(sec =>
-        (sec.divider ? '<div class="nav-divider">' + sec.divider + '</div>' : '') +
+        (sec.box ? '<div class="nav-box">' : '') +
+        (sec.divider ? '<div class="nav-divider">' + (sec.tag ? '<span>' + sec.divider + '</span><span class="nav-new">' + sec.tag + '</span>' : sec.divider) + '</div>' : '') +
         sec.items.map(it =>
           '<a class="nav-item" href="#' + it.id + '" data-nav="' + it.id + '">' +
             (it.color ? '<span class="nav-dot" aria-hidden="true" style="background:' + TYPE_COLORS[it.color] + '"></span>' : '') +
             '<span' + (it.lang ? ' lang="' + it.lang + '"' : '') + '>' + esc(it.label) + '</span><span class="nav-check" data-check="' + it.id + '"></span>' +
           '</a>'
-        ).join('')
+        ).join('') +
+        (sec.box ? '</div>' : '')
       ).join('') +
     '</div>' +
     '<button class="nav-install no-print" data-action="install-app" data-install hidden><span>Install as app</span><span aria-hidden="true">&darr;</span></button>' +
