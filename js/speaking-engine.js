@@ -377,7 +377,7 @@ SP.imageHTML = function (id) {
   const d = SP.data(); const im = d && d.images[id];
   if (!im) return '';
   if (im.pending) return '<figure class="sp-img pending"><div class="sp-img-ph"><span class="sp-img-tag">Picture</span><p>' + esc(im.alt) + '</p></div><figcaption>The picture for this task is still being made. Until then, use this description.</figcaption></figure>';
-  return '<figure class="sp-img"><img src="/' + esc(im.file) + '" alt="' + esc(im.alt) + '" loading="' + (SP.eagerImages ? 'eager' : 'lazy') + '" width="1200" height="800"><figcaption>' + (im.ai ? 'AI-generated image' : esc(im.credit || '')) + '</figcaption></figure>';
+  return '<figure class="sp-img"><img src="/' + esc(im.file) + '" alt="' + esc(im.alt) + '" loading="' + (SP.eagerImages ? 'eager' : 'lazy') + '" width="1024" height="683"><figcaption>' + (im.ai ? 'AI-generated image' : esc(im.credit || '')) + '</figcaption></figure>';
 };
 SP.inputHTML = function (input) {
   if (!input) return '';

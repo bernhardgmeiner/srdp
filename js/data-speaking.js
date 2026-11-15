@@ -513,14 +513,14 @@ SRDP.speaking = {
   /* ─── Pictures: AI-generated. pending:true = file not delivered yet;
      the page then shows a labelled box with the description instead. ─── */
   images: {
-    'school-lt2-1': { file: 'speaking/img/school-lt2-1.webp', ai: true, pending: true, alt: 'A classroom seen from the back: girls and boys of about 16 are sitting in rows at their desks and looking at a male teacher who is writing on the board.' },
-    'school-lt2-2': { file: 'speaking/img/school-lt2-2.webp', ai: true, pending: true, alt: 'A mixed group of students of about 16 are kneeling beside a small stream. They are taking water samples and writing down their results while a female teacher watches.' },
-    'media-lt2-1': { file: 'speaking/img/media-lt2-1.webp', ai: true, pending: true, alt: 'Three generations are sitting at a dinner table: a grandmother, a father and two teenagers. The food is in front of them, but everyone except the grandmother is looking at a phone.' },
-    'environment-lt2-1': { file: 'speaking/img/environment-lt2-1.webp', ai: true, pending: true, alt: 'A city square on a hot summer day: stone paving, parked cars, no trees and no shade. Only a few people are crossing it.' },
-    'environment-lt2-2': { file: 'speaking/img/environment-lt2-2.webp', ai: true, pending: true, alt: 'A city square on a hot summer day with large trees, grass and a fountain. People are sitting on benches in the shade, and children are cooling their hands and feet at the edge of the fountain.' },
-    'tech-lt2-1': { file: 'speaking/img/tech-lt2-1.webp', ai: true, pending: true, alt: 'A service robot on wheels is carrying plates of food to a table in a restaurant. A waitress is standing nearby and watching, and the guests, a mixed group of older and younger adults, look surprised.' },
-    'food-lt2-1': { file: 'speaking/img/food-lt2-1.webp', ai: true, pending: true, alt: 'A tray in a school canteen with a freshly cooked meal: rice with vegetables, a small salad, an apple and a glass of water.' },
-    'food-lt2-2': { file: 'speaking/img/food-lt2-2.webp', ai: true, pending: true, alt: 'A tray in a fast-food restaurant with a burger, a large portion of chips and a soft drink in a paper cup.' },
+    'school-lt2-1': { file: 'speaking/img/school-lt2-1.webp', ai: true, alt: 'A classroom seen from the back: girls and boys of about 16 are sitting in rows at their desks while a male teacher is writing on the blackboard.' },
+    'school-lt2-2': { file: 'speaking/img/school-lt2-2.webp', ai: true, alt: 'A mixed group of students of about 16 are kneeling and crouching beside a small stream in a wood. They are taking water samples and writing down their results while a female teacher watches.' },
+    'media-lt2-1': { file: 'speaking/img/media-lt2-1.webp', ai: true, alt: 'Three generations are sitting at a dinner table: a grandmother, a father and three teenagers. The food is in front of them, but everyone except the grandmother is looking at a phone.' },
+    'environment-lt2-1': { file: 'speaking/img/environment-lt2-1.webp', ai: true, alt: 'A city square on a hot summer day: stone paving, parked cars, no trees and no shade. Only a few people are crossing it, and one woman is holding a bag over her head against the sun.' },
+    'environment-lt2-2': { file: 'speaking/img/environment-lt2-2.webp', ai: true, alt: 'The same kind of city square on a hot summer day, now with large trees, grass and a fountain in the ground. People are sitting on benches in the shade, and small children are playing in the water.' },
+    'tech-lt2-1': { file: 'speaking/img/tech-lt2-1.webp', ai: true, alt: 'A service robot on wheels is carrying plates of food to a table in a restaurant. A waitress is standing nearby and watching, and the guests, a mixed group of older and younger adults, look surprised.' },
+    'food-lt2-1': { file: 'speaking/img/food-lt2-1.webp', ai: true, alt: 'A tray in a school canteen with a freshly cooked meal: rice with vegetables, a small salad, an apple and a glass of water.' },
+    'food-lt2-2': { file: 'speaking/img/food-lt2-2.webp', ai: true, alt: 'A tray in a fast-food restaurant with a burger wrapped in paper, a large portion of chips and a soft drink in a paper cup.' },
   },
 
   /* ─── Phrases ───────────────────────────────────────────── */

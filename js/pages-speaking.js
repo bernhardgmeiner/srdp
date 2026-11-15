@@ -241,11 +241,11 @@ function statsHTML(take, sec, t3, withB3, paired) {
   const cell = (l, v) => '<div class="sp-stat"><span class="sp-stat-l">' + l + '</span><span class="sp-stat-v">' + v + '</span></div>';
   return '<div class="sp-stats">' +
     cell('Talk time', SP.fmt(take ? take.ms / 1000 : sec)) +
-    (withB3 ? cell('Bullet 3 at', t3 != null ? SP.fmt(t3) : 'not marked') : '') +
+    (withB3 ? cell('Bullet 3 at', t3 != null ? SP.fmt(t3) : '&ndash;') : '') +
     (paired ? '' : cell('Longest pause', st && !st.silent ? (st.longest ? Math.round(st.longest) + ' s' : '&lt; 3 s') : '&ndash;')) +
     '</div>' +
     '<p class="sp-fine">' + (st && st.silent ? 'The recording is very quiet. Listen to check that it worked. ' : (st ? 'Striped orange marks: 3 seconds or more that were much quieter than the rest. Usually these are pauses, but a quiet voice or background noise can fool the measurement. ' : '')) +
-    (withB3 ? '&ldquo;Bullet 3 at&rdquo; is the moment you tapped bullet 3. ' : '') + 'These are plain measurements. They say nothing about your grade.</p>';
+    (withB3 ? '&ldquo;Bullet 3 at&rdquo; is the moment you tapped bullet 3' + (t3 != null ? '' : ' (you did not tap it this time)') + '. ' : '') + 'These are plain measurements. They say nothing about your grade.</p>';
 }
 function topicCards(ids, kicker) {
   return ids.map(id => { const t = SP.topic(id);
@@ -631,7 +631,7 @@ STEPS['mk-prep'] = {
   html() {
     const half = w => { const p = F.mk[w]; return '<div class="sp-half ' + w.toLowerCase() + (w === 'B' && F.flip ? ' flip' : '') + '"' + (w === 'B' ? ' tabindex="0"' : '') + '><div class="sp-half-k">Partner ' + w + ' &middot; notes on paper</div>' + SP.longTurnCard(p.topic.name, p.lt) + '</div>'; };
     return '<div class="sp-split">' + half('B') +
-      '<div class="sp-band"><div class="sp-band-row"><span class="sp-band-l" data-focus>Preparation</span><span class="sp-bandclock" id="spBand" role="timer">' + SP.fmt(SP.prepMinutes() * 60) + '</span>' +
+      '<div class="sp-band"><div class="sp-band-row"><span class="sp-band-l" data-focus>Prep<span class="visually-hidden">aration</span></span><span class="sp-bandclock" id="spBand" role="timer">' + SP.fmt(SP.prepMinutes() * 60) + '</span>' +
       '<button type="button" class="btn btn-ghost btn-sm" data-sp="pause" id="spPause">Pause</button>' + X + '</div>' +
       '<button type="button" class="btn btn-primary" data-sp="mk-ready">We are ready &middot; Partner A starts</button></div>' +
       half('A') + '</div>';
