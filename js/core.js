@@ -432,7 +432,7 @@ const NAV = [
     { id: 'timer', label: 'Mock exam' },
   ]},
   /* Mündliche Matura: eigener, abgesetzter Block (box) unter dem Schreib-Teil, vor "About". */
-  { divider: 'Oral exam', box: true, tag: 'New', items: [
+  { divider: 'Oral exam (AHS)', box: true, tag: 'New', items: [
     { id: 'speaking', label: 'Speaking trainer' },
     { id: 'speakingguide', label: 'How the oral exam works' },
     { id: 'speakingclass', label: 'Speaking in class' },

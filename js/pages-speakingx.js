@@ -32,9 +32,10 @@ PAGES.speakingguide = {
     const d = D(), g = d.guide;
     const tl = steps => '<ol class="sp-tl">' + steps.map(s => '<li><span class="sp-tl-time">' + esc(s.time) + '</span><div><strong>' + esc(s.t) + '</strong><p>' + esc(s.d) + '</p></div></li>').join('') + '</ol>';
     return '<div class="page" id="spGuide">' +
-      pageHead('Oral exam &middot; B2', 'How the oral exam works', 'The paired form step by step, a plan for your preparation time, what examiners listen for, two model transcripts and the phrases you need.',
+      pageHead('Oral exam &middot; AHS &middot; B2', 'How the oral exam works', 'The paired form at an AHS step by step, a plan for your preparation time, what examiners listen for, two model transcripts and the phrases you need.',
         '<div class="row-wrap mt-4 mb-4"><a class="btn btn-primary" href="#speaking">Open the trainer <span aria-hidden="true">&rarr;</span></a></div>') +
       '<div class="wrap">' +
+        '<div class="tip sp-ahs"><strong>AHS only for now.</strong> This page describes the oral exam at an AHS. At a BHS some rules are different, for example the preparation time, and the topics are often linked to your school type. If you go to a BHS, ask your teacher how your exam works.</div>' +
         sectionLabel('How the paired exam works', { id: 'exam', label: 'The exam' }) +
         '<p class="lead-sm mb-4">' + esc(g.exam.lead) + '</p>' + tl(g.exam.steps) +
         '<ul class="sp-after">' + g.exam.after.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>' +
@@ -162,7 +163,7 @@ PAGES.speakingclass = {
     if (!C.topic) { C.topic = D().topics[0].id; }
     C.phase = 0;
     return '<div class="page" id="spClass">' +
-      pageHead('For teachers', 'Speaking in class', 'Show a task on the projector, run the clock for each phase and print task cards. Nothing is recorded in this view.') +
+      pageHead('For teachers', 'Speaking in class', 'Show a task on the projector, run the clock for each phase and print task cards. The tasks follow the AHS format (paired form). Nothing is recorded in this view.') +
       '<div class="wrap spc-wrap">' +
         '<div id="spcControls">' + cControls() + '</div>' +
         '<div class="spc-show" id="spcShow">' + cShowHTML() + '</div>' +

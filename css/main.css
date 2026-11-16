@@ -1818,3 +1818,5 @@ div.sp-tap{cursor:default}
 .home-sp-d{max-width:64ch;margin:0 0 16px;line-height:1.55}
 .home-sp-b{display:flex;flex-wrap:wrap;gap:10px}
 @media print{.home-sp{box-shadow:none}}
+.sp-ahs{margin:18px 0}
+.sp-promise+.sp-ahs{margin-top:18px}

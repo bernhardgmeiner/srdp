@@ -46,9 +46,12 @@ PAGES.speaking = {
     const d = D();
     const prep = SP.prepMinutes();
     const way = (act, t, dsc) => '<button type="button" class="way-card" data-hub="' + act + '"><span class="way-t">' + t + ' <span aria-hidden="true">&rarr;</span></span><span class="way-d">' + dsc + '</span></button>';
+    const bhs = M.school && M.school() === 'bhs';
+    const ahsNote = '<div class="tip sp-ahs"><strong>AHS only for now.</strong> The trainer follows the oral exam at an AHS (paired form). At a BHS some rules are different, for example the preparation time, and the topics are often linked to your school type. If you go to a BHS, ask your teacher how your exam works.</div>';
     return '<div class="page" id="spHub">' +
-      pageHead('Oral exam &middot; B2', 'Practise speaking. <span class="stick">Out loud.</span>', 'Individual Long Turn and Paired Activity in the format of the oral Matura. You record yourself, listen back and work on one thing at a time. Your recordings stay on this device.') +
+      pageHead('Oral exam &middot; AHS &middot; B2', 'Practise speaking. <span class="stick">Out loud.</span>', 'Individual Long Turn and Paired Activity in the format of the oral Matura. You record yourself, listen back and work on one thing at a time. Your recordings stay on this device.') +
       '<div class="wrap">' +
+        (bhs ? ahsNote : '') +
         '<nav class="ways sp-ways" aria-label="Choose how to practise">' +
           way('lt', 'Long Turn &middot; alone', '<span data-preplabel>' + prep + '</span> min to prepare &middot; 5 min talk &middot; listen back &middot; work on one thing') +
           way('pa', 'Paired Activity &middot; two of you', 'One phone between you &middot; 10 min &middot; agree on two options') +
@@ -60,6 +63,7 @@ PAGES.speaking = {
             '<button type="button" class="tab' + (SP.soundOn() ? ' active' : '') + '" data-hub="sound" role="switch" aria-labelledby="spSoundL" aria-checked="' + SP.soundOn() + '">' + (SP.soundOn() ? 'On' : 'Off') + '</button></div>' +
         '</div>' +
         '<p class="sp-promise"><strong>No AI, no score.</strong> You judge your own recording with questions that examiners also ask themselves. <a href="#speakingguide">Why it works this way</a></p>' +
+        (bhs ? '' : ahsNote) +
 
         sectionLabel('Before you start') +
         '<ul class="home-links">' +
